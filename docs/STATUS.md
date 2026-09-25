@@ -18,7 +18,7 @@ Phase 1 playable prototype complete: prologue + Apollo 11 + Mars signal teaser. 
 `npm run typecheck` passes. `npm run build` passes. Playwright: 2 complete journeys passed (1440x900 desktop and 390x844 touch + reduced motion), including all investigations, gating, controls, focus, scroll restoration, archive, restart, no horizontal overflow, and zero browser errors. Manual browser interaction and screenshot review completed. Selected QA images are in docs/qa; automated ending screenshots are in ignored test-results.
 
 ## In progress
-Private Sites publication after final source packaging. Check .openai/hosting.json for the existing project ID; never create a second site.
+None. Private Sites deployment succeeded on 2026-09-25: https://mersa-petrova-archive.bracunasa.chatgpt.site . Check .openai/hosting.json for the existing project ID; never create a second site. Deployed source: 9a90fe01759ca45e5ab3d6407b5a05bf713081b1. This status-only handoff update follows that deployment.
 
 ## Known limitations
 - Geometry and terrain are schematic, not photorealistic or dimensionally exact NASA CAD. Site object placement is authored, not a survey.
@@ -32,3 +32,4 @@ Replace the schematic Eagle geometry with a vetted, optimized, component-separat
 ## Important commands and files
 `npm run dev`; `npm run typecheck`; `npm run test:e2e`; `npm run build`.
 App.tsx: story and inspector; three/World.tsx: scene/models/camera; three/ModelControls.tsx: accessible camera controls; stores/archive.ts: progression and scroll return; data/archive.ts: verified educational content and chapter placeholders; styles.css: visual system; tests/experience.spec.ts: complete journey coverage. All application paths are under src/.
+
