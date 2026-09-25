@@ -3,33 +3,18 @@
 ## Current phase
 Phase 1 playable prototype complete: prologue + Apollo 11 + Mars signal teaser. No later chapter implemented.
 
-## What works / complete
-- Unknown signal acquisition; Moon identification; native scroll camera approach with accessible assisted alternative; gated descent alignment.
-- Unknown surface structure scan, followed by the Apollo 11 reveal and Tranquility Base exploration.
-- One persistent 3D canvas, schematic lunar world, spatial discovery markers, reusable inspection mode.
-- Eagle orbit/zoom, button-based rotation/zoom, component selection and facts, hover/selection feedback, animated explosion, isolation, assembly/reset.
-- Retroreflector alignment and laser-return experiment; NASA footprint exposure reconstruction and emotional interpretation.
-- All-three discovery gate, archive journal, 02% to 14% narrative confidence, Mars ending, return and restart.
-- Opt-in quiet audio; keyboard focus and Escape; inspection scroll/focus restoration; narrow touch layout; reduced-motion progression.
-- Local NASA imagery and local licensed fonts. No external runtime image/font requests.
-- Concise project memory, factual citations, chapter-authoring and visual-QA skills.
+## Redesign validated / 2026-09-25
+User explicitly waived further interview pauses. Pinterest reference fetched, preflight completed, measurable mechanisms recorded in bar.md. Rebuild implemented: player-controlled 3D landing with touch/keyboard/assist, actual NASA imagery, detailed NASA-derived descent model, in-world component separation, retained three discoveries and real Mars teaser. Three rendered critics now pass all pieces. Public publication follows the successful production build.
 
-## Validation
-`npm run typecheck` passes. `npm run build` passes. Playwright: 2 complete journeys passed (1440x900 desktop and 390x844 touch + reduced motion), including all investigations, gating, controls, focus, scroll restoration, archive, restart, no horizontal overflow, and zero browser errors. Manual browser interaction and screenshot review completed. Selected QA images are in docs/qa; automated ending screenshots are in ignored test-results.
+The original scroll-based descent was superseded by the user's explicit direct-flight request. One persistent canvas and shared inspector remain. See ARCHITECTURE.md and ASSETS.md for code and source provenance.
 
-## In progress
-None. Private Sites deployment succeeded on 2026-09-25: https://mersa-petrova-archive.bracunasa.chatgpt.site . Check .openai/hosting.json for the existing project ID; never create a second site. Deployed source: 9a90fe01759ca45e5ab3d6407b5a05bf713081b1. This status-only handoff update follows that deployment.
+Desktop and mobile/reduced-motion full journeys passed after refinements, with explicit sourced-note and mobile-control checks. Failure/retry passed at both breakpoints. Pure simulation tests pass at 15,30,60,144fps plus unsafe touchdown, braking, purity and timestep limits. TypeScript and production build pass. Three.js vendor chunk is 336KB gzip; Vite reports a non-blocking chunk-size advisory. Design-loop progress: docs/DESIGN_LOOP.md. Existing public deployment remains the prior prototype until publishing completes.
 
-## Known limitations
-- Geometry and terrain are schematic, not photorealistic or dimensionally exact NASA CAD. Site object placement is authored, not a survey.
-- The Three.js vendor chunk is approximately 310 KB gzip and triggers Vite's 500 KB uncompressed advisory; no runtime error. Test on physical low-end laptops before a public competition presentation.
-- Progress is held in memory; refresh starts over. Audio uses interface tones only; no final music/voice assets.
-- Chromium desktop and mobile emulation verified; physical Safari/iOS and no-WebGL hardware not yet tested. The error fallback is coded but not independently exercised in the current automated suite.
+## Access
+Public, no ChatGPT login. Existing project in .openai/hosting.json, never create a duplicate. https://mersa-petrova-archive.bracunasa.chatgpt.site
 
-## Next exact task
-Replace the schematic Eagle geometry with a vetted, optimized, component-separated NASA-derived model; retain the existing inspector contract and re-run both journeys. Do not build Mars yet.
+## Known limits
+NASA-derived hardware is an adapted reconstruction, not an exact site survey. Terrain uses photographic color over authored geometry. Alien ship and flight handling are fictional. Mars remains a teaser. Session progress resets on refresh; opt-in interface tones only. Chromium desktop and mobile emulation are tested; physical Safari/iOS and low-end devices are not yet verified.
 
-## Important commands and files
-`npm run dev`; `npm run typecheck`; `npm run test:e2e`; `npm run build`.
-App.tsx: story and inspector; three/World.tsx: scene/models/camera; three/ModelControls.tsx: accessible camera controls; stores/archive.ts: progression and scroll return; data/archive.ts: verified educational content and chapter placeholders; styles.css: visual system; tests/experience.spec.ts: complete journey coverage. All application paths are under src/.
-
+## Commands
+npm run dev; npm run typecheck; npm run build; npm run test:e2e.
