@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.scaffold/
+.wrangler/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.playwright-mcp/
+*.tar.gz

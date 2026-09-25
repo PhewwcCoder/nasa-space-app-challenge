@@ -1,0 +1,21 @@
+﻿import {test,expect} from '@playwright/test';
+test('complete expedition, inspection controls, scroll restoration, and archive',async({page},testInfo)=>{
+ const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
+ await page.goto('/');await expect(page.getByRole('heading',{name:/Nothing here/})).toBeVisible();await expect(page.locator('canvas')).toHaveCount(1);
+ await expect(page.locator('body')).not.toContainText('Apollo 11');
+ await page.getByRole('button',{name:'Focus on primary signal'}).click();await page.getByRole('button',{name:'Follow the signal'}).click();
+ await page.getByRole('button',{name:'Use assisted approach'}).click();await page.getByLabel('Align descent vector').waitFor();await expect(page.getByRole('button',{name:'Begin surface approach'})).toBeDisabled();
+ await page.getByLabel('Align descent vector').fill('0');await page.getByRole('button',{name:'Begin surface approach'}).click();await expect(page.locator('body')).not.toContainText('Apollo 11');
+ await page.getByRole('button',{name:'Scan structure'}).click();await expect(page.getByRole('heading',{name:'Apollo 11.'})).toBeVisible();await page.getByRole('button',{name:'Investigate the site'}).click();
+ const eagle=page.locator('[data-artifact="eagle"]');await eagle.scrollIntoViewIfNeeded();const before=await page.evaluate(()=>window.scrollY);await eagle.click();
+ await expect(page.getByRole('dialog')).toBeVisible();await page.getByRole('button',{name:'02 / Descent engine'}).click();await page.getByRole('button',{name:'Explode parts'}).click();await expect(page.getByRole('button',{name:'Assemble parts'})).toHaveAttribute('aria-pressed','true');
+ await page.getByRole('button',{name:'Isolate part'}).click();await page.getByRole('button',{name:'Show all'}).click();await page.getByRole('button',{name:'Rotate model left'}).click();await page.getByRole('button',{name:'Zoom in',exact:true}).click();await page.getByRole('button',{name:'Reset view'}).click();
+ await page.keyboard.press('Escape');await expect(page.getByRole('dialog')).toHaveCount(0);await expect(eagle).toBeFocused();await expect.poll(()=>page.evaluate(()=>window.scrollY)).toBeCloseTo(before,0);await expect.poll(()=>page.evaluate(()=>document.body.style.overflow)).toBe('');
+ await eagle.click();await page.getByRole('button',{name:'02 / Descent engine'}).click();await page.getByRole('button',{name:'03 / Landing gear'}).click();await page.getByRole('button',{name:'Add discovery to archive'}).click();
+ await page.locator('[data-artifact="reflector"]').click();await expect(page.getByRole('button',{name:'Send laser pulse'})).toBeDisabled();await page.getByLabel('Beam alignment').fill('0');await page.getByRole('button',{name:'Send laser pulse'}).click();await expect(page.getByRole('status')).toContainText('RETURN DETECTED');await page.getByRole('button',{name:'Add discovery to archive'}).click();
+ await page.locator('[data-artifact="footprints"]').click();await page.getByLabel('Reconstruction exposure').fill('100');await expect(page.getByRole('status')).toContainText('PATTERN MATCH');await page.getByRole('button',{name:'Add discovery to archive'}).click();
+ await page.getByRole('button',{name:'Listen beyond the Moon'}).click();await expect(page.locator('.mars-signal')).toContainText('MARS');await expect(page.locator('.confidence')).toContainText('14%');
+ await page.getByRole('button',{name:'Read the archive'}).click();await expect(page.getByRole('dialog')).toContainText('3 of 3 discoveries');await page.keyboard.press('Tab');await expect(page.getByRole('button',{name:'Close archive'})).toBeFocused();await page.keyboard.press('Escape');
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();expect(errors).toEqual([]);await page.screenshot({path:`test-results/${testInfo.project.name}-ending.png`,fullPage:true});
+ await page.getByRole('button',{name:'Restart expedition'}).click();await expect(page.getByRole('heading',{name:/Nothing here/})).toBeVisible();
+});

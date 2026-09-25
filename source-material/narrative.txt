@@ -1,0 +1,225 @@
+narrative
+Prologue
+The alien arrives. Goal: To study the Solar System, located in the Orion Arm, where eight planets orbit around the star Sol, or Sun. Multiple unidentified artificial signals detected across the system on planets other than the home planet of humans.
+Begins with a signal originating from Earth's Moon.
+What the player feels:
+The player begins with curiosity and detachment. They view the artifacts as archaeological objects belonging to a long-gone civilization. Humanity is still an unknown species, reduced to scattered remnants across a forgotten Solar System.
+Chapter 1- Apollo 11
+Apollo 11 left behind the descent stage of the Lunar Module "Eagle," scientific equipment, and symbolic items at Tranquility Base on the Moon.
+Lunar Module Descent Stage:
+ The gold-and-silver base of the "Eagle" remains on the lunar surface as the largest object left behind. 
+Scientific Instruments:
+ A Laser Ranging Retroreflector (used to measure the distance between Earth and the Moon) and a passive seismometer. 
+TV Camera and Tools:
+ The camera used to broadcast the historic first steps, along with discarded and jettisoned tools and equipment bags. 
+Commemorative and Symbolic Items
+The Apollo 11 Plaque:
+ Attached to the ladder of the descent stage, reading: 
+"Here men from the planet Earth first set foot upon the moon, July 1969 A.D. We came in peace for all mankind."
+American Flag:
+ Planted by the astronauts, though it was likely blown over by the ascent engine exhaust during liftoff.
+Goodwill Disc:
+ A silicon disk inscribed with peace messages from 73 world leaders.
+Memorials:
+ A silicon patch honoring the fallen Apollo 1 crew and a small gold olive branch as a symbol of peace. 
+Personal Items
+Astronaut Boots:
+ Neil Armstrong and Buzz Aldrin left their heavy lunar overshoes on the surface to shed weight and conserve fuel for liftoff.
+Footprints:
+ The famous bootprints in the dust remain intact due to the lack of wind or atmosphere.
+Narrative: The alien/player wonders how much further humans have gone. They decide to target the next feasible planet, Mars.
+What the Player Feels: A sense of intrigue and admiration. The player realizes humans were willing to leave the safety of their world despite having no certainty of success. The untouched footprints create a quiet feeling of loneliness and wonder, raising the question of what kind of species would take such a risk simply to explore.
+Chapter 2- Sojourner
+Sojourner was NASA's groundbreaking six-wheeled robotic rover that became the first wheeled vehicle to operate on another planet.
+Mission and Timeline
+Launch Date:
+ December 4, 1996 
+Landing Date:
+ July 4, 1997, touching down in the Ares Vallis region.
+Duration:
+ Designed for a brief 7-sol (Martian day) mission, it actively explored for 
+83 sols
+ (about 85 Earth days) before communications ended on September 27, 1997. 
+Name Origin:
+ Named after the famous African-American abolitionist and civil rights activist Sojourner Truth. 
+Size and Specifications
+Dimensions:
+ 65 cm (26 inches) long, 48 cm (19 inches) wide, and 30 cm (12 inches) high—roughly the size of a microwave oven.
+Weight:
+ 10.6 kilograms (23 pounds). 
+Power:
+ Powered by a solar array and non-rechargeable lithium batteries, generating about 16 watts of power at noon. 
+Scientific Contributions
+Imaging:
+ Sent back over 550 images of the Martian landscape.
+Analysis:
+ Used an Alpha Proton X-ray Spectrometer (APXS) to analyze the chemical composition of nearby rocks and soil.
+Legacy:
+ Proved that autonomous mobile surface exploration on Mars was entirely feasible, paving the way for later mega-rovers like Curiosity and Perseverance.
+T
+he primary items left behind include:
+The Sojourner Rover:
+ The 23-pound, microwave-sized rover itself is sitting dormant somewhere near its final science target, a rock named "Stimpy".
+The Carl Sagan Memorial Station (The Lander):
+ The three-petaled base station that housed the rover during transit and served as its communications relay is permanently parked on the Martian plain. 
+The Airbags:
+ The giant, deflated woven-nylon airbags that protected the spacecraft as it bounced along the surface during landing are still draped around the base station. 
+The Parachute and Heat Shield:
+ The backshell, heat shield, and the massive parachute used to slow the spacecraft down during its descent are scattered across the landing zone a short distance away. 
+Tracks in the Dust:
+ The physical tracks pressed into the soft Martian soil by Sojourner's six studded wheels remain, preserved by the planet's thin atmosphere.
+Narrative: The alien/player explores further on Mars.
+What the Player Feels: Affection and respect begin to emerge. Sojourner appears small and fragile compared to the vastness of Mars, yet it represents an enormous ambition. The player starts seeing humanity not as a powerful civilization, but as a determined one that was willing to begin with imperfect tools.
+Chapter 3- Spirit
+Sojourner was NASA's groundbreaking six-wheeled robotic rover that became the first wheeled vehicle to operate on another planet. Later discovered by the player, it is the twin of the Opportunity rover.
+Mission Overview
+Launch Date:
+ June 10, 2003, from Cape Canaveral. 
+Landing Date:
+ January 3, 2004, at the Gusev Crater on Mars. 
+Twin Rover:
+ Opportunity, which landed on the opposite side of the planet. 
+Original Plan:
+ Designed to last only 90 Martian days (sols).
+Actual Lifespan:
+ Operated for over six years, covering 4.8 miles (7.73 kilometers). 
+Major Achievements
+Evidence of Water:
+ Uncovered strong geological signs that Mars was once much wetter. 
+Rock Grinding:
+ Used its Rock Abrasion Tool (RAT) to intentionally grind and analyze Martian rocks for the first time. 
+End of Mission:
+ Became stuck in a sandy soil trap in 2009, went silent in March 2010, and NASA officially declared the mission complete on May 25, 2011
+The Spirit rover left behind several physical items and operational artifacts on the Martian surface at its final resting place, a site named 
+Troika
+ near the 
+Columbia Hills
+ inside 
+Gusev Crater
+.
+Physical Components Left on Mars
+The Spirit Rover Itself:
+ The entire robotic vehicle remains parked on Mars. Because it became permanently trapped in a patch of loose sand called "Troy," it remains exactly where its wheels last spun.
+The Lander Assembly:
+ The protective lander platform and its deflated airbags, which shielded Spirit during its high-impact landing, remain at the initial touchdown location, named the 
+Columbia Memorial Station
+.
+Jettisoned Hardware:
+ The cruise stage, heat shield, and parachute used during entry, descent, and landing are scattered across the Gusev Crater terrain.
+Science Tools and Drill Dust:
+ The rover's 
+Rock Abrasion Tool (RAT)
+ left small, circular grind marks and pulverized rock dust on various Martian boulders it analyzed throughout its 4.8-mile journey.
+Operational State
+Solar Panels:
+ The rover's solar arrays are still attached but are covered in a thick layer of Martian dust, which ultimately starved the vehicle of power.
+Instruments:
+ All onboard scientific gear—including its panoramic cameras, spectrometers, and robotic arm—remains physically intact but completely non-functional due to the extreme Martian cold.
+Narrative: The alien/player decides to find its twin, Opportunity.
+What the Player Feels: The player's perspective becomes more personal. Spirit's search for water reveals that humans were not merely studying another planet—they were searching for the possibility of life. For the first time, the player senses the loneliness and hope behind humanity's scientific endeavors.
+Chapter 4- Opportunity
+NASA's Opportunity rover was a golf-cart-sized robotic vehicle that explored Mars from 2004 to 2018, vastly outperforming its planned 90-day lifespan. 
+Mission Overview and Timeline
+Launch:
+ July 7, 2003, from Cape Canaveral, Florida. 
+Landing:
+ January 25, 2004, at Meridiani Planum on Mars.
+Design Lifespan:
+ 90 Martian days (sols), or about 92.5 Earth days.
+Actual Operation:
+ 5,111 sols (nearly 15 years), ending in 2018.
+Major Scientific Discoveries
+Past Water:
+ Found hematite spheres (nicknamed "blueberries") and mineral veins confirming that liquid water once pooled or flowed on Mars. 
+Habitability:
+ Uncovered evidence that ancient Martian environmental conditions could have supported microbial life.
+Sedimentary Rock:
+ Became the first rover to identify sedimentary rock layers on another planet. 
+Records and Legacy
+Distance Record:
+ Traveled a total odometry of 28.06 miles (45.16 kilometers), setting the off-Earth driving distance record.
+The Final Moments:
+ A massive planet-wide dust storm blocked sunlight to its solar panels in June 2018. Its final transmission translated famously as, 
+"My battery is low and it's getting dark."
+ [
+Mission End:
+ NASA officially declared the mission complete on February 13, 2019, after hundreds of unsuccessful attempts to re-establish contact.
+During its nearly 15-year journey across Mars, the Opportunity rover left behind several physical artifacts, tracks, and scientific markers on the planet's surface.
+Here is what remains of the mission at Meridiani Planum:
+Hardware and Instruments
+The Rover Itself:
+ The 
+Opportunity rover
+ sits permanently silent on the slopes of Perseverance Valley. It is mostly intact, though covered in a fine layer of red Martian dust.
+The Landing Platform:
+ The 
+Challenger Memorial Station
+ lander structure remains inside Eagle Crater, where the rover safely deflated its protective airbags in 2004.
+The Heat Shield:
+ The discarded shell that protected the rover during its atmospheric entry lies a few kilometers away from the landing site, surrounded by debris from its high-speed impact (the "Heat Shield Rock" area).
+Physical Markers and Science Scars
+Deep Wheel Tracks:
+ Because Mars lacks rain and strong liquid erosion, the 
+45.16 kilometers of tracks
+ carved by Opportunity's six metallic wheels are still visible and will remain etched into the soil for decades or centuries.
+Rock Grind Marks:
+ The rover used its 
+Rock Abrasion Tool (RAT)
+ to grind away the weathered outer layers of Martian rocks. Dozens of circular, coin-sized holes remain on targets across the plains.
+The Fallen Tool:
+ In 2005, Opportunity accidentally dropped a small 
+aluminum calibration tool
+ from its robotic arm while examining a rock named "James 'Cool Papa' Bell." It remains on the ground.
+Tributes and Memorabilia
+9/11 Memorial:
+ A shield made from 
+recovered aluminum from the World Trade Center
+ towers serves as a debris shield on the rover's Rock Abrasion Tool, bearing a small American flag.
+The Fallen Astronaut Tribute:
+ The landing site was named after the crew of Space Shuttle Challenger, and several geographic features along its route were named in honor of deceased NASA scientists and astronauts.
+Narrative: The alien/player wonders if anything about this civilization survives that is still alive. 
+What the Player Feels: Deep admiration and emotional attachment. Opportunity's survival far beyond its expected lifespan transforms it from a machine into a symbol of perseverance. The player begins to feel that humanity's greatest strength was not intelligence alone, but the refusal to give up when confronted with uncertainty and failure.
+Chapter 5- Voyager 1
+Voyager 1 is a robotic space probe launched by NASA on September 5, 1977, to study the outer Solar System and interstellar space. It is the furthest humanity has ever gone.
+Mission Overview
+Launch Date:
+ September 5, 1977
+Primary Targets:
+ Jupiter and Saturn
+Current Status:
+ Operating on an extended mission in interstellar space 
+Key Achievements
+Planetary Discoveries:
+ Conducted close flybys of Jupiter in 1979 and Saturn in 1980, discovering new moons and ring structures.
+Interstellar Crossing:
+ Became the first human-made object to cross the heliopause and enter interstellar space in 2012. 
+The Golden Record:
+ Carries a gold-plated phonograph record containing sounds, images, and messages representing Earth life
+Narrative: The alien/player discovers the Golden Record. 
+What the Player Feels: Anticipation and mystery. The player expects another scientific artifact, another collection of measurements and discoveries. Instead, a feeling emerges that they are about to encounter humanity directly for the first time. They are hearing human voices, music, laughter, and the sounds of Earth itself. Curiosity gives way to empathy. The player feels as though they have finally met the people behind the artifacts.
+Epilogue — The Final Report
+What the Player Feels: A mixture of awe, melancholy, and connection. The Solar System no longer feels like a collection of abandoned hardware. Instead, it feels like a vast archive of humanity's dreams. The player leaves with the realization that every rover, lander, and probe was part of a larger story—a species reaching beyond its home not out of conquest, but out of curiosity, hope, and the desire to be understood.
+website
+How the website will follow
+Landing Page
+     ↓
+Mission Description + Backstory
+     ↓
+Moon Artifact
+(Apollo 11)
+     ↓
+Mars Archive Unlocked
+     ↓
+Sojourner
+     ↓
+Spirit
+     ↓
+Opportunity
+     ↓
+Deep Space Signal Detected
+     ↓
+Voyager 1
+     ↓
+Golden Record
+     ↓
+Final Report
