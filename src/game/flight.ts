@@ -24,18 +24,25 @@ export function stepFlight(state: FlightState, input: FlightInput, dt: number): 
     const powered = next.fuel > 0;
     let ax = 0, az = 0, ay = -1.62, burn = 0;
     if (powered && input.assist) {
-      ax = clamp(-0.65 * next.x - 1.65 * next.vx, -4.5, 4.5);
-      az = clamp(-0.65 * next.z - 1.65 * next.vz, -4.5, 4.5);
+      // Steering requests a gentle speed; assistance never switches off on keydown.
+      // Releasing a key recenters the craft, and final capture settles it safely.
+      const ix = Number.isFinite(input.x) ? clamp(input.x, -1, 1) : 0;
+      const iz = Number.isFinite(input.z) ? clamp(input.z, -1, 1) : 0;
+      const capture = next.altitude < 3;
+      const targetX = !capture && ix && !input.brake ? ix * 2.8 : clamp(-next.x * .6, -4, 4);
+      const targetZ = !capture && iz && !input.brake ? iz * 2.8 : clamp(-next.z * .6, -4, 4);
+      ax = clamp((targetX - next.vx) * 2.2, -3.5, 3.5);
+      az = clamp((targetZ - next.vz) * 2.2, -3.5, 3.5);
       // Reduce descent progressively; hold altitude if still outside the landing circle near ground.
-      const aligned = Math.hypot(next.x, next.z) < LANDING_RADIUS * 0.7;
-      const targetVy = next.altitude < 8 && !aligned ? 0 : -Math.min(8, 1.2 + next.altitude * 0.28);
+      const aligned = Math.hypot(next.x, next.z) < LANDING_RADIUS * 0.7 && Math.hypot(next.vx,next.vz) < 2;
+      const targetVy = next.altitude < 8 && !aligned ? 0 : input.brake ? -.6 : -Math.min(7, 1.1 + next.altitude * 0.25);
       ay = clamp((targetVy - next.vy) * 2.8, -1.62, 6);
-      burn = 0.7 + (Math.abs(ax) + Math.abs(az) + Math.max(0, ay)) * 0.08;
+      burn = 0.22;
     } else if (powered) {
       const ix = Number.isFinite(input.x) ? clamp(input.x, -1, 1) : 0;
       const iz = Number.isFinite(input.z) ? clamp(input.z, -1, 1) : 0;
       const norm = Math.max(1, Math.hypot(ix, iz));
-      ax = ix / norm * 4.2; az = iz / norm * 4.2;
+      ax = ix / norm * 3.2 - next.vx * 1.3; az = iz / norm * 3.2 - next.vz * 1.3;
       if (input.brake) {
         ax -= next.vx * 1.8; az -= next.vz * 1.8;
         // Braking stabilizes a slow descent, so holding Space never launches the craft away.

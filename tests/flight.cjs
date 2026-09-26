@@ -34,3 +34,19 @@ const moving = { ...initialFlight(), vx: 5, vz: -5, vy: -8 };
 const braked = stepFlight(moving, { ...idle, brake: true }, 0.1);
 assert.ok(braked.vx < moving.vx && braked.vz > moving.vz && braked.vy > moving.vy);
 console.log('Pass: assist, unsafe touchdown, target radius, purity, dt clamp, manual braking.');
+// Assisted steering must retain vertical protection, including after a long held key.
+for (const fps of [15, 60, 144]) {
+ let s=initialFlight();
+ for(let i=0;i<fps*4;i++)s=stepFlight(s,{...idle,assist:true,x:1},1/fps);
+ assert.ok(s.x>16 && s.vx<3.1,'Guided steering should be responsive and speed-limited');
+ assert.ok(s.vy>-7.1,'Steering must not disable automatic descent control');
+ const recovered=run({...idle,assist:true},fps,s);
+ assert.ok(recovered.state.landed,'Releasing steering must recover a safe landing');
+}
+let protectedApproach={...initialFlight(),x:15,z:0,altitude:7,vy:-1};
+for(let i=0;i<600;i++)protectedApproach=stepFlight(protectedApproach,{...idle,assist:true,x:1},1/60);
+assert.ok(!protectedApproach.failed && protectedApproach.altitude>0,'Assistance should hold above an unsafe landing');
+assert.ok(run({...idle,assist:true},60,protectedApproach).state.landed,'Release should recover from an offset approach');
+const coasting=stepFlight({...initialFlight(),vx:2,vz:-2},idle,.1);
+assert.ok(coasting.vx<2 && coasting.vz>-2,'Manual release should damp lateral drift');
+console.log('Pass: assisted key steering, descent protection, safe recovery and release damping.');
