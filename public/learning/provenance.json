@@ -1,0 +1,17 @@
+{
+  "images": {
+    "eagle-orbit": "https://www.nasa.gov/wp-content/uploads/2019/01/6-as11-44-6576a.jpg",
+    "houbolt": "https://www.nasa.gov/wp-content/uploads/2019/01/3-john_c._houbolt_-_gpn-2000-001274b.jpg",
+    "camera-training": "https://www.nasa.gov/wp-content/uploads/2023/06/48264704227-429c94870f-4k.jpg",
+    "aldrin-eagle": "https://www.nasa.gov/wp-content/uploads/2023/06/337294main-pg62-as11-40-5903-full.jpg",
+    "lovell-training": "https://images-assets.nasa.gov/image/s70-20272/s70-20272~large.jpg",
+    "science-deployment": "https://www.nasa.gov/wp-content/uploads/2020/03/aldrin20190724.jpg"
+  },
+  "apolloCodeCommit": "911e5c0283c629c50cb97666f34065e8c07d71a5",
+  "repositoryPreview": {
+    "file": "apollo-repository.png",
+    "source": "https://github.com/chrislgarry/Apollo-11",
+    "captured": "2026-09-27"
+  },
+  "missionOverview": "https://www.nasa.gov/mission/apollo-11/"
+}

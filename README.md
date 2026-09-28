@@ -12,6 +12,14 @@ Start a new development session with AGENTS.md and docs/STATUS.md. Source narrat
 
 ## Play
 
-[Open MERSA](https://mersa-petrova-archive.bracunasa.chatgpt.site) - public, no login. Resolve the signal, use WASD/arrows to steer and Space to brake into the lunar ring. Touch controls and flight assist are available. Scan the unknown hardware, then click its separated components. Complete all three investigations to reveal Mars.
+[Play MERSA on Cloudflare](https://nasa-space-app-challenge.aryan-sharar.workers.dev/) - public, no login. The latest source changes in this repository may appear there only after a separate Cloudflare deployment.
+
+Land in third person: WASD/arrows steer, release stops drift, and Space brakes for touchdown. Flight assist starts off; touch controls and optional assist are available. Walk or skip to the unknown hardware, scan it, and explore six discoveries. See complete Eagle first, then use See what remains today for its lower stage. Choose a part to pull it out with blue edge outlines and a white field note with Miso and nine sentences of flowing prose; click again to return it. Footprints appear immediately. FIELD GUIDE opens a white study page with the mission overview, crew, timeline, experiments, photos and interactive code. The separate Apollo code entrance links to VS Code for the Web. Replay the supplied historical landing and first-step recordings from their scenes. Archive all six discoveries to reveal the Mars teaser.
+
+Run `node tests/flight.cjs` for pure flight checks. Current architecture and interaction contracts are in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 NASA imagery and model credits are in the in-game archive and docs/ASSETS.md. The alien craft, terrain placement and disassembly are interpretive, not an exact survey.
+
+For desktop-only website verification: `npx playwright test --project=desktop`. Current user preference is to defer mobile testing. Read the current summary at the top of docs/STATUS.md before older historical logs to minimize context.
+
+The current hardware pattern adds right-edge flight instruments, gray flowing dust, an authored astronaut walk, warmer metallic Eagle materials, scroll-driven scan entry, and a surface journey/log sidebar. Read [the reusable hardware journey contract](docs/HARDWARE_JOURNEY.md) before extending another hardware journey.

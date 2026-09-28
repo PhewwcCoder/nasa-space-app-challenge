@@ -10,7 +10,7 @@ export const MAX_HORIZONTAL_TOUCHDOWN_SPEED = 3;
 export const MAX_VERTICAL_TOUCHDOWN_SPEED = 3.5;
 const clamp = (value: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, value));
 export function initialFlight(): FlightState {
-  return { x: 16, z: 12, altitude: 100, vx: 0, vz: 0, vy: -2, fuel: 100, landed: false, failed: false };
+  return { x: 0, z: 20, altitude: 100, vx: 0, vz: 0, vy: -2, fuel: 100, landed: false, failed: false };
 }
 
 /** Pass seconds; a long suspended frame advances at most 100ms. Inputs are world X/Z axes. */
@@ -42,7 +42,11 @@ export function stepFlight(state: FlightState, input: FlightInput, dt: number): 
       const ix = Number.isFinite(input.x) ? clamp(input.x, -1, 1) : 0;
       const iz = Number.isFinite(input.z) ? clamp(input.z, -1, 1) : 0;
       const norm = Math.max(1, Math.hypot(ix, iz));
-      ax = ix / norm * 3.2 - next.vx * 1.3; az = iz / norm * 3.2 - next.vz * 1.3;
+      // Responsive speed control, with no automatic centering in manual mode.
+      ax = (ix / norm * 3.8 - next.vx) * 3;
+      az = (iz / norm * 3.8 - next.vz) * 3;
+      // A forgiving game descent gives time to steer; Space is still needed to land safely.
+      ay = clamp((-5.5 - next.vy) * 2, -1.62, 6);
       if (input.brake) {
         ax -= next.vx * 1.8; az -= next.vz * 1.8;
         // Braking stabilizes a slow descent, so holding Space never launches the craft away.

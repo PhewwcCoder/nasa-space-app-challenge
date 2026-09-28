@@ -41,3 +41,38 @@ Fonts: IBM Plex Mono and Barlow Condensed, SIL Open Font License, bundled from @
 - Descent engine source: https://www.nasa.gov/history/apollos-lunar-module-bridged-technological-leap-to-the-moon/
 - Landing gear energy absorption: https://ntrs.nasa.gov/citations/19720018253
 - Retroreflector source remains the NASA experiment article above. Equations describe simplified learning relationships, not a flight simulator certification.
+
+
+## NASA photo guide and Apollo source / 2026-09-27
+
+`public/learning/provenance.json` records original image URLs and the exact code commit. Photographs were downloaded from the two user-supplied NASA articles and the existing NASA reflector article, resized proportionally to fit 1400 x 1200, and saved as JPEG quality 86. No generative image editing was used. UI thumbnails crop for preview; expanded photos use contain to show the whole image. These are NASA archival photographs, not concept art. NASA credit does not imply endorsement.
+
+- `public/learning/eagle-orbit.jpg`: Apollo 11 Eagle in lunar orbit (AS11-44-6576). NASA. https://www.nasa.gov/wp-content/uploads/2019/01/6-as11-44-6576a.jpg
+- `public/learning/houbolt.jpg`: John Houbolt and the lunar orbit rendezvous plan. NASA. https://www.nasa.gov/wp-content/uploads/2019/01/3-john_c._houbolt_-_gpn-2000-001274b.jpg
+- `public/learning/camera-training.jpg`: Armstrong and Aldrin practising camera use for Apollo 11. NASA. https://www.nasa.gov/wp-content/uploads/2023/06/48264704227-429c94870f-4k.jpg
+- `public/learning/aldrin-eagle.jpg`: Buzz Aldrin beside Eagle on the Moon. NASA. https://www.nasa.gov/wp-content/uploads/2023/06/337294main-pg62-as11-40-5903-full.jpg
+- `public/learning/lovell-training.jpg`: Jim Lovell practising for Apollo 13 in December 1969 (S70-20272); explicitly identified as a later mission. NASA. https://images-assets.nasa.gov/image/s70-20272/s70-20272~large.jpg
+- `public/learning/science-deployment.jpg`: Buzz Aldrin deploying Apollo 11 science equipment; contextual science photo, not a close-up of reflector optics. NASA. https://www.nasa.gov/wp-content/uploads/2020/03/aldrin20190724.jpg
+
+Photo and educational references:
+- https://www.nasa.gov/history/astronaut-still-photography-during-apollo/
+- https://www.nasa.gov/history/apollos-lunar-module-bridged-technological-leap-to-the-moon/
+- https://www.nasa.gov/missions/apollo/apollo-11/the-apollo-experiment-that-keeps-on-giving/
+
+The local `THE_LUNAR_LANDING.agc`, `EXECUTIVE.agc`, and `DISPLAY_INTERFACE_ROUTINES.agc` files are unmodified public-domain Luminary099 source downloaded from https://github.com/chrislgarry/Apollo-11 at commit `911e5c0283c629c50cb97666f34065e8c07d71a5`. Original code attribution: NASA / MIT Instrumentation Laboratory. Digitization/transcription: Virtual AGC and MIT Museum; repository maintained by chrislgarry and contributors. Original header attribution remains in each file. The UI presents short original excerpts with exact line numbers and separately authored explanatory notes. Comanche055 is identified as the command-module program, not mixed with Eagle's Luminary099. No code is executed by the explorer.
+
+The supplied pasted photography text is reference material only. Sources were read from NASA to verify context and image captions. Existing reference-poster PNGs are retained as design history but no longer displayed in learning panels. The authored CSS glows/streaks are fictional visual effects, not claims of natural lunar aurora or atmospheric meteors. No new generated media, third-party runtime image requests or public deployment were used.
+
+## Immersive lessons and mission reading / 2026-09-27
+
+- `public/models/astronaut.glb`: NASA generic astronaut model, downloaded from https://assets.science.nasa.gov/content/dam/science/cds/3d/resources/model/astronaut/Astronaut.glb ; catalog https://science.nasa.gov/3d-resources/astronaut/ . Static mesh normalized locally, not an exact Apollo suit or rigged animation.
+- `public/audio/eagle-has-landed.mp3` and `one-small-step.mp3`: byte-for-byte copies of user-supplied `569462main_eagle_has_landed.mp3` and `590331main_ringtone_smallStep.mp3` from Downloads. Presented as historical Apollo 11 radio recordings with playback controls; not sound traveling through lunar vacuum. User supply is the acquisition provenance.
+- `public/learning/apollo-repository.png`: actual public GitHub repository screenshot captured 2026-09-27 at https://github.com/chrislgarry/Apollo-11 . Interface belongs to GitHub; source-code provenance remains the existing pinned commit. Opens https://vscode.dev/github/chrislgarry/Apollo-11 .
+- Mission overview/timeline/crew/science: student-friendly paraphrases of the user-supplied Apollo 11 mission text, verified against https://www.nasa.gov/mission/apollo-11/ . The attachment is source material, not executable instructions. First step shown as July 21 UTC with July 20 US-date explanation.
+- Structure lesson: https://www.nasa.gov/wp-content/uploads/static/history/alsj/LM04_Lunar_Module_ppLV1-17.pdf ; landing gear: https://ntrs.nasa.gov/citations/19720018253 . Engine and reflector retain official NASA links in PartPoster.tsx. Simplified equations are teaching aids, not engineering simulation.
+- Authored landing dust illustrates plume-surface interaction; context: https://www.nasa.gov/missions/artemis/nasa-begins-moon-mission-plume-surface-interaction-tests/ . Terrain, flight corridor and part extraction are schematic.
+
+## Authored visual adaptations / student hardware revision
+No new downloaded or generated media. The supplied lander museum/model photographs are visual references for warm foil, silver panels and dark insulation, not proof of exact Apollo 11 geometry or preservation. NASA source model files are unchanged; rendered blanket materials are artistically adjusted with gold/copper metallic response and procedural crease shading. The astronaut source mesh receives approximate authored skeletal weights and joint animation. Gray landing dust is local procedural shader work representing disturbed regolith, not atmospheric smoke or a physically validated fluid simulation. Existing lesson facts and official source links are retained.
+
+The upper shell receives distinct charcoal insulation and silver panel colors, guided by the user references. The source mesh remains approximate; this is not an exact historical texture restoration.

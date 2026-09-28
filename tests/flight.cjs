@@ -38,7 +38,7 @@ console.log('Pass: assist, unsafe touchdown, target radius, purity, dt clamp, ma
 for (const fps of [15, 60, 144]) {
  let s=initialFlight();
  for(let i=0;i<fps*4;i++)s=stepFlight(s,{...idle,assist:true,x:1},1/fps);
- assert.ok(s.x>16 && s.vx<3.1,'Guided steering should be responsive and speed-limited');
+ assert.ok(s.x>initialFlight().x && s.vx<3.1,'Guided steering should be responsive and speed-limited');
  assert.ok(s.vy>-7.1,'Steering must not disable automatic descent control');
  const recovered=run({...idle,assist:true},fps,s);
  assert.ok(recovered.state.landed,'Releasing steering must recover a safe landing');
@@ -50,3 +50,13 @@ assert.ok(run({...idle,assist:true},60,protectedApproach).state.landed,'Release 
 const coasting=stepFlight({...initialFlight(),vx:2,vz:-2},idle,.1);
 assert.ok(coasting.vx<2 && coasting.vz>-2,'Manual release should damp lateral drift');
 console.log('Pass: assisted key steering, descent protection, safe recovery and release damping.');
+
+// Manual approach: forward, release to settle, brake close to the surface.
+for(const fps of [15,30,60,144]){
+ let s=initialFlight(), t=0;
+ while(!s.landed&&!s.failed&&t<60){
+  s=stepFlight(s,{...idle,z:s.z>1?-1:0,brake:s.altitude<15},1/fps);t+=1/fps;
+ }
+ assert.ok(s.landed,`Manual approach should be controllable at ${fps}fps`);
+}
+console.log('Pass: manual forward approach and held brake at four frame rates.');
