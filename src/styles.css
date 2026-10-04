@@ -182,3 +182,12 @@
  .eagle .exit-inspection,.reflector .exit-inspection{top:72px;left:auto;right:var(--edge);min-height:44px;padding:8px 12px;background:#041018dc}
  .eagle .part-poster,.reflector .part-poster{top:128px}
 }
+
+/* Keep discovery labels contained and vertically centered after identification. */
+.discovery-dock strong{min-width:0;overflow-wrap:anywhere;align-self:center}
+@media(min-width:761px){
+ .discovery-dock{width:min(1040px,calc(100% - 60px));display:grid;grid-template-columns:repeat(6,minmax(0,1fr))}
+ .discovery-dock button{width:100%;max-width:none;grid-template-columns:24px minmax(0,1fr);align-items:center}
+ .discovery-dock button>span{grid-row:1;grid-column:1}
+ .discovery-dock button>strong{grid-row:1;grid-column:2}
+}

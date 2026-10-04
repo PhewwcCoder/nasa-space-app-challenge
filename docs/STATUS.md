@@ -1,5 +1,8 @@
 # Status
 
+## Discovery dock alignment fix / 2026-10-05
+Fixed archived-name overflow and vertical alignment: six equal desktop columns, shrinkable text tracks, centered labels/checkmarks, and a natural wrap point in Retroreflector. Verified bounds and vertical centers for reflector-only and all-archived states at 1280, 1440 and 1920px; desktop screenshot reviewed. Production build passes with the existing bundle-size advisory. Mobile tests skipped. Publishing to GitHub and the existing Cloudflare Worker.
+
 ## Published UI release / 2026-10-05
 Pushed to GitHub main: 9dd1f71 (UI and NASA assets), a741055 (documentation and deployment configuration). Deployed to https://nasa-space-app-challenge.aryan-sharar.workers.dev/ using the existing Cloudflare Worker. Production version: f62868ab-1b2f-4727-9c0e-867f563f3307. This supersedes the local-only notes below.
 
