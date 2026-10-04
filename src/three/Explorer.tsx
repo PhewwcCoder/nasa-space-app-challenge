@@ -1,5 +1,5 @@
-﻿import { useEffect, useMemo, useRef } from 'react';
-import { useGLTF } from '@react-three/drei';
+import { useRef } from 'react';
+import { RoundedBox } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useArchive } from '../stores/archive';
@@ -17,54 +17,30 @@ export default function Explorer(){
  </group><group>{Array.from({length:26},(_,i)=>{const t=i/25;return <group key={i} position={[32-t*12+(i%2?.22:-.22),.012,-1-t*18]} rotation={[0,.62,0]}><mesh rotation={[-Math.PI/2,0,0]}><planeGeometry args={[.25,.46]}/><meshStandardMaterial color="#41423f" roughness={1}/></mesh>{Array.from({length:6},(_,j)=><mesh key={j} position={[0,.012,(j-2.5)*.063]} rotation={[-Math.PI/2,0,0]}><planeGeometry args={[.22,.023]}/><meshStandardMaterial color="#93938a"/></mesh>)}</group>;})}</group></>;
 }
 
+// Fictional survey suit inspired by the supplied cosmic character, built as rigid jointed parts.
+function Armor({position,size,color='#dddfe9',glow=false}:{position:[number,number,number];size:[number,number,number];color?:string;glow?:boolean}){return <RoundedBox args={size} radius={.045} smoothness={3} position={position} castShadow><meshStandardMaterial color={color} metalness={.35} roughness={.38} emissive={glow?color:'#000000'} emissiveIntensity={glow?1.5:0}/></RoundedBox>;}
 function AstronautSuit(){
- const gltf=useGLTF('/models/astronaut.glb','/draco/');
- const phase=useRef(0),stride=useRef(0);
- const rig=useMemo(()=>{
-  gltf.scene.updateMatrixWorld(true);
-  const bounds=new THREE.Box3().setFromObject(gltf.scene),size=bounds.getSize(new THREE.Vector3()),center=bounds.getCenter(new THREE.Vector3());
-  const scale=2.4/size.y,group=new THREE.Group(),root=new THREE.Bone();group.add(root);
-  const bones=[root];
-  for(const side of [-1,1]){
-   const hip=new THREE.Bone();hip.position.set(side*.2,1.05,0);root.add(hip);
-   const knee=new THREE.Bone();knee.position.set(0,-.52,0);hip.add(knee);
-   const shoulder=new THREE.Bone();shoulder.position.set(side*.34,1.78,0);root.add(shoulder);
-   const elbow=new THREE.Bone();elbow.position.set(side*.38,-.08,0);shoulder.add(elbow);
-   bones.push(hip,knee,shoulder,elbow);
-  }
-  group.updateMatrixWorld(true);
-  const skeleton=new THREE.Skeleton(bones),meshes:THREE.SkinnedMesh[]=[];
-  gltf.scene.traverse(o=>{
-   if(!(o instanceof THREE.Mesh))return;
-   const geometry=o.geometry.clone();geometry.applyMatrix4(o.matrixWorld);geometry.translate(-center.x,-bounds.min.y,-center.z);geometry.scale(scale,scale,scale);
-   const pos=geometry.attributes.position,indices:number[]=[],weights:number[]=[];
-   for(let i=0;i<pos.count;i++){
-    const x=pos.getX(i),y=pos.getY(i),side=x<0?1:5;
-    const arm=THREE.MathUtils.smoothstep(Math.abs(x),.32,.55)*THREE.MathUtils.smoothstep(y,1.15,1.5);
-    const backpackMask=y>.7?THREE.MathUtils.smoothstep(pos.getZ(i),-.24,-.08):1;
-    const leg=(1-THREE.MathUtils.smoothstep(y,.85,1.03))*(1-arm)*backpackMask;
-    if(arm>.01){const forearm=THREE.MathUtils.smoothstep(Math.abs(x),.65,.92);indices.push(0,side+2,side+3,0);weights.push(1-arm,arm*(1-forearm),arm*forearm,0);}
-    else{const shin=1-THREE.MathUtils.smoothstep(y,.43,.66);indices.push(0,side,side+1,0);weights.push(1-leg,leg*(1-shin),leg*shin,0);}
-   }
-   geometry.setAttribute('skinIndex',new THREE.Uint16BufferAttribute(indices,4));geometry.setAttribute('skinWeight',new THREE.Float32BufferAttribute(weights,4));
-   const material=Array.isArray(o.material)?o.material.map(m=>m.clone()):o.material.clone();
-   const mesh=new THREE.SkinnedMesh(geometry,material);mesh.castShadow=true;mesh.receiveShadow=true;mesh.frustumCulled=false;group.add(mesh);mesh.bind(skeleton);meshes.push(mesh);
-  });
-  return {group,bones,meshes,skeleton};
- },[gltf]);
- useEffect(()=>()=>{rig.meshes.forEach(m=>{m.geometry.dispose();(Array.isArray(m.material)?m.material:[m.material]).forEach(x=>x.dispose());});rig.skeleton.dispose();},[rig]);
- useFrame((_,dt)=>{
-  const s=useArchive.getState();if(s.paused)return;
-  const moving=s.stage==='surface'&&!s.inspector&&flightInput.z<0&&s.walk<1&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  stride.current=THREE.MathUtils.damp(stride.current,moving?1:0,8,dt);if(moving)phase.current+=Math.min(dt,.05)*6;
-  for(const [i,side] of [[1,-1],[5,1]]){
-   const step=Math.sin(phase.current+(side<0?0:Math.PI))*stride.current;
-   rig.bones[i].rotation.x=step*.42;
-   rig.bones[i+1].rotation.x=Math.max(0,-step)*.55;
-   rig.bones[i+2].rotation.set(-step*.32,0,-side*.72);
-   rig.bones[i+3].rotation.x=-.18-Math.max(0,step)*.22;
-  }
- });
- return <primitive object={rig.group}/>;
+ const limbs=useRef<(THREE.Group|null)[]>([]),phase=useRef(0),stride=useRef(0);
+ useFrame((_,dt)=>{const s=useArchive.getState();if(s.paused)return;const moving=s.stage==='surface'&&!s.inspector&&flightInput.z<0&&s.walk<1&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches;stride.current=THREE.MathUtils.damp(stride.current,moving?1:0,8,dt);if(moving)phase.current+=Math.min(dt,.05)*5;limbs.current.forEach((limb,i)=>{if(limb)limb.rotation.x=Math.sin(phase.current+(i%2?Math.PI:0))*stride.current*(i<2?.32:-.25);});});
+ return <group>
+ <Armor position={[0,1.38,0]} size={[.75,.68,.46]} color="#242044"/>
+ <Armor position={[0,1.07,0]} size={[.7,.16,.49]} color="#d4ad65"/>
+ <mesh position={[0,2.02,0]} castShadow><sphereGeometry args={[.43,32,24]}/><meshStandardMaterial color="#dddfe9" metalness={.5} roughness={.3}/></mesh>
+ <mesh position={[0,2.04,.19]} scale={[1,.82,.7]}><sphereGeometry args={[.37,32,24]}/><meshStandardMaterial color="#191732" metalness={.8} roughness={.16} emissive="#422677" emissiveIntensity={.35}/></mesh>
+ <mesh position={[0,1.75,0]} rotation={[Math.PI/2,0,0]}><torusGeometry args={[.32,.045,8,40]}/><meshStandardMaterial color="#d4ad65" metalness={.7} roughness={.3}/></mesh>
+ {[-1,1].map((side,i)=><group key={side}>
+ <mesh position={[side*.43,2.04,0]} rotation={[0,0,Math.PI/2]} castShadow><cylinderGeometry args={[.19,.19,.13,32]}/><meshStandardMaterial color="#242039" roughness={.65}/></mesh>
+ <mesh position={[side*.51,2.04,0]} rotation={[0,0,Math.PI/2]} castShadow><cylinderGeometry args={[.175,.175,.08,32]}/><meshStandardMaterial color="#dddfe9" metalness={.4} roughness={.3}/></mesh>
+ <mesh position={[side*.557,2.04,0]} rotation={[0,Math.PI/2,0]}><torusGeometry args={[.12,.024,8,32]}/><meshStandardMaterial color="#ad8bff" emissive="#7956df" emissiveIntensity={.8}/></mesh>
+ <group ref={el=>{limbs.current[i]=el;}} position={[side*.22,1,0]}><Armor position={[0,-.23,0]} size={[.3,.44,.34]} color="#302649"/><Armor position={[0,-.46,.035]} size={[.31,.16,.37]}/><Armor position={[0,-.67,0]} size={[.3,.32,.34]} color="#25253e"/><Armor position={[0,-.86,.09]} size={[.35,.2,.5]}/><Armor position={[0,-.64,.18]} size={[.17,.035,.015]} color="#b998ff" glow/></group>
+ <group ref={el=>{limbs.current[i+2]=el;}} position={[side*.49,1.63,0]} rotation={[0,0,side*.1]}><Armor position={[0,-.12,0]} size={[.27,.3,.36]} color="#62508e"/><Armor position={[0,-.37,0]} size={[.25,.2,.3]} color="#25253e"/><Armor position={[0,-.55,.015]} size={[.29,.22,.34]}/><Armor position={[0,-.7,.02]} size={[.23,.16,.27]} color="#33304d"/><Armor position={[0,-.49,.19]} size={[.18,.035,.015]} color="#b998ff" glow/></group>
+ <Armor position={[side*.25,1.43,.26]} size={[.065,.51,.07]}/>
+ </group>)}
+ <Armor position={[0,1.46,-.35]} size={[.68,.6,.24]} color="#29203d"/>
+ <mesh position={[0,1.48,-.5]} rotation={[0,Math.PI,0]}><circleGeometry args={[.235,40]}/><meshStandardMaterial color="#34215c" emissive="#613b9f" emissiveIntensity={.5}/></mesh>
+ <mesh position={[0,1.48,-.52]} rotation={[.2,.2,-.4]} scale={[1,.65,1]}><torusGeometry args={[.27,.018,8,48]}/><meshStandardMaterial color="#dfb875" metalness={.65} roughness={.3}/></mesh>
+ {Array.from({length:18},(_,i)=><mesh key={i} position={[Math.sin(i*2.4)*(.035+i*.009),1.48+Math.cos(i*2.4)*(.035+i*.009),-.53]}><sphereGeometry args={[i%4===0?.018:.008,6,6]}/><meshBasicMaterial color={i%3?'#cebcff':'#8ce5ff'}/></mesh>)}
+ <mesh position={[0,2.04,0]} castShadow><torusGeometry args={[.46,.05,12,48,Math.PI]}/><meshStandardMaterial color="#29233f" metalness={.35} roughness={.4}/></mesh>
+ <mesh position={[0,2.04,-.035]}><torusGeometry args={[.46,.022,8,48,Math.PI]}/><meshStandardMaterial color="#b5a0de" metalness={.4} roughness={.35}/></mesh>
+ </group>;
 }
-useGLTF.preload('/models/astronaut.glb','/draco/');

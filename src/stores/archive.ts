@@ -17,7 +17,7 @@ export const useArchive = create<State>((set, get) => ({
   stage:'entry', progress:0, inspector:null, discovered:[], selected:'', inspectedParts:[],
   exploded:false, isolated:false, viewKey:0, muted:true, assist:false, flightReset:0, paused:false,
   setStage:stage=>set({stage}), setProgress:progress=>set({progress}),
-  inspect:inspector=>{const previous=get().inspector;set({inspector,scanProgress:inspector&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches?0:1,exploded:false,isolated:false,selected:'',inspectedParts:[]});if(!inspector)requestAnimationFrame(()=>document.querySelector<HTMLElement>(`[data-artifact="${previous}"]`)?.focus());},
+  inspect:inspector=>{const previous=get().inspector;set({inspector,scanProgress:1,exploded:false,isolated:false,selected:'',inspectedParts:[]});if(!inspector)requestAnimationFrame(()=>document.querySelector<HTMLElement>(`[data-artifact="${previous}"]`)?.focus());},
   discover:id=>set(s=>({discovered:s.discovered.includes(id)?s.discovered:[...s.discovered,id]})),
   select:selected=>set(s=>({selected:s.selected===selected?'':selected,isolated:false,inspectedParts:s.inspectedParts.includes(selected)?s.inspectedParts:[...s.inspectedParts,selected]})),
   toggleExploded:()=>set(s=>({exploded:!s.exploded})), toggleIsolated:()=>set(s=>({isolated:!s.isolated})),

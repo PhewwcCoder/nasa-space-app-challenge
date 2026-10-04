@@ -60,7 +60,7 @@
 .footprints .footprint-panel{background:#03111b75;backdrop-filter:blur(2px)}
 .sky-atmosphere{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;mask-image:linear-gradient(#000,transparent 38%)}
 .sky-glow{position:absolute;left:25%;top:-20%;width:70%;height:40%;background:radial-gradient(ellipse,#70cab824,transparent 65%);filter:blur(35px);opacity:0;animation:sky-glow 47s 12s infinite}
-.sky-streak{position:absolute;left:18%;top:8%;width:110px;height:1px;background:linear-gradient(90deg,transparent,#d1e6e0);transform:rotate(25deg);opacity:0;animation:sky-streak 31s 9s infinite}
+.sky-streak{position:absolute;left:18%;top:8%;width:110px;height:1px;background:linear-gradient(90deg,transparent,#d1e6e0);transform:rotate(25deg);opacity:0;animation:sky-streak 22s 5s infinite}
 @keyframes sky-glow{0%,25%,100%{opacity:0;transform:translateX(-8%)}45%,65%{opacity:.65;transform:translateX(10%)}}
 @keyframes sky-streak{0%,94%,100%{opacity:0;transform:translate(0,0) rotate(25deg)}95%{opacity:.65}98%{opacity:0;transform:translate(450px,180px) rotate(25deg)}}
 .sky-atmosphere.paused i{animation-play-state:paused}.inspecting .sky-atmosphere{display:none}
@@ -146,3 +146,39 @@
 .scan-meter{height:2px;background:#bde1e32b;margin:20px 0}.scan-meter i{display:block;height:100%;background:#bde1e3}
 
 @media(min-width:761px){.expedition-log{max-height:calc(100svh - 440px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}}
+
+/* Student discovery polish / October 2026 */
+.discovery-dock button{position:relative;overflow:visible;transition:transform .22s ease,background .22s ease,box-shadow .22s ease}
+.discovery-dock button:hover,.discovery-dock button:focus-visible{transform:translateY(-7px);background:#16323de8;box-shadow:0 8px 28px #0007}
+.clue-icon{width:42px;height:42px;color:#b7eaf0;pointer-events:none}
+.icon-orbit{stroke:#ab91df;stroke-dasharray:2 6;opacity:.5}
+.discovery-dock .clue-icon{position:absolute;bottom:calc(100% + 14px);left:calc(50% - 27px);width:54px;height:54px;padding:6px;background:#0b1727e8;border:1px solid #9fb4dd66;border-radius:50%;opacity:0;transform:translateY(12px) scale(.75) rotate(-12deg);transition:opacity .2s,transform .25s}
+.discovery-dock button:hover .clue-icon,.discovery-dock button:focus-visible .clue-icon{opacity:1;transform:translateY(0) scale(1) rotate(0)}
+.code-discovery{transition:transform .22s,background .22s,box-shadow .22s;padding-right:54px}
+.code-discovery>.clue-icon{position:absolute;right:13px;top:34px;width:34px;height:34px;opacity:.55;transition:transform .25s,opacity .25s}
+.code-discovery:hover,.code-discovery:focus-visible{transform:translateY(-5px);box-shadow:0 10px 30px #0005}
+.code-discovery:hover>.clue-icon,.code-discovery:focus-visible>.clue-icon{transform:rotate(-8deg) scale(1.15);opacity:1}
+.cutaway-controls .separate-primary{background:#173b48c9;border-color:#a8e4ec;box-shadow:inset 3px 0 #9cdae0,0 0 16px #9bdbe016;color:#e4fbff}
+.eagle .orbit-hint{display:block;position:absolute;top:125px;bottom:auto;left:40%;right:24%;text-align:center;font-size:11px;letter-spacing:.04em;color:#c0d8de;pointer-events:none}
+.seismic-exhibit{position:absolute;inset:175px var(--edge) 112px;display:grid;grid-template-columns:minmax(260px,340px) minmax(430px,640px);justify-content:space-between;gap:40px;pointer-events:none}
+.seismic-meter{align-self:start;background:#07151dec;padding:24px;pointer-events:auto;border-top:1px solid #94cbd780}
+.seismic-meter h3{font:400 32px/1.1 'Barlow Condensed',sans-serif}.seismic-meter svg{width:100%;height:150px;fill:none;stroke:#c4e59c;stroke-width:2}.seismic-meter small{display:block;font-size:9px;color:#b4c7cd;line-height:1.7;margin-bottom:20px}.seismic-meter .action{width:100%;min-width:0}.seismic-meter>p:last-child{font:16px/1.65 Arial,sans-serif;margin:20px 0 0}
+.seismic-notebook{background:#f4f1e9;color:#25333a;overflow:auto;overscroll-behavior:contain;pointer-events:auto;padding:28px 32px;scrollbar-color:#607f89 #e5e2d9;box-shadow:0 12px 45px #0004}.seismic-notebook .eyebrow{color:#486570;font-size:10px}.seismic-notebook h3{font:500 42px/1 'Barlow Condensed',sans-serif;margin:10px 0 16px}.seismic-notebook p{font:17px/1.7 Arial,sans-serif}.seismic-notebook figure{margin:24px 0}.seismic-notebook img{display:block;width:100%;max-height:260px;object-fit:contain;background:#deded7}.seismic-notebook figcaption{font-size:10px;line-height:1.6;margin-top:9px;color:#53666c}.seismic-notebook h4{font:500 26px/1.2 'Barlow Condensed',sans-serif;margin:26px 0 8px}.seismic-stats{display:flex;justify-content:space-between;gap:14px;border-block:1px solid #bbc5c4;padding:18px 0}.seismic-stats b{display:block;font:500 30px 'Barlow Condensed',sans-serif}.seismic-stats span{font-size:10px}.seismic-source{font-size:12px;color:#285c70}.seismic-note{display:block;font-size:10px;line-height:1.7;margin-top:22px;color:#53666c}
+.seismometer .evidence-conclusion{top:auto;bottom:100px;left:var(--edge);right:auto;width:330px;font-size:20px}.seismometer .interpretation{left:var(--edge);right:auto;bottom:25px;width:340px}.seismometer .interpretation[open]{z-index:20;background:#07151df5}.seismometer .archive-action{bottom:30px}
+@media(max-width:1000px){.seismic-exhibit{gap:22px;grid-template-columns:minmax(230px,1fr) minmax(350px,1.4fr)}.seismic-notebook{padding:22px}.seismic-meter{padding:18px}.eagle .orbit-hint{left:42%;right:8%}}
+@media(max-width:760px){.seismic-exhibit{inset:155px 20px 200px;display:block;overflow:auto;pointer-events:auto}.seismic-meter{margin-bottom:20px}.seismic-notebook{overflow:visible}.seismometer .evidence-conclusion{bottom:115px;width:auto;right:20px;left:20px}.seismometer .interpretation{bottom:75px;left:20px;width:auto;right:20px}.seismometer .archive-action{bottom:15px}.eagle .orbit-hint{top:350px;left:25%;right:5%;font-size:10px}.discovery-dock .clue-icon{display:none}}
+@media(prefers-reduced-motion:reduce){.discovery-dock button,.discovery-dock .clue-icon,.code-discovery,.code-discovery>.clue-icon{transition:none;transform:none!important}}
+
+@media(min-width:761px) and (max-height:820px){.seismic-exhibit{top:180px;bottom:140px}.seismic-meter{padding:18px}.seismic-meter h3{font-size:26px}.seismic-meter svg{height:95px}.seismic-meter>p:last-child{font-size:14px;line-height:1.5;margin-top:12px}.seismic-meter small{margin-bottom:12px}.seismometer .evidence-conclusion{bottom:96px;font-size:18px}}
+
+.eagle-target{transform:translateX(clamp(130px,12vw,190px))}
+
+.quiz-options button{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.quiz-options button small{font-size:11px}
+.quiz-options button.answer-wrong{border:2px solid #f07878;background:#481f29;color:#ffd4d4;padding:11px}
+.quiz-options button.answer-correct{border:2px solid #76d69b;background:#142e27;color:#c8f5d8;padding:11px}
+
+@media(min-width:761px){
+ .eagle .exit-inspection,.reflector .exit-inspection{top:72px;left:auto;right:var(--edge);min-height:44px;padding:8px 12px;background:#041018dc}
+ .eagle .part-poster,.reflector .part-poster{top:128px}
+}
