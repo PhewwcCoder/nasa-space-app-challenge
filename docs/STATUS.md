@@ -1,5 +1,10 @@
 # Status
 
+## Published UI release / 2026-10-05
+Pushed to GitHub main: 9dd1f71 (UI and NASA assets), a741055 (documentation and deployment configuration). Deployed to https://nasa-space-app-challenge.aryan-sharar.workers.dev/ using the existing Cloudflare Worker. Production version: f62868ab-1b2f-4727-9c0e-867f563f3307. This supersedes the local-only notes below.
+
+Final production build, pure flight checks and all three desktop e2e tests passed (2.0 minutes). Public HTTP verification returned 200; HTML matches the local build after trimming whitespace, and all three JavaScript bundles, CSS and both new NASA images match local SHA-256 hashes. Mobile testing skipped as requested. Existing non-blocking Three.js bundle-size warning remains. QA screenshots stay local and were not included in commits.
+
 ## Release preparation / 2026-10-05
 Final production build, pure flight checks and all three desktop e2e tests passed (2.0 minutes). Existing non-blocking bundle-size warning remains. UI updates and NASA seismic assets are being committed and pushed to GitHub; Cloudflare configuration targets the existing Worker. Deployment verification will be recorded after publication. QA screenshots remain local. Mobile tests skipped per user instruction.
 
