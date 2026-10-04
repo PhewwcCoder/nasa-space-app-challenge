@@ -18,3 +18,9 @@ A separate visible Apollo code entrance opens a repository preview and an intera
 This section supersedes earlier numbered/floating lesson requirements. Desktop descent measurements sit at the right edge, with the target map left and steering help below. Gray turbulent ground sheets replace solid dust particles. The explorer has an authored jointed gait. Eagle uses warmer metallic thermal blankets and readable silver/dark surfaces; the scene must remain bright enough for students.
 
 Choosing a clue opens a reversible scroll-driven camera scan. Native scroll or Continue scan completes the move; Escape/Return exits, and reduced motion opens inspection immediately. Selected hardware exposes a warm-white right-hand field note: Miso, photograph, nine sentences in two flowing paragraphs, simplified physics, source, and clearly labeled fictional interpretation. The surface sidebar shows expedition milestones, latest archived interpretation, logs and the historical mission journey. No later hardware chapter is implemented.
+
+
+## Current UI revision / 2026-10-05
+This section supersedes conflicting earlier behavior.
+
+Clues now open the shared inspector immediately on click, without a scroll-to-scan gate. The fictional explorer wears an authored purple, ivory and gold survey suit inspired by the user reference. Discovery hover/focus icons, an animated code entrance and modestly more frequent sky streaks add playful feedback. Seismic inspection includes a white NASA reading panel and the existing illustrative meter.

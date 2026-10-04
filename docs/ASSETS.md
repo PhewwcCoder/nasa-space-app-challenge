@@ -76,3 +76,9 @@ The supplied pasted photography text is reference material only. Sources were re
 No new downloaded or generated media. The supplied lander museum/model photographs are visual references for warm foil, silver panels and dark insulation, not proof of exact Apollo 11 geometry or preservation. NASA source model files are unchanged; rendered blanket materials are artistically adjusted with gold/copper metallic response and procedural crease shading. The astronaut source mesh receives approximate authored skeletal weights and joint animation. Gray landing dust is local procedural shader work representing disturbed regolith, not atmospheric smoke or a physically validated fluid simulation. Existing lesson facts and official source links are retained.
 
 The upper shell receives distinct charcoal insulation and silver panel colors, guided by the user references. The source mesh remains approximate; this is not an exact historical texture restoration.
+
+
+## Current UI revision / 2026-10-05
+This section supersedes conflicting earlier behavior.
+
+The explorer is original procedural Three.js geometry inspired by the supplied character reference, explicitly fictional. The previous NASA astronaut GLB is retained on disk but no longer rendered. No generated media or generation credits used. New unmodified local assets: public/learning/seismic-surface.jpg from https://assets.science.nasa.gov/content/dam/science/psd/lunar-science/2023/09/371255main_Seismic_full.jpg (NASA Apollo 11 photograph); public/learning/seismic-diagram.jpg from https://assets.science.nasa.gov/content/dam/science/psd/lunar-science/2023/09/a11PSEP_NASM.jpg (NASA-hosted diagram, measurements by Allan Needell, NASM, 13 July 2010). Educational copy and links verified against https://science.nasa.gov/resource/apollo-11-seismic-experiment/ . Trace is simulated, not recorded seismic data.

@@ -50,3 +50,9 @@ DPR is capped at 1.5; one shadow light and instanced rocks limit rendering cost.
 Upper-shell meshes are classified by their world-space height before the legacy name mapping, so the ascent cabin belongs to Structure rather than being extracted with Landing gear. Dark insulation and silver shell surfaces are assigned separately. Astronaut leg weights exclude the lower backpack to keep its rigid housing stable during strides.
 
 See [HARDWARE_JOURNEY.md](HARDWARE_JOURNEY.md) for the consolidated extension contract.
+
+
+## Current UI revision / 2026-10-05
+This section supersedes conflicting earlier behavior.
+
+App mounts Inspector directly; inspect(id) initializes scanProgress to 1. ScanTransition.tsx remains unused historical code; camera interpolation and one persistent canvas remain. ClueIcon.tsx provides decorative SVGs without changing accessible names. SeismicExhibit.tsx owns the locally sourced photo/diagram and independent keyboard-focusable reading scroller. Explorer.tsx now uses rigid authored RoundedBox armor and opposing limb pivots instead of approximate skinning of the NASA mesh. Reduced motion and pause stop walking animation.

@@ -1,0 +1,9 @@
+{
+  "name": "nasa-space-app-challenge",
+  "account_id": "216e971ddee763a1681feb5d7b66db43",
+  "compatibility_date": "2026-09-26",
+  "assets": {
+    "directory": "./dist"
+  },
+  "workers_dev": true
+}

@@ -5,7 +5,7 @@ Current scope is prologue, Apollo 11 and the Mars teaser. This contract supports
 ## Visitor sequence
 
 1. Keep an object unnamed until its identification step. Use the artifact's unknown name in the discovery dock until archived.
-2. Selecting a clue calls the shared store's `inspect(id)`. A native scroll track opens above the same persistent canvas. Scroll forward/backward to scrub the camera; Continue scan offers a click/keyboard equivalent. Escape or Return cancels. Reduced motion enters the inspector immediately.
+2. Selecting a clue calls inspect(id) and opens the shared inspector immediately in the same canvas. No scroll-to-scan step. Escape or Return exits and restores clue focus.
 3. For hardware with components, start assembled and unselected. Selecting a component pulls it outward and adds thin blue edges. Repeated selection puts it back. Viewed progress remains independent of selection.
 4. A selected component opens the right-hand warm-white field note. Keep the world/model visible, with exit and component controls outside the reading panel.
 5. Archive only after the artifact's existing investigation requirement is met. Show the newest record and actual discovery count in the surface journey/log panel. Return focus to the clue.
@@ -19,7 +19,7 @@ NASA facts, authored reconstructions and alien interpretations are different kin
 ## Ownership
 
 - `src/stores/archive.ts`: session discovery state, selection versus viewed progress, scan progress and inspection exit.
-- `src/ScanTransition.tsx`: native scroll/GSAP ScrollTrigger, progress meter and keyboard-accessible completion/cancel controls. Clean up the trigger on exit.
+- `src/ScanTransition.tsx`: unused historical implementation, not mounted.
 - `src/three/World.tsx`: one camera, approach interpolation, framing and post-scan orbit controls. Return to the surface composition on exit.
 - `src/three/ApolloModel.tsx`: component geometry, separation transforms, local material adaptations and selection edges.
 - `src/PartPoster.tsx`: sourced student prose and photo reading panel.
@@ -29,4 +29,4 @@ The astronaut skeleton and regolith shader are authored presentation effects, no
 
 ## Verify an extension
 
-Run TypeScript, production build and the pure flight checks when relevant. Verify scan forward/reverse/cancel, Continue, reduced-motion bypass, part selection/deselection, scroll reset, all archive gates, source links, guide/inspector exits, and restored clue focus. Review desktop composition at both a standard and a shorter window height. Mobile testing is deferred for this revision at the user's request; equivalent existing touch controls remain. Update STATUS, PRODUCT, ARCHITECTURE, DESIGN_SYSTEM and ASSETS with what actually changed and what was tested.
+Run TypeScript, production build and the pure flight checks when relevant. Verify immediate click entry, reduced-motion entry, part selection/deselection, scroll reset, all archive gates, source links, guide/inspector exits, and restored clue focus. Review desktop composition at both a standard and a shorter window height. Mobile testing is deferred for this revision at the user's request; equivalent existing touch controls remain. Update STATUS, PRODUCT, ARCHITECTURE, DESIGN_SYSTEM and ASSETS with what actually changed and what was tested.

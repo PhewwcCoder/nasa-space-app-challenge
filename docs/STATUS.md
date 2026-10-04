@@ -1,5 +1,30 @@
 # Status
 
+## Release preparation / 2026-10-05
+Final production build, pure flight checks and all three desktop e2e tests passed (2.0 minutes). Existing non-blocking bundle-size warning remains. UI updates and NASA seismic assets are being committed and pushed to GitHub; Cloudflare configuration targets the existing Worker. Deployment verification will be recorded after publication. QA screenshots remain local. Mobile tests skipped per user instruction.
+
+## Inspector exit placement / 2026-10-05
+Moved desktop Eagle and reflector Escape/Return controls to the upper right above the reading panel, clearing the hardware. Reading panels start below the button. Desktop screenshot reviewed (docs/qa/exit-right.png); checked no button/panel overlap and click-to-exit. Mobile layout unchanged and testing skipped. Local only.
+
+## Quiz answer feedback / 2026-10-05
+Selected wrong answers now use red fill/border and an Incorrect label; the correct option receives a green border and Correct answer label after any answer. Before answering, options remain neutral. Switching to the correct answer clears the red state. Desktop interaction checks and screenshot review passed, as did typecheck. Capture: docs/qa/quiz-feedback.png. Mobile testing skipped; local only.
+
+## Headset and Eagle label refinement / 2026-10-05
+Removed the yellow helmet antenna and replaced the side accents with padded ivory/lavender headphones and a dark overhead band. Shifted the Eagle / Dissect hardware target right to clear the lander. Desktop screenshots reviewed (docs/qa/headset.png and eagle-label.png); shifted target opens inspection correctly. Headset production build and final typecheck passed. Mobile testing remains skipped. Local only.
+
+## Current UI revision / 2026-10-05
+Implemented locally, not deployed. This section supersedes older scan-transition and astronaut descriptions.
+
+- Replaced the awkward skinned astronaut with an authored jointed cosmic survey character: purple/ivory armor, gold orbital trim, glowing accents and a star backpack, inspired by the supplied reference. Fictional design, not an Apollo suit reconstruction.
+- Discovery buttons lift and reveal related SVG symbols on hover/focus. The Apollo code entrance has matching code icon feedback. Reduced motion removes transitions.
+- All clues open directly on click. The extra scroll/Continue scan screen is no longer mounted; shared inspector, one canvas, exit and opener focus restoration remain.
+- Seismic inspection retains the schematic meter and adds a scrollable warm-white NASA field note with a real photograph, instrument diagram, key numbers, mechanism, power/thermal context and mission outcome. Links and credits accompany evidence; fictional interpretation remains separate.
+- Separate hardware is modestly brighter without changing its label or shape. A centered hint explains orbit and zoom. Decorative sky streak cadence changes from 31 to 22 seconds.
+- Updated README, PRODUCT, ARCHITECTURE, DESIGN_SYSTEM, ASSETS and HARDWARE_JOURNEY.
+
+Validation: final typecheck and production build pass (613 modules; existing non-blocking Three.js chunk-size advisory). Pure flight checks pass. All three desktop e2e cases passed: retry and manual landing in the initial run, then the complete journey on rerun (49.3 seconds including runner). The initial full-journey attempt was blocked by a Vite compile overlay from a file-encoding error, corrected before the passing rerun. Full journey verifies six discoveries, source access, separation/selection, archive gates, guide exits, focus restoration and no page errors. Visual captures reviewed at 1440x900 and 1366x768 including reduced motion: docs/qa/ui-*.png. Corrected a short-window exit overlap during review. Mobile testing explicitly skipped as requested. No public deployment or generated media.
+
+
 ## GitHub source update / 2026-09-28
 The student hardware journey and preceding local revisions are being published to the GitHub repository. README now points to the user-provided Cloudflare Workers URL. A GitHub source push does not deploy the Cloudflare site; the live build must be verified or deployed separately. QA screenshots remain local because they are large generated review artifacts.
 

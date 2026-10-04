@@ -43,3 +43,9 @@ Right-edge flight telemetry uses large tabular numerals, small unit labels, a ve
 Use warm metallic gold/copper foil, silver panels and charcoal insulation for Eagle. Avoid flat yellow plastic and globally darkening the world. The walking explorer swings limbs with alternating steps. Scan entry is a scroll-scrubbed camera move with targeting graphics, an explicit Continue control and an immediate reduced-motion equivalent.
 
 Hardware reading stays on the right of the visible model: warm white #fafbf8, ink #243c42, teal source links, 17px prose with 1.75 line height, Miso and a real credited photograph. Nine short sentences form two paragraphs, without numbered bullets. Physics and fictional interpretation are visually distinct. Keep the panel independently scrollable and all exit controls visible. The surface journey/log sidebar occupies the space below the code entrance; it shows actual progress and the newest archived record.
+
+
+## Current UI revision / 2026-10-05
+This section supersedes conflicting earlier behavior.
+
+The cosmic explorer uses restrained purple, ivory armor, gold orbital trim and a star-speckled backpack. Clue buttons lift 7px and reveal matching cyan/lavender pictograms on hover or keyboard focus; reduced motion removes transitions. The code entrance has a matching code glyph. Separate hardware retains its wording and shape with a slightly brighter cyan edge. An orbit hint occupies the upper empty space. Sky streak interval changes from 31 to 22 seconds; existing pause/reduced-motion rules remain. Seismic notes use warm-white paper beside the dark meter, with separate exit/archive controls.

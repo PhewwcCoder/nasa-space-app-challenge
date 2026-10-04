@@ -22,4 +22,11 @@ NASA imagery and model credits are in the in-game archive and docs/ASSETS.md. Th
 
 For desktop-only website verification: `npx playwright test --project=desktop`. Current user preference is to defer mobile testing. Read the current summary at the top of docs/STATUS.md before older historical logs to minimize context.
 
-The current hardware pattern adds right-edge flight instruments, gray flowing dust, an authored astronaut walk, warmer metallic Eagle materials, scroll-driven scan entry, and a surface journey/log sidebar. Read [the reusable hardware journey contract](docs/HARDWARE_JOURNEY.md) before extending another hardware journey.
+The current hardware pattern adds right-edge flight instruments, gray flowing dust, an authored astronaut walk, warmer metallic Eagle materials, direct-open inspection, and a surface journey/log sidebar. Read [the reusable hardware journey contract](docs/HARDWARE_JOURNEY.md) before extending another hardware journey.
+
+
+UI revision (2026-10-05): direct-open clue inspection, cosmic explorer, animated discovery/code icons, expanded NASA seismic exhibit and refined hardware guidance. See docs/STATUS.md for desktop validation and provenance.
+
+## Deploy
+
+After `npm run build`, run `npx wrangler deploy` while signed into the existing Cloudflare account. `wrangler.jsonc` targets the existing `nasa-space-app-challenge` Worker and uploads only `dist`. GitHub pushes alone do not publish the site.
