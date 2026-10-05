@@ -1,5 +1,9 @@
-export type ArtifactId = 'eagle' | 'reflector' | 'footprints' | 'camera' | 'seismometer' | 'messages';
+import { spiritArtifacts, type SpiritArtifactId } from './spirit';
+import { marsArtifacts, type MarsArtifactId } from './mars';
+export type ArtifactId = SpiritArtifactId | MarsArtifactId | 'eagle' | 'reflector' | 'footprints' | 'camera' | 'seismometer' | 'messages';
 export const artifacts = {
+  ...marsArtifacts,
+  ...spiritArtifacts,
   camera: {id:'camera',code:'TB / 004',unknownName:'Optical instrument',name:'Camera',subtitle:'Television camera',purpose:'A black-and-white television camera transmitted the first steps to viewers on Earth.',interpretation:'They wanted others to witness it.',source:'https://www.nasa.gov/history/astronaut-still-photography-during-apollo/',sourceName:'NASA / Apollo photography'},
   seismometer: {id:'seismometer',code:'TB / 005',unknownName:'Silent instrument',name:'Seismometer',subtitle:'Passive seismic experiment',purpose:'The instrument measured vibrations to help scientists study the lunar interior.',interpretation:'They wanted to understand this world.',source:'https://science.nasa.gov/resource/apollo-11-seismic-experiment/',sourceName:'NASA / Seismic experiment'},
   messages: {id:'messages',code:'TB / 006',unknownName:'Inscribed objects',name:'Plaque + goodwill disc',subtitle:'Messages left behind',purpose:'A plaque and a silicon disc carrying goodwill messages were left on the Moon.',interpretation:'They expected their presence to be discovered.',source:'https://www.nasa.gov/history/55-years-ago-one-month-until-the-moon-landing/',sourceName:'NASA / Memorial items'},
@@ -15,7 +19,7 @@ export const components = [
 export const chapters = [
  { id:'prologue', theme:{ink:'#e3e9e8',accent:'#a6cfd1',world:'#050a12'}, available:true },
  { id:'apollo11', theme:{ink:'#eee9dd',accent:'#c9ad72',world:'#090a0b'}, available:true },
- { id:'sojourner',theme:{ink:'#efdfca',accent:'#c98e5b',world:'#482d25'},available:false },
+ { id:'sojourner',theme:{ink:'#efdfca',accent:'#c98e5b',world:'#482d25'},available:true },
  { id:'spirit',theme:{ink:'#efdfca',accent:'#bd7151',world:'#301f1c'},available:false },
  { id:'opportunity',theme:{ink:'#efdfca',accent:'#ad7a56',world:'#281d18'},available:false },
  { id:'voyager',theme:{ink:'#e1e6f1',accent:'#8dabe0',world:'#03040a'},available:false },

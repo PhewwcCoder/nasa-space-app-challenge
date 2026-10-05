@@ -7,3 +7,6 @@ playwright-report/
 *.tsbuildinfo
 .playwright-mcp/
 *.tar.gz
+
+# Blender autosave backups; the editable .blend source is retained.
+*.blend1

@@ -1,8 +1,10 @@
+import { isSpiritArtifact } from './data/spirit';
+import { isMarsArtifact } from './data/mars';
 import { useArchive } from './stores/archive';
 import { artifacts } from './data/archive';
 
 export default function ExpeditionLog({openLog,openJourney}:{openLog:()=>void;openJourney:()=>void}) {
-  const discovered=useArchive(s=>s.discovered);
+  const discovered=useArchive(s=>s.discovered).filter(id=>!isMarsArtifact(id)&&!isSpiritArtifact(id));
   return <aside className="expedition-log" aria-label="Journey and field logs">
     <header><span>YOUR EXPEDITION</span><b>{String(discovered.length).padStart(2,'0')} / 06</b></header>
     <h2>A trail of discoveries.</h2>

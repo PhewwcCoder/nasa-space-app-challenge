@@ -1,3 +1,25 @@
+## Current scope / 2026-10-06
+
+This section supersedes earlier scope and locked-Spirit statements. The user authorized playable Chapter 3, Spirit, and Chapter 2 improvements. Built chapters are Prologue, Apollo 11, Sojourner and Spirit; all are freely selectable from Archive Index. Opportunity and Voyager remain unavailable.
+
+Spirit uses a Blender-refined rover with bounded whole-model zoom and matches Apollo's model-first teaching: scan unidentified hardware, separate three assemblies, read Miso's sourced photo lessons, and archive the evidence. Five records cover the rover, abrasion, silica-rich soil, landing hardware and final mission timeline. Four records reveal the final log; all five reveal the twin's signal without implementing Chapter 4. A pauseable/skippable fictional Mars traverse links the completed Sojourner chapter to Gusev. Reduced motion arrives immediately.
+
+Sojourner now has a four-stage landing reconstruction with NASA backshell, airbag and ramp photographs; the station lesson couples relay tracing with ramp deployment. Its guide includes the same evidence. The site is a teaching reconstruction; neither Mars chapter claims exact archaeological positions or surviving condition. Read [CHAPTER_3.md](CHAPTER_3.md) for the Chapter 1 analysis and supplied-source audit. Mobile testing is deferred by user request.
+
+## Free chapter access / 2026-10-05
+
+Built chapters (Prologue, Apollo 11, Sojourner) are always selectable from the Archive Index, including fresh expeditions and after restart. Availability is defined by builtChapters, not discovery progress. Future chapters remain unavailable. The six-record Apollo ending remains a narrative route to Mars, not an access requirement. Within-chapter scans and artifact learning gates remain unchanged. This supersedes the unlock descriptions below.
+
+## Authorized Chapter 2 extension / 2026-10-05
+
+Current scope is prologue, Apollo 11 and playable Chapter 2 - Sojourner. This supersedes earlier teaser-only scope; Spirit, Opportunity and Voyager remain locked, unidentified signals.
+
+Six Apollo records unlock Mars. The quiet lunar surface retains its hardware and gains a distant orange point and a thin fictional signal trajectory. Continue lifts the survey craft and camera away, crosses space, and descends into Ares Vallis in the same canvas. Pause, skip travel and a reduced-motion immediate arrival are available. The signal appears automatically after a short quiet interval, once per expedition; Apollo revisits remain on the Moon.
+
+Mars begins with a microwave-sized rover in a wide landscape. Approach, scan, identify, inspect and archive are separate steps. Sojourner has selectable solar, wheel and APXS/camera assemblies. Pathfinder and airbags reveal relay and landing sequences. Three archived discoveries expose tracks and the final seven-to-83-sol log. The emotional arc is curiosity, surprise and respect. Field Guide content grows with identification; the earlier Apollo interaction remains unchanged.
+
+A small global Archive Index opens a desktop panel or mobile bottom sheet. Only unlocked chapters can be revisited; discoveries persist for this in-memory expedition. Locked later chapters have corrupted signal text without actionable controls. No later chapter is implemented.
+
 # Phase 1
 
 The visitor is a nonhuman explorer discovering human artifacts. Scope remains prologue, Apollo 11 and a Mars signal teaser only. Mystery precedes naming; the emotional arc is curiosity, discovery and recognition.

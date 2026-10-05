@@ -1,3 +1,21 @@
+## Inspection quality / 2026-10-06
+
+Closest zoom preserves whole-hardware reading at the scale of the supplied Apollo inspection references. Wheel/pinch and button limits must agree; retain existing approach/return transitions. Mars uses muted mineral brown soil, fine relief, irregular stones, atmospheric ridges and tan sky instead of a uniform orange plane. The source-reference renders guide visible detail, not claims of exact surviving condition. Test at desktop 1440x900, 1920x1080 and a short reduced-motion viewport; mobile remains deferred.
+
+## Spirit / 2026-10-06 - current precedence
+
+Use Apollo's detailed, textured hardware and warm-white teaching panel for Chapter 3. Spirit uses a Blender refinement of NASA's twin-rover base with explicit blue photovoltaic cells, ribbed wheels, detailed mast/arm fittings, wiring, tuned PBR materials, blue selection edges and three separated assemblies. The rover remains a physical object in the landscape; camera framing reserves the right side for reading. Dark rocks and muted ochre soil contrast with the solar deck, pale silica patch and light metal. Gusev is a composite science landscape, explicitly labeled as such.
+
+Five dock targets keep unknown names until scanning. The final log appears only after four records; the twin signal stays a small edge panel after completion. The landing-hardware marker represents a distant archive record, not a claim that the lander is beside Troy. Story actions change rock/soil illustrations and advance compact evidence steps. Real imagery remains captioned, expandable and independently scrollable.
+
+Sojourner gains a warm-paper landing diagram and source photos for backshell, airbag and ramp stages, plus an expanded guide. Desktop layouts must keep model tools, chapter access, Return and Archive outside the reading panel. Existing touch layouts remain; mobile testing is deferred by request.
+
+## Sojourner extension / 2026-10-05 - current precedence
+
+Chapter 2 reuses IBM Plex Mono, Barlow Condensed, cyan fine-line HUD, shared controls, Miso, scan/inspection behavior, white field notes and Field Guide. Only the world changes: desaturated ochre soil, warm mineral haze, dark rocks and metallic hardware. Sojourner starts tiny in the landscape; inspection moves the camera closer without rescaling it. The journey lifts from Apollo through dark space and descends toward the site.
+
+Archive Index remains a small corner control until opened. Its native dialog is a compact desktop archive panel and a bottom sheet on phones; locked rows read as corrupted signals. Mobile inspection reserves upper space for hardware and lower space for scrollable notes and touch controls. Reduced motion removes transit and scan animation while retaining every discovery gate.
+
 # Design system / playable world revision
 
 Current precedence: the 2026-09-27 section below supersedes the cockpit and default-assist rules in earlier revision notes.

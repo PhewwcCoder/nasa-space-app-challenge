@@ -1,3 +1,13 @@
+## Chapter 3 application / 2026-10-06
+
+Spirit now implements the shared pattern: unknown trace, approach, scan, three selectable NASA model assemblies, the existing white PartPoster, sourced investigation and archive. Apollo still opens known clues directly. Selection/deselection, separation, isolation, orbit/zoom/reset, inspector exit, focus restoration and independently scrolling notes carry forward. Additional rock/soil actions teach mechanism through an observable change before interpretation.
+
+The Spirit model is a NASA twin-rover design model. Its three teaching groups are not exact maintenance assemblies. Chapter 2 now requires both relay/deployment steps and all four landing stages before archiving those records. See [CHAPTER_3.md](CHAPTER_3.md) for the reference audit and Chapter 1 comparison, and STATUS for validation. This authorization does not extend to a playable Opportunity or Voyager chapter.
+
+## Chapter 2 extension / 2026-10-05
+
+Sojourner is explicitly authorized and implemented. Mars uses a progressive scan before shared inspection; Apollo retains direct-open clues. PartPoster now accepts the three Mars lessons, and Learning uses the same dialog for chapter-specific content. The authoritative extension details are in ARCHITECTURE.md. Earlier teaser-only statements below are historical.
+
 # Hardware journey contract
 
 Current scope is prologue, Apollo 11 and the Mars teaser. This contract supports later authorized work; it does not authorize adding chapters.

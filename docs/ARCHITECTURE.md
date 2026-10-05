@@ -1,3 +1,33 @@
+## Spirit and Chapter 2 evidence / 2026-10-06 - current precedence
+
+One persistent Canvas and shared inspector remain. `builtChapters` now includes Spirit. `stage` adds `spirit` and `mars-travel`; the store tracks `spiritApproached` and a reset-on-entry `evidenceStep`. Chapter visits preserve discoveries, restart clears them, and lunar discovery counts explicitly exclude both Mars chapters. Progress remains in memory.
+
+`data/spirit.ts` defines mystery names, facts, sources, positions and three lesson groups. `SpiritChapter.tsx` provides surface, scanner, shared-inspector content, guide and transit HUD. `SpiritScene.tsx` renders the NASA rover within a composite terrain and interactive evidence patches; `MarsTraverse` animates the existing camera over a compressed ten-second journey. It pauses, skips and handles reduced motion. Transit has a midpoint veil, not a second canvas or a geographic simulation.
+
+`SpiritModel.tsx` loads `spirit-refined.glb` on scene entry. Blender exports explicit `assembly` extras for body, power, mobility and instruments; these replace material-name inference (retained as fallback). Meshes retain world transforms, shared inspector selection and reversible offsets. `scripts/build-spirit.py` imports the untouched NASA source, rebuilds wheel/suspension/mast/arm geometry, fits discrete solar wafers to the source deck and adds hardware/wiring. It merges meshes by assembly/material and exports Draco compression; `assets/blender/spirit-refined.blend` is the editable source. The authored HDR reflection environment and PMREM target are disposed on unmount.
+
+`inspectionZoom.ts` supplies the same minima to every OrbitControls and button handler: Eagle 17, reflector 8, Sojourner 2, Spirit/log 4.8, other evidence 4.2 scene units. Existing maxima, zoom increments, reset destinations and entry/exit transitions remain. Canvas DPR is capped at 2. `MarsTerrain.tsx` shares authored terrain between both Mars chapters: soil color/normal detail, instanced irregular rocks, layered ridges and a gradient sky. Terrain is a composite, not surveyed topography.
+
+`PartPoster` and `Learning/PhotoReveal` serve both new and existing chapters. `MarsEvidence.tsx` supplies the enhanced station/landing lessons and guide resources. `SojournerModel` animates a schematic ramp using evidenceStep. Opening inspection resets the evidence action sequence and viewed-part gates; previously scanned names persist. Inspector exit returns focus to the artifact; guide exit preserves the underlying inspector. The document has no narrative-page scrolling; white notes scroll independently and reset when components change.
+
+Desktop validation: `tests/spirit.spec.ts`, updated `tests/mars.spec.ts` and existing `tests/experience.spec.ts`; use `--project=desktop`. See STATUS for completed results. Detailed reference audit: CHAPTER_3.md.
+
+## Free chapter access / 2026-10-05
+
+Built chapters (Prologue, Apollo 11, Sojourner) are always selectable from the Archive Index, including fresh expeditions and after restart. Availability is defined by builtChapters, not discovery progress. Future chapters remain unavailable. The six-record Apollo ending remains a narrative route to Mars, not an access requirement. Within-chapter scans and artifact learning gates remain unchanged. This supersedes the unlock descriptions below.
+
+## Chapter 2 extension / 2026-10-05 - current precedence
+
+The single Canvas in World.tsx remains mounted across all chapter changes. Scene chooses LunarScene, TransitPlanets or MarsScene inside it. ChapterTravel owns the existing camera during transit; MarsCamera owns approach/inspection and restores the surface composition afterward. Departure and arrival animate the existing SurveyCraft. Two dark transit veils conceal the change in world scale; this is cinematic travel, not an orbital simulation. Pause and reduced-motion alternatives are supported.
+
+The existing Zustand archive adds chapter/unlocked/identified/marsApproached/travelProgress/lunarSignalSeen. Shared inspector selection, component progress, reset, explosion, discovery and focus restoration remain the common contract. Apollo and Mars discovery counts are scoped independently. visitChapter guards unlocks and clears held controls. Restart clears chapter progress. Progress remains session-memory only, matching Apollo.
+
+src/data/mars.ts holds unknown/identified names, facts, sources, positions and interactions. MarsChapter.tsx provides the accessible native-dialog Archive Index, signal and travel HUDs, Mars surface, MarsInspector and the Mars section of Learning. The shared Inspector dispatches by artifact ID. PartPoster and PhotoReveal are reused for three Mars hardware lessons; Learning retains the same native dialog and white page. The scan uses a cancellable RAF with pause and reduced-motion support. Exit restores the opener; the guide restores itself without closing the underlying inspector.
+
+MarsScene uses procedural terrain, instanced rocks, thin authored tracks, dust sheets, distant illustrative entry remnants and site lighting. SojournerModel authors small-scale rover geometry, Pathfinder petals/mast/ramp and collapsed airbag lobes. HardwareSurfaces provides deterministic material variation and cylindrical suspension members. This is a stylized reconstruction, not a surveyed site or NASA-supplied Mars mesh. No new canvas, router, hosted service or generated media was added.
+
+Validation adds tests/mars.spec.ts for the completed-Apollo boundary, persistent canvas identity, paused transit, progressive names and duration, all four records, guide/inspector exits, keyboard focus, chapter revisits and locked signals. Existing experience.spec.ts still tests earning Apollo's six records and the ending signal. Use --project=desktop for current validation. Mobile tests are implemented but skipped at the user's request.
+
 # Architecture
 
 Current implementation: 2026-09-27. React 19 + TypeScript + Vite, Zustand and one persistent React Three Fiber canvas. The authorized direct-flight game supersedes the original narrative-scroll descent. Scope stays prologue, Apollo 11, and the Mars signal teaser.

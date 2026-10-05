@@ -1,0 +1,75 @@
+[
+  {
+    "file": "public\\learning\\pathfinder-airbags.jpg",
+    "source": "https://science.nasa.gov/resource/airbags-and-sojourner-rover/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/mars/downloadable_items/3/9/39755_PIA00614.jpg",
+    "modifications": "None",
+    "verifiedOn": "2026-10-06",
+    "credit": "NASA/JPL"
+  },
+  {
+    "file": "public\\learning\\pathfinder-ramp.jpg",
+    "source": "https://science.nasa.gov/resource/pathfinder-rear-ramp/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/mars/downloadable_items/3/9/39767_PIA00627.jpg",
+    "modifications": "None",
+    "verifiedOn": "2026-10-06",
+    "credit": "NASA/JPL"
+  },
+  {
+    "file": "public\\learning\\pathfinder-backshell.jpg",
+    "source": "https://science.nasa.gov/resource/backshell-located/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/mars/downloadable_items/3/9/39875_PIA00790.jpg",
+    "modifications": "None",
+    "verifiedOn": "2026-10-06",
+    "credit": "NASA/JPL/University of Arizona"
+  },
+  {
+    "file": "public\\learning\\spirit-silica.jpg",
+    "source": "https://science.nasa.gov/photojournal/silica-rich-soil-in-gusev-crater/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia09/pia09403/PIA09403.jpg",
+    "modifications": "None",
+    "verifiedOn": "2026-10-06",
+    "credit": "NASA/JPL/Cornell"
+  },
+  {
+    "file": "public\\learning\\spirit-hardware.jpg",
+    "source": "https://science.nasa.gov/photojournal/spirits-hardware-up-close-on-mars/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia05/pia05133/PIA05133.jpg",
+    "modifications": "None",
+    "verifiedOn": "2026-10-06",
+    "credit": "NASA/JPL/MSSS"
+  },
+  {
+    "file": "public\\models\\mer-rover.glb",
+    "source": "https://science.nasa.gov/resource/mars-exploration-rovers-3d-model/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/m/MER_static.glb",
+    "credit": "NASA / VTAD",
+    "modifications": "Source bytes unchanged; runtime material-based assembly grouping, placement, edge overlays and authored reflection lighting",
+    "verifiedOn": "2026-10-06"
+  },
+  {
+    "file": "public\\learning\\spirit-rover.jpg",
+    "source": "https://science.nasa.gov/photojournal/spirit-self-portrait-sols-329-330/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia07/pia07371/PIA07371.jpg",
+    "credit": "NASA/JPL/Cornell",
+    "modifications": "None",
+    "verifiedOn": "2026-10-06"
+  },
+  {
+    "file": "public\\learning\\spirit-abrasion.jpg",
+    "source": "https://science.nasa.gov/photojournal/first-grinding-of-a-rock-on-mars/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia05/pia05223/PIA05223.jpg",
+    "credit": "NASA/JPL/Cornell",
+    "modifications": "None",
+    "verifiedOn": "2026-10-06"
+  },
+  {
+    "file": "public/models/spirit-refined.glb",
+    "source": "https://science.nasa.gov/resource/mars-exploration-rovers-3d-model/",
+    "credit": "NASA/VTAD base; MERSA authored Blender refinement",
+    "modifications": "Reference-inspired explicit solar cells, wheels, suspension, mast, arm, wiring and PBR materials; three teaching assemblies. Not exact engineering or surveyed preservation.",
+    "authoring": "scripts/build-spirit.py; assets/blender/spirit-refined.blend",
+    "sha256": "ca0f6ce81ebcf4c332a1a5956d1d1699076d8dc8df81bb1a604cb378abdac12b",
+    "verifiedOn": "2026-10-06"
+  }
+]

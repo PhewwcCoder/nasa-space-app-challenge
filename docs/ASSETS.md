@@ -1,3 +1,35 @@
+## Spirit Blender refinement and Mars environment / 2026-10-06
+
+This revision supersedes the runtime-model description below; the original NASA download remains unchanged as authoring input.
+
+- `assets/blender/spirit-refined.blend`: editable Blender 4.5 reconstruction, authored locally using the user's MER renders as visual references. `scripts/build-spirit.py` reproduces it from the NASA source. Added/rebuilt wheel ribs and hubs, suspension, mast cameras, arm fittings, photovoltaic wafers/interconnects, chassis panels and wiring. Reference images are not redistributed or used as textures. No claim of exact engineering accuracy or current preservation.
+- `public/models/spirit-refined.glb`: current runtime asset, Draco compressed, 76657 triangles across 25 material batches; 6.28 MiB. It retains portions of NASA's geometry/texture atlases and adds original mesh/PBR detail. Assembly extras preserve the three teaching groups and fixed body.
+- `public/models/mer-rover.glb`: unchanged NASA/VTAD source, [Mars Exploration Rovers 3D model](https://science.nasa.gov/resource/mars-exploration-rovers-3d-model/). NASA credits do not imply endorsement.
+- `src/three/MarsTerrain.tsx`: original procedural sediment shading, normal relief, instanced stones, ridge geometry and sky. `SpiritScene.tsx` adds an authored HDR sky/ground reflection environment. These are composite visual reconstructions, not NASA elevation data or calibrated true-color photography.
+- Blender was run locally from a portable installation outside the repository. No paid generation, external runtime dependencies or cloud model project was required.
+
+## Spirit and supplied Chapter 2 references / 2026-10-06
+
+- `public/models/mer-rover.glb`: unmodified NASA / VTAD twin Mars Exploration Rover model from https://science.nasa.gov/resource/mars-exploration-rovers-3d-model/ . About 11.36 MB, 31,450 triangles, nine material primitives. Runtime grouping and offsets are teaching adaptations. Original textures remain; locally generated sky/ground reflections illuminate the fully metallic NASA materials without recoloring them. This is neither an exact engineering disassembly nor a surveyed preservation state.
+- `public/learning/spirit-rover.jpg`: NASA/JPL/Cornell, PIA07371 self-portrait mosaic, December 7-8, 2004 (sols 329-330), not a current photo. The mast is outside its own camera's view.
+- `public/learning/spirit-silica.jpg`: NASA/JPL/Cornell, PIA09403, approximately true-color image taken April 6, 2007. Chemistry refers to archived subsequent measurements.
+- `public/learning/spirit-hardware.jpg`: NASA/JPL/MSSS, PIA05133 orbital image identifying Spirit's backshell and parachute, 2004.
+- `public/learning/pathfinder-airbags.jpg`: NASA/JPL, PIA00614, rover/rear APXS, rolled ramp and partially deflated airbags obstructing deployment.
+- `public/learning/pathfinder-ramp.jpg`: NASA/JPL, PIA00627, successfully unfurled rear ramp at the end of Sol 2.
+- `public/learning/pathfinder-backshell.jpg`: NASA/JPL/University of Arizona, PIA00790, distant backshell identification.
+
+- `public/learning/spirit-abrasion.jpg`: NASA/JPL/Cornell, PIA05223, the Rock Abrasion Tool and ground patch on Adirondack, February 2004. Source: https://science.nasa.gov/photojournal/first-grinding-of-a-rock-on-mars/ .
+
+All seven photographs are unmodified local downloads. Original URLs, page sources and modifications are recorded in `public/learning/spirit-resources.json`; official sources and corrections are listed in [CHAPTER_3.md](CHAPTER_3.md). No generated media, paid generation, new audio or external runtime images. The supplied XLSX and DOCX were read only as reference material. Do not interpret their later chapters as scope authorization. NASA credits do not imply endorsement.
+
+## Sojourner extension / 2026-10-05
+
+- public/learning/sojourner-sol2.jpg: unmodified NASA/JPL eight-image Sol 2 mosaic, downloaded from https://www.nasa.gov/wp-content/uploads/2023/03/pia01551.jpg . Context: https://www.nasa.gov/image-article/nasas-first-rover-red-planet/ . Exact provenance is stored in public/learning/sojourner-provenance.json. Existing PhotoReveal crops its preview; expansion displays the whole photo.
+- Sojourner, Pathfinder, airbag lobes, rock, terrain, track and distant remnant geometry are locally authored in Three.js. They are interpretive reconstructions, not downloaded NASA engineering models, exact archaeological surveys or claims of current/future preservation. HardwareSurfaces adds deterministic foil/fabric shading; no generated image/video assets were used.
+- Existing NASA Moon/star/Mars imagery and fictional SurveyCraft are reused for travel. Flight and transit are fictional, with compressed distances and hidden world-scale transitions.
+- Mission/landing/station context: https://science.nasa.gov/mission/mars-pathfinder/ . Small scale, terrain, photos and landing concept: https://spaceplace.nasa.gov/mars-sojourner/en/ . Instrument and 83-sol archive: https://planetarydata.jpl.nasa.gov/img/data/mpfr-m-apxs-5-ddr-v1.0/mprv_0001/document/apxedrds.htm . Nominal seven-sol mission: https://planetarydata.jpl.nasa.gov/img/data/mpfr-m-rvreng-2_3-edr_rdr-v1.0/mprv_0001/document/insthost.htm . Official sources checked on 2026-10-05.
+- The newly supplied concept image and Downloads/Space Apps Challenge 26 Team Petrova (1).docx were read as creative source material only. Invented technical names, silver-zinc battery callout, exact final rover location, permanent-track claims and the later-chapter text were not treated as instructions or authoritative facts. No unrequested later chapter was built.
+
 # Assets and source provenance
 
 - public/textures/moon-color-2k.jpg: NASA Scientific Visualization Studio, 2048 x 1024 lunar color map, https://svs.gsfc.nasa.gov/4720/ ; https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg . Credit NASA SVS. 458 KB.

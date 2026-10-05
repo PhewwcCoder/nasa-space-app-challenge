@@ -1,3 +1,7 @@
+import { inspectionMinDistance } from './inspectionZoom';
+import SpiritScene, { MarsTraverse } from './SpiritScene';
+import MarsScene from './MarsScene';
+import ChapterTravel, { DistantSignal, TransitPlanets, DepartureCraft } from './ChapterTravel';
 ﻿import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, useTexture, Html, Line } from '@react-three/drei';
@@ -35,7 +39,7 @@ function Reflector({position=[0,0,0]}:{position?:[number,number,number]}){return
 function SurfaceObjects(){const {stage,inspector,inspect,walk}=useArchive();return <><Explorer/>
  <group position={eagleOrigin}><ApolloModel/></group>
  <group position={[10,.4,-15]} onClick={()=>{if(stage==='explore')inspect('reflector');}}><Reflector/></group>
- <group position={[2,0,3]} rotation={[0,.8,0]}><SurveyCraft thrust={0}/></group>
+ {stage==='travel'?<DepartureCraft/>:<group position={[2,0,3]} rotation={[0,.8,0]}><SurveyCraft thrust={0}/></group>}
  {stage==='surface'&&walk>=1&&!inspector&&<Html position={[20,3.8,-22]} center zIndexRange={[4,3]}><button className="world-target" data-artifact="eagle" onClick={()=>useArchive.getState().setStage('identified')}><span>+</span><small>UNKNOWN HARDWARE<br/>SCAN OBJECT</small></button></Html>}
  {stage==='explore'&&!inspector&&<><Html position={[20,3.8,-22]} center zIndexRange={[4,3]}><button className="world-target eagle-target" data-artifact="eagle" onClick={()=>inspect('eagle')}><span>01</span><small>EAGLE<br/>DISSECT HARDWARE</small></button></Html><Html position={[10,1.4,-15]} center zIndexRange={[4,3]}><button className="world-target" data-artifact="reflector" onClick={()=>inspect('reflector')}><span>02</span><small>REFLECTIVE ARRAY</small></button></Html><Html position={[26,.4,-14]} center zIndexRange={[4,3]}><button className="world-target" data-artifact="footprints" onClick={()=>inspect('footprints')}><span>03</span><small>SURFACE TRACES</small></button></Html></>}
  </>;}
@@ -60,7 +64,7 @@ function ViewRig(){
    }
    return;
   }
-  if(stage==='approach'||stage==='surface')return;
+  if(stage==='approach'||stage==='surface'||stage==='travel'||stage==='mars')return;
   const orbital=stage==='entry'||stage==='signal';const pos=orbital?new THREE.Vector3(0,4.5,23):new THREE.Vector3(33,6,-3);
   const focus=orbital?new THREE.Vector3(0,0,0):new THREE.Vector3(20,1.2,-22);
   camera.position.lerp(pos,reduced()?1:1-Math.exp(-dt*2));look.current.lerp(focus,reduced()?1:1-Math.exp(-dt*2));camera.lookAt(look.current);
@@ -68,11 +72,12 @@ function ViewRig(){
  useEffect(()=>{if(inspector&&useArchive.getState().scanProgress===1){camera.position.set(...(inspector==='reflector'?[14,5,-9]:[29,7,-8]) as [number,number,number]);}},[inspector,viewKey,camera]);
  return null;
 }
-function Scene(){const {stage,inspector,viewKey,scanProgress}=useArchive();const orbit=stage==='entry'||stage==='signal';const {camera,controls,invalidate}=useThree();
- useEffect(()=>{const action=(event:Event)=>{if(!inspector)return;const mode=(event as CustomEvent<string>).detail;const center=inspector==='reflector'?new THREE.Vector3(10,window.innerWidth<761?-1.2:.4,-15):new THREE.Vector3(20,3,-22);const delta=camera.position.clone().sub(center);if(mode==='left'||mode==='right')delta.applyAxisAngle(new THREE.Vector3(0,1,0),mode==='left'?.25:-.25);else delta.multiplyScalar(mode==='in'?.87:1.15);delta.setLength(THREE.MathUtils.clamp(delta.length(),7,40));camera.position.copy(center.add(delta));(controls as unknown as {update?:()=>void})?.update?.();invalidate();};window.addEventListener('model-control',action);return()=>window.removeEventListener('model-control',action);},[camera,controls,inspector,invalidate]);
+function LunarScene(){const {stage,inspector,viewKey,scanProgress}=useArchive();const orbit=stage==='entry'||stage==='signal';const {camera,controls,invalidate}=useThree();
+ useEffect(()=>{const action=(event:Event)=>{if(!inspector)return;const mode=(event as CustomEvent<string>).detail;const center=inspector==='reflector'?new THREE.Vector3(10,window.innerWidth<761?-1.2:.4,-15):new THREE.Vector3(20,3,-22);const delta=camera.position.clone().sub(center);if(mode==='left'||mode==='right')delta.applyAxisAngle(new THREE.Vector3(0,1,0),mode==='left'?.25:-.25);else delta.multiplyScalar(mode==='in'?.87:1.15);delta.setLength(THREE.MathUtils.clamp(delta.length(),inspectionMinDistance(inspector),40));camera.position.copy(center.add(delta));(controls as unknown as {update?:()=>void})?.update?.();invalidate();};window.addEventListener('model-control',action);return()=>window.removeEventListener('model-control',action);},[camera,controls,inspector,invalidate]);
  return <><Background/><ambientLight intensity={orbit?.08:.65}/><directionalLight position={orbit?[-70,15,-25]:[-30,35,30]} intensity={orbit?2.1:2.4} color="#f6f3e8" castShadow shadow-mapSize={[2048,2048]} shadow-camera-left={-65} shadow-camera-right={65} shadow-camera-top={65} shadow-camera-bottom={-65} shadow-bias={-.0006}/><directionalLight position={[40,12,-5]} intensity={inspector?.85:stage==='approach'?.55:.12} color="#adc3d2"/>
- {orbit?<><Moon/><OrbitalCraft/></>:stage!=='complete'?<><Ground/><Rocks/>{stage==='approach'?<><Flight/><group position={eagleOrigin}><ApolloModel/></group></>:<SurfaceObjects/>}</>:null}
- <ViewRig/>{inspector&&scanProgress===1&&(inspector==='eagle'||inspector==='reflector')&&<OrbitControls key={`${inspector}-${viewKey}`} makeDefault target={inspector==='reflector'?[10,window.innerWidth<761?-1.2:.4,-15]:[20,3,-22]} minDistance={inspector==='reflector'?3:10} maxDistance={40} maxPolarAngle={Math.PI*.49} enablePan={false}/>}
+ {orbit?<><Moon/><OrbitalCraft/></>:<><Ground/><Rocks/>{stage==='approach'?<><Flight/><group position={eagleOrigin}><ApolloModel/></group></>:<SurfaceObjects/>}</>}
+ {stage==='complete'&&<DistantSignal/>}<ViewRig/>{inspector&&scanProgress===1&&(inspector==='eagle'||inspector==='reflector')&&<OrbitControls key={`${inspector}-${viewKey}`} makeDefault target={inspector==='reflector'?[10,window.innerWidth<761?-1.2:.4,-15]:[20,3,-22]} minDistance={inspectionMinDistance(inspector)} maxDistance={40} maxPolarAngle={Math.PI*.49} enablePan={false}/>}
  </>;}
-export default function World(){return <div className="world" aria-label="Three dimensional lunar exploration"><Canvas shadows dpr={[1,1.5]} camera={{position:[0,4.5,23],fov:49,near:.1,far:700}} gl={{antialias:true,powerPreference:'high-performance',localClippingEnabled:true}}><Input/><Suspense fallback={null}><Scene/></Suspense></Canvas></div>;}
+function Scene(){const {stage,travelProgress}=useArchive();return <>{stage==='spirit'||stage==='mars-travel'&&travelProgress>=.5?<SpiritScene/>:stage==='mars-travel'||stage==='mars'||stage==='travel'&&travelProgress>=.68?<MarsScene/>:stage==='travel'&&travelProgress>=.36?<TransitPlanets/>:<LunarScene/>}{stage==='travel'&&<ChapterTravel/>}{stage==='mars-travel'&&<MarsTraverse/>}</>;}
+export default function World(){return <div className="world" aria-label="Three dimensional archive exploration"><Canvas shadows dpr={[1,2]} camera={{position:[0,4.5,23],fov:49,near:.1,far:700}} gl={{antialias:true,powerPreference:'high-performance',localClippingEnabled:true}}><Input/><Suspense fallback={null}><Scene/></Suspense></Canvas></div>;}
 
