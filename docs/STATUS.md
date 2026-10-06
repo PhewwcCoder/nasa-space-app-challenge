@@ -1,8 +1,12 @@
 # Status
 
+## Public deployment / 2026-10-07
+
+Chapter 5 Voyager is live at https://nasa-space-app-challenge.aryan-sharar.workers.dev/ on Cloudflare Workers (version `7c2048d1-481b-4cc0-b166-d19e9403309d`). The deployed production build passed `npm run build`. The homepage, Voyager GLB, Voyager provenance JSON and main JavaScript returned HTTP 200 and matched the local build byte-for-byte by SHA-256. Source through `0f02ce6` was pushed to GitHub before deployment; this status update follows it. Mobile testing remains skipped by request.
+
 ## Chapter 5 Voyager / 2026-10-07
 
-Implemented and desktop-verified. The earlier Opportunity/performance work was committed and pushed first as 06fc483 and fa4cec5. This source release adds Chapter 5 Voyager 1; all existing index chapters are now available. No website deployment. Read [CHAPTER_5.md](CHAPTER_5.md) for the supplied DOCX/XLSX audit, chapter analysis, official evidence and reconstruction limits.
+Implemented and desktop-verified. The earlier Opportunity/performance work was committed and pushed first as 06fc483 and fa4cec5. This source release adds Chapter 5 Voyager 1; all existing index chapters are now available. Read [CHAPTER_5.md](CHAPTER_5.md) for the supplied DOCX/XLSX audit, chapter analysis, official evidence and reconstruction limits.
 
 Five investigations connect Voyager hardware, the Earth radio link, Golden Record instructions, Pale Blue Dot and a final greeting. Four archived records gate the fifth. Original Miso dialogue moves from mistaken guesses to a fictional final report. Opportunity completion opens a ten-second pauseable/skippable deep-space transit; reduced motion arrives immediately. The shared inspector, warm-white lessons, field guide, focus/scroll behavior and original Canvas/renderer/camera remain. Unknown artifacts stay unnamed until scanned. Source facts, schematic actions and fiction are distinguished.
 
