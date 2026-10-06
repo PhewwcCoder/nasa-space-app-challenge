@@ -221,3 +221,10 @@
 @media(max-width:760px){.discovery-dock.spirit-dock{grid-template-columns:repeat(2,minmax(0,1fr));width:auto}.spirit-next-signal{top:245px;left:20px;right:20px;max-width:none;padding:15px}.spirit-next-signal h2{font-size:28px}.spirit-next-signal p{font-size:12px}.mars-resource-grid{grid-template-columns:1fr}.spirit-investigation .mars-model-tools button{font-size:9px}.evidence-workflow li{font-size:8px}}
 
 @media(min-width:761px){.spirit-dock:not(:has([data-artifact="spiritLog"])){grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+/* Chapter 4 inherits the established inspection and field-note design. */
+@media(min-width:761px){
+  .discovery-dock.opportunity-dock{grid-template-columns:repeat(6,minmax(0,1fr));width:min(1200px,calc(100% - 60px))}
+  .opportunity-dock:not(:has([data-artifact="opportunityLog"])){grid-template-columns:repeat(5,minmax(0,1fr))}
+}
+.stage-opportunity-travel .chapter-track{visibility:hidden}

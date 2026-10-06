@@ -10,13 +10,14 @@ async function camera(page:Page){
   });
 }
 
-for(const [chapter,id,limit] of [['01.*APOLLO','eagle',17],['02.*SOJOURNER','sojourner',2],['03.*SPIRIT','spirit',4.8]] as const){
+for(const [chapter,id,limit] of [['01.*APOLLO','eagle',17],['02.*SOJOURNER','sojourner',2],['03.*SPIRIT','spirit',4.8],['04.*OPPORTUNITY','opportunity',4.8]] as const){
   test(`${id}: wheel and buttons share a bounded closest view; zoom out, reset and exit survive`,async({page})=>{
     test.setTimeout(90000);const errors:string[]=[];
     page.on('pageerror',e=>errors.push(e.message));
     page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
     await page.goto('/');await page.locator('.archive-index-trigger').click();await page.getByRole('button',{name:new RegExp(chapter)}).click();
     if(id==='sojourner')await page.getByRole('button',{name:'Approach the signal'}).click();
+    if(id==='opportunity')await page.getByRole('button',{name:'Approach the familiar trace'}).click();
     if(id==='spirit')await page.getByRole('button',{name:'Approach the trace'}).click();
     await page.locator(`[data-artifact="${id}"]`).last().click();
     if(id!=='eagle'){await page.getByRole('button',{name:'Scan object',exact:true}).click();await expect(page.getByRole('button',{name:'Scan object',exact:true})).toHaveCount(0);}
@@ -33,6 +34,16 @@ for(const [chapter,id,limit] of [['01.*APOLLO','eagle',17],['02.*SOJOURNER','soj
     await page.screenshot({path:`docs/qa/${id}-zoom-limit.png`});
     await page.getByRole('button',{name:'Reset view',exact:true}).click();await page.waitForTimeout(2300);
     expect((await camera(page)).distance).toBeCloseTo(initial.distance,2);
+    if(id==='sojourner'){
+      // Reproduce a frame that crosses the entire approach deadline. The camera
+      // must apply its endpoint before handing control back to OrbitControls.
+      await page.getByRole('button',{name:'Zoom out',exact:true}).click();
+      await page.getByRole('button',{name:'Zoom out',exact:true}).click();
+      await page.getByRole('button',{name:'Reset view',exact:true}).click();
+      await page.waitForTimeout(100);
+      await page.evaluate(()=>{const until=performance.now()+2000;while(performance.now()<until){/* deliberate dropped frame */}});
+      await expect.poll(async()=>Math.abs((await camera(page)).distance-Math.hypot(1.25,.75,1.4))).toBeLessThan(.001);
+    }
     await page.keyboard.press('Escape');await expect(page.getByRole('region',{name:'Artifact inspection'})).toHaveCount(0);
     await expect(page.locator('canvas')).toHaveCount(1);expect(errors).toEqual([]);
   });

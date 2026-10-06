@@ -76,7 +76,7 @@ test('continuous transit, Mars discoveries, guide, archive revisits and focus',a
  }
  await expect(page.getByRole('heading',{name:'Small was not insignificant.'})).toBeVisible();
  await page.locator('.archive-index-trigger').click();await expect(page.getByRole('dialog',{name:'Archive Index'})).toBeVisible();
- await expect(page.locator('.corrupted-signal')).toHaveCount(2);await expect(page.getByRole('button',{name:/SPIRIT/})).toBeEnabled();
+ await expect(page.locator('.corrupted-signal')).toHaveCount(1);await expect(page.getByRole('button',{name:/SPIRIT/})).toBeEnabled();
  await page.screenshot({path:`docs/qa/mars-${info.project.name}-index.png`});
  await page.getByRole('button',{name:/01 — APOLLO 11/}).click();await expect(page.locator('.discovery-dock')).toContainText('Eagle');
  await page.waitForTimeout(7500);await expect(page.locator('.experience')).toHaveClass(/stage-explore/);
@@ -89,7 +89,7 @@ test('continuous transit, Mars discoveries, guide, archive revisits and focus',a
 
 test('built chapters are freely accessible from a fresh expedition and after refresh',async({page})=>{
  await page.goto('/');await page.locator('.archive-index-trigger').click();
- await expect(page.locator('.corrupted-signal')).toHaveCount(2);
+ await expect(page.locator('.corrupted-signal')).toHaveCount(1);
  await expect(page.getByRole('button',{name:/APOLLO 11/})).toBeEnabled();
  await page.getByRole('button',{name:/SOJOURNER/}).click();
  await expect(page.getByRole('button',{name:'Approach the signal'})).toBeVisible();

@@ -1,9 +1,10 @@
-﻿import { useEffect, useState } from 'react';
+import { useShallow } from 'zustand/react/shallow';
+import { useEffect, useState } from 'react';
 import { initialFlight, type FlightState } from './game/flight';
 import { pressControl, clearControls } from './game/input';
 import { useArchive } from './stores/archive';
 function TouchControls(){const hold=(key:string,label:string)=><button key={key} aria-label={label} onPointerDown={e=>{e.currentTarget.setPointerCapture(e.pointerId);pressControl(key,true);}} onPointerUp={()=>pressControl(key,false)} onPointerCancel={()=>pressControl(key,false)} onLostPointerCapture={()=>pressControl(key,false)}>{label}</button>;return <div className="touch-controls"><div className="d-pad">{hold('KeyW','Forward')}{hold('KeyA','Left')}{hold('KeyS','Back')}{hold('KeyD','Right')}</div>{hold('Space','Brake')}</div>;}
-export default function FlightHUD(){const[flight,setFlight]=useState<FlightState>(initialFlight());const{assist,toggleAssist,retryFlight,flightReset,paused,setPaused}=useArchive();
+export default function FlightHUD(){const[flight,setFlight]=useState<FlightState>(initialFlight());const{assist,toggleAssist,retryFlight,flightReset,paused,setPaused}=useArchive(useShallow(s=>({assist:s.assist,toggleAssist:s.toggleAssist,retryFlight:s.retryFlight,flightReset:s.flightReset,paused:s.paused,setPaused:s.setPaused})));
  useEffect(()=>{const update=(e:Event)=>setFlight((e as CustomEvent<FlightState>).detail);window.addEventListener('mersa-flight',update);return()=>window.removeEventListener('mersa-flight',update);},[]);useEffect(()=>setFlight(initialFlight()),[flightReset]);
  const offset=Math.hypot(flight.x,flight.z),drift=Math.hypot(flight.vx,flight.vz),descent=Math.abs(flight.vy);
  return <section className="flight-hud easy-flight" aria-label="Flight controls" data-altitude={flight.altitude.toFixed(1)} data-z={flight.z.toFixed(2)} data-offset={offset.toFixed(1)} data-drift={drift.toFixed(2)}>

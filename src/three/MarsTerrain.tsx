@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js';
@@ -11,7 +12,7 @@ float noiseSoil(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mi
 float soilRelief(vec2 p){return noiseSoil(p*2.)*.006+noiseSoil(p*13.)*.0015+noiseSoil(p*65.)*.0004;}
 `;
 
-export default function MarsTerrain(){
+function MarsTerrain(){
   const rocks=useRef<THREE.InstancedMesh>(null);
   const ground=useMemo(()=>{const g=new THREE.PlaneGeometry(520,520,220,220);g.rotateX(-Math.PI/2);const p=g.attributes.position;for(let i=0;i<p.count;i++)p.setY(i,height(p.getX(i),p.getZ(i)));g.computeVertexNormals();return g;},[]);
   const material=useMemo(()=>{
@@ -63,3 +64,5 @@ export default function MarsTerrain(){
 }` }/></mesh>
   </>;
 }
+
+export default memo(MarsTerrain);

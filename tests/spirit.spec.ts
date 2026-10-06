@@ -40,9 +40,9 @@ test('Spirit hardware, evidence actions, completion and chapter revisits',async(
     if(id==='spiritLog')await expect(page.getByRole('status')).toContainText('March 22, 2010');
     await page.getByRole('button',{name:'Archive discovery',exact:true}).click();
   }
-  await expect(page.getByRole('heading',{name:'It had a twin.'})).toBeVisible();await expect(page.locator('.spirit-next-signal')).toContainText('NOT YET AVAILABLE');
+  await expect(page.getByRole('heading',{name:'It had a twin.'})).toBeVisible();await expect(page.locator('.spirit-next-signal')).toContainText('Continue to Meridiani Planum');
   await page.waitForTimeout(2000);await page.screenshot({path:'docs/qa/spirit-desktop-complete.png'});
-  await page.locator('.archive-index-trigger').click();await expect(page.locator('.corrupted-signal')).toHaveCount(2);
+  await page.locator('.archive-index-trigger').click();await expect(page.locator('.corrupted-signal')).toHaveCount(1);
   await page.getByRole('button',{name:/01 — APOLLO 11/}).click();await expect(page.locator('.expedition-log')).toContainText('00 / 06');
   await page.locator('.archive-index-trigger').click();await page.getByRole('button',{name:/03 — SPIRIT/}).click();
   await expect(page.getByRole('heading',{name:'It had a twin.'})).toBeVisible();await page.locator('.spirit-dock [data-artifact="spirit"]').click();

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useMemo } from 'react';
 import type {} from '@react-three/fiber';
 import { DoubleSide, Quaternion, Vector3 } from 'three';
@@ -17,7 +18,7 @@ function Strut({ from, to, radius = 0.045 }: { from: [number, number, number]; t
 }
 
 /** Authored fictional alien survey craft. Feet rest at local y=0 when level. ~47 meshes. */
-export default function SurveyCraft({ thrust, bankX = 0, bankZ = 0 }: SurveyCraftProps) {
+function SurveyCraft({ thrust, bankX = 0, bankZ = 0 }: SurveyCraftProps) {
   const power = Math.max(0, Math.min(1, thrust));
   return <group rotation={[bankX, 0, bankZ]}>
     <mesh position={[0, 1.16, 0]} scale={[1.32, 0.42, 1]} castShadow receiveShadow><icosahedronGeometry args={[1.5, 0]} /><meshStandardMaterial {...hull} /></mesh>
@@ -43,3 +44,5 @@ export default function SurveyCraft({ thrust, bankX = 0, bankZ = 0 }: SurveyCraf
     <mesh position={[0, 1.68, 0.04]} rotation={[Math.PI / 2, 0, Math.PI / 8]}><ringGeometry args={[0.44, 0.46, 8]} /><meshStandardMaterial {...edge} side={DoubleSide} /></mesh>
   </group>;
 }
+
+export default memo(SurveyCraft);

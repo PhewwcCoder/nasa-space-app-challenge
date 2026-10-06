@@ -1,0 +1,58 @@
+[
+  {
+    "file": "opportunity-rover.jpg",
+    "page": "https://science.nasa.gov/photojournal/opportunity-rover-self-portrait-from-2007/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia15/pia15114/PIA15114.jpg",
+    "bytes": 328580,
+    "sha256": "7ffc5962f5ea32d4990ab3f282f03e83650b7031d4afcef2b3da5d1ac6832966"
+  },
+  {
+    "file": "opportunity-landing.jpg",
+    "page": "https://science.nasa.gov/resource/rovers-landing-hardware-at-eagle-crater-mars/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/mars/resources/detail_files/8/8366_mars-eagle-crater-ESP_050177_1780-pia21494-full2.jpg",
+    "bytes": 1454793,
+    "sha256": "e96d8147f8a2e5f46de5b52555e41423347188e9112510f416a22f2421467e28"
+  },
+  {
+    "file": "opportunity-heatshield.jpg",
+    "page": "https://science.nasa.gov/photojournal/heat-shield-in-pieces/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia07/pia07402/PIA07402.jpg",
+    "bytes": 156750,
+    "sha256": "d17b2338aa24cc5c2ff1135cc6e19426db2194af97ae17cc82d1296ab1aa6e42"
+  },
+  {
+    "file": "opportunity-berries.jpg",
+    "page": "https://science.nasa.gov/photojournal/discovery-served-up-in-a-bowl/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia05/pia05634/PIA05634.jpg",
+    "bytes": 65987,
+    "sha256": "5a511a9b9792e3a1db35ff18a4376b78563adcdc637bf5f317e4a7b3711a6204"
+  },
+  {
+    "file": "opportunity-dune.jpg",
+    "page": "https://science.nasa.gov/photojournal/looking-back-at-purgatory-dune/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia07/pia07999/PIA07999.jpg",
+    "bytes": 140176,
+    "sha256": "bcbf158eb0ae813fe134b90d5d81d6dc2aa52d557eddea19d3aa9abc878f1b0e"
+  },
+  {
+    "file": "opportunity-route.jpg",
+    "page": "https://science.nasa.gov/photojournal/opportunitys-final-traverse-map/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23178/PIA23178.jpg",
+    "bytes": 1094251,
+    "sha256": "4283cf3ca2fad3edea55e0ecb2647ee4beb324525c8367ba132d6e133721a73e"
+  },
+  {
+    "file": "opportunity-final.jpg",
+    "page": "https://science.nasa.gov/resource/last-images-opportunity-took/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/mars/resources/detail_files/2/22340_PIA22930-246-combo.jpg",
+    "bytes": 4146,
+    "sha256": "6a041ebfc112e54109b5b8f9f725273754cca33566c736880435badafcc26964"
+  },
+  {
+    "file": "opportunity-meteorite.jpg",
+    "page": "https://science.nasa.gov/photojournal/iron-meteorite-on-mars/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia07/pia07269/PIA07269.jpg",
+    "bytes": 42636,
+    "sha256": "cb42ecba0ce09837ebf8f7ac690ecc1d35b003e38c87973e41d5abb5691ab973"
+  }
+]

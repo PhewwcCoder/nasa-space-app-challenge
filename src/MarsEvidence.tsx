@@ -1,3 +1,4 @@
+import { useShallow } from 'zustand/react/shallow';
 import { PhotoReveal } from './Learning';
 import { useArchive } from './stores/archive';
 
@@ -9,7 +10,7 @@ const landingSteps = [
 ] as const;
 
 export function PathfinderEvidence(){
-  const {evidenceStep,setEvidenceStep}=useArchive();
+  const {evidenceStep,setEvidenceStep}=useArchive(useShallow(s=>({evidenceStep:s.evidenceStep,setEvidenceStep:s.setEvidenceStep})));
   return <>
     <PhotoReveal photo="pathfinderRamp"/>
     <p className="lesson-prose">The lander was both a starting platform and a link to Earth. Its opened petals supported the equipment; a separate roll-out ramp gave Sojourner a safe route onto the soil.</p>
@@ -20,7 +21,7 @@ export function PathfinderEvidence(){
 }
 
 export function AirbagEvidence(){
-  const {evidenceStep,setEvidenceStep}=useArchive();const step=landingSteps[Math.max(0,evidenceStep-1)];
+  const {evidenceStep,setEvidenceStep}=useArchive(useShallow(s=>({evidenceStep:s.evidenceStep,setEvidenceStep:s.setEvidenceStep})));const step=landingSteps[Math.max(0,evidenceStep-1)];
   return <>
     <p className="lesson-prose">Before six wheels could move, an entire landing system had to work. Reconstruct its four stages.</p>
     {evidenceStep===0?<><PhotoReveal photo="pathfinderAirbags"/><button className="action" onClick={()=>setEvidenceStep(1)}>Reconstruct the landing</button></>:<>

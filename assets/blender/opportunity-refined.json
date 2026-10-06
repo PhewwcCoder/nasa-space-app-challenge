@@ -1,0 +1,10 @@
+{
+  "meshes": 25,
+  "triangles": 77093,
+  "assemblies": [
+    "body",
+    "instruments",
+    "mobility",
+    "power"
+  ]
+}

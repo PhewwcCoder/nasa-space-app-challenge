@@ -3,11 +3,12 @@ Run: blender --background --factory-startup --python scripts/build-spirit.py
 Reference proportions: NASA source; authored detail: supplied MER render references.
 All detail is explicit mesh/PBR material, so it survives glTF export.
 """
-import bpy, math, json
+import bpy, math, json, sys
 from mathutils.bvhtree import BVHTree
 from pathlib import Path
 from mathutils import Vector
 
+VARIANT='opportunity' if '--opportunity' in sys.argv else 'spirit'
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'assets'/'blender'
 OUT.mkdir(parents=True,exist_ok=True)
@@ -41,7 +42,7 @@ tread=mat('Burnished wheel ribs',(.14,.115,.085),.6,.5)
 black=mat('Carbon and optical baffles',(.016,.02,.023),.15,.36)
 blue=mat('Cable retention collars',(.037,.12,.26),.25,.4)
 glass=mat('Camera optics',(.015,.042,.058),.65,.14)
-cells=[mat('Silicon cells '+str(i),(.028+i*.003,.074+i*.004,.115+i*.005),.48,.32) for i in range(4)]
+cells=[mat('Silicon cells '+str(i),((.052+i*.003,.049+i*.003,.038+i*.003) if VARIANT=='opportunity' else (.028+i*.003,.074+i*.004,.115+i*.005)),.48,.38 if VARIANT=='opportunity' else .32) for i in range(4)]
 
 # Work in the application's Y-up coordinate system; Blender uses Z-up.
 def pt(p):return Vector((p[0],-p[2],p[1]))
@@ -196,6 +197,21 @@ for side in [-1,1]:
     for j in range(3):
         cable('array bus harness','power',[(side*.15,.713,-.57+j*.006),(side*.42,.713,-.57+j*.006),(side*.73,.713,-.43+j*.006),(side*.95,.713,-.35+j*.006)],.0017)
 
+# Opportunity variant: the supplied reference's dark camera brow and deck palette.
+# MER-A and MER-B share hardware; these are reconstruction treatments, not claims
+# that they had different engineering designs or known present-day dust coverage.
+if VARIANT=='opportunity':
+    box('Pancam sunshade brow','instruments',(.05,1.572,-.384),(.37,.018,.107),black,.003)
+    for x in [-.135,.235]:
+        box('optical bench end bracket','instruments',(x,1.52,-.38),(.016,.104,.10),gold,.002)
+        for y in [1.488,1.55]:
+            rod('brow bracket fastener','instruments',(x,y,-.432),(x,y,-.436),.003,silver,8)
+    for m,color,rough in [(white,(.62,.60,.53),.5),(gold,(.32,.245,.12),.49),(silver,(.42,.43,.40),.4)]:
+        m.diffuse_color=(*color,1)
+        bs=m.node_tree.nodes.get('Principled BSDF')
+        bs.inputs['Base Color'].default_value=(*color,1);bs.inputs['Roughness'].default_value=rough
+    bpy.context.scene['provenance']='NASA/VTAD MER base; MERSA reference-based Opportunity teaching reconstruction. Not an exact engineering or preservation survey.'
+
 # Convert curves then batch by assembly/material: detailed surfaces without hundreds of draw calls.
 bpy.ops.object.select_all(action='DESELECT')
 for o in bpy.context.scene.objects:
@@ -210,9 +226,9 @@ for (part,m),objects in batches.items():
     for o in objects:o.select_set(True)
     bpy.context.view_layer.objects.active=objects[0];bpy.ops.object.join();o=bpy.context.object;o.name=part+'__'+m;o['assembly']=part
 
-bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'spirit-refined.blend'))
-bpy.ops.export_scene.gltf(filepath=str(ROOT/'public/models/spirit-refined.glb'),export_format='GLB',export_extras=True,export_draco_mesh_compression_enable=True,export_draco_mesh_compression_level=6)
+bpy.ops.wm.save_as_mainfile(filepath=str(OUT/f'{VARIANT}-refined.blend'))
+bpy.ops.export_scene.gltf(filepath=str(ROOT/f'public/models/{VARIANT}-refined.glb'),export_format='GLB',export_extras=True,export_draco_mesh_compression_enable=True,export_draco_mesh_compression_level=6)
 meshes=[o for o in bpy.context.scene.objects if o.type=='MESH']
 stats={'meshes':len(meshes),'triangles':sum(sum(len(p.vertices)-2 for p in o.data.polygons) for o in meshes),'assemblies':sorted(set(o['assembly'] for o in meshes))}
-(OUT/'spirit-refined.json').write_text(json.dumps(stats,indent=2))
+(OUT/f'{VARIANT}-refined.json').write_text(json.dumps(stats,indent=2))
 print('MERSA_MODEL',json.dumps(stats))

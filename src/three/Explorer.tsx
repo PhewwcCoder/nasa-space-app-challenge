@@ -1,12 +1,13 @@
+import { memo } from 'react';
+import { useSceneFrame as useFrame } from './SceneActivity';
 import { useRef } from 'react';
 import { RoundedBox } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useArchive } from '../stores/archive';
 import { flightInput } from '../game/input';
 
 // Authored explorer and path, not a reconstruction of an Apollo astronaut's route.
-export default function Explorer(){
+function Explorer(){
  const body=useRef<THREE.Group>(null);const clock=useRef(0);
  useFrame(({camera},dt)=>{const s=useArchive.getState();if(s.stage!=='surface'||s.inspector)return;const moving=flightInput.z<0&&!s.paused&&s.walk<1;const progress=Math.min(1,s.walk+(moving?Math.min(dt,.05)/7:0));if(progress!==s.walk)s.setWalk(progress);clock.current+=moving?dt*6:0;const x=32-progress*10,z=-1-progress*14;const bob=moving&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches?Math.sin(clock.current*2)*.055:0;
  if(body.current){body.current.position.set(x,bob,z);body.current.rotation.y=Math.atan2(-10,-14);}
@@ -44,3 +45,5 @@ function AstronautSuit(){
  <mesh position={[0,2.04,-.035]}><torusGeometry args={[.46,.022,8,48,Math.PI]}/><meshStandardMaterial color="#b5a0de" metalness={.4} roughness={.35}/></mesh>
  </group>;
 }
+
+export default memo(Explorer);

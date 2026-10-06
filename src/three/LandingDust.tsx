@@ -1,5 +1,5 @@
-﻿import { useMemo, useRef, useEffect, type RefObject } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useSceneFrame as useFrame } from './SceneActivity';
+import { useMemo, useRef, useEffect, type RefObject } from 'react';
 import * as THREE from 'three';
 import type { FlightState } from '../game/flight';
 import { useArchive } from '../stores/archive';

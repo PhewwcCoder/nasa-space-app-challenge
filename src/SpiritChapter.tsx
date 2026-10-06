@@ -1,3 +1,4 @@
+import { useShallow } from 'zustand/react/shallow';
 import { useEffect, useRef, useState } from 'react';
 import { useArchive } from './stores/archive';
 import { spiritArtifacts, spiritIds, spiritParts, spiritSources, type SpiritArtifactId } from './data/spirit';
@@ -5,19 +6,19 @@ import PartPoster from './PartPoster';
 import { PhotoReveal } from './Learning';
 
 export function SpiritTravelHUD(){
-  const {travelProgress,paused,setPaused,setStage}=useArchive();
+  const {travelProgress,paused,setPaused,setStage}=useArchive(useShallow(s=>({travelProgress:s.travelProgress,paused:s.paused,setPaused:s.setPaused,setStage:s.setStage})));
   return <><div className="travel-veil" style={{opacity:Math.max(0,1-Math.abs(travelProgress-.5)/.13)}}/><section className="travel-hud" aria-label="Travel to Gusev Crater"><p className="eyebrow">ARCHIVE TRANSIT / 02 → 03</p><h2>{travelProgress<.5?'Beyond a small beginning.':'A different question in the dust.'}</h2><p className="eyebrow">ARES VALLIS → GUSEV CRATER / COMPRESSED FICTIONAL TRAVEL</p><div className="travel-line"><i style={{width:`${travelProgress*100}%`}}/></div><button className="quiet-button" onClick={()=>setPaused(!paused)}>{paused?'Resume journey':'Pause journey'}</button><button className="quiet-button" onClick={()=>{setPaused(false);setStage('spirit');}}>Skip travel</button></section></>;
 }
 
 export function SpiritSurface(){
-  const {spiritApproached,approachSpirit,identified,discovered,inspect}=useArchive();
+  const {spiritApproached,approachSpirit,identified,discovered,inspect}=useArchive(useShallow(s=>({spiritApproached:s.spiritApproached,approachSpirit:s.approachSpirit,identified:s.identified,discovered:s.discovered,inspect:s.inspect})));
   const count=spiritIds.filter(id=>discovered.includes(id)).length;
   const available=spiritIds.filter(id=>id!=='spiritLog'||count>=4||discovered.includes(id));
   return <>
     <div className="site-caption mars-caption"><p className="eyebrow">CH-03 / GUSEV CRATER</p><h1>{count===5?'A question outlives its explorer.':identified.includes('spirit')?'What did the stones remember?':'A taller shadow in the dust.'}</h1><p>{count===5?'FIVE RECORDS RECOVERED':spiritApproached?'Read the machine. Then read the world it studied.':'Another human trace. Another reason to explore.'}</p></div>
     {!spiritApproached?<div className="mars-approach"><p>Its wheels stopped. Its evidence did not.</p><button className="action" onClick={approachSpirit}>Approach the trace ↗</button></div>:<nav className="discovery-dock mars-dock spirit-dock" aria-label="Spirit discoveries">{available.map((id,i)=><button key={id} data-artifact={id} onClick={()=>inspect(id)}><span>{discovered.includes(id)?'✓':`0${i+1}`}</span><strong>{identified.includes(id)?spiritArtifacts[id].name:spiritArtifacts[id].unknownName}</strong><small>{discovered.includes(id)?'ARCHIVED':identified.includes(id)?'INSPECT ↗':'DETECT / SCAN ↗'}</small></button>)}</nav>}
     <div className="mars-site-note">{count} / 05 RECORDS<br/>COMPOSITE SCIENCE LANDSCAPE<br/>SITES AND DISTANCES ARE SCHEMATIC</div>
-    {count===5&&<aside className="spirit-next-signal"><p className="eyebrow">A SECOND SIGNATURE / ARCHIVE MATCH</p><h2>It had a twin.</h2><p>Opportunity. Another explorer, on another part of Mars.</p><small>CHAPTER 04 / SIGNAL RECORDED · NOT YET AVAILABLE</small></aside>}
+    {count===5&&<aside className="spirit-next-signal"><p className="eyebrow">A SECOND SIGNATURE / ARCHIVE MATCH</p><h2>It had a twin.</h2><p>Opportunity. Another explorer, on another part of Mars.</p><button className="action" onClick={()=>useArchive.getState().startOpportunityTravel()}>Continue to Meridiani Planum</button></aside>}
   </>;
 }
 
@@ -29,7 +30,7 @@ const investigations = {
 } as const;
 
 export function SpiritInspector({id}:{id:SpiritArtifactId}){
-  const {identified,identify,scanProgress,setScanProgress,inspect,selected,select,inspectedParts,exploded,toggleExploded,isolated,toggleIsolated,resetView,discover,evidenceStep,setEvidenceStep}=useArchive();
+  const {identified,identify,scanProgress,setScanProgress,inspect,selected,select,inspectedParts,exploded,toggleExploded,isolated,toggleIsolated,resetView,discover,evidenceStep,setEvidenceStep}=useArchive(useShallow(s=>({identified:s.identified,identify:s.identify,scanProgress:s.scanProgress,setScanProgress:s.setScanProgress,inspect:s.inspect,selected:s.selected,select:s.select,inspectedParts:s.inspectedParts,exploded:s.exploded,toggleExploded:s.toggleExploded,isolated:s.isolated,toggleIsolated:s.toggleIsolated,resetView:s.resetView,discover:s.discover,evidenceStep:s.evidenceStep,setEvidenceStep:s.setEvidenceStep})));
   const close=useRef<HTMLButtonElement>(null);const note=useRef<HTMLElement>(null);const [scanning,setScanning]=useState(false);
   const a=spiritArtifacts[id],known=identified.includes(id),story=id==='spirit'?null:investigations[id];
   const ready=known&&(id==='spirit'?spiritParts.every(p=>inspectedParts.includes(p.id)):evidenceStep>=(story?.actions.length??1));
@@ -60,7 +61,7 @@ export function SpiritInspector({id}:{id:SpiritArtifactId}){
 }
 
 export function SpiritGuideBody(){
-  const {identified,discovered}=useArchive();
+  const {identified,discovered}=useArchive(useShallow(s=>({identified:s.identified,discovered:s.discovered})));
   return <div className="learning-body"><p className="eyebrow">NASA EVIDENCE / GUSEV CRATER</p><h2 id="learning-title">Spirit: reading the history of water.</h2><p className="learning-intro">A mobile laboratory learned to read a planet through its rocks. Your recovered evidence appears below.</p><div className="learning-story"><PhotoReveal photo="spiritRover"/><article><h3>A new scale of exploration</h3><p>After Sojourner’s small beginning, Spirit carried a mast, a broad solar deck and a robotic science arm. It landed in Gusev Crater on January 4, 2004 UTC (January 3 in California).</p><p>A mineral can retain evidence of an environment that no longer exists. Spirit helped investigate whether water had once altered the rocks and soil.</p><a href={spiritSources.mission} target="_blank" rel="noreferrer">NASA / Spirit mission ↗</a></article></div>
     {spiritIds.filter(id=>identified.includes(id)).map(id=><section className="spirit-guide-record" key={id}><h3>{spiritArtifacts[id].name}</h3><p>{id==='spiritLog'&&!discovered.includes(id)?'Recover the mission timeline to read this record.':spiritArtifacts[id].purpose}</p><a href={spiritArtifacts[id].source} target="_blank" rel="noreferrer">NASA evidence ↗</a></section>)}
     <h3>How to read this reconstruction</h3><p>The 3D rover is a Blender-refined reconstruction based on NASA’s shared Spirit and Opportunity model. Added hardware detail, selection groups, separation, terrain and the nearby evidence stations are authored teaching aids. These stations combine events from different years and places; they are not an exact archaeological survey or a claim about surviving tracks. Photographs show the dates and locations in their captions. Miso’s interpretations and archive travel are fiction.</p>
