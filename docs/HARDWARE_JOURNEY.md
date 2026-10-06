@@ -1,3 +1,7 @@
+## Chapter 4 application / 2026-10-06 - current scope
+
+Opportunity is now explicitly authorized and implements this same hardware journey. Its shared MER component takes the inspected artifact ID and local GLB URL, while both chapters retain separate model assemblies and the same worker-prepared selection outlines. Five evidence records gate the sixth mission log. Spirit's completion connects to Meridiani through the original shared camera. Voyager remains unavailable. Read CHAPTER_4.md for source corrections and STATUS.md for actual validation.
+
 ## Chapter 3 application / 2026-10-06
 
 Spirit now implements the shared pattern: unknown trace, approach, scan, three selectable NASA model assemblies, the existing white PartPoster, sourced investigation and archive. Apollo still opens known clues directly. Selection/deselection, separation, isolation, orbit/zoom/reset, inspector exit, focus restoration and independently scrolling notes carry forward. Additional rock/soil actions teach mechanism through an observable change before interpretation.

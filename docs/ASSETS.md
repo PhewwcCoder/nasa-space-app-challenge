@@ -1,3 +1,11 @@
+## Opportunity sources and Blender reconstruction / 2026-10-06
+
+- `assets/blender/opportunity-refined.blend`: editable Blender 4.5 reconstruction from the unchanged NASA/VTAD `public/models/mer-rover.glb`. Run `scripts/build-opportunity.py` to invoke the shared builder's explicit variant. Added camera brow and brackets, dark photovoltaic cell treatment and reference-based metal palette sit on the detailed twin-rover geometry. The supplied illustration is a visual reference only, not redistributed or baked as a texture.
+- `public/models/opportunity-refined.glb`: 6,593,924 bytes, 77,093 triangles, 25 mesh/material batches, Draco compression; body/power/mobility/instruments extras. Exact engineering geometry and present-day dust coverage are not claimed.
+- Eight `public/learning/opportunity-*.jpg` files: original NASA downloads, with pages, download URLs, byte counts and SHA-256 values in `public/learning/opportunity-provenance.json`. Credits include NASA/JPL-Caltech/Cornell for the 2007 self-portrait; NASA/JPL-Caltech/University of Arizona for the 2017 exaggerated-color landing-site image; NASA/JPL/Cornell for PIA07402 heat shield, PIA07269 meteorite and PIA05634 Berry Bowl; NASA/JPL for PIA07999 Purgatory; NASA/JPL-Caltech/MSSS for PIA23178 traverse; NASA/JPL-Caltech/Cornell/ASU for the June 10, 2018 Sun thumbnails.
+- `OpportunityEvidence.tsx`: authored composite lander, fabric, shield, mineral and traction geometry. Locations, dimensions, motion and preserved traces are schematic. `OpportunityScene.tsx` uses authored lighting/reflections and the existing procedural Mars terrain, not an orbital topographic survey.
+- Read [CHAPTER_4.md](CHAPTER_4.md) for official links and the DOCX/XLSX/article audit. Source attachments remain unmodified. No paid generation, cloud model service or new runtime remote media dependency.
+
 ## Spirit Blender refinement and Mars environment / 2026-10-06
 
 This revision supersedes the runtime-model description below; the original NASA download remains unchanged as authoring input.

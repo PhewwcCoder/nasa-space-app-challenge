@@ -1,3 +1,9 @@
+## Opportunity / 2026-10-06 - current extension
+
+Chapter 4 preserves the existing HUD, typography, dark dock, warm-white Miso notes, cyan assembly edges and inspection controls. Meridiani adds muted pale sedimentary outcrops and sand ripples to the shared Mars terrain. The separate Blender MER treatment follows the supplied reference's dark solar deck, metallic body, ribbed wheels and mast camera brow; it is not an exact engineering or preservation claim.
+
+The dock has five initially unnamed traces and six after the final log is available. Evidence actions open schematic landing petals, distinguish the meteorite from manufactured debris, expose an enlarged mineral sample and compare wheel slip with a careful retreat. Labels distinguish these teaching views from historical photos. Photos, text and source links use the existing independently scrolling lesson panel. Opportunity's final signal uses the existing small completion panel; Chapter 5 is unavailable. Desktop 1440x900, 1920x1080 and short reduced-motion composition are the review targets; no mobile test is claimed.
+
 ## Inspection quality / 2026-10-06
 
 Closest zoom preserves whole-hardware reading at the scale of the supplied Apollo inspection references. Wheel/pinch and button limits must agree; retain existing approach/return transitions. Mars uses muted mineral brown soil, fine relief, irregular stones, atmospheric ridges and tan sky instead of a uniform orange plane. The source-reference renders guide visible detail, not claims of exact surviving condition. Test at desktop 1440x900, 1920x1080 and a short reduced-motion viewport; mobile remains deferred.

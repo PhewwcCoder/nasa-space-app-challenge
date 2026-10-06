@@ -1,3 +1,11 @@
+## Chapter 4 Opportunity / 2026-10-06 - current scope
+
+The user explicitly authorized Chapter 4. Prologue, Apollo 11, Sojourner, Spirit and Opportunity are built and freely available through Archive Index. Voyager alone remains an unavailable chapter signal. This supersedes earlier locked-Opportunity statements.
+
+Opportunity inherits the shared scan, hardware inspection, Miso photo lessons, archive and guide design. Six investigations cover MER-B, Challenger Memorial Station and descent remnants, the heat shield and iron-nickel meteorite, hematite blueberries, Purgatory Dune and the final mission record. The first five discoveries reveal the final log; all six reveal an unresolved Chapter 5 signal without implementing it. Spirit's ending now offers a ten-second fictional traverse to Meridiani with pause, skip and reduced-motion arrival. Records persist during chapter revisits and reset on refresh.
+
+The Blender reconstruction uses NASA's common MER base and reference-inspired detail. Evidence sites are explicitly a composite of different places and years. Miso's playful guesses are original fiction; NASA links support historical findings. Read [CHAPTER_4.md](CHAPTER_4.md) for the supplied-source audit and full behavior. Desktop-only verification is authorized; mobile testing remains deferred.
+
 ## Current scope / 2026-10-06
 
 This section supersedes earlier scope and locked-Spirit statements. The user authorized playable Chapter 3, Spirit, and Chapter 2 improvements. Built chapters are Prologue, Apollo 11, Sojourner and Spirit; all are freely selectable from Archive Index. Opportunity and Voyager remain unavailable.
