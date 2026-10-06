@@ -1,3 +1,4 @@
+import { voyagerParts } from './data/voyager';
 import { opportunityParts } from './data/opportunity';
 import { spiritParts } from './data/spirit';
 import { marsParts } from './data/mars';
@@ -10,7 +11,7 @@ const lessons={
  reflector:{title:'Retroreflector',quote:'What if a mirror could help measure a whole journey?',photo:'science',lines:['Apollo 11 left this array on the Moon.','It contains one hundred special glass prisms.','A telescope on Earth sends a short laser pulse.','The prisms send some light back toward Earth.','They do not need batteries to do this.','Scientists measure how long the round trip takes.','They know how fast light travels.','Time and light speed help them find the distance.','The return trip is why they divide the result by two.'],equation:'Distance = light speed × time ÷ 2',physics:'The measured time includes the trip to the Moon and back. This is a simplified explanation.',source:'https://www.nasa.gov/missions/apollo/apollo-11/the-apollo-experiment-that-keeps-on-giving/'}
 } as const;
 export default function PartPoster({part,conclusion}:{part:string;conclusion?:string}){
- const ref=useRef<HTMLElement>(null);const mars=marsParts.find(p=>`mars-${p.id}`===part);const spirit=spiritParts.find(p=>`spirit-${p.id}`===part);const opportunity=opportunityParts.find(p=>`opportunity-${p.id}`===part);const p=opportunity?{...opportunity,title:opportunity.name}:spirit?{...spirit,title:spirit.name}:mars?{...mars,title:mars.name,photo:'sojourner' as const}:lessons[part as keyof typeof lessons]??lessons.structure;
+ const ref=useRef<HTMLElement>(null);const mars=marsParts.find(p=>`mars-${p.id}`===part);const spirit=spiritParts.find(p=>`spirit-${p.id}`===part);const opportunity=opportunityParts.find(p=>`opportunity-${p.id}`===part);const voyager=voyagerParts.find(p=>`voyager-${p.id}`===part);const p=voyager?{...voyager,title:voyager.name}:opportunity?{...opportunity,title:opportunity.name}:spirit?{...spirit,title:spirit.name}:mars?{...mars,title:mars.name,photo:'sojourner' as const}:lessons[part as keyof typeof lessons]??lessons.structure;
  useEffect(()=>{if(ref.current)ref.current.scrollTop=0;},[part]);
  return <aside ref={ref} className="part-poster floating-lesson" aria-label={`${p.title} learning poster`} tabIndex={0}>
   <header className="poster-presenter"><img src="/textures/alien-cat.png" alt="Miso the alien cat"/><div><span>MISO’S DISCOVERY</span><p>“{p.quote}”</p></div></header>

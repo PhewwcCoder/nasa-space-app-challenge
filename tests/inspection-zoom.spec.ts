@@ -10,7 +10,7 @@ async function camera(page:Page){
   });
 }
 
-for(const [chapter,id,limit] of [['01.*APOLLO','eagle',17],['02.*SOJOURNER','sojourner',2],['03.*SPIRIT','spirit',4.8],['04.*OPPORTUNITY','opportunity',4.8]] as const){
+for(const [chapter,id,limit] of [['01.*APOLLO','eagle',17],['02.*SOJOURNER','sojourner',2],['03.*SPIRIT','spirit',4.8],['04.*OPPORTUNITY','opportunity',4.8],['05.*VOYAGER','voyager',24]] as const){
   test(`${id}: wheel and buttons share a bounded closest view; zoom out, reset and exit survive`,async({page})=>{
     test.setTimeout(90000);const errors:string[]=[];
     page.on('pageerror',e=>errors.push(e.message));
@@ -18,10 +18,11 @@ for(const [chapter,id,limit] of [['01.*APOLLO','eagle',17],['02.*SOJOURNER','soj
     await page.goto('/');await page.locator('.archive-index-trigger').click();await page.getByRole('button',{name:new RegExp(chapter)}).click();
     if(id==='sojourner')await page.getByRole('button',{name:'Approach the signal'}).click();
     if(id==='opportunity')await page.getByRole('button',{name:'Approach the familiar trace'}).click();
+    if(id==='voyager')await page.getByRole('button',{name:'Approach the distant traveler'}).click();
     if(id==='spirit')await page.getByRole('button',{name:'Approach the trace'}).click();
     await page.locator(`[data-artifact="${id}"]`).last().click();
     if(id!=='eagle'){await page.getByRole('button',{name:'Scan object',exact:true}).click();await expect(page.getByRole('button',{name:'Scan object',exact:true})).toHaveCount(0);}
-    await expect(page.getByRole('heading',{name:new RegExp(`^${id}$`,'i')})).toBeVisible({timeout:15000});
+    await expect(page.getByRole('heading',{name:new RegExp(id==='voyager'?'^Voyager 1$':`^${id}$`,'i')})).toBeVisible({timeout:15000});
     await page.waitForTimeout(2300);
     const initial=await camera(page);expect(initial.minimum).toBe(limit);
     if(id==='eagle')await page.getByText('More model controls',{exact:true}).click();
@@ -29,7 +30,7 @@ for(const [chapter,id,limit] of [['01.*APOLLO','eagle',17],['02.*SOJOURNER','soj
     expect((await camera(page)).distance).toBeCloseTo(limit,3);
     await page.getByRole('button',{name:'Zoom out',exact:true}).click();
     expect((await camera(page)).distance).toBeGreaterThan(limit+.1);
-    await page.mouse.move(1050,450);for(let i=0;i<4;i++)await page.mouse.wheel(0,-4000);
+    await page.mouse.move(id==='voyager'?700:1050,450);for(let i=0;i<4;i++)await page.mouse.wheel(0,-4000);
     await page.waitForTimeout(600);expect((await camera(page)).distance).toBeCloseTo(limit,3);
     await page.screenshot({path:`docs/qa/${id}-zoom-limit.png`});
     await page.getByRole('button',{name:'Reset view',exact:true}).click();await page.waitForTimeout(2300);

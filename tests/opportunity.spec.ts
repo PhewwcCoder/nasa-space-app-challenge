@@ -64,9 +64,9 @@ test('Opportunity full desktop investigation, source photos, guide and retained 
     await page.getByRole('button',{name:'Archive discovery',exact:true}).click();
   }
   await expect(page.locator('.mars-site-note')).toContainText('6 / 06 RECORDS');
-  await expect(page.locator('.spirit-next-signal')).toContainText('CHAPTER 05');
+  await expect(page.locator('.spirit-next-signal')).toContainText('Follow the deep-space signal');
   await page.waitForTimeout(1900);await page.screenshot({path:'docs/qa/opportunity-desktop-complete.png'});
-  await page.locator('.archive-index-trigger').click();await expect(page.locator('.corrupted-signal')).toHaveCount(1);
+  await page.locator('.archive-index-trigger').click();await expect(page.locator('.corrupted-signal')).toHaveCount(0);
   await page.getByRole('button',{name:/APOLLO 11/}).click();await expect(page.locator('.expedition-log')).toContainText('00 / 06');
   await page.locator('.archive-index-trigger').click();await page.getByRole('button',{name:/04 — OPPORTUNITY/}).click();
   await expect(page.locator('.mars-site-note')).toContainText('6 / 06 RECORDS');

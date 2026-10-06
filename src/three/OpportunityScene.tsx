@@ -20,7 +20,7 @@ function OpportunityCamera(){
   useEffect(()=>{start.current.copy(camera.position);elapsed.current=0;arrived.current=false;},[camera,inspector,opportunityApproached,viewKey,stage]);
   useEffect(()=>{const handle=(event:Event)=>{if(!inspector)return;const mode=(event as CustomEvent<string>).detail,d=camera.position.clone().sub(focus);if(mode==='left'||mode==='right')d.applyAxisAngle(new THREE.Vector3(0,1,0),mode==='left'?.25:-.25);else d.multiplyScalar(mode==='in'?.85:1.15);d.setLength(THREE.MathUtils.clamp(d.length(),inspectionMinDistance(inspector),18));camera.position.copy(focus.clone().add(d));camera.lookAt(focus);};window.addEventListener('model-control',handle);return()=>window.removeEventListener('model-control',handle);},[camera,focus,inspector]);
   useFrame((_,dt)=>{
-    if(stage==='opportunity-travel')return;
+    if(stage==='opportunity-travel'||stage==='voyager-travel')return;
     if(camera instanceof THREE.PerspectiveCamera){if(inspector)camera.setViewOffset(size.width,size.height,size.width>760?size.width*.18:0,size.width<=760?size.height*.1:0,size.width,size.height);else camera.clearViewOffset();}
     if(useArchive.getState().paused)return;
     elapsed.current+=dt;if(inspector&&arrived.current&&scanProgress===1)return;

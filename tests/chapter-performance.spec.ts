@@ -105,3 +105,17 @@ test('late cold preparation cannot replace a newer chapter request', async ({ pa
   await expect(page.locator('main')).toHaveClass(/stage-entry/);
   await expect(page.locator('canvas')).toHaveCount(1);
 });
+
+test('shader preparation survives disposal of transient source materials',async({page})=>{
+ const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/');await expect(page.locator('canvas')).toHaveAttribute('data-world','orbit',{timeout:30000});
+ const result=await page.evaluate(async()=>{
+  const fiberUrl=performance.getEntriesByType('resource').find(e=>e.name.includes('/@react-three_fiber.js'))!.name;const fiber=await import(/* @vite-ignore */fiberUrl);const root=fiber._roots.get(document.querySelector('canvas')).store.getState();
+  const {preparationSnapshot}=await import(/* @vite-ignore */'/src/three/preparationSnapshot.ts');const THREE=await import(/* @vite-ignore */'/node_modules/.vite/deps/three.js');
+  const source=new THREE.Scene(),material=new THREE.MeshStandardMaterial(),geometry=new THREE.BoxGeometry(),mesh=new THREE.Mesh(geometry,material);
+  material.onBeforeCompile=(shader:any)=>{shader.fragmentShader=shader.fragmentShader.replace('#include <dithering_fragment>','#include <dithering_fragment>\n gl_FragColor.rgb *= 0.9;');};material.customProgramCacheKey=()=> 'preparation-lifetime-regression';source.add(mesh,new THREE.AmbientLight());
+  const snapshot=preparationSnapshot(source),owned=snapshot.scene.children[0].material;let disposed=false;owned.addEventListener('dispose',()=>{disposed=true;});
+  const pending=root.gl.compileAsync(snapshot.scene,root.camera);source.remove(mesh);material.dispose();await pending;
+  const safe=!disposed&&owned!==material&&owned.onBeforeCompile===material.onBeforeCompile&&owned.customProgramCacheKey()===material.customProgramCacheKey();snapshot.dispose();geometry.dispose();return {safe,released:disposed};
+ });
+ expect(result).toEqual({safe:true,released:true});expect(errors).toEqual([]);
+});

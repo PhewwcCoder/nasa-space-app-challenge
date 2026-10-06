@@ -1,8 +1,10 @@
+import { voyagerArtifacts, type VoyagerArtifactId } from './voyager';
 import { opportunityArtifacts, type OpportunityArtifactId } from './opportunity';
 import { spiritArtifacts, type SpiritArtifactId } from './spirit';
 import { marsArtifacts, type MarsArtifactId } from './mars';
-export type ArtifactId = OpportunityArtifactId | SpiritArtifactId | MarsArtifactId | 'eagle' | 'reflector' | 'footprints' | 'camera' | 'seismometer' | 'messages';
+export type ArtifactId = VoyagerArtifactId | OpportunityArtifactId | SpiritArtifactId | MarsArtifactId | 'eagle' | 'reflector' | 'footprints' | 'camera' | 'seismometer' | 'messages';
 export const artifacts = {
+  ...voyagerArtifacts,
   ...marsArtifacts,
   ...opportunityArtifacts, ...spiritArtifacts,
   camera: {id:'camera',code:'TB / 004',unknownName:'Optical instrument',name:'Camera',subtitle:'Television camera',purpose:'A black-and-white television camera transmitted the first steps to viewers on Earth.',interpretation:'They wanted others to witness it.',source:'https://www.nasa.gov/history/astronaut-still-photography-during-apollo/',sourceName:'NASA / Apollo photography'},

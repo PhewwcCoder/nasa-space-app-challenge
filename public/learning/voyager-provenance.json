@@ -1,0 +1,48 @@
+[
+  {
+    "file": "voyager-cover.jpg",
+    "url": "https://science.nasa.gov/wp-content/uploads/2024/03/voyager-record-cover-446eb9.jpg",
+    "source": "https://science.nasa.gov/mission/voyager/golden-record-cover/",
+    "credit": "NASA/JPL-Caltech",
+    "sha256": "eac79258cc229db4de1234afa4c8d64a158d287f8c6ee59e175535f0e86b5502"
+  },
+  {
+    "file": "voyager-diagram.jpg",
+    "url": "https://science.nasa.gov/wp-content/uploads/2024/03/instruments-3.jpg",
+    "source": "https://science.nasa.gov/mission/voyager/spacecraft/",
+    "credit": "NASA/JPL-Caltech",
+    "sha256": "5f7e3c2c2b75537f4ecdbd9fdf1d5d8ceb2e67ffb5cdc08d426b5794410cf611"
+  },
+  {
+    "file": "voyager-record.jpg",
+    "url": "https://science.nasa.gov/wp-content/uploads/2024/03/voyager-gold-record-display.jpg",
+    "source": "https://science.nasa.gov/mission/voyager/golden-record-contents/greetings/",
+    "credit": "NASA/JPL-Caltech",
+    "sha256": "51038ad8fb765ed6145f222ca8b01400365f50e5c3415f3618d404e5bdd10af9"
+  },
+  {
+    "file": "voyager-dot.jpg",
+    "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23645/PIA23645.jpg",
+    "source": "https://science.nasa.gov/photojournal/pale-blue-dot-revisited/",
+    "credit": "NASA/JPL-Caltech",
+    "sha256": "b783a29a134377ba41ffe8f644fd1f066b591b77b316daac3d32b315cc265c34"
+  },
+  {
+    "file": "../models/voyager-nasa.glb",
+    "source": "https://science.nasa.gov/resource/voyager-3d-model/",
+    "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/v/Voyager.glb",
+    "credit": "NASA/VTAD",
+    "modifications": "None",
+    "bytes": 3128204,
+    "sha256": "5338241f2e89e9cfe3ebb82f519b4cad64c97e66883cccba6fdda98667aec731"
+  },
+  {
+    "file": "../models/voyager-refined.glb",
+    "source": "https://science.nasa.gov/resource/voyager-3d-model/",
+    "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/v/Voyager.glb",
+    "credit": "NASA/VTAD",
+    "modifications": "Blender assembly grouping and material response; source spacecraft geometry and UV retained",
+    "bytes": 2404940,
+    "sha256": "b5e0b37b6764bf2e9e57c136f2f6e98f9a9550643708ba38c04fc11f9d282df3"
+  }
+]

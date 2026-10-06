@@ -228,3 +228,10 @@
   .opportunity-dock:not(:has([data-artifact="opportunityLog"])){grid-template-columns:repeat(5,minmax(0,1fr))}
 }
 .stage-opportunity-travel .chapter-track{visibility:hidden}
+/* Voyager inherits chapter controls and warm paper notes; its world has no ground. */
+.stage-voyager .chapter-track,.stage-voyager-travel .chapter-track{visibility:hidden}
+.stage-voyager .sky-atmosphere,.stage-voyager-travel .sky-atmosphere{display:none}
+.voyager-diagram{width:100%;height:auto;max-height:110px;fill:none;stroke:#39747b;stroke-width:1.5;margin:12px 0}
+.voyager-diagram text{fill:#315c64;stroke:none;font:11px 'IBM Plex Mono',monospace}
+.voyager-diagram .observed{stroke:#1399a5;stroke-width:3}
+@media(min-width:761px){.discovery-dock.voyager-dock{grid-template-columns:repeat(5,minmax(0,1fr));width:min(1200px,calc(100% - 60px))}.voyager-dock:not(:has([data-artifact="voyagerMessage"])){grid-template-columns:repeat(4,minmax(0,1fr))}}

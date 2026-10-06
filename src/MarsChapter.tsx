@@ -9,18 +9,18 @@ import { clearControls } from './game/input';
 
 export function ArchiveIndex(){const {chapter,visitChapter,stage}=useArchive(useShallow(s=>({chapter:s.chapter,visitChapter:s.visitChapter,stage:s.stage})));const [open,setOpen]=useState(false);const dialog=useRef<HTMLDialogElement>(null);const trigger=useRef<HTMLButtonElement>(null);const priorPause=useRef(false);const pending=useRef<(()=>void)|null>(null);
  useEffect(()=>()=>pending.current?.(),[]);
- useEffect(()=>{if(open){const wasPending=!!pending.current;pending.current?.();pending.current=null;void import('./three/preloadChapters').then(({preloadChapter})=>{preloadChapter('apollo11');preloadChapter('spirit');preloadChapter('opportunity');});if(!wasPending)priorPause.current=useArchive.getState().paused;clearControls();useArchive.getState().setPaused(true);dialog.current?.showModal();}else dialog.current?.close();},[open]);
+ useEffect(()=>{if(open){const wasPending=!!pending.current;pending.current?.();pending.current=null;void import('./three/preloadChapters').then(({preloadChapter})=>{preloadChapter('apollo11');preloadChapter('spirit');preloadChapter('opportunity');preloadChapter('voyager');});if(!wasPending)priorPause.current=useArchive.getState().paused;clearControls();useArchive.getState().setPaused(true);dialog.current?.showModal();}else dialog.current?.close();},[open]);
  const close=(destination?:Chapter)=>{
   pending.current?.();dialog.current?.close();setOpen(false);trigger.current?.focus();
   if(destination)pending.current=afterPaint(()=>{visitChapter(destination);pending.current=null;});
   else useArchive.getState().setPaused(priorPause.current);
  };
  const current=stage==='entry'?'prologue':stage==='mars'?'sojourner':chapter;
- return <><button ref={trigger} className="archive-index-trigger" aria-haspopup="dialog" aria-expanded={open} aria-controls="archive-index" onClick={()=>setOpen(true)}>ARCHIVE / {current==='prologue'?'PR':current==='sojourner'?'CH-02':current==='spirit'?'CH-03':current==='opportunity'?'CH-04':'CH-01'} ▾</button>
+ return <><button ref={trigger} className="archive-index-trigger" aria-haspopup="dialog" aria-expanded={open} aria-controls="archive-index" onClick={()=>setOpen(true)}>ARCHIVE / {current==='prologue'?'PR':current==='sojourner'?'CH-02':current==='spirit'?'CH-03':current==='opportunity'?'CH-04':current==='voyager'?'CH-05':'CH-01'} ▾</button>
  <dialog ref={dialog} id="archive-index" className="archive-index" aria-labelledby="archive-index-title" onCancel={e=>{e.preventDefault();close();}} onClick={e=>{if(e.target===e.currentTarget)close();}}>
  <header><h2 id="archive-index-title">Archive Index</h2><button onClick={()=>close()} aria-label="Close Archive Index">×</button></header><p className="eyebrow">MERSA / RECOVERED COORDINATES</p>
- {builtChapters.map((id,i)=><button key={id} aria-current={current===id?'location':undefined} onClick={()=>close(id)}><span>{['PROLOGUE','01 — APOLLO 11','02 — SOJOURNER','03 — SPIRIT','04 — OPPORTUNITY'][i]}</span><small>{current===id?'ACTIVE':'OPEN'}</small></button>)}
- {[5].map(i=><p key={i} className="corrupted-signal">0{i} — SIGNAL █▒▓█ <small>[LOCKED]</small></p>)}<p className="archive-index-note">Recovered records remain in this expedition.</p>
+ {builtChapters.map((id,i)=><button key={id} aria-current={current===id?'location':undefined} onClick={()=>close(id)}><span>{['PROLOGUE','01 — APOLLO 11','02 — SOJOURNER','03 — SPIRIT','04 — OPPORTUNITY','05 / VOYAGER 1'][i]}</span><small>{current===id?'ACTIVE':'OPEN'}</small></button>)}
+ <p className="archive-index-note">Recovered records remain in this expedition.</p>
  </dialog></>;
 }
 export function LunarSignal({openLog}:{openLog:()=>void}){const {startTravel,setStage,restart}=useArchive(useShallow(s=>({startTravel:s.startTravel,setStage:s.setStage,restart:s.restart})));return <section className="lunar-signal" aria-label="Mars signal"><p className="eyebrow">UNIDENTIFIED SIGNAL DETECTED</p><h1>MARS</h1><p>ORIGIN: MARS</p><div className="signal-rule"/><p className="eyebrow" role="status">MARS ARCHIVE AVAILABLE</p><button className="action" onClick={startTravel}>Continue to Mars <span aria-hidden="true">↗</span></button><button className="quiet-button" onClick={openLog}>Read the expedition archive</button><button className="quiet-button" onClick={()=>setStage('explore')}>Return to the Moon</button><button className="quiet-button" onClick={restart}>Restart expedition</button></section>;}

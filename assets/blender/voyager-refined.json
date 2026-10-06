@@ -1,0 +1,12 @@
+{
+  "source": "NASA/VTAD Voyager.glb",
+  "assemblies": [
+    "power",
+    "instruments",
+    "mobility",
+    "body"
+  ],
+  "triangles": 20378,
+  "mesh_batches": 7,
+  "adaptation": "Preserved geometry/UV; assembly grouping, metallic/roughness adjustment; no exact CAD claim"
+}

@@ -4,9 +4,12 @@ import * as THREE from 'three';
 import { useArchive, type Stage } from '../stores/archive';
 import { afterPaint } from '../afterPaint';
 import { SceneActivity } from './SceneActivity';
+import { preparationSnapshot } from './preparationSnapshot';
 
-export type WorldId = 'orbit' | 'lunar' | 'mars' | 'spirit' | 'transit' | 'opportunity';
+export type WorldId = 'orbit' | 'lunar' | 'mars' | 'spirit' | 'transit' | 'opportunity' | 'voyager';
 export function worldFor(stage: Stage, progress: number): WorldId {
+  if (stage === 'voyager' || stage === 'voyager-travel' && progress >= .5) return 'voyager';
+  if (stage === 'voyager-travel') return 'opportunity';
   if (stage === 'entry' || stage === 'signal') return 'orbit';
   if (stage === 'opportunity' || stage === 'opportunity-travel' && progress >= .5) return 'opportunity';
   if (stage === 'opportunity-travel') return 'spirit';
@@ -21,16 +24,28 @@ function Prepared({ id, ready }: { id: WorldId; ready: (id: WorldId) => void }) 
   const [error, setError] = useState<Error | null>(null);
   useEffect(() => {
     let cancelled = false;
+    let settled = false;
+    let snapshot: ReturnType<typeof preparationSnapshot> | undefined;
     const cancel = afterPaint(() => {
       const start = performance.now();
-      void gl.compileAsync(scene, camera).then(() => {
+      snapshot = preparationSnapshot(scene);
+      void gl.compileAsync(snapshot.scene, camera).then(() => {
+        settled = true;
+        snapshot?.releaseGraph();
+        // Hold material wrappers/program references for this retained world's life.
+        // Transient source materials may disappear while compileAsync is polling.
+        if (cancelled) { snapshot?.dispose(); return; }
         if (!cancelled) {
           performance.measure(`mersa:prepare:${id}`, { start });
           ready(id);
         }
-      }).catch((cause: unknown) => { if (!cancelled) setError(cause instanceof Error ? cause : new Error(String(cause))); });
+      }).catch((cause: unknown) => {
+        settled = true;
+        snapshot?.dispose();
+        if (!cancelled) setError(cause instanceof Error ? cause : new Error(String(cause)));
+      });
     });
-    return () => { cancelled = true; cancel(); };
+    return () => { cancelled = true; cancel(); if (settled) snapshot?.dispose(); };
   }, [id, scene, gl, camera, ready]);
   if (error) throw error;
   return null;
