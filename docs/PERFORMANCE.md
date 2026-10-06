@@ -1,3 +1,9 @@
+## Voyager and shader lifetime / 2026-10-07
+
+Chapter 5 extends the same retained-world/preload/readiness path to Voyager. Its 2.29 MiB Draco model has seven material batches. A rapid Apollo-to-Mars test exposed a Three.js async shader readiness race when a transient source material was disposed before polling finished. Preparation now uses owned material wrappers with the same shader hooks in a temporary scene snapshot. Geometry and textures remain shared; the snapshot graph is released after compilation, while shader references remain with the retained world. Cancellation does not dispose compiling wrappers. A dedicated renderer test covers source disposal during compilation; Voyager revisits separately verify scene, geometry, material, renderer and camera identity and one preparation.
+
+Earlier timing measurements below remain historical measurements of the earlier revision. They are not new Chapter 5 performance claims. The extra material wrappers have bounded session memory cost; no mobile or low-end GPU benchmark is claimed.
+
 # Chapter switching profile ? October 6, 2026
 
 ## Findings

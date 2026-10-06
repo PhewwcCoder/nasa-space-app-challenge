@@ -1,3 +1,7 @@
+## Voyager extension / 2026-10-07
+
+Voyager follows approach, scan, identify, inspect three assemblies and archive. The same shared controls, bounded zoom, reversible separation, Miso PartPoster and PhotoReveal remain. Radio, cover, Earth-image and greeting investigations use sequential evidence with replay. Four records expose the fifth; finishing closes the expedition with a fictional final report. The original canvas carries Opportunity departure and deep-space arrival with pause, skip and reduced motion. See CHAPTER_5.md for sources and contracts.
+
 ## Chapter 4 application / 2026-10-06 - current scope
 
 Opportunity is now explicitly authorized and implements this same hardware journey. Its shared MER component takes the inspected artifact ID and local GLB URL, while both chapters retain separate model assemblies and the same worker-prepared selection outlines. Five evidence records gate the sixth mission log. Spirit's completion connects to Meridiani through the original shared camera. Voyager remains unavailable. Read CHAPTER_4.md for source corrections and STATUS.md for actual validation.

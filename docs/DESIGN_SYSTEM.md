@@ -1,3 +1,7 @@
+## Voyager / 2026-10-07 - current extension
+
+Keep the chapter HUD, unknown-before-scan dock, white Miso notes, cyan component outlines and native guide. The world changes to dark interstellar space with the existing NASA star visualization, warm metal and a white dish. Preserve the NASA spacecraft silhouette and long booms; camera framing must reserve the reading panel and keep the title clear. There is no adjacent Saturn in this fictional interstellar encounter. Evidence SVGs are schematic; photos and diagram captions identify historical context. The final report is compact and explicitly fictional. Desktop and short reduced-motion checks replace mobile testing for this request.
+
 ## Opportunity / 2026-10-06 - current extension
 
 Chapter 4 preserves the existing HUD, typography, dark dock, warm-white Miso notes, cyan assembly edges and inspection controls. Meridiani adds muted pale sedimentary outcrops and sand ripples to the shared Mars terrain. The separate Blender MER treatment follows the supplied reference's dark solar deck, metallic body, ribbed wheels and mast camera brow; it is not an exact engineering or preservation claim.

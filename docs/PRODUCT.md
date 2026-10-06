@@ -1,3 +1,7 @@
+## Chapter 5 Voyager 1 / 2026-10-07 - current scope
+
+Explicit authorization extends the playable experience through Voyager 1. All chapters in the existing index are built and freely available. Voyager has five investigations and three separable hardware assemblies, with four records gating the final greeting. Opportunity links to a pauseable/skippable fictional deep-space transit. The final Miso report completes this expedition without introducing further chapters. See [CHAPTER_5.md](CHAPTER_5.md). This supersedes earlier unavailable-Voyager statements. Mobile testing is skipped by request.
+
 ## Chapter 4 Opportunity / 2026-10-06 - current scope
 
 The user explicitly authorized Chapter 4. Prologue, Apollo 11, Sojourner, Spirit and Opportunity are built and freely available through Archive Index. Voyager alone remains an unavailable chapter signal. This supersedes earlier locked-Opportunity statements.

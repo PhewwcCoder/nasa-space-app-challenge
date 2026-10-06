@@ -1,3 +1,11 @@
+## Chapter 5 Voyager 1 / 2026-10-07 - current extension
+
+Voyager adds a seventh retained scene graph in the original Canvas, renderer and camera. `VoyagerScene`, `VoyagerChapter` and `data/voyager` follow the Opportunity boundaries. Store stages `voyager`/`voyager-travel`, an approach action, model preloading and the covered travel midpoint extend the existing navigation contract. Opportunity's camera yields during departure. The shared `SpiritModel` assembly renderer accepts a Voyager asset/orientation; prior defaults are unchanged. `PartPoster`, `PhotoReveal`, the shared inspector and guide remain common. Apollo counts exclude Voyager records.
+
+Shader preparation now compiles a short-lived scene snapshot with owned material wrappers. Geometry and textures are shared, custom shader callbacks/cache keys are preserved, and wrapper/program references remain until the retained world unmounts. The snapshot graph is cleared after compilation. Source materials may therefore be disposed during rapid navigation without invalidating Three.js's async readiness poll; cancellation waits for compilation to settle before disposing its wrappers. This fixes a browser error found in the Apollo-to-Mars regression and retains asynchronous preparation and warm scene identity.
+
+Five records use original Miso prose, four local historical images and step-driven SVG evidence. The final greeting requires the first four archives. No additional canvas, page-scroll framework, runtime remote assets or backend is introduced. Voyager's whole-model zoom minimum is shared by buttons and OrbitControls. See [CHAPTER_5.md](CHAPTER_5.md) for Blender/source details and tests.
+
 ## Chapter 4 Opportunity / 2026-10-06 - current extension
 
 `builtChapters` adds `opportunity`; `Stage` adds `opportunity` and `opportunity-travel`. Store actions preserve discoveries, clear inspection state on chapter changes and reset the new approach state on expedition restart. Apollo counts, including `ExpeditionLog`, explicitly exclude Opportunity records.

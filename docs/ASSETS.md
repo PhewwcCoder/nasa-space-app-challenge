@@ -1,3 +1,10 @@
+## Voyager / 2026-10-07
+
+- `public/models/voyager-nasa.glb`: untouched NASA/VTAD model from https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/v/Voyager.glb ; catalog https://science.nasa.gov/resource/voyager-3d-model/ .
+- `assets/blender/voyager-refined.blend` and `public/models/voyager-refined.glb`: reproducible with `scripts/build-voyager.py`. Original spacecraft geometry/UVs retained; utility cube removed, teaching groups assigned, PBR response adjusted and runtime Draco compressed. Reference-based educational reconstruction, not exact CAD or a surveyed preservation state.
+- Four NASA/JPL-Caltech images and exact hashes/URLs in `public/learning/voyager-provenance.json`: spacecraft diagram, Golden Record cover, record display, and the 2020 reprocessing of the February 14, 1990 Pale Blue Dot image. Local unmodified downloads; expandable UI crops.
+- User illustrations guide visual review only; not redistributed or used as textures. Existing NASA/Goddard SVS star visualization reused. SVG evidence, lighting and Miso prose are original fiction/teaching aids. No generated media or paid service. See [CHAPTER_5.md](CHAPTER_5.md).
+
 ## Opportunity sources and Blender reconstruction / 2026-10-06
 
 - `assets/blender/opportunity-refined.blend`: editable Blender 4.5 reconstruction from the unchanged NASA/VTAD `public/models/mer-rover.glb`. Run `scripts/build-opportunity.py` to invoke the shared builder's explicit variant. Added camera brow and brackets, dark photovoltaic cell treatment and reference-based metal palette sit on the detailed twin-rover geometry. The supplied illustration is a visual reference only, not redistributed or baked as a texture.
