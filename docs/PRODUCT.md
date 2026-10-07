@@ -1,3 +1,7 @@
+## Product identity / 2026-10-07
+
+The experience is **Sol-3: The Human Trace**, by Team Petrova. Use **Sol-3** for the short name throughout the interface, documentation and authored credits. The authorized chapters and narrative remain unchanged.
+
 ## Chapter 5 Voyager 1 / 2026-10-07 - current scope
 
 Explicit authorization extends the playable experience through Voyager 1. All chapters in the existing index are built and freely available. Voyager has five investigations and three separable hardware assemblies, with four records gating the final greeting. Opportunity links to a pauseable/skippable fictional deep-space transit. The final Miso report completes this expedition without introducing further chapters. See [CHAPTER_5.md](CHAPTER_5.md). This supersedes earlier unavailable-Voyager statements. Mobile testing is skipped by request.

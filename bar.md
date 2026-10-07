@@ -1,4 +1,4 @@
-﻿# Visual bar / MERSA redesign
+﻿# Visual bar / Sol-3 redesign
 
 Reference: https://www.pinterest.com/pin/2674081025095575/ (Solar System UI UX Website Landing Page Design, QClay). Viewed actual video at 2s and 6s; frames and poster in references/. The reference is a visual/motion bar, not a gameplay reference. Original Voyager/Opportunity concept images remain the archival annotation bar.
 

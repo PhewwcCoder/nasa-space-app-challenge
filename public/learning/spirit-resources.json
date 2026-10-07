@@ -66,7 +66,7 @@
   {
     "file": "public/models/spirit-refined.glb",
     "source": "https://science.nasa.gov/resource/mars-exploration-rovers-3d-model/",
-    "credit": "NASA/VTAD base; MERSA authored Blender refinement",
+    "credit": "NASA/VTAD base; Sol-3 authored Blender refinement",
     "modifications": "Reference-inspired explicit solar cells, wheels, suspension, mast, arm, wiring and PBR materials; three teaching assemblies. Not exact engineering or surveyed preservation.",
     "authoring": "scripts/build-spirit.py; assets/blender/spirit-refined.blend",
     "sha256": "ca0f6ce81ebcf4c332a1a5956d1d1699076d8dc8df81bb1a604cb378abdac12b",

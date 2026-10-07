@@ -36,7 +36,7 @@ function Prepared({ id, ready }: { id: WorldId; ready: (id: WorldId) => void }) 
         // Transient source materials may disappear while compileAsync is polling.
         if (cancelled) { snapshot?.dispose(); return; }
         if (!cancelled) {
-          performance.measure(`mersa:prepare:${id}`, { start });
+          performance.measure(`sol-3:prepare:${id}`, { start });
           ready(id);
         }
       }).catch((cause: unknown) => {
@@ -80,7 +80,7 @@ export default function RetainedWorlds({ renderWorld }: { renderWorld: (id: Worl
     if (scene && displayed === requested) gl.render(scene, camera);
   }, 1);
   return <>{mounted.map(id => {
-    if (!worlds.has(id)) { const scene = new THREE.Scene(); scene.name = `mersa:${id}`; worlds.set(id, scene); }
+    if (!worlds.has(id)) { const scene = new THREE.Scene(); scene.name = `sol-3:${id}`; worlds.set(id, scene); }
     const active = id === displayed && id === requested;
     return <Fragment key={id}>{createPortal(<SceneActivity active={active} root={root}><Suspense fallback={null}>
       {renderWorld(id, active)}<Prepared id={id} ready={ready}/>

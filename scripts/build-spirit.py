@@ -210,7 +210,7 @@ if VARIANT=='opportunity':
         m.diffuse_color=(*color,1)
         bs=m.node_tree.nodes.get('Principled BSDF')
         bs.inputs['Base Color'].default_value=(*color,1);bs.inputs['Roughness'].default_value=rough
-    bpy.context.scene['provenance']='NASA/VTAD MER base; MERSA reference-based Opportunity teaching reconstruction. Not an exact engineering or preservation survey.'
+    bpy.context.scene['provenance']='NASA/VTAD MER base; Sol-3 reference-based Opportunity teaching reconstruction. Not an exact engineering or preservation survey.'
 
 # Convert curves then batch by assembly/material: detailed surfaces without hundreds of draw calls.
 bpy.ops.object.select_all(action='DESELECT')
@@ -231,4 +231,4 @@ bpy.ops.export_scene.gltf(filepath=str(ROOT/f'public/models/{VARIANT}-refined.gl
 meshes=[o for o in bpy.context.scene.objects if o.type=='MESH']
 stats={'meshes':len(meshes),'triangles':sum(sum(len(p.vertices)-2 for p in o.data.polygons) for o in meshes),'assemblies':sorted(set(o['assembly'] for o in meshes))}
 (OUT/f'{VARIANT}-refined.json').write_text(json.dumps(stats,indent=2))
-print('MERSA_MODEL',json.dumps(stats))
+print('Sol-3_MODEL',json.dumps(stats))

@@ -1,3 +1,7 @@
+## Authored credit rename / 2026-10-07
+
+Authored credits now use Sol-3. The Opportunity Blender scene and GLB provenance string received an equal-length metadata-only edit; geometry, materials, textures and NASA attribution are unchanged. Blender library references to the existing local tool installation directory are retained so those paths remain valid.
+
 ## Voyager / 2026-10-07
 
 - `public/models/voyager-nasa.glb`: untouched NASA/VTAD model from https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/v/Voyager.glb ; catalog https://science.nasa.gov/resource/voyager-3d-model/ .

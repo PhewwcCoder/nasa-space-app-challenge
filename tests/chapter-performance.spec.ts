@@ -55,9 +55,9 @@ test('recorded chapter order yields before scene work and reuses warmed GPU reso
   // Leaving extracted hardware must reset the retained group, not replay an old pose.
   await page.locator('.discovery-dock [data-artifact="eagle"]').click();
   await page.getByRole('navigation', { name: 'Hardware components' }).getByRole('button', { name: /Structure/ }).click();
-  await expect.poll(() => page.evaluate(() => (window as any).chapterProbe.scenes['mersa:lunar'].getObjectByName('apollo-structure').position.length())).toBeGreaterThan(1);
+  await expect.poll(() => page.evaluate(() => (window as any).chapterProbe.scenes['sol-3:lunar'].getObjectByName('apollo-structure').position.length())).toBeGreaterThan(1);
   await visit(page, 'SPIRIT', 'spirit');
-  expect(await page.evaluate(() => (window as any).chapterProbe.scenes['mersa:lunar'].getObjectByName('apollo-structure').position.toArray())).toEqual([0, 0, 0]);
+  expect(await page.evaluate(() => (window as any).chapterProbe.scenes['sol-3:lunar'].getObjectByName('apollo-structure').position.toArray())).toEqual([0, 0, 0]);
   // Capture the reset lunar surface after the inspector's conditional overlays leave.
   await visit(page, 'APOLLO 11', 'lunar');
   await visit(page, 'SPIRIT', 'spirit');
@@ -77,7 +77,7 @@ test('recorded chapter order yields before scene work and reuses warmed GPU reso
   });
   expect(result.frames).toHaveLength(10);
   expect(result.frames.every((f: { closed: boolean; unchanged: boolean }) => f.closed && f.unchanged)).toBe(true);
-  for (const name of ['mersa:lunar', 'mersa:mars', 'mersa:spirit', 'mersa:opportunity']) {
+  for (const name of ['sol-3:lunar', 'sol-3:mars', 'sol-3:spirit', 'sol-3:opportunity']) {
     const initial = new Set<string>(JSON.parse(before[name]));
     const current = new Set<string>(JSON.parse(result.snapshots[name]));
     expect({ name, replaced: [...initial].filter(id => !current.has(id)).length, added: [...current].filter(id => !initial.has(id)).length }).toEqual({ name, replaced: 0, added: 0 });

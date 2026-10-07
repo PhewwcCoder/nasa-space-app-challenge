@@ -1,5 +1,13 @@
 # Status
 
+## Sol-3 identity / 2026-10-07
+
+Renamed the experience to **Sol-3: The Human Trace**, with **Sol-3** as its short name. Updated the browser title, HUD and archive labels, package metadata, runtime event/performance names and corresponding tests, README, project instructions, authoring skills, product/design documentation and authored model credits. The existing Cloudflare Worker and public URL remain the deployment target. No chapter or interaction scope changed.
+
+The Opportunity Blender/GLB change edits only its authored provenance string. Blender reopened the file successfully; the GLB JSON parses and its geometry/texture payload is byte-identical. Existing local Blender library paths remain valid. Tracked text has no old-name references. Existing untracked QA artifacts are excluded from this release.
+
+Validation: typecheck, final production build, pure flight checks and git diff --check pass. Ten distinct desktop end-to-end checks passed across the main run (9/10, 6.6 minutes) and a focused navigation rerun (1/1). The main run overlapped a browser-title edit and its navigation check observed a hot-reload canvas reset; the unchanged-source rerun passed. Browser assertions verified the exact title, archive branding and Escape exit; 1440x900 reduced-motion arrival/archive captures were visually reviewed. The existing Three.js bundle-size advisory remains. Mobile testing remains deferred. Deployment is pending this source commit.
+
 ## Public deployment / 2026-10-07
 
 Chapter 5 Voyager is live at https://nasa-space-app-challenge.aryan-sharar.workers.dev/ on Cloudflare Workers (version `7c2048d1-481b-4cc0-b166-d19e9403309d`). The deployed production build passed `npm run build`. The homepage, Voyager GLB, Voyager provenance JSON and main JavaScript returned HTTP 200 and matched the local build byte-for-byte by SHA-256. Source through `0f02ce6` was pushed to GitHub before deployment; this status update follows it. Mobile testing remains skipped by request.
@@ -150,7 +158,7 @@ The original scroll-based descent was superseded by the user's explicit direct-f
 Desktop and mobile/reduced-motion full journeys passed after refinements, with explicit sourced-note and mobile-control checks. Failure/retry passed at both breakpoints. Pure simulation tests pass at 15,30,60,144fps plus unsafe touchdown, braking, purity and timestep limits. TypeScript and production build pass. Three.js vendor chunk is 336KB gzip; Vite reports a non-blocking chunk-size advisory. Design-loop progress: docs/DESIGN_LOOP.md. Public deployment is now the piloted NASA-asset redesign, saved version 2, source commit 66d5c831b6834d0bf7823f580892e7c0a6a18063. Anonymous access and core asset requests verified after publication.
 
 ## Access
-Public, no ChatGPT login. Existing project in .openai/hosting.json, never create a duplicate. https://mersa-petrova-archive.bracunasa.chatgpt.site
+Public, no ChatGPT login. Existing project in .openai/hosting.json, never create a duplicate. https://nasa-space-app-challenge.aryan-sharar.workers.dev/ (current deployment; supersedes the original Sites release)
 
 ## Known limits
 NASA-derived hardware is an adapted reconstruction, not an exact site survey. Terrain uses photographic color over authored geometry. Alien ship and flight handling are fictional. Mars remains a teaser. Session progress resets on refresh; interface tones and historical radio playback are opt-in. Chromium desktop and mobile emulation are tested; physical Safari/iOS and low-end devices are not yet verified.

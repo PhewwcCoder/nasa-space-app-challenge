@@ -38,8 +38,8 @@ function Flight(){const state=useRef<FlightState>(initialFlight());const {camera
  const target=p.clone().add(new THREE.Vector3(6,8,22));
  camera.position.lerp(target,reduced()?1:1-Math.exp(-dt*5));
  camera.lookAt(s.x-2,y-12,p.z-45);
- sent.current+=dt;if(sent.current>.08){window.dispatchEvent(new CustomEvent('mersa-flight',{detail:s}));sent.current=0;setPower(s.failed||s.landed?0:flightInput.brake||assist?.9:.15);}
- if(s.landed){if(landedAt.current===0)window.dispatchEvent(new Event('mersa-touchdown'));landedAt.current+=dt;if(landedAt.current>1.1)setStage('surface');}
+ sent.current+=dt;if(sent.current>.08){window.dispatchEvent(new CustomEvent('sol-3-flight',{detail:s}));sent.current=0;setPower(s.failed||s.landed?0:flightInput.brake||assist?.9:.15);}
+ if(s.landed){if(landedAt.current===0)window.dispatchEvent(new Event('sol-3-touchdown'));landedAt.current+=dt;if(landedAt.current>1.1)setStage('surface');}
  });return <><group ref={craft} scale={1.45}><SurveyCraft thrust={power}/></group><LandingDust flight={state}/><LandingTarget/></>;}
 function Reflector({position=[0,0,0]}:{position?:[number,number,number]}){return <group position={position} rotation={[-.35,0,0]}><mesh castShadow><boxGeometry args={[1.4,.1,1.4]}/><meshStandardMaterial color="#aaa894" metalness={.6} roughness={.5}/></mesh>{Array.from({length:100},(_,i)=><mesh key={i} position={[(i%10-4.5)*.13,.065,(Math.floor(i/10)-4.5)*.13]} rotation={[-Math.PI/2,0,0]}><circleGeometry args={[.055,6]}/><meshStandardMaterial color="#cee4e7" metalness={.9} roughness={.18}/></mesh>)}</group>;}
 function SurfaceObjects(){const {stage,inspector,inspect,walk}=useArchive(useShallow(s=>({stage:s.stage,inspector:s.inspector,inspect:s.inspect,walk:s.walk})));return <><Explorer/>

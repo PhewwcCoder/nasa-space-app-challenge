@@ -5,7 +5,7 @@ import { useArchive } from './stores/archive';
 export function MissionAudio(){
   const player=useRef<HTMLAudioElement>(null);
   const {muted,paused,stage}=useArchive(useShallow(s=>({muted:s.muted,paused:s.paused,stage:s.stage})));
-  useEffect(()=>{const play=()=>{if(!useArchive.getState().muted){player.current!.currentTime=0;void player.current?.play().catch(()=>{});}};window.addEventListener('mersa-touchdown',play);return()=>window.removeEventListener('mersa-touchdown',play);},[]);
+  useEffect(()=>{const play=()=>{if(!useArchive.getState().muted){player.current!.currentTime=0;void player.current?.play().catch(()=>{});}};window.addEventListener('sol-3-touchdown',play);return()=>window.removeEventListener('sol-3-touchdown',play);},[]);
   useEffect(()=>{if(muted||paused||stage==='entry'||stage==='explore')player.current?.pause();},[muted,paused,stage]);
   return <audio ref={player} src="/audio/eagle-has-landed.mp3" preload="auto" aria-hidden="true"/>;
 }

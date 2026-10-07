@@ -1,4 +1,4 @@
-# MERSA - The Human Trace
+# Sol-3: The Human Trace
 
 Team Petrova's interactive space archaeology experience: prologue, Apollo 11, Chapter 2 - Sojourner, Chapter 3 - Spirit, Chapter 4 - Opportunity on Mars, and Chapter 5 - Voyager 1 in deep space.
 
@@ -16,7 +16,7 @@ Start a new development session with AGENTS.md and docs/STATUS.md. Source narrat
 
 ## Play
 
-[Play MERSA on Cloudflare](https://nasa-space-app-challenge.aryan-sharar.workers.dev/) - public, no login. The latest source changes in this repository may appear there only after a separate Cloudflare deployment.
+[Play Sol-3 on Cloudflare](https://nasa-space-app-challenge.aryan-sharar.workers.dev/) - public, no login. The latest source changes in this repository may appear there only after a separate Cloudflare deployment.
 
 Land in third person: WASD/arrows steer, release stops drift, and Space brakes for touchdown. Flight assist starts off; touch controls and optional assist are available. Walk or skip to the unknown hardware, scan it, and explore six discoveries. See complete Eagle first, then use See what remains today for its lower stage. Choose a part to pull it out with blue edge outlines and a white field note with Miso and nine sentences of flowing prose; click again to return it. Footprints appear immediately. FIELD GUIDE opens a white study page with the mission overview, crew, timeline, experiments, photos and interactive code. The separate Apollo code entrance links to VS Code for the Web. Replay the supplied historical landing and first-step recordings from their scenes. Archive all six discoveries to hear the next signal. Continue through a continuous lift-off and descent, approach the small rover, and recover four Mars records. Prologue, Apollo 11, Sojourner, Spirit, Opportunity and Voyager 1 are freely accessible from the Archive Index from the start; switching chapters retains discoveries.
 
@@ -35,7 +35,7 @@ UI revision (2026-10-05): direct-open clue inspection, cosmic explorer, animated
 
 Spirit follows Apollo's teaching pattern with a Blender-refined NASA twin-rover reconstruction, three separable assemblies, five investigations and a sourced field guide. Follow the Sojourner ending to Gusev or select Spirit directly from Archive Index. Rock abrasion, silica-rich soil and the final mission record lead to a twin-rover signal and a journey to playable Chapter 4.
 
-Chapter 2 now includes NASA airbag, ramp and backshell evidence, a four-stage landing lesson and a deployment interaction. Read [the source audit and Chapter 1 comparison](docs/CHAPTER_3.md). Changes are local until separately deployed. Current desktop checks: `npx playwright test --project=desktop`; mobile testing remains deferred.
+Chapter 2 now includes NASA airbag, ramp and backshell evidence, a four-stage landing lesson and a deployment interaction. Read [the source audit and Chapter 1 comparison](docs/CHAPTER_3.md). Playable on the current Cloudflare deployment. Current desktop checks: `npx playwright test --project=desktop`; mobile testing remains deferred.
 
 ## Opportunity
 

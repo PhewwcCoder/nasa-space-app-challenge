@@ -1,3 +1,7 @@
+## Product identity / 2026-10-07
+
+Use **Sol-3: The Human Trace** as the full title and **Sol-3** for the HUD wordmark and archive labels. Preserve the existing typography, spacing and cinematic presentation.
+
 ## Voyager / 2026-10-07 - current extension
 
 Keep the chapter HUD, unknown-before-scan dock, white Miso notes, cyan component outlines and native guide. The world changes to dark interstellar space with the existing NASA star visualization, warm metal and a white dish. Preserve the NASA spacecraft silhouette and long booms; camera framing must reserve the reading panel and keep the title clear. There is no adjacent Saturn in this fictional interstellar encounter. Evidence SVGs are schematic; photos and diagram captions identify historical context. The final report is compact and explicitly fictional. Desktop and short reduced-motion checks replace mobile testing for this request.

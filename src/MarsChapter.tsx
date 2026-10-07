@@ -18,7 +18,7 @@ export function ArchiveIndex(){const {chapter,visitChapter,stage}=useArchive(use
  const current=stage==='entry'?'prologue':stage==='mars'?'sojourner':chapter;
  return <><button ref={trigger} className="archive-index-trigger" aria-haspopup="dialog" aria-expanded={open} aria-controls="archive-index" onClick={()=>setOpen(true)}>ARCHIVE / {current==='prologue'?'PR':current==='sojourner'?'CH-02':current==='spirit'?'CH-03':current==='opportunity'?'CH-04':current==='voyager'?'CH-05':'CH-01'} ▾</button>
  <dialog ref={dialog} id="archive-index" className="archive-index" aria-labelledby="archive-index-title" onCancel={e=>{e.preventDefault();close();}} onClick={e=>{if(e.target===e.currentTarget)close();}}>
- <header><h2 id="archive-index-title">Archive Index</h2><button onClick={()=>close()} aria-label="Close Archive Index">×</button></header><p className="eyebrow">MERSA / RECOVERED COORDINATES</p>
+ <header><h2 id="archive-index-title">Archive Index</h2><button onClick={()=>close()} aria-label="Close Archive Index">×</button></header><p className="eyebrow">Sol-3 / RECOVERED COORDINATES</p>
  {builtChapters.map((id,i)=><button key={id} aria-current={current===id?'location':undefined} onClick={()=>close(id)}><span>{['PROLOGUE','01 — APOLLO 11','02 — SOJOURNER','03 — SPIRIT','04 — OPPORTUNITY','05 / VOYAGER 1'][i]}</span><small>{current===id?'ACTIVE':'OPEN'}</small></button>)}
  <p className="archive-index-note">Recovered records remain in this expedition.</p>
  </dialog></>;
