@@ -1,8 +1,12 @@
 # Status
 
-## October 20 release publication
+## October 20 release publication ? deployed
 
-The museum, playable Mars journeys, student questions and inspection-map refinements are prepared for the user-authorized GitHub update and existing Cloudflare deployment. [Release notes](RELEASE_2026-10-20.md) compare this release with the October 7 production version. The validation entries below cover the current code; publication identifiers and live verification will be recorded after deployment. Local video production and generated QA captures remain outside the source commit.
+Source release `ca50d2b` was committed and pushed to `origin/main` on GitHub with a detailed added/changed/validation message. [Release notes](RELEASE_2026-10-20.md) compare it with the October 7 production version. The existing Cloudflare Worker is deployed at https://nasa-space-app-challenge.aryan-sharar.workers.dev/ as version `ccc1f22d-a864-464a-ae2b-82135eeea72f`.
+
+Live verification: the homepage and all six built JavaScript/CSS files (including the outlines worker) returned HTTP 200 and matched the local production output byte-for-byte by SHA-256. A desktop Chrome smoke check verified all five exhibits, a Miso question, Spirit silica inspection with the bottom-left map, map-free Spirit hardware inspection, one canvas and zero page errors. Capture: `docs/qa/deployed-oct20-silica.png`. The first smoke attempt used an ambiguous heading locator; specifying the heading level resolved it, and the rerun passed. No application defect was found in live verification.
+
+The validation entries below cover the released code. Mobile testing remains excluded. Local video production and generated QA captures remain outside the source commit. This documentation receipt does not change the deployed runtime.
 
 ## Inspection map clearance / 2026-10-20
 
