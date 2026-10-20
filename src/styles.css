@@ -309,3 +309,5 @@
 .mission-question .action{border-color:#b9e8e5}.mars-caption>p:last-child{color:#fff0dd;text-shadow:0 1px 5px #34251b,0 0 12px #34251b}
 
 .minimap .planet-map text{display:block}.minimap:not(.inspecting .minimap){width:260px}
+
+.mars-walk-prompt{bottom:80px;max-width:430px;padding:20px;background:linear-gradient(120deg,#0d1b20ed,#0d1b20b8);border-left:2px solid #b9e8e5}.mars-walk-prompt h1{font-size:36px}.mars-walk-prompt .action{border-color:#b9e8e5;touch-action:none;user-select:none}.mars-walk-actions{display:flex;gap:22px;margin:14px 0}.mars-walk-prompt progress{width:100%;height:3px;accent-color:#b9e8e5}.mars-walk-prompt .action:disabled{opacity:.45}@media(max-width:760px){.mars-walk-prompt{bottom:65px;left:20px;right:20px;max-width:none}.mars-walk-prompt h1{font-size:28px}}

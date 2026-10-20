@@ -2,7 +2,7 @@ import {test,expect,type Page} from '@playwright/test';
 
 async function visitSpirit(page:Page){
   await page.goto('/');await page.locator('.archive-index-trigger').click();await page.getByRole('button',{name:/03 — SPIRIT/}).click();
-  await expect(page.locator('canvas')).toHaveCount(1);await page.getByRole('button',{name:'Approach the trace'}).click();
+  await expect(page.locator('canvas')).toHaveCount(1);await page.getByRole('button',{name:'Approach the trace'}).click();if(await page.getByRole('button',{name:'Skip walk',exact:true}).isVisible())await page.getByRole('button',{name:'Skip walk',exact:true}).click();
 }
 async function scan(page:Page,id:string){
   await page.locator(`.spirit-dock [data-artifact="${id}"]`).click();await expect(page.getByRole('button',{name:'Scan object',exact:true})).toHaveCount(0);

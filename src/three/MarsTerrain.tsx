@@ -58,7 +58,7 @@ function MarsTerrain({variant = 'ares'}: {variant?: MarsTerrainVariant}){
   useEffect(()=>{if(!rocks.current)return;const o=new THREE.Object3D();for(let i=0;i<2200;i++){
     const a=i*2.39996,r=.9+Math.sqrt(i/2200)*65,x=Math.cos(a)*r,z=Math.sin(a)*r;
     const size=.018+((Math.sin(i*72.1)+1)*.5)**8*(meridiani ? .13 : variant === 'gusev' ? .48 : .35);
-    o.position.set(x,terrainHeight(x,z)+size*.21,z);o.rotation.set(i*.61,i*1.3,i*.17);o.scale.set(size*1.6,size*.65,size);o.updateMatrix();rocks.current.setMatrixAt(i,o.matrix);
+    o.position.set(x,terrainHeight(x,z)+size*.21,z);o.rotation.set(i*.61,i*1.3,i*.17);o.scale.set(size*1.6,size*.65,size);const footT=THREE.MathUtils.clamp(((x-7)*-2.5+(z-7)*-5.2)/33.29,0,1);if(Math.hypot(x-(7-2.5*footT),z-(7-5.2*footT))<.65)o.scale.setScalar(0);o.updateMatrix();rocks.current.setMatrixAt(i,o.matrix);
     rocks.current.setColorAt(i,new THREE.Color().setHSL(.065,meridiani ? .08 : .17, (meridiani ? .17 : .13)+(i%7)*.027));
   }rocks.current.instanceMatrix.needsUpdate=true;},[variant]);
   useEffect(()=>()=>{ground.dispose();material.dispose();rockMaterial.dispose();stone.dispose();ridges.forEach(g=>g.dispose());},[ground,material,rockMaterial,stone,ridges]);

@@ -1,3 +1,7 @@
+## Astronaut walking on Mars / 2026-10-20 - current precedence
+
+Each Mars Approach action now invites an astronaut walk before the existing clue dock. Sojourner?s playable landing also hands over to walking. Hold W/up or Hold to walk, pause/resume with Escape, or Skip walk. Navigation cancels an unfinished walk and releases input; discoveries persist. Reduced motion arrives directly. Miso?s optional introduction closes for the visit when skipped, when approaching hardware, or when inspecting. It never reopens on walking completion or inspection exit; a new chapter visit offers a fresh question. The fictional EVA visitor and footprints are distinct from NASA rover history and surveyed site coordinates.
+
 ## Inspection map clearance / 2026-10-20
 
 Evidence-inspection maps use the bottom-left corner with no expandable travel menu. Hardware inspection (Sojourner, Pathfinder, Spirit, Opportunity) and MER mission-record views omit the map to reserve the model and control area. This supersedes earlier persistent inspection-map placement. Apollo and Voyager remain map-free.

@@ -6,7 +6,7 @@ async function visit(page:Page){
   const chapter=page.getByRole('button',{name:/04 — OPPORTUNITY/});
   await chapter.focus();await page.keyboard.press('Enter');
   await expect(page.locator('canvas')).toHaveAttribute('data-world','opportunity',{timeout:30000});
-  await page.getByRole('button',{name:'Approach the familiar trace'}).click();
+  await page.getByRole('button',{name:'Approach the familiar trace'}).click();if(await page.getByRole('button',{name:'Skip walk',exact:true}).isVisible())await page.getByRole('button',{name:'Skip walk',exact:true}).click();
 }
 async function scan(page:Page,id:string){
   await page.locator(`.opportunity-dock [data-artifact="${id}"]`).click();

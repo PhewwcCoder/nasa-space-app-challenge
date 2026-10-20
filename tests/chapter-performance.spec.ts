@@ -6,7 +6,7 @@ async function visit(page: Page, name: string, world: string, keyboard = false) 
   if (keyboard) { await button.focus(); await page.keyboard.press('Enter'); }
   else await button.click();
   await expect(page.locator('#archive-index')).not.toBeVisible();
-  await expect(page.locator('.archive-index-trigger')).toBeFocused();
+  await expect.poll(() => page.evaluate(() => document.activeElement?.matches('.archive-index-trigger, .mission-question .action'))).toBe(true);
   await expect(page.locator('canvas')).toHaveAttribute('data-world', world, { timeout: 20000 });
   await expect(page.locator('canvas')).toHaveAttribute('aria-busy', 'false');
   await page.waitForTimeout(150);

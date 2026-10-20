@@ -5,17 +5,18 @@ import { useArchive } from './stores/archive';
 export default function MissionQuestion({ chapter }: { chapter: QuizChapter }) {
   const [question] = useState(() => nextMissionQuestion(chapter));
   const [answer, setAnswer] = useState<number | null>(null);
-  const [dismissed, setDismissed] = useState(false);
+  const dismissed = useArchive(s => s.missionQuestionDismissed);
+  const dismiss = useArchive(s => s.dismissMissionQuestion);
+  const walking = useArchive(s => s.marsWalking);
   const inspector = useArchive(s => s.inspector);
   const skip = useRef<HTMLButtonElement>(null);
   const close = () => {
-    setDismissed(true);
+    dismiss();
     requestAnimationFrame(() => document.querySelector<HTMLElement>('.mars-approach .action, .discovery-dock button')?.focus());
   };
-  useEffect(() => { skip.current?.focus({ preventScroll: true }); }, []);
+  useEffect(() => { if (!walking && !dismissed) skip.current?.focus({ preventScroll: true }); }, [walking, dismissed]);
   useEffect(() => { rememberMissionQuestion(chapter, question); }, [chapter, question]);
-  useEffect(() => { if (inspector) setDismissed(true); }, [inspector]);
-  if (dismissed || inspector) return null;
+  if (dismissed || inspector || walking) return null;
   return <section className="cat-question mission-question" aria-label="Miso mission question" onKeyDown={e => { if (e.key === 'Escape') { e.stopPropagation(); close(); } }}>
     <img src="/textures/alien-cat.png" alt="Miso, a fictional alien copilot"/>
     <div><p className="eyebrow">MISO / YOUR CURIOUS COPILOT</p><h1>A quick wonder.</h1>

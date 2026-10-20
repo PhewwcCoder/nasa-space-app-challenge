@@ -17,7 +17,7 @@ function SharedHardware({ index }: { index: number }) {
     return { scale: 4.3 / Math.max(size.x, size.y, size.z), center: box.getCenter(new THREE.Vector3()).negate() };
   }, [scene]);
   return <group scale={scale}><group position={center}>
-    {index === 0 ? <group scale={1 / 1.28} position={[0, .13 / 1.28, 0]}><ApolloModel preview/></group> : <group position={[0, -.003, 0]}><SpiritModel artifact={index === 2 ? 'spirit' : index === 3 ? 'opportunity' : 'voyager'} url={exhibits[index].model!} rotation={0}/></group>}
+    {index === 0 ? <group scale={1 / 1.28} position={[0, .13 / 1.28, 0]}><ApolloModel preview/></group> : <group position={[0, -.003, 0]}><SpiritModel preview artifact={index === 2 ? 'spirit' : index === 3 ? 'opportunity' : 'voyager'} url={exhibits[index].model!} rotation={0}/></group>}
   </group></group>;
 }
 function ExhibitModel({ index }: { index: number }) {

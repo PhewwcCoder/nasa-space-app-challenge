@@ -1,7 +1,7 @@
 import {test,expect,type Page} from '@playwright/test';
 
 test('supplied landing evidence loads and each stage is required',async({page})=>{
- await page.goto('/');await page.locator('.archive-index-trigger').click();await page.getByRole('button',{name:/SOJOURNER/}).click();await page.getByRole('button',{name:'Approach the signal'}).click();
+ await page.goto('/');await page.locator('.archive-index-trigger').click();await page.getByRole('button',{name:/SOJOURNER/}).click();await page.getByRole('button',{name:'Approach the signal'}).click();if(await page.getByRole('button',{name:'Skip walk',exact:true}).isVisible())await page.getByRole('button',{name:'Skip walk',exact:true}).click();
  await page.locator('.mars-dock [data-artifact="airbags"]').click();await expect(page.getByRole('button',{name:'Scan object',exact:true})).toHaveCount(0);await page.getByRole('button',{name:'Reconstruct the landing'}).click();
  for(let i=1;i<=4;i++){
   await expect.poll(()=>page.locator('.mars-note .photo-reveal img').evaluate((img:HTMLImageElement)=>img.naturalWidth)).toBeGreaterThan(0);
@@ -42,7 +42,7 @@ test('continuous transit, Mars discoveries, guide, archive revisits and focus',a
   await page.getByRole('button',{name:'Resume journey'}).click();
  }
  await page.getByRole('button',{name:'Skip landing'}).waitFor({timeout:60000});
- await page.getByRole('button',{name:'Skip landing'}).click();
+ await page.getByRole('button',{name:'Skip landing'}).click();if(await page.getByRole('button',{name:'Skip walk',exact:true}).isVisible())await page.getByRole('button',{name:'Skip walk',exact:true}).click();
  await expect(page.locator('canvas')).toHaveAttribute('data-persistent','original');
  await expect(page.locator('.mars-dock')).toBeVisible();
  await page.waitForTimeout(3000);await page.screenshot({path:`docs/qa/mars-${info.project.name}-wide.png`});
@@ -103,7 +103,7 @@ test('built chapters are freely accessible from a fresh expedition and after ref
 test('reduced motion at a short desktop size preserves inspection gates',async({page})=>{
  await page.setViewportSize({width:1366,height:768});await page.emulateMedia({reducedMotion:'reduce'});
  await lunarBoundary(page);await page.getByRole('button',{name:'Continue to Mars'}).click();
- await page.getByRole('button',{name:'Skip landing'}).click();
+ await page.getByRole('button',{name:'Skip landing'}).click();if(await page.getByRole('button',{name:'Skip walk',exact:true}).isVisible())await page.getByRole('button',{name:'Skip walk',exact:true}).click();
  await expect(page.getByLabel('Travel to Mars')).toHaveCount(0);
  await page.locator('.mars-dock [data-artifact="sojourner"]').click();await expect(page.getByRole('button',{name:'Scan object',exact:true})).toHaveCount(0);
  await expect(page.getByRole('button',{name:/Inspect all parts/})).toBeDisabled();

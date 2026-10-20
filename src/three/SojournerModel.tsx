@@ -19,7 +19,8 @@ function Part({id,offset,children}:{id:string;offset:V3;children:React.ReactNode
   useFrame((_,dt)=>{if(!ref.current||paused)return;const t=active&&(exploded||selected===id)?1:0;const k=matchMedia('(prefers-reduced-motion: reduce)').matches?1:1-Math.exp(-dt*5);ref.current.position.lerp(new THREE.Vector3(...offset).multiplyScalar(t),k);});
   return <group name={`sojourner-${id}`} ref={ref} visible={!active||!isolated||!selected||selected===id} onClick={e=>{if(active){e.stopPropagation();select(id);}}}>{children}{active&&selected===id&&<mesh position={[0,.27,0]}><boxGeometry args={[.76,.47,.57]}/><meshBasicMaterial transparent opacity={0} depthWrite={false}/><Edges color="#a0e0e5"/></mesh>}</group>;
 }
-function SojournerModel(){const foil=useHardwareMaterial('#bb914f',.65);return <group>
+// NASA/JPL: 0.30 m body height; the flexible antenna extends above this envelope.
+function SojournerModel(){const foil=useHardwareMaterial('#bb914f',.65);return <group name="sojourner-hardware" position={[0,.005*.30/.354,0]} scale={[.65/.66,.30/.354,.48/.546]}>
   <mesh position={[0,.21,0]} castShadow material={foil}><boxGeometry args={[.48,.16,.32]}/></mesh>
   {[-1,1].map(s=><group key={`body-${s}`}><Strut from={[-.23,.15,s*.17]} to={[.23,.15,s*.17]} radius={.009}/>{[-.19,-.1,0,.1,.19].map(x=><mesh key={x} position={[x,.275,s*.178]} rotation={[Math.PI/2,0,0]}><cylinderGeometry args={[.006,.006,.008,8]}/><meshStandardMaterial color="#dad5c6" metalness={.8} roughness={.4}/></mesh>)}</group>)}
   {[-1,1].map(s=><group key={s}><Box at={[0,.25,s*.166]} size={[.43,.095,.013]} color="#c8bfa7"/>{Array.from({length:9},(_,i)=><Box key={i} at={[-.19+i*.048,.26,s*.175]} size={[.012,.08,.008]} color="#7e7263"/>)}</group>)}

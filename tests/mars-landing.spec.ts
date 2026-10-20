@@ -30,7 +30,8 @@ test('Moon departure and spaceflight hand over to a manual Mars landing and hard
   await page.keyboard.up('KeyW');
   await expect.poll(async () => Number(await flight.getAttribute('data-altitude')), { timeout: 40000 }).toBeLessThan(15);
   await page.keyboard.down('Space');
-  await page.locator('.mars-dock').waitFor({ timeout: 40000 });
+  await page.getByRole('button', { name: 'Skip walk', exact: true }).waitFor({ timeout: 40000 });
+  await page.getByRole('button', { name: 'Skip walk', exact: true }).click();
   await page.keyboard.up('Space');
   await expect(page.locator('.mars-dock')).not.toContainText('Sojourner');
   await page.locator('.mars-dock [data-artifact="sojourner"]').click();
@@ -59,7 +60,8 @@ test('Mars missed landing retries, pauses, and lands with assist', async ({ page
   await expect(flight).toHaveAttribute('data-altitude', altitude!);
   await page.keyboard.press('Escape');
   await page.getByRole('button', { name: 'Enable flight assist' }).click();
-  await page.locator('.mars-dock').waitFor({ timeout: 60000 });
+  await page.getByRole('button', { name: 'Skip walk', exact: true }).waitFor({ timeout: 60000 });
+  await page.getByRole('button', { name: 'Skip walk', exact: true }).click();
   await expect(page.locator('canvas')).toHaveAttribute('data-original', 'yes');
 });
 
@@ -68,7 +70,7 @@ test('reduced motion keeps the landing playable; skip and navigation cancel clea
   await launch(page);
   await expect(page.getByLabel('Travel to Mars')).toHaveCount(0);
   await expect(page.getByLabel('Flight controls')).toBeVisible();
-  await page.getByRole('button', { name: 'Skip landing', exact: true }).click();
+  await page.getByRole('button', { name: 'Skip landing', exact: true }).click();if(await page.getByRole('button',{name:'Skip walk',exact:true}).isVisible())await page.getByRole('button',{name:'Skip walk',exact:true}).click();
   await expect(page.locator('.mars-dock')).toBeVisible();
   await page.getByRole('button', { name: 'MUSEUM', exact: true }).click();
   await expect(page.locator('.museum-model-label h2')).toHaveText('Sojourner');

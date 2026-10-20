@@ -56,7 +56,9 @@ function ApolloModel({preview=false}:{preview?:boolean}){
    });return parts;
  },[gltf,full,historical]);
  useEffect(()=>()=>{Object.values(groups).forEach(group=>group.traverse(o=>{if(o instanceof THREE.Mesh)(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>m.dispose());}));},[groups]);
- return <group scale={1.28} position={[0,-.13,0]} onClick={()=>{if(!inspector){if(stage==='surface'&&useArchive.getState().walk>=1)useArchive.getState().setStage('identified');else if(stage==='explore'||stage==='identified')inspect('eagle');}}}>
+ // NASA ALSJ: 7.04 m from footpads to rendezvous radar. Keep both stages at the same scale.
+ const physicalScale=7.04/5.012792199850082;
+ return <group name="eagle-hardware" scale={preview?1.28:physicalScale} position={[0,preview?-.13:-.10263100266456604*physicalScale,0]} onClick={()=>{if(!inspector){if(stage==='surface'&&useArchive.getState().walk>=1)useArchive.getState().setStage('identified');else if(stage==='explore'||stage==='identified')inspect('eagle');}}}>
  {Object.entries(groups).map(([id,object])=><ModelPart key={id} part={id} object={object}/>)}
  {sceneActive&&inspector==='eagle'&&scanProgress===1&&components.map(c=>(!isolated||!selected||c.id===selected)&&<group key={c.id} position={exploded?[0,0,0]:c.id==='engine'?[-2.8,.2,-2]:c.id==='structure'?[4,-2,0]:[0,0,0]}>
  <Line points={[[positions[c.id][0],positions[c.id][1]+(c.id==='structure'?1.8:.6),positions[c.id][2]],tags[c.id]]} color={selected===c.id?'#b8f2f5':'#76999a'} lineWidth={.7} transparent opacity={.65}/>

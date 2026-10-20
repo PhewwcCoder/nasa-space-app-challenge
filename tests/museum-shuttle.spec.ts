@@ -133,7 +133,7 @@ test('inspection opens directly and its minimap does not cover the lesson', asyn
   await page.goto('/'); await select(page, 'SOJOURNER');
   await page.getByRole('button', { name: 'Explore without answering' }).click();
   await expect(page.locator('canvas')).toHaveAttribute('data-world', 'mars', { timeout: 30000 });
-  await page.getByRole('button', { name: /Approach/ }).click();
+  await page.getByRole('button', { name: /Approach/ }).click();if(await page.getByRole('button',{name:'Skip walk',exact:true}).isVisible())await page.getByRole('button',{name:'Skip walk',exact:true}).click();
   await page.locator('.mars-dock [data-artifact="airbags"]').click();
   await expect(page.getByRole('button', { name: 'Scan object', exact: true })).toHaveCount(0);
   const map = page.getByRole('complementary', { name: 'Expedition minimap' });

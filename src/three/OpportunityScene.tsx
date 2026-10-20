@@ -1,3 +1,4 @@
+import MarsExplorer from './MarsExplorer';
 import { memo } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useSceneFrame as useFrame, SceneOrbitControls } from './SceneActivity';
@@ -22,7 +23,7 @@ function OpportunityCamera(){
   useFrame((_,dt)=>{
     if(stage==='opportunity-travel'||stage==='voyager-travel')return;
     if(camera instanceof THREE.PerspectiveCamera){if(inspector)camera.setViewOffset(size.width,size.height,size.width>760?size.width*.18:0,size.width<=760?size.height*.1:0,size.width,size.height);else camera.clearViewOffset();}
-    if(useArchive.getState().paused)return;
+    if(useArchive.getState().paused||useArchive.getState().marsWalking)return;
     elapsed.current+=dt;if(inspector&&arrived.current&&scanProgress===1)return;
     const t=matchMedia('(prefers-reduced-motion: reduce)').matches?1:Math.min(1,elapsed.current/1.7),smooth=t*t*(3-2*t);
     const destination=inspector?focus.clone().add(new THREE.Vector3(...(inspector==='opportunity'||inspector==='opportunityLog'?[3.9,2.7,4.9]:[3,2.4,3.9]) as [number,number,number])):new THREE.Vector3(...(opportunityApproached?[6,3.6,9]:[11,5.4,17]) as [number,number,number]);
@@ -45,11 +46,11 @@ function OpportunityScene({active=true}:{active?:boolean}){
     return()=>{scene.environment=old;target.dispose();};
   },[scene,gl]);
   return <>
-    <hemisphereLight args={['#e9d5bd','#51453e',1.45]}/><directionalLight position={[-12,18,8]} intensity={3} color="#fff0cf" castShadow shadow-mapSize={[2048,2048]} shadow-camera-left={-7} shadow-camera-right={7} shadow-camera-top={7} shadow-camera-bottom={-7} shadow-bias={-.0003}/>
+    <hemisphereLight args={['#e9d5bd','#51453e',1.45]}/><directionalLight position={[-12,18,8]} intensity={3} color="#fff0cf" castShadow shadow-mapSize={[2048,2048]} shadow-camera-left={-16} shadow-camera-right={16} shadow-camera-top={16} shadow-camera-bottom={-16} shadow-bias={-.0003}/>
     <Terrain variant="meridiani"/><Dust/><SpiritModel artifact="opportunity" url="/models/opportunity-refined.glb"/><OpportunityEvidence/>
     <group position={[11,0,-6]} rotation={[0,-.6,0]} scale={.65}><SurveyCraft thrust={0}/></group>
     {active&&stage==='opportunity'&&!inspector&&opportunityApproached&&<Html position={[1.4,1.7,0]} center zIndexRange={[4,3]}><button className="world-target" data-artifact="opportunity" onClick={()=>inspect('opportunity')}><span>01</span><small>{identified.includes('opportunity')?'OPPORTUNITY':'UNKNOWN TRACE'}<br/>INSPECT TRACE</small></button></Html>}
-    {active&&<OpportunityCamera/>}
+    {active&&<OpportunityCamera/>}<MarsExplorer chapter="opportunity"/>
   </>;
 }
 

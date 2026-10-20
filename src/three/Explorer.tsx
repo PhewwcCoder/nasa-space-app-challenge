@@ -20,7 +20,7 @@ function Explorer(){
 
 // Reference-inspired EVA suit. Original geometry; not an exact flight-suit reconstruction.
 function SuitPanel({position,size,color='#eeeae1'}:{position:[number,number,number];size:[number,number,number];color?:string}) {
- return <RoundedBox args={size} radius={.035} smoothness={3} position={position} castShadow><meshStandardMaterial color={color} roughness={.85}/></RoundedBox>;
+ return <RoundedBox args={size} radius={Math.min(.035, ...size.map(n => n / 2 - .0001))} smoothness={3} position={position} castShadow><meshStandardMaterial color={color} roughness={.85}/></RoundedBox>;
 }
 function FabricLimb({length,radius}:{length:number;radius:number}) {
  const geometry=useMemo(()=>{
@@ -33,10 +33,10 @@ function FabricLimb({length,radius}:{length:number;radius:number}) {
 }
 function SuitHose(){const curve=useMemo(()=>new THREE.CatmullRomCurve3([new THREE.Vector3(.19,1.39,.32),new THREE.Vector3(.34,1.12,.4),new THREE.Vector3(.36,.82,.34),new THREE.Vector3(.2,.76,.3),new THREE.Vector3(.09,1.12,.28)]),[]);return <mesh><tubeGeometry args={[curve,48,.025,8,false]}/><meshStandardMaterial color="#dad8cc" roughness={.9}/></mesh>;}
 function FlagPatch(){return <group position={[0,1.58,-.525]} rotation={[0,Math.PI,0]}><mesh><planeGeometry args={[.3,.18]}/><meshStandardMaterial color="#f5f0e5"/></mesh>{Array.from({length:7},(_,i)=><mesh key={i} position={[0,.077-i*.026,.002]}><planeGeometry args={[.3,.012]}/><meshStandardMaterial color="#ab3c35"/></mesh>)}<mesh position={[-.082,.039,.004]}><planeGeometry args={[.135,.103]}/><meshStandardMaterial color="#233f65"/></mesh>{Array.from({length:12},(_,i)=><mesh key={i} position={[-.13+(i%4)*.03,.075-Math.floor(i/4)*.03,.006]}><circleGeometry args={[.006,5]}/><meshBasicMaterial color="#f4eee0"/></mesh>)}</group>;}
-export function AstronautSuit(){
+export function AstronautSuit({isWalking}:{isWalking?:()=>boolean}){
  const limbs=useRef<(THREE.Group|null)[]>([]),phase=useRef(0),stride=useRef(0);
- useFrame((_,dt)=>{const s=useArchive.getState();if(s.paused)return;const moving=s.stage==='surface'&&!s.inspector&&flightInput.z<0&&s.walk<1&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches;stride.current=THREE.MathUtils.damp(stride.current,moving?1:0,8,dt);if(moving)phase.current+=Math.min(dt,.05)*5;limbs.current.forEach((limb,i)=>{if(limb)limb.rotation.x=Math.sin(phase.current+(i%2?Math.PI:0))*stride.current*(i<2?.32:-.25);});});
- return <group>
+ useFrame((_,dt)=>{const s=useArchive.getState();if(s.paused)return;const moving=(isWalking?isWalking():s.stage==='surface'&&!s.inspector&&flightInput.z<0&&s.walk<1)&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches;stride.current=THREE.MathUtils.damp(stride.current,moving?1:0,8,dt);if(moving)phase.current+=Math.min(dt,.05)*5;limbs.current.forEach((limb,i)=>{if(limb)limb.rotation.x=Math.sin(phase.current+(i%2?Math.PI:0))*stride.current*(i<2?.32:-.25);});});
+ return <group name="suited-visitor" scale={1.85 / (2.43 - .0105)}><group position={[0,-.0105,0]}>
  <mesh position={[0,1.4,0]} scale={[.39,.44,.27]} castShadow><sphereGeometry args={[1,32,24]}/><meshStandardMaterial color="#eeeae3" roughness={.93}/></mesh>
  <SuitPanel position={[0,1.05,0]} size={[.65,.24,.45]}/>
  <mesh position={[0,2.02,0]} castShadow><sphereGeometry args={[.41,40,32]}/><meshStandardMaterial color="#f2f0e7" roughness={.55}/></mesh>
@@ -68,6 +68,6 @@ export function AstronautSuit(){
  <SuitPanel position={[0,1.94,-.32]} size={[.52,.2,.29]}/><FlagPatch/><SuitHose/>
  {[-1,1].map(side=><SuitPanel key={side} position={[side*.3,1.46,-.53]} size={[.045,.76,.035]} color="#aeb2aa"/>)}
  {Array.from({length:10},(_,i)=><mesh key={i} position={[(i%5-2)*.12,1.02+Math.floor(i/5)*.1,-.556]}><circleGeometry args={[.012,8]}/><meshStandardMaterial color="#555e59" side={THREE.DoubleSide}/></mesh>)}
- </group>;
+ </group></group>;
 }
 export default memo(Explorer);

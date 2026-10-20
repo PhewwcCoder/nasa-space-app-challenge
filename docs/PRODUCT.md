@@ -1,3 +1,7 @@
+## Astronaut walking on Mars / 2026-10-20 - current precedence
+
+Sojourner, Spirit and Opportunity now have a fictional EVA walking approach. Their Approach action starts a six-second player-controlled walk: hold W/up or the held pointer/keyboard button, pause with Escape, or Skip walk. Sojourner touchdown and Skip landing start this walk directly. Reduced motion reaches the endpoint immediately. Finishing exposes the existing clues; prior discoveries and completed approaches survive chapter revisits. Leaving a chapter cancels an unfinished walk. The astronaut is the visitor?s fictional expedition character, not a claim that humans visited Mars.
+
 ## Student exploration refinement / 2026-10-20 - current precedence
 
 Apollo has no map in flight, surface exploration or inspection. The mission selector reads Explore other missions. Chapters 2-5 each offer an optional Miso question on arrival, with five questions per chapter, clear feedback and a NASA source. Skipping or Escape continues exploration; immediately repeated questions are excluded, including refreshes within the same browser tab. Unknown scene artifacts still identify only when opened.

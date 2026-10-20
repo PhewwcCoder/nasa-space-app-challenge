@@ -1,3 +1,7 @@
+## Astronaut walking on Mars / 2026-10-20 - current precedence
+
+Mars walking uses the existing white EVA suit with animated legs/arms and a gentle third-person chase camera. A short footprint path leads toward the unknown rover; small procedural stones are omitted inside its narrow corridor. Walking controls occupy the lower-left, while minimaps, chapter captions and Miso questions yield space. The astronaut remains beside the site after arrival and disappears during inspection. Reduced motion bypasses walking and disables bob/stride motion. All walks and footprints are authored fiction.
+
 ## Inspection map clearance / 2026-10-20
 
 Evidence-inspection maps use the bottom-left corner with no expandable travel menu. Hardware inspection (Sojourner, Pathfinder, Spirit, Opportunity) and MER mission-record views omit the map to reserve the model and control area. This supersedes earlier persistent inspection-map placement. Apollo and Voyager remain map-free.

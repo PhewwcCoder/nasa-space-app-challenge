@@ -1,66 +1,118 @@
 # Sol-3: The Human Trace
 
-Team Petrova's interactive exploration museum: five question-led missions through Apollo 11, Sojourner, Spirit, Opportunity and Voyager 1, with Miso as your curious copilot.
+**A cinematic exploration museum by Team Petrova.** Discover the machines humans sent beyond Earth, ask questions with Miso, and build your own notebook of evidence.
 
-## Exploration museum release / 2026-10-20
+[**Play Sol-3**](https://nasa-space-app-challenge.aryan-sharar.workers.dev/) ? [Project status](docs/STATUS.md) ? [Sources & credits](docs/ASSETS.md)
 
-Start in the five-exhibit museum, scroll through sourced stories and floating 3D hardware, and choose any mission. Clicking Apollo’s model or Explore starts the Moon landing, which leads to the new reference-inspired white EVA explorer. Save discoveries in your notebook. Return with **MUSEUM** to resume browsing where you left off.
+![Sol-3 opening museum with floating Apollo hardware and mission stories](docs/images/museum.jpg)
 
-Choose **Museum > Sojourner > Explore** for a shuttle lift-off from the Moon, animated travel to Mars and a manual landing at Ares Vallis. WASD/arrows steer and Space brakes; assist, pause/Escape, retry and separate travel/landing skips are available. Touchdown opens the Chapter 2 hardware clues. Apollo completion uses the same route; Mission selector remains a direct revisit. This is a fictional shuttle experience, separate from Pathfinder landing history.
+## Five missions. One curious explorer.
 
-On Mars, expand **Fly to another site** in the on-screen minimap to fly between Ares Vallis, Gusev Crater and Meridiani Planum. W/up provides thrust, A/D or arrows steer, Space brakes; touch, cruise, pause, skip and reduced-motion arrival are supported. Coordinates update for your simulated shuttle; historical NASA landing markers are separately labeled. Voyager does not invent surface coordinates. See [the museum/story contract](docs/EXPLORATION_MUSEUM.md).
+Start in the museum, browse the exhibits, and choose a mission. Land, walk toward unknown hardware, open an inspection, and follow the clues. Return to **MUSEUM** to resume browsing, or use **EXPLORE OTHER MISSIONS** to revisit any chapter. Discoveries stay in your notebook.
 
-Presentation production is isolated in Git-ignored `pitch-video/`; local `output/` and `tmp/` are also excluded. Runtime assets stay under `public/`. See [what changed since the October 7 version](docs/RELEASE_2026-10-20.md). Deployment receipts and current validation are at the top of [Status](docs/STATUS.md); older notes below describe historical releases.
+| Chapter | Destination | Discover |
+| --- | --- | --- |
+| 01 ? Apollo 11 | Tranquility Base, Moon | Eagle, its separable assemblies, experiments and human traces |
+| 02 ? Sojourner | Ares Vallis, Mars | The small rover, Pathfinder and landing evidence |
+| 03 ? Spirit | Gusev Crater, Mars | Rover engineering, rock abrasion and clues in silica-rich soil |
+| 04 ? Opportunity | Meridiani Planum, Mars | Mineral clues, a meteorite, dune traction and a long mission |
+| 05 ? Voyager 1 | Between the stars | Spacecraft hardware, distant signals and the Golden Record |
 
-Each of Chapters 2-5 offers five optional, NASA-linked Miso questions without immediate repeats. Mars routes read forward toward the destination; maps move to the bottom-left for evidence and disappear during hardware inspection. Apollo and Voyager have no minimap.
+Miso is a fictional alien copilot. NASA-linked field notes distinguish historical evidence from interpretation. The Mars astronaut, shuttle journeys, terrain placement and separated hardware are educational reconstructions, not an exact survey or a claim that humans visited Mars.
 
-## Chapter 5 Voyager 1 / scope
+## Inside the experience
 
-Voyager 1 is now playable through Mission selector or the completed Opportunity story. Five investigations connect a NASA-based Blender spacecraft, radio communication, the Golden Record, Pale Blue Dot and Miso's final report. Read [Chapter 5](docs/CHAPTER_5.md) for sources, reconstruction limits and implementation; [Status](docs/STATUS.md) records validation and publication. Desktop-only testing is requested.
+### Apollo 11 ? Take Eagle apart
 
-## Run
+Inspect the complete lander, separate its assemblies, or reveal the descent stage left on the Moon. Rotate, zoom and reset the model while exploring its engineering.
 
-Install with `npm install`, then `npm run dev`. Open the local URL printed by Vite. Node 22 or newer is recommended.
+![Apollo 11 Eagle with its hardware assemblies separated for inspection](docs/images/eagle.jpg)
 
-`npm run typecheck` checks TypeScript. `npm run build` produces static output in dist. With the dev server running and Chrome installed, `npm run test:e2e` runs desktop and mobile/reduced-motion journeys.
+### Mars ? Walk toward the evidence
 
-Start a new development session with AGENTS.md and docs/STATUS.md. Source narrative and asset provenance live in source-material and docs/ASSETS.md.
+Chapters 2?4 share a walking astronaut, warm Martian soil and question-led investigations. Sojourner is small beside a person; Spirit and Opportunity stand much taller. Models use NASA-referenced dimensions with a consistent 1.85 m fictional suited visitor.
 
-## Play
+| Sojourner ? Ares Vallis | Spirit ? Gusev Crater |
+| --- | --- |
+| ![Sojourner and Pathfinder at Ares Vallis](docs/images/sojourner.jpg) | ![Astronaut beside Spirit at Gusev Crater](docs/images/spirit.jpg) |
 
-[Play Sol-3 on Cloudflare](https://nasa-space-app-challenge.aryan-sharar.workers.dev/) - public, no login. The latest source changes in this repository may appear there only after a separate Cloudflare deployment.
+![Opportunity exploration at Meridiani Planum](docs/images/opportunity.jpg)
 
-Land in third person: WASD/arrows steer, release stops drift, and Space brakes for touchdown. Flight assist starts off; touch controls and optional assist are available. Walk or skip to the unknown hardware, open it, and explore six discoveries. See complete Eagle first, then use See what remains today for its lower stage. Choose a part to pull it out with blue edge outlines and a white field note with Miso and nine sentences of flowing prose; click again to return it. Footprints appear immediately. FIELD GUIDE opens a white study page with the mission overview, crew, timeline, experiments, photos and interactive code. The separate Apollo code entrance links to VS Code for the Web. Replay the supplied historical landing and first-step recordings from their scenes. Save all six discoveries to hear the next signal. Continue through a continuous lift-off and descent, approach the small rover, and recover four Mars records. Prologue, Apollo 11, Sojourner, Spirit, Opportunity and Voyager 1 are freely accessible from the Mission selector from the start; switching chapters retains discoveries.
+Optional Miso questions draw from five sourced questions per chapter without immediate repeats. Skipping, approaching hardware or opening an inspection dismisses the introduction for that visit; it does not follow you through exploration.
 
-Run `node tests/flight.cjs` for pure flight checks and `node tests/navigation.cjs` for coordinate-route checks. Current architecture and interaction contracts are in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+### Voyager 1 ? A traveler between the stars
 
-NASA imagery and model credits are in the in-game notebook and docs/ASSETS.md. The alien craft, terrain placement and disassembly are interpretive, not an exact survey.
+Explore the spacecraft and the ideas it carries: communication across distance, the Golden Record and our view of Earth.
 
-For desktop-only website verification: `npx playwright test --project=desktop`. Chapter 2 has mobile layouts and reduced-motion support; mobile testing is skipped at the user's request. Read the current summary at the top of docs/STATUS.md before older historical logs to minimize context.
+![Voyager 1 spacecraft in the interactive hardware inspector](docs/images/voyager.jpg)
 
-The current hardware pattern adds right-edge flight instruments, gray flowing dust, an authored astronaut walk, warmer metallic Eagle materials, direct-open inspection, and a surface journey/log sidebar. Read [the reusable hardware journey contract](docs/HARDWARE_JOURNEY.md) before extending another hardware journey.
+Screenshots above were captured from the application on desktop for the October 21, 2026 release. NASA imagery and model provenance are documented in [ASSETS.md](docs/ASSETS.md).
 
+## Controls
 
-UI revision (2026-10-05): direct-open clue inspection, cosmic explorer, animated discovery/code icons, expanded NASA seismic exhibit and refined hardware guidance. See docs/STATUS.md for desktop validation and provenance.
+| Activity | Controls |
+| --- | --- |
+| Walk on Moon or Mars | Hold **W / ?** or the on-screen walking control; release to stop; skip is available |
+| Fly and land | **WASD / arrows** to steer, **Space** to brake; assist, pause and skip controls are available |
+| Travel between Mars sites | Open **Fly to another site**; **W / ?** thrust, **A / D** steer, **Space** brake |
+| Inspect hardware | Select a clue; orbit, zoom, select assemblies and use **Reset view** |
+| Leave inspection / pause | **Escape** or the visible return/pause control |
 
-## Spirit and expanded Mars evidence
+Reduced motion bypasses walking and provides direct arrivals. Historical landing coordinates and simulated shuttle positions are labeled separately. Apollo and Voyager have no minimap; maps yield during walking and hardware inspection.
 
-Spirit follows Apollo's teaching pattern with a Blender-refined NASA twin-rover reconstruction, three separable assemblies, five investigations and a sourced field guide. Follow the Sojourner ending to Gusev or select Spirit directly from Mission selector. Rock abrasion, silica-rich soil and the final mission record lead to a twin-rover signal and a journey to playable Chapter 4.
+## Latest changes ? October 21, 2026
 
-Chapter 2 now includes NASA airbag, ramp and backshell evidence, a four-stage landing lesson and a deployment interaction. Read [the source audit and Chapter 1 comparison](docs/CHAPTER_3.md). Playable on the current Cloudflare deployment. Current desktop checks: `npx playwright test --project=desktop`; mobile testing remains deferred.
+- Added Apollo-style astronaut walking to Sojourner, Spirit and Opportunity, with stride animation, footprints, pause, skip and reduced-motion arrival.
+- Fixed optional questions reappearing after walking or inspection exit, while preserving random questions on new visits.
+- Unified astronaut scale and calibrated Eagle and Mars rover heights against NASA references; corrected ground contact.
+- Added this screenshot tour. See [release notes](docs/RELEASE_2026-10-21.md) for the comparison with the previous deployment.
 
-## Opportunity
+## Run locally
 
-Choose **04 - OPPORTUNITY** from Mission selector, or finish Spirit and continue to Meridiani Planum. Six investigations cover the rover, Challenger Memorial Station, heat shield and meteorite, mineral blueberries, Purgatory Dune and the final mission record. Miso has original dialogue, sourced NASA photographs and three separable hardware lessons. Its completed story now continues to Voyager 1. Read [the source audit and chapter structure](docs/CHAPTER_4.md).
+Use Node.js 22 or newer, then:
 
-Opportunity uses `assets/blender/opportunity-refined.blend`. Rebuild with `blender --background --factory-startup --python scripts/build-opportunity.py`; the common MER builder exports its separate `public/models/opportunity-refined.glb`. Chapter changes preserve the persistent Canvas and reuse prepared scene resources.
+```sh
+npm install
+npm run dev
+```
 
-## Rover authoring and inspection quality
+Open the URL printed by Vite, normally `http://127.0.0.1:5173/`.
 
-Spirit's editable model is `assets/blender/spirit-refined.blend`; rebuild it with Blender 4.5 using `blender --background --factory-startup --python scripts/build-spirit.py`. The script retains the NASA base and adds reference-inspired wheels, suspension, camera hardware, solar cells and wiring, then exports `public/models/spirit-refined.glb`. It is an illustrative reconstruction, not exact engineering geometry.
+```sh
+npm run typecheck
+npm run build
+node tests/flight.cjs
+node tests/navigation.cjs
+node tests/surface-flight.cjs
+node tests/mission-questions.cjs
+npx playwright test --project=desktop
+```
 
-Wheel/pinch and buttons share artifact-specific closest distances in `src/three/inspectionZoom.ts`. Eagle stops at the supplied whole-model framing. Zoom out, rotation, reset and inspection entry/exit retain their behavior. Canvas resolution follows device pixel ratio up to 2. Mars uses authored soil relief, textured stones, layered ridges and dust-colored sky. See `docs/ASSETS.md` for provenance.
+Playwright requires the dev server and Chrome. `npm run test:e2e` includes both configured desktop and mobile projects; mobile testing is currently deferred at the project owner's request. See [Status](docs/STATUS.md) for checks actually run and known limitations.
+
+## Build and source guide
+
+React 19, TypeScript and Vite power the interface. React Three Fiber and Three.js share one persistent canvas across the museum and mission scenes. Zustand manages expedition state; authored Blender models and NASA assets support the exhibits.
+
+- [Product scope](docs/PRODUCT.md) ? [Architecture](docs/ARCHITECTURE.md) ? [Design system](docs/DESIGN_SYSTEM.md)
+- [Exploration and simulated-navigation contract](docs/EXPLORATION_MUSEUM.md)
+- [Spirit source audit](docs/CHAPTER_3.md) ? [Opportunity source audit](docs/CHAPTER_4.md) ? [Voyager source audit](docs/CHAPTER_5.md)
+- [Hardware journey contract](docs/HARDWARE_JOURNEY.md) ? [Asset provenance](docs/ASSETS.md)
+
+Read `AGENTS.md` and `docs/STATUS.md` before development. Current scope ends at Voyager 1. Runtime assets live in `public/`; local pitch-video production, temporary output and generated QA captures are separate from the published application.
+
+The editable rover models live in `assets/blender/`. Rebuild with Blender 4.5:
+
+```sh
+blender --background --factory-startup --python scripts/build-spirit.py
+blender --background --factory-startup --python scripts/build-opportunity.py
+```
 
 ## Deploy
 
-After `npm run build`, run `npx wrangler deploy` while signed into the existing Cloudflare account. `wrangler.jsonc` targets the existing `nasa-space-app-challenge` Worker and uploads only `dist`. GitHub pushes alone do not publish the site.
+```sh
+npm run build
+npx wrangler deploy
+```
+
+Sign into the existing Cloudflare account first. `wrangler.jsonc` deploys `dist` to the existing `nasa-space-app-challenge` Worker. A GitHub push alone does not deploy the website. Deployment receipts are recorded in [Status](docs/STATUS.md).

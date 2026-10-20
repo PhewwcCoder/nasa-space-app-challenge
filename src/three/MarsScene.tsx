@@ -1,3 +1,4 @@
+import MarsExplorer from './MarsExplorer';
 import { memo } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useSceneFrame as useFrame, SceneOrbitControls } from './SceneActivity';
@@ -22,7 +23,7 @@ function MarsCamera(){const {camera,size}=useThree();const {inspector,marsApproa
  useEffect(()=>{start.current.copy(camera.position);elapsed.current=0;arrived.current=false;},[inspector,marsApproached,viewKey,camera,stage]);
  useEffect(()=>{const handle=(event:Event)=>{if(!inspector)return;const mode=(event as CustomEvent<string>).detail;const delta=camera.position.clone().sub(focus);if(mode==='left'||mode==='right')delta.applyAxisAngle(new THREE.Vector3(0,1,0),mode==='left'?.25:-.25);else delta.multiplyScalar(mode==='in'?.85:1.15);delta.setLength(THREE.MathUtils.clamp(delta.length(),inspectionMinDistance(inspector),14));camera.position.copy(focus.clone().add(delta));camera.lookAt(focus);};window.addEventListener('model-control',handle);return()=>window.removeEventListener('model-control',handle);},[camera,focus,inspector]);
  useFrame((_,dt)=>{if(stage==='travel'||stage==='mars-travel'||stage==='mars-landing')return;if(camera instanceof THREE.PerspectiveCamera){if(inspector)camera.setViewOffset(size.width,size.height,size.width>760?size.width*.19:0,size.width<=760?size.height*.14:0,size.width,size.height);else camera.clearViewOffset();}
- if(useArchive.getState().paused)return;
+ if(useArchive.getState().paused||useArchive.getState().marsWalking)return;
  elapsed.current+=dt;const t=reduced()?1:smooth(Math.min(1,elapsed.current/(inspector?1.7:2.8)));
  if(inspector&&arrived.current&&scanProgress===1)return;
  const destination=inspector?focus.clone().add(new THREE.Vector3(...(inspector==='sojourner'?[1.25,.75,1.4]:[3,2.3,3.8]) as [number,number,number])):new THREE.Vector3(...(marsApproached?[3,1.8,5.8]:[12,4.1,19]) as [number,number,number]);
@@ -36,7 +37,7 @@ function MarsScene({active=true}:{active?:boolean}){const {scene}=useThree();con
  <mesh position={[-.65,.14,-.1]} scale={[.33,.25,.3]} castShadow><dodecahedronGeometry args={[1,1]}/><meshStandardMaterial color="#66594c" roughness={1}/></mesh>
  <group position={[19,0,-28]}><mesh rotation={[0,.2,.06]}><coneGeometry args={[.8,.25,28,1,true]}/><meshStandardMaterial color="#60544c" side={THREE.DoubleSide}/></mesh><mesh position={[3,.04,-1]} rotation={[-Math.PI/2,0,.3]} scale={[1.8,.6,1]}><circleGeometry args={[1,18]}/><meshStandardMaterial color="#b8a994" side={THREE.DoubleSide} roughness={1}/></mesh></group>
  {active&&stage==='mars'&&!inspector&&marsApproached&&<Html position={[0,.8,0]} center zIndexRange={[4,3]}><button className="world-target" data-artifact="sojourner" onClick={()=>inspect('sojourner')}><span>01</span><small>{identified.includes('sojourner')?'SOJOURNER':'UNKNOWN HARDWARE'}<br/>SCAN OBJECT</small></button></Html>}
- {active&&<MarsCamera/>}
+ {active&&<MarsCamera/>}<MarsExplorer chapter="sojourner"/>
  </>;}
 
 export default memo(MarsScene);

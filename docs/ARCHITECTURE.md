@@ -1,3 +1,7 @@
+## Astronaut walking on Mars / 2026-10-20 - current precedence
+
+MarsExplorer reuses AstronautSuit in each retained Mars world, with an optional motion predicate that leaves Apollo behavior intact. marsWalking/marsWalk and start/finish actions own the six-second approach. Existing chapter cameras yield while walking and resume their normal surface/inspection transition afterward; no canvas or camera is added. MarsWalkHUD shares input state, releases held controls on cancellation/unmount/pause and restores clue focus on completion. Opening inspection during a walk completes the approach before the inspector takes camera ownership. Landing completion and Skip landing enter the Sojourner walk. Global navigation/restart cancels it. Terrain instance placement clears the narrow authored footpath. Inactive retained worlds do not animate their suits.
+
 ## Inspection map clearance / 2026-10-20
 
 Evidence-inspection maps use the bottom-left corner with no expandable travel menu. Hardware inspection (Sojourner, Pathfinder, Spirit, Opportunity) and MER mission-record views omit the map to reserve the model and control area. This supersedes earlier persistent inspection-map placement. Apollo and Voyager remain map-free.

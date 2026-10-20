@@ -37,7 +37,7 @@ function Assembly({id,object,artifact}:{id:string;object:THREE.Group;artifact:st
   </group>;
 }
 
-function SpiritModel({artifact='spirit',url='/models/spirit-refined.glb',rotation=Math.PI*1.1}:{artifact?:'spirit'|'opportunity'|'voyager';url?:string;rotation?:number}){
+function SpiritModel({artifact='spirit',url='/models/spirit-refined.glb',rotation=Math.PI*1.1,preview=false}:{preview?:boolean;artifact?:'spirit'|'opportunity'|'voyager';url?:string;rotation?:number}){
   const {scene}=useGLTF(url,'/draco/');
   const groups=useMemo(()=>{
     const result:Record<string,THREE.Group>={body:new THREE.Group(),power:new THREE.Group(),mobility:new THREE.Group(),instruments:new THREE.Group()};
@@ -51,8 +51,14 @@ function SpiritModel({artifact='spirit',url='/models/spirit-refined.glb',rotatio
     });
     return result;
   },[scene]);
+  const calibration=useMemo(()=>{
+    if(preview||artifact==='voyager')return {scale:1,y:.003};
+    const box=new THREE.Box3().setFromObject(scene);
+    const scale=1.5/(box.max.y-box.min.y);
+    return {scale,y:-box.min.y*scale};
+  },[scene,artifact,preview]);
   // Blender-refined NASA base with authored reference details; not a Troy survey.
-  return <group position={[0,.003,0]} rotation={[0,rotation,0]}>{Object.entries(groups).map(([id,object])=><Assembly key={id} id={id} object={object} artifact={artifact}/>)}</group>;
+  return <group name={`${artifact}-hardware`} scale={calibration.scale} position={[0,calibration.y,0]} rotation={[0,rotation,0]}>{Object.entries(groups).map(([id,object])=><Assembly key={id} id={id} object={object} artifact={artifact}/>)}</group>;
 }
 
 export default memo(SpiritModel);

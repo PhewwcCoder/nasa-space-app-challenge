@@ -1,3 +1,13 @@
+## Astronaut walking on Mars / 2026-10-20 - current precedence
+
+## Human and hardware scale / 2026-10-21
+
+Walking scenes use metres and one fictional suited visitor, 1.85 m from sole to helmet. This is an authored representative adult, not a claim about a particular Apollo astronaut. The suit geometry is normalized once for Moon and Mars. Eagle is calibrated uniformly to 7.04 m using the full GLB bounds, with the same factor retained for its descent-only state; footpads meet the ground. Source: [NASA Apollo 11 Image Library](https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/images11.html). Spirit and Opportunity are uniformly calibrated to the 1.5 m height in the [NASA/JPL MSL landing press kit](https://www.jpl.nasa.gov/news/press_kits/MSLLanding.pdf). NASA publications round rover dimensions differently; this implementation consistently uses that reference. Sojourner's authored body envelope is calibrated to approximately 0.65 m long, 0.48 m wide and 0.30 m high; its deployed instrument and flexible antenna extend beyond the body. Source: [JPL Robotics Sojourner](https://www-robotics.jpl.nasa.gov/what-we-do/flight-projects/pathfinder/). Checked 2026-10-21.
+
+These are dimensional educational reconstructions, not exact CAD replicas. Perspective still affects apparent size. The museum's individually framed display models are presentation-scaled, not a side-by-side size comparison. Fictional landing craft, paths and evidence layouts remain schematic.
+
+Mars walking reuses the original procedural AstronautSuit from Explorer.tsx; no external model, image, audio, paid generation or historical astronaut claim is added. Footprints and the cleared central footpath are authored teaching geometry. Apollo?s suit and movement remain the source of the visual language.
+
 ## Playable Chapter 2 arrival / 2026-10-19 - current precedence
 
 The Chapter 2 landing sequence reuses the authored SurveyCraft, existing lunar scene, NASA-linked Moon/Mars/star textures and authored Mars terrain. LandingDust now accepts a warm Mars tint; no new raster, video, 3D model or paid generation was introduced. The flight corridor and landing ring are illustrative, not surveyed landing-site coordinates.

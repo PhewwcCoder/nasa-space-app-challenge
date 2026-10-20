@@ -33,11 +33,11 @@ function MapPlot({ chapter, progress = 0, from, to, offset = 0 }: { chapter: Exc
   </svg><p className="coordinate-value" data-testid="coordinates">{coordinates(position.lat, position.lon)}</p></>;
 }
 export default function FlightMap() {
-  const { stage, chapter, inspector } = useArchive(useShallow(s => ({ stage: s.stage, chapter: s.chapter, inspector: s.inspector })));
+  const { stage, chapter, inspector, walking } = useArchive(useShallow(s => ({ stage: s.stage, chapter: s.chapter, inspector: s.inspector, walking: s.marsWalking })));
   const id = chapter === 'prologue' ? 'apollo11' : chapter;
   // Hardware inspection reserves the whole model area for orbiting and assembly controls.
   if (inspector && ['sojourner', 'pathfinder', 'spirit', 'spiritLog', 'opportunity', 'opportunityLog'].includes(inspector)) return null;
-  if (id === 'voyager' || id === 'apollo11' || stage === 'entry' || stage.includes('travel') || stage === 'shuttle' || stage === 'approach' || stage === 'mars-landing') return null;
+  if (walking || id === 'voyager' || id === 'apollo11' || stage === 'entry' || stage.includes('travel') || stage === 'shuttle' || stage === 'approach' || stage === 'mars-landing') return null;
   return <aside className="minimap" aria-label="Expedition minimap">
     <header><span>{sites[id].body}</span><strong>{sites[id].name}</strong></header>
     <MapPlot chapter={id}/>

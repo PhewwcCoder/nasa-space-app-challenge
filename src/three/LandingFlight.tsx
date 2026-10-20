@@ -18,5 +18,5 @@ export default function LandingFlight({mars=false}:{mars?:boolean}){const state=
  camera.position.lerp(target,reduced()?1:1-Math.exp(-dt*5));
  camera.lookAt(p.x-2,y-12,p.z-45);
  sent.current+=dt;if(sent.current>.08){window.dispatchEvent(new CustomEvent('sol-3-flight',{detail:s}));sent.current=0;setPower(s.failed||s.landed?0:flightInput.brake||assist?.9:.15);}
- if(s.landed){if(landedAt.current===0&&!mars)window.dispatchEvent(new Event('sol-3-touchdown'));landedAt.current+=dt;if(landedAt.current>(mars?1.6:1.1)){clearControls();if(mars)useArchive.setState({stage:'mars',chapter:'sojourner',marsApproached:true});else setStage('surface');}}
+ if(s.landed){if(landedAt.current===0&&!mars)window.dispatchEvent(new Event('sol-3-touchdown'));landedAt.current+=dt;if(landedAt.current>(mars?1.6:1.1)){clearControls();if(mars){useArchive.setState({stage:'mars',chapter:'sojourner',marsApproached:false});useArchive.getState().startMarsWalk();}else setStage('surface');}}
  });return <><group ref={craft} scale={mars?1.05:1.45}><SurveyCraft thrust={power}/></group><group position={mars?[10,0,4]:[0,0,0]}><LandingDust flight={state} mars={mars}/><LandingTarget/></group></>;}
