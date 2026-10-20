@@ -1,3 +1,11 @@
+## Direct inspection update / 2026-10-18
+
+Selecting an unknown object now identifies it and opens the existing investigation immediately. The separate Scan object button and timer are removed; source audits, evidence steps, hardware-part requirements and completion gates below remain valid. The on-screen minimap stays visible during inspection and yields space to the lesson and completion panel.
+
+## Navigation update / 2026-10-18
+
+All five missions are available from the new exploration museum and Mission selector. Saved discoveries live in the notebook. Mars sites also connect through the pilotable shuttle in Flight map, independent of learning completion. The source audit below is preserved; older archive/availability language describes historical revisions. See [EXPLORATION_MUSEUM.md](EXPLORATION_MUSEUM.md) for the current story, navigation and coordinate contract.
+
 # Chapter 4 / Opportunity
 
 The user explicitly authorized Chapter 4 on 2026-10-06, superseding earlier locked-Opportunity scope. Voyager remains an unavailable signal. Work is local until a separate deployment. Mobile testing is excluded at the user's request.
@@ -58,3 +66,11 @@ Opportunity joins the retained-world registry and preloads through the same GLTF
 ## Verification
 
 Desktop tests cover all six records, gates, local photograph loading, replay, field-guide focus, inspection exit, lesson scroll reset, pause/skip/natural/reduced-motion transit, free fresh access, retained discoveries, one Canvas, original renderer/camera and unchanged warmed resource identities. Shared zoom tests include Opportunity and a deliberately stalled Sojourner approach. The Blender source reopened with all 13 images packed and all four assembly values present. Current outcomes and visual checks are recorded at the top of `STATUS.md`; no mobile run is claimed.
+
+### Landscape reference / October 2026 update
+
+- [NASA: Gusev and Columbia Hills, approximate true color](https://science.nasa.gov/photojournal/sweeping-view-of-the-columbia-hills-and-gusev-crater-approximate-true-color/): terrain character and dusty red-brown palette.
+- [NASA: Opportunity Lion King panorama, approximate true color](https://science.nasa.gov/photojournal/opportunity-captures-lion-king-panorama/): open Meridiani plains and pale outcrops.
+- [NASA: cobbles between Meridiani ripples](https://science.nasa.gov/photojournal/cobbles-in-troughs-between-meridiani-ripples-false-color/): morphology only; the false-color image is not used as a true-color palette.
+
+Runtime soil, rocks, bedding and shelves are original procedural geometry/shaders informed by these references. No NASA image is used as a sampled texture, no exact survey is claimed, and evidence stations continue to combine separate dates and locations.

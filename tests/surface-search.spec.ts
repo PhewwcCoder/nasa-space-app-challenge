@@ -1,0 +1,18 @@
+import {test,expect} from '@playwright/test';
+test('surface search: gallery departures, collision retry, braking, return and arrival',async({page})=>{
+ test.setTimeout(150000);const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
+ await page.goto('/');await expect(page.locator('canvas')).toHaveAttribute('data-world','museum',{timeout:30000});await page.locator('canvas').evaluate(e=>e.setAttribute('data-persistent','surface-search'));
+ await page.getByRole('navigation',{name:'Five missions'}).getByRole('button',{name:/Spirit/}).click();await page.getByRole('button',{name:'Explore Spirit',exact:true}).click();
+ await expect(page.locator('canvas')).toHaveAttribute('data-world','shuttle',{timeout:30000});await expect(page.locator('.shuttle-departure')).toContainText('Ares Vallis');
+ await page.keyboard.down('KeyW');await expect(page.getByRole('button',{name:'Retry from checkpoint'})).toBeVisible({timeout:20000});await page.keyboard.up('KeyW');
+ await page.screenshot({path:'docs/qa/surface-flight-rock-contact.png'});await page.getByRole('button',{name:'Retry from checkpoint'}).click();await expect(page.getByRole('progressbar')).toHaveAttribute('value','0');
+ await page.keyboard.down('KeyD');await page.waitForTimeout(400);await page.keyboard.up('KeyD');
+ await page.getByRole('button',{name:'Cruise assist off'}).click();await expect.poll(async()=>Number(await page.getByRole('progressbar').getAttribute('value'))).toBeGreaterThan(.035);
+ await page.getByRole('button',{name:'Pause journey'}).click();const progress=await page.getByRole('progressbar').getAttribute('value');await page.waitForTimeout(300);await expect(page.getByRole('progressbar')).toHaveAttribute('value',progress!);await page.screenshot({path:'docs/qa/surface-flight-gusev.png'});
+ await page.keyboard.press('Escape');await expect(page.locator('canvas')).toHaveAttribute('data-world','spirit',{timeout:50000});await page.getByRole('button',{name:'Approach the trace'}).click();await page.waitForTimeout(2200);await page.screenshot({path:'docs/qa/mars-gusev-realism.png'});
+ await page.getByRole('button',{name:'MUSEUM',exact:true}).click();await page.getByRole('navigation',{name:'Five missions'}).getByRole('button',{name:/Opportunity/}).click();await page.getByRole('button',{name:'Explore Opportunity',exact:true}).click();await expect(page.locator('.shuttle-departure')).toContainText('Gusev Crater');
+ await page.getByRole('button',{name:'Cruise assist off'}).click();await expect.poll(async()=>Number(await page.getByRole('progressbar').getAttribute('value'))).toBeGreaterThan(.1);await page.getByRole('button',{name:'Pause journey'}).click();await page.screenshot({path:'docs/qa/surface-flight-meridiani.png'});await page.getByRole('button',{name:'Resume journey'}).click();
+ await expect(page.locator('canvas')).toHaveAttribute('data-world','opportunity',{timeout:50000});await page.getByRole('button',{name:'Approach the familiar trace'}).click();await page.waitForTimeout(2200);await page.screenshot({path:'docs/qa/mars-meridiani-realism.png'});
+ await page.locator('.opportunity-dock [data-artifact="opportunity"]').click();await expect(page.getByRole('region',{name:'Artifact inspection'})).toBeVisible();await page.keyboard.press('Escape');
+ await expect(page.locator('canvas')).toHaveAttribute('data-persistent','surface-search');expect(errors).toEqual([]);
+});

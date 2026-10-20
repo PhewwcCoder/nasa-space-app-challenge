@@ -1,5 +1,5 @@
 import { useShallow } from 'zustand/react/shallow';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useArchive } from './stores/archive';
 import { voyagerArtifacts, voyagerIds, voyagerParts, voyagerSources, voyagerInvestigations, type VoyagerArtifactId } from './data/voyager';
 import PartPoster from './PartPoster';
@@ -7,13 +7,13 @@ import { PhotoReveal } from './Learning';
 
 export function VoyagerTravelHUD(){
  const {travelProgress:p,paused,setPaused,setStage}=useArchive(useShallow(s=>({travelProgress:s.travelProgress,paused:s.paused,setPaused:s.setPaused,setStage:s.setStage})));
- return <><div className="travel-veil" style={{opacity:Math.max(0,1-Math.abs(p-.5)/.14)}}/><section className="travel-hud" aria-label="Travel to deep space"><p className="eyebrow">ARCHIVE TRANSIT / 04 / 05</p><h2>{p<.5?'One last whisper beyond Mars.':'Someone sent a message this far.'}</h2><p className="eyebrow">COMPRESSED FICTIONAL TRAVEL / NOT A REAL FLIGHT PATH</p><div className="travel-line"><i style={{width:`${p*100}%`}}/></div><button className="quiet-button" onClick={()=>setPaused(!paused)}>{paused?'Resume journey':'Pause journey'}</button><button className="quiet-button" onClick={()=>{setPaused(false);setStage('voyager');}}>Skip travel</button></section></>;
+ return <><div className="travel-veil" style={{opacity:Math.max(0,1-Math.abs(p-.5)/.14)}}/><section className="travel-hud" aria-label="Travel to deep space"><p className="eyebrow">SHUTTLE TRANSIT / 04 / 05</p><h2>{p<.5?'One last whisper beyond Mars.':'Someone sent a message this far.'}</h2><p className="eyebrow">COMPRESSED FICTIONAL TRAVEL / NOT A REAL FLIGHT PATH</p><div className="travel-line"><i style={{width:`${p*100}%`}}/></div><button className="quiet-button" onClick={()=>setPaused(!paused)}>{paused?'Resume journey':'Pause journey'}</button><button className="quiet-button" onClick={()=>{setPaused(false);setStage('voyager');}}>Skip travel</button></section></>;
 }
 export function VoyagerSurface(){
  const {voyagerApproached,approachVoyager,identified,discovered,inspect}=useArchive(useShallow(s=>({voyagerApproached:s.voyagerApproached,approachVoyager:s.approachVoyager,identified:s.identified,discovered:s.discovered,inspect:s.inspect})));
  const count=voyagerIds.filter(id=>discovered.includes(id)).length;
  return <><div className="site-caption mars-caption"><p className="eyebrow">CH-05 / BETWEEN THE STARS</p><h1>{count===5?'A message for whoever came next.':identified.includes('voyager')?'How do you say hello to a stranger?':'Something is still traveling.'}</h1><p>{count===5?'FIVE RECORDS / ONE SMALL WORLD':'Miso has run out of planets. Not questions.'}</p></div>
- {!voyagerApproached?<div className="mars-approach"><p>&ldquo;No wheels. No landing legs. Where was it going?&rdquo;</p><button className="action" onClick={approachVoyager}>Approach the distant traveler</button></div>:<nav className="discovery-dock mars-dock spirit-dock voyager-dock" aria-label="Voyager discoveries">{voyagerIds.filter(id=>id!=='voyagerMessage'||count>=4||discovered.includes(id)).map((id,i)=><button key={id} data-artifact={id} onClick={()=>inspect(id)}><span>{discovered.includes(id)?'\u2713':`0${i+1}`}</span><strong>{identified.includes(id)?voyagerArtifacts[id].name:voyagerArtifacts[id].unknownName}</strong><small>{discovered.includes(id)?'ARCHIVED':identified.includes(id)?'INSPECT':'DETECT / SCAN'}</small></button>)}</nav>}
+ {!voyagerApproached?<div className="mars-approach"><p>&ldquo;No wheels. No landing legs. Where was it going?&rdquo;</p><button className="action" onClick={approachVoyager}>Approach the distant traveler</button></div>:<nav className="discovery-dock mars-dock spirit-dock voyager-dock" aria-label="Voyager discoveries">{voyagerIds.filter(id=>id!=='voyagerMessage'||count>=4||discovered.includes(id)).map((id,i)=><button key={id} data-artifact={id} onClick={()=>inspect(id)}><span>{discovered.includes(id)?'\u2713':`0${i+1}`}</span><strong>{identified.includes(id)?voyagerArtifacts[id].name:voyagerArtifacts[id].unknownName}</strong><small>{discovered.includes(id)?'SAVED':identified.includes(id)?'INSPECT':'EXPLORE'}</small></button>)}</nav>}
  <div className="mars-site-note">{count} / 05 RECORDS<br/>FICTIONAL DEEP-SPACE ENCOUNTER<br/>HISTORICAL SPACECRAFT RECONSTRUCTION</div>
  {count===5&&<aside className="spirit-next-signal"><p className="eyebrow">MISO’S FINAL REPORT / FICTION</p><h2>We found more than machines.</h2><p>&ldquo;They sent questions into the dark. And, just in case, they packed a hello.&rdquo;</p><button className="quiet-button" onClick={()=>useArchive.getState().visitChapter('apollo11')}>Revisit where we began</button></aside>}</>;
 }
@@ -23,16 +23,15 @@ function VoyagerDiagram({id,step}:{id:VoyagerArtifactId;step:number}){
  </svg>;
 }
 export function VoyagerInspector({id}:{id:VoyagerArtifactId}){
-  const {identified,identify,scanProgress,setScanProgress,inspect,selected,select,inspectedParts,exploded,toggleExploded,isolated,toggleIsolated,resetView,discover,evidenceStep,setEvidenceStep}=useArchive(useShallow(s=>({identified:s.identified,identify:s.identify,scanProgress:s.scanProgress,setScanProgress:s.setScanProgress,inspect:s.inspect,selected:s.selected,select:s.select,inspectedParts:s.inspectedParts,exploded:s.exploded,toggleExploded:s.toggleExploded,isolated:s.isolated,toggleIsolated:s.toggleIsolated,resetView:s.resetView,discover:s.discover,evidenceStep:s.evidenceStep,setEvidenceStep:s.setEvidenceStep})));
-  const close=useRef<HTMLButtonElement>(null);const note=useRef<HTMLElement>(null);const [scanning,setScanning]=useState(false);
+  const {identified,inspect,selected,select,inspectedParts,exploded,toggleExploded,isolated,toggleIsolated,resetView,discover,evidenceStep,setEvidenceStep}=useArchive(useShallow(s=>({identified:s.identified,inspect:s.inspect,selected:s.selected,select:s.select,inspectedParts:s.inspectedParts,exploded:s.exploded,toggleExploded:s.toggleExploded,isolated:s.isolated,toggleIsolated:s.toggleIsolated,resetView:s.resetView,discover:s.discover,evidenceStep:s.evidenceStep,setEvidenceStep:s.setEvidenceStep})));
+  const close=useRef<HTMLButtonElement>(null);const note=useRef<HTMLElement>(null);
   const a=voyagerArtifacts[id],known=identified.includes(id),story=id==='voyager'?null:voyagerInvestigations[id];
   const ready=known&&(id==='voyager'?voyagerParts.every(p=>inspectedParts.includes(p.id)):evidenceStep>=(story?.actions.length??1));
   useEffect(()=>{close.current?.focus();},[]);
-  useEffect(()=>{if(!scanning)return;let frame=0,p=0,last=performance.now();const tick=(now:number)=>{if(!useArchive.getState().paused)p+=Math.min(now-last,100)/1400;last=now;if(matchMedia('(prefers-reduced-motion: reduce)').matches)p=1;setScanProgress(Math.min(1,p));if(p>=1){identify(id);setScanning(false);}else frame=requestAnimationFrame(tick);};frame=requestAnimationFrame(tick);return()=>cancelAnimationFrame(frame);},[scanning,id,identify,setScanProgress]);
   return <section className="investigation mars-investigation spirit-investigation voyager-investigation" role="region" aria-label="Artifact inspection">
     <div className="investigation-title"><p className="eyebrow">{a.code} / {known?'SPATIAL ANALYSIS':'UNIDENTIFIED TRACE'}</p><h2>{known?a.name:a.unknownName}</h2></div>
     <button ref={close} className="exit-inspection" onClick={()=>inspect(null)}>ESC / Return to encounter <span>×</span></button>
-    {!known?<div className="mars-scan-panel"><p className="eyebrow">{scanning?'MATCHING THE ARCHIVE':'TRACE ACQUIRED'}</p><div className="travel-line"><i style={{width:`${scanProgress*100}%`}}/></div><button className="action" disabled={scanning} onClick={()=>setScanning(true)}>{scanning?'Scanning…':'Scan object'}</button><small>Historical evidence within a fictional expedition.</small></div>:<>
+    {<>
       {id==='voyager'?<>
         <nav className="component-switch" aria-label="Hardware components">{voyagerParts.map((p,i)=><button key={p.id} aria-pressed={selected===p.id} onClick={()=>select(p.id)}><span>0{i+1}</span>{p.name}<small>{selected===p.id?'✓':'+'}</small></button>)}</nav>
         {selected&&<PartPoster part={`voyager-${selected}`} conclusion={ready?a.interpretation:undefined}/>}
@@ -48,7 +47,7 @@ export function VoyagerInspector({id}:{id:VoyagerArtifactId}){
         {ready&&<><p className="lesson-prose">{a.purpose}</p><p className="evidence-conclusion poster-conclusion"><small>FICTIONAL ALIEN INTERPRETATION</small>{a.interpretation}</p><button className="quiet-button replay-evidence" onClick={()=>setEvidenceStep(0)}>Replay investigation</button></>}
         {id==='voyagerMessage'&&evidenceStep>=2&&<p><a href={voyagerSources.greetings} target="_blank" rel="noreferrer">Listen to the original greetings at NASA</a></p>}<a className="poster-source" href={a.source} target="_blank" rel="noreferrer">Read the NASA source ↗</a>
       </aside>}
-      <div className="archive-action"><button className="action" disabled={!ready} onClick={()=>{discover(id);inspect(null);}}>{ready?'Archive discovery':id==='voyager'?`Inspect all parts / ${inspectedParts.length} of 3`:'Investigation incomplete'}</button></div>
+      <div className="archive-action"><button className="action" disabled={!ready} onClick={()=>{discover(id);inspect(null);}}>{ready?'Save discovery':id==='voyager'?`Inspect all parts / ${inspectedParts.length} of 3`:'Investigation incomplete'}</button></div>
     </>}
   </section>;
 }

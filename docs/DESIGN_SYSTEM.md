@@ -1,3 +1,29 @@
+## Inspection map clearance / 2026-10-20
+
+Evidence-inspection maps use the bottom-left corner with no expandable travel menu. Hardware inspection (Sojourner, Pathfinder, Spirit, Opportunity) and MER mission-record views omit the map to reserve the model and control area. This supersedes earlier persistent inspection-map placement. Apollo and Voyager remain map-free.
+
+## Student exploration refinement / 2026-10-20 - current precedence
+
+Mars uses Chapter 2 soil #79695e across Ares, Gusev, Meridiani and the shuttle course, with shared warm lighting and fog hue. This is an authored visual treatment, not a claim that all Martian soil is identical. Site-specific rocks, pale shelves, hills and ripples remain. Exploration invitations use a brighter #b9e8e5 border. Miso questions appear in a bounded, scrollable side panel; the Mars minimap yields while that panel is visible. Shuttle routes read upward toward the destination, with a prominent ship marker, two checkpoints and explicit departure/destination labels.
+
+## Playable Chapter 2 arrival / 2026-10-19 - current precedence
+
+Chapter 2 starts with the visible fictional shuttle lifting from the Moon, approaching Mars in space, and descending over the existing ochre terrain. Landing keeps the familiar Apollo controls and two instruments; dark translucent instrument backgrounds protect readability against the brighter Martian sky. The skip action sits bottom-right, outside the flight instruments. The fictional/simplified-flight label separates this sequence from historical landing evidence. Touchdown opens the unknown hardware dock; naming still happens on inspection.
+
+## Interface refinement / 2026-10-19 ? current precedence
+
+Museum backdrop fades from charcoal at the lower left through neutral gray to white. Reading cards stay pale and mission introductions provide a longer curiosity-led paragraph. Selected hardware retains a muted blue-gray edge cue with fewer internal seams. The Moon map sits above the lower clue strip and disappears in inspection; Voyager has no map card. The three-clue Sojourner strip has no fourth empty column.
+
+## Exploration museum / 2026-10-18 ? current visual precedence
+
+The entrance is a light, minimal gallery with five numbered mission tabs, a shared 3D hardware miniature on the left, and a warm-white fact panel on the right. Use one name, one short fact, one source link and one Explore action; omit the extra hook, task, copilot paragraph and separate landing link. The plinth replaces the enclosing glass cylinder. Model clicks and Explore are equivalent. Native scroll and GSAP synchronize exhibits without replacing the canvas.
+
+Desktop model and text regions remain separate. Phones retain the stacked layout, but mobile testing was explicitly excluded from this revision. Reduced motion freezes decorative movement. A compact light minimap remains visible during exploration and inspection, with expandable Mars destination buttons. Keep it clear of the reading panel, exit, and Save action.
+
+The white EVA-style explorer follows the supplied silhouette and palette: off-white suit, nearly black visor, red bands, chest controls, pleated fabric geometry, hose, gloves, boots and a large backpack. It is an original stylized model, not a photoreal asset extracted from the reference.
+
+Flight navigation uses dark translucent panels, restrained cyan coordinates and warm historical-site markers. ?SIMULATED POSITION? stays visible during shuttle travel. Keep the spacecraft unobstructed between the map and controls. Site coordinates label historical landing references, never the location/condition of every reconstructed object. Moon and Mars use surface coordinates; deep space explicitly does not. Save actions go to a notebook; Miso's interpretation remains labeled fiction and NASA evidence remains linked.
+
 ## Product identity / 2026-10-07
 
 Use **Sol-3: The Human Trace** as the full title and **Sol-3** for the HUD wordmark and archive labels. Preserve the existing typography, spacing and cinematic presentation.
@@ -81,3 +107,7 @@ Hardware reading stays on the right of the visible model: warm white #fafbf8, in
 This section supersedes conflicting earlier behavior.
 
 The cosmic explorer uses restrained purple, ivory armor, gold orbital trim and a star-speckled backpack. Clue buttons lift 7px and reveal matching cyan/lavender pictograms on hover or keyboard focus; reduced motion removes transitions. The code entrance has a matching code glyph. Separate hardware retains its wording and shape with a slightly brighter cyan edge. An orbit hint occupies the upper empty space. Sky streak interval changes from 31 to 22 seconds; existing pause/reduced-motion rules remain. Seismic notes use warm-white paper beside the dark meter, with separate exit/archive controls.
+
+### Mars terrain and flight contrast
+
+Use dusty ochre soil, darker rocks and distant hills for Gusev; muted tan-gray soil, a flatter horizon, dark cobbles and pale layered shelves for Meridiani. Wind-ripple detail is procedural and should remain subtle at distance. Surface-flight HUD panels sit in the lower corners, leaving the craft and obstacles visible in the center. Guide lights, checkpoint posts and signal-lock telemetry belong to the fictional shuttle experience, not the historical Mars landscape. Keep cruise, retry, pause, skip and return actions accessible without requiring successful manual flight.

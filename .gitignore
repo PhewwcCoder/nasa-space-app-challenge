@@ -10,3 +10,8 @@ playwright-report/
 
 # Blender autosave backups; the editable .blend source is retained.
 *.blend1
+
+# Local video production workspace (sources, renders, audio, timelines).
+/pitch-video/
+/output/
+/tmp/

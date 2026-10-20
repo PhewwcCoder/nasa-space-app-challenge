@@ -1,3 +1,31 @@
+## Student exploration refinement / 2026-10-20 - current precedence
+
+Apollo has no map in flight, surface exploration or inspection. The mission selector reads Explore other missions. Chapters 2-5 each offer an optional Miso question on arrival, with five questions per chapter, clear feedback and a NASA source. Skipping or Escape continues exploration; immediately repeated questions are excluded, including refreshes within the same browser tab. Unknown scene artifacts still identify only when opened.
+
+## Playable Chapter 2 arrival / 2026-10-19 - current precedence
+
+Entering Sojourner through either museum entry starts a fictional shuttle departure from the Moon, a spaceflight toward Mars, and a player-controlled landing at Ares Vallis. The completed Apollo route uses the same sequence. WASD/arrows steer and Space brakes; assist is optional and off initially and after retry. Safe touchdown exposes the Chapter 2 clues without a second approach gate. Pause/Escape, retry, Skip travel, Skip landing, Museum return and direct mission-selector revisits remain available. Reduced motion skips the cinematic but retains playable landing and its skip option. This is the alien expedition, not Pathfinder landing history or realistic Mars flight physics. Mobile testing is explicitly excluded for this revision.
+
+## Interface refinement / 2026-10-19 ? current precedence
+
+The museum uses a charcoal-to-white gradient and longer, curiosity-led NASA-linked introductions for all five exhibits. The Moon minimap sits low on the surface and is hidden throughout Apollo inspection. Voyager has no minimap card. Mars maps and shuttle routing remain available. Sojourner discovery strips fit the available clues without a reserved empty cell.
+
+## Exploration museum and student expedition / 2026-10-18 ? current precedence
+
+Inspection identifies an object immediately; the extra Scan object button and timer are removed. Learning investigations still require their meaningful steps.
+
+This revision replaces the archive-led entrance with a five-exhibit exploration museum. It supersedes older opening, cosmic-suit, and navigation language below. Scope remains the prologue/museum and Apollo 11, Sojourner, Spirit, Opportunity, and Voyager 1; no later chapters are authorized.
+
+The visitor is an explorer learning with Miso, a fictional alien copilot. Five questions connect landing, small robotic explorers, water clues, engineering persistence, and communicating across space. Students choose a mission without a completion gate, open unknown objects directly for inspection, manipulate hardware, connect it to sourced evidence, and save discoveries to their notebook. ?Mission selector,? ?Save discovery,? and ?Notebook? replace prominent archive jargon. Museum previews identify the historical exhibits; unopened objects in the exploration scenes retain their mystery names. This is a learning design, not a claim of measured educational impact.
+
+The light entrance has five chapter tabs, the actual exploration hardware rendering on the left, and a short NASA-linked fact on a white card on the right. Clicking the model or Explore enters the mission; Apollo always begins with the piloted Moon landing. There is no separate landing option. Nothing auto-launches while a student is reading. Museum return restores the selected exhibit and native scroll position. Progress persists during this session and resets on refresh/restart.
+
+An always-visible compact minimap shows contextual Moon/Mars coordinates or a deep-space explanation, including during inspection. It does not open a modal. On Mars, any of the three rover landing sites can be selected at any time. A fictional third-person shuttle supports W/up thrust, A/D or arrow steering, Space braking, equivalent held touch buttons, optional cruise, pause/resume/Escape, skip, and return to departure. Cruise takes approximately 20 simulation seconds; geography and travel time are compressed. Reduced motion arrives directly. Existing completion-triggered cinematic routes also remain available.
+
+Historical landing-site markers and live simulated shuttle coordinates are distinct. The 2D grid uses east-positive longitude and north-positive latitude, with wrapped longitude interpolation; it is a schematic route, not terrain imagery, a geodesic simulation, rover telemetry, GPS, or a surveyed position of the nearby lesson stations. Voyager has no invented planetary latitude/longitude or changing live distance. See [EXPLORATION_MUSEUM.md](EXPLORATION_MUSEUM.md) for narrative, sources and limitations.
+
+The explorer now wears an original white EVA-style suit inspired by the supplied image: dark visor, red bands, chest controls, hose, pleated limbs, gloves, boots and a rectangular life-support backpack. This is a stylized reference interpretation, not the exact photographed mesh or an authenticated Apollo suit.
+
 ## Product identity / 2026-10-07
 
 The experience is **Sol-3: The Human Trace**, by Team Petrova. Use **Sol-3** for the short name throughout the interface, documentation and authored credits. The authorized chapters and narrative remain unchanged.

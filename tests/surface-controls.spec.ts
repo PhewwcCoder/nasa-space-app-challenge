@@ -1,0 +1,12 @@
+import {test,expect} from '@playwright/test';
+test('surface controls brake, recover a checkpoint, return and bypass motion',async({page})=>{
+ test.setTimeout(60000);await page.goto('/');await expect(page.locator('canvas')).toHaveAttribute('data-world','museum',{timeout:30000});
+ const launch=async()=>{await page.getByRole('navigation',{name:'Five missions'}).getByRole('button',{name:/Spirit/}).click();await page.getByRole('button',{name:'Explore Spirit',exact:true}).click();await expect(page.locator('canvas')).toHaveAttribute('data-world','shuttle',{timeout:30000});};
+ await launch();await page.keyboard.down('KeyW');await expect.poll(async()=>parseFloat(await page.locator('.surface-telemetry>span').first().innerText())).toBeGreaterThan(12);
+ await page.keyboard.down('Space');await expect(page.locator('.surface-telemetry>span').first()).toHaveText('0 SPEED %');await page.keyboard.up('KeyW');await page.keyboard.up('Space');
+ const stopped=await page.getByRole('progressbar').getAttribute('value');await page.waitForTimeout(250);await expect(page.getByRole('progressbar')).toHaveAttribute('value',stopped!);
+ await page.evaluate(async()=>{const url=performance.getEntriesByType('resource').find(r=>r.name.includes('/src/stores/archive.ts'))!.name;const {useArchive}=await import(/* @vite-ignore */url);useArchive.getState().discover('footprints');useArchive.setState({shuttleRace:{distance:400,offset:0,speed:0,checkpoint:400,failed:false,finished:false}});});
+ await page.keyboard.down('KeyW');await expect(page.getByRole('button',{name:'Retry from checkpoint'})).toBeVisible({timeout:15000});await page.keyboard.up('KeyW');await page.getByRole('button',{name:'Retry from checkpoint'}).click();await expect(page.getByRole('progressbar')).toHaveAttribute('value',String(400/620));await expect(page.getByRole('button',{name:'NOTEBOOK 01'})).toBeVisible();
+ await page.getByRole('button',{name:'Return to departure'}).click();await expect(page.locator('canvas')).toHaveAttribute('data-world','mars',{timeout:30000});
+ await page.getByRole('button',{name:'MUSEUM',exact:true}).click();await page.emulateMedia({reducedMotion:'reduce'});await page.getByRole('navigation',{name:'Five missions'}).getByRole('button',{name:/Opportunity/}).click();await page.getByRole('button',{name:'Explore Opportunity',exact:true}).click();await expect(page.locator('canvas')).toHaveAttribute('data-world','opportunity',{timeout:30000});await expect(page.getByRole('button',{name:'NOTEBOOK 01'})).toBeVisible();await expect(page.locator('canvas')).toHaveCount(1);
+});

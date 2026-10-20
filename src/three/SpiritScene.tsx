@@ -63,7 +63,7 @@ const EvidenceGround=memo(function EvidenceGround(){
 
 function SpiritScene({active=true}:{active?:boolean}){
   const {scene,gl}=useThree();const {inspector,spiritApproached,identified,inspect,stage}=useArchive(useShallow(s=>({inspector:s.inspector,spiritApproached:s.spiritApproached,identified:s.identified,inspect:s.inspect,stage:s.stage})));
-  useEffect(()=>{const old=scene.background;scene.background=new THREE.Color('#b39a7d');scene.fog=new THREE.FogExp2('#b39a7d',.009);return()=>{scene.background=old;scene.fog=null;};},[scene]);
+  useEffect(()=>{const old=scene.background;scene.background=new THREE.Color('#9b7862');scene.fog=new THREE.FogExp2('#9b7862',.012);return()=>{scene.background=old;scene.fog=null;};},[scene]);
   useEffect(()=>{
     // Authored linear HDR sky/ground reflection, with a broad sunward highlight.
     // Keeps metal readable without a photographic environment or runtime network fetch.
@@ -75,8 +75,8 @@ function SpiritScene({active=true}:{active?:boolean}){
     return()=>{scene.environment=old;target.dispose();};
   },[scene,gl]);
   return <>
-    <hemisphereLight args={['#e5d7bd','#493a30',.85]}/><directionalLight position={[-10,14,7]} intensity={2.8} color="#fff7eb" castShadow shadow-mapSize={[2048,2048]} shadow-camera-left={-7} shadow-camera-right={7} shadow-camera-top={7} shadow-camera-bottom={-7} shadow-bias={-.0003}/>
-    <Terrain/><Dust/><SpiritModel/><EvidenceGround/>
+    <hemisphereLight args={['#e9d5bd','#51453e',1.45]}/><directionalLight position={[-12,18,8]} intensity={3} color="#fff0cf" castShadow shadow-mapSize={[2048,2048]} shadow-camera-left={-7} shadow-camera-right={7} shadow-camera-top={7} shadow-camera-bottom={-7} shadow-bias={-.0003}/>
+    <Terrain variant="gusev"/><Dust/><SpiritModel/><EvidenceGround/>
     <group position={[11,0,-6]} rotation={[0,-.6,0]} scale={.65}><SurveyCraft thrust={0}/></group>
     {active&&stage==='spirit'&&!inspector&&spiritApproached&&<Html position={[1.4,1.7,0]} center zIndexRange={[4,3]}><button className="world-target" data-artifact="spirit" onClick={()=>inspect('spirit')}><span>01</span><small>{identified.includes('spirit')?'SPIRIT':'UNKNOWN HARDWARE'}<br/>INSPECT TRACE</small></button></Html>}
     {active&&<SpiritCamera/>}

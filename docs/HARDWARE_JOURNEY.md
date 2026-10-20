@@ -1,3 +1,7 @@
+## Museum-led discovery / 2026-10-18 ? current precedence
+
+All five hardware chapters are authorized and accessible from the museum and Mission selector. The museum names its historical exhibits; on-location unknown objects retain their identification steps. The existing shared inspection and learning gates remain, but the primary completion action now reads Save discovery and records appear in the Notebook. Mars shuttle navigation is independent of those gates and preserves discoveries. See [EXPLORATION_MUSEUM.md](EXPLORATION_MUSEUM.md); the older scope statements below are historical.
+
 ## Voyager extension / 2026-10-07
 
 Voyager follows approach, scan, identify, inspect three assemblies and archive. The same shared controls, bounded zoom, reversible separation, Miso PartPoster and PhotoReveal remain. Radio, cover, Earth-image and greeting investigations use sequential evidence with replay. Four records expose the fifth; finishing closes the expedition with a fictional final report. The original canvas carries Opportunity departure and deep-space arrival with pause, skip and reduced motion. See CHAPTER_5.md for sources and contracts.

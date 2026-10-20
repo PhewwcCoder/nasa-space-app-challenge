@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { useSceneFrame as useFrame } from './SceneActivity';
-import { useRef } from 'react';
+import { useRef, useMemo, useEffect } from 'react';
 import { RoundedBox } from '@react-three/drei';
 import * as THREE from 'three';
 import { useArchive } from '../stores/archive';
@@ -18,32 +18,56 @@ function Explorer(){
  </group><group>{Array.from({length:26},(_,i)=>{const t=i/25;return <group key={i} position={[32-t*12+(i%2?.22:-.22),.012,-1-t*18]} rotation={[0,.62,0]}><mesh rotation={[-Math.PI/2,0,0]}><planeGeometry args={[.25,.46]}/><meshStandardMaterial color="#41423f" roughness={1}/></mesh>{Array.from({length:6},(_,j)=><mesh key={j} position={[0,.012,(j-2.5)*.063]} rotation={[-Math.PI/2,0,0]}><planeGeometry args={[.22,.023]}/><meshStandardMaterial color="#93938a"/></mesh>)}</group>;})}</group></>;
 }
 
-// Fictional survey suit inspired by the supplied cosmic character, built as rigid jointed parts.
-function Armor({position,size,color='#dddfe9',glow=false}:{position:[number,number,number];size:[number,number,number];color?:string;glow?:boolean}){return <RoundedBox args={size} radius={.045} smoothness={3} position={position} castShadow><meshStandardMaterial color={color} metalness={.35} roughness={.38} emissive={glow?color:'#000000'} emissiveIntensity={glow?1.5:0}/></RoundedBox>;}
-function AstronautSuit(){
+// Reference-inspired EVA suit. Original geometry; not an exact flight-suit reconstruction.
+function SuitPanel({position,size,color='#eeeae1'}:{position:[number,number,number];size:[number,number,number];color?:string}) {
+ return <RoundedBox args={size} radius={.035} smoothness={3} position={position} castShadow><meshStandardMaterial color={color} roughness={.85}/></RoundedBox>;
+}
+function FabricLimb({length,radius}:{length:number;radius:number}) {
+ const geometry=useMemo(()=>{
+  const g=new THREE.CylinderGeometry(radius*.9,radius,length,24,32),p=g.attributes.position;
+  for(let i=0;i<p.count;i++){const y=p.getY(i),a=Math.atan2(p.getZ(i),p.getX(i));const fold=1+.045*Math.sin(y*95+a*2)+.022*Math.sin(y*160-a*4);p.setX(i,p.getX(i)*fold);p.setZ(i,p.getZ(i)*fold);}
+  g.computeVertexNormals();return g;
+ },[length,radius]);
+ useEffect(()=>()=>geometry.dispose(),[geometry]);
+ return <mesh geometry={geometry} position={[0,-length/2,0]} castShadow><meshStandardMaterial color="#e6e3db" roughness={.94}/></mesh>;
+}
+function SuitHose(){const curve=useMemo(()=>new THREE.CatmullRomCurve3([new THREE.Vector3(.19,1.39,.32),new THREE.Vector3(.34,1.12,.4),new THREE.Vector3(.36,.82,.34),new THREE.Vector3(.2,.76,.3),new THREE.Vector3(.09,1.12,.28)]),[]);return <mesh><tubeGeometry args={[curve,48,.025,8,false]}/><meshStandardMaterial color="#dad8cc" roughness={.9}/></mesh>;}
+function FlagPatch(){return <group position={[0,1.58,-.525]} rotation={[0,Math.PI,0]}><mesh><planeGeometry args={[.3,.18]}/><meshStandardMaterial color="#f5f0e5"/></mesh>{Array.from({length:7},(_,i)=><mesh key={i} position={[0,.077-i*.026,.002]}><planeGeometry args={[.3,.012]}/><meshStandardMaterial color="#ab3c35"/></mesh>)}<mesh position={[-.082,.039,.004]}><planeGeometry args={[.135,.103]}/><meshStandardMaterial color="#233f65"/></mesh>{Array.from({length:12},(_,i)=><mesh key={i} position={[-.13+(i%4)*.03,.075-Math.floor(i/4)*.03,.006]}><circleGeometry args={[.006,5]}/><meshBasicMaterial color="#f4eee0"/></mesh>)}</group>;}
+export function AstronautSuit(){
  const limbs=useRef<(THREE.Group|null)[]>([]),phase=useRef(0),stride=useRef(0);
  useFrame((_,dt)=>{const s=useArchive.getState();if(s.paused)return;const moving=s.stage==='surface'&&!s.inspector&&flightInput.z<0&&s.walk<1&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches;stride.current=THREE.MathUtils.damp(stride.current,moving?1:0,8,dt);if(moving)phase.current+=Math.min(dt,.05)*5;limbs.current.forEach((limb,i)=>{if(limb)limb.rotation.x=Math.sin(phase.current+(i%2?Math.PI:0))*stride.current*(i<2?.32:-.25);});});
  return <group>
- <Armor position={[0,1.38,0]} size={[.75,.68,.46]} color="#242044"/>
- <Armor position={[0,1.07,0]} size={[.7,.16,.49]} color="#d4ad65"/>
- <mesh position={[0,2.02,0]} castShadow><sphereGeometry args={[.43,32,24]}/><meshStandardMaterial color="#dddfe9" metalness={.5} roughness={.3}/></mesh>
- <mesh position={[0,2.04,.19]} scale={[1,.82,.7]}><sphereGeometry args={[.37,32,24]}/><meshStandardMaterial color="#191732" metalness={.8} roughness={.16} emissive="#422677" emissiveIntensity={.35}/></mesh>
- <mesh position={[0,1.75,0]} rotation={[Math.PI/2,0,0]}><torusGeometry args={[.32,.045,8,40]}/><meshStandardMaterial color="#d4ad65" metalness={.7} roughness={.3}/></mesh>
+ <mesh position={[0,1.4,0]} scale={[.39,.44,.27]} castShadow><sphereGeometry args={[1,32,24]}/><meshStandardMaterial color="#eeeae3" roughness={.93}/></mesh>
+ <SuitPanel position={[0,1.05,0]} size={[.65,.24,.45]}/>
+ <mesh position={[0,2.02,0]} castShadow><sphereGeometry args={[.41,40,32]}/><meshStandardMaterial color="#f2f0e7" roughness={.55}/></mesh>
+ <mesh position={[0,2.04,.205]} scale={[.88,.94,.58]}><sphereGeometry args={[.355,40,32]}/><meshStandardMaterial color="#090f14" metalness={.8} roughness={.12}/></mesh>
+ <mesh position={[-.1,2.19,.39]} rotation={[0,.1,-.3]} scale={[1,.14,1]}><sphereGeometry args={[.1,20,12]}/><meshStandardMaterial color="#b5c9cd" metalness={.7} roughness={.2}/></mesh>
+ <mesh position={[0,1.75,0]} rotation={[Math.PI/2,0,0]}><torusGeometry args={[.29,.055,12,48]}/><meshStandardMaterial color="#c8c9c4" metalness={.6} roughness={.4}/></mesh>
+ <SuitPanel position={[0,1.48,.29]} size={[.48,.32,.15]}/>
+ <SuitPanel position={[0,1.5,.373]} size={[.22,.12,.025]} color="#a6aca8"/>
  {[-1,1].map((side,i)=><group key={side}>
- <mesh position={[side*.43,2.04,0]} rotation={[0,0,Math.PI/2]} castShadow><cylinderGeometry args={[.19,.19,.13,32]}/><meshStandardMaterial color="#242039" roughness={.65}/></mesh>
- <mesh position={[side*.51,2.04,0]} rotation={[0,0,Math.PI/2]} castShadow><cylinderGeometry args={[.175,.175,.08,32]}/><meshStandardMaterial color="#dddfe9" metalness={.4} roughness={.3}/></mesh>
- <mesh position={[side*.557,2.04,0]} rotation={[0,Math.PI/2,0]}><torusGeometry args={[.12,.024,8,32]}/><meshStandardMaterial color="#ad8bff" emissive="#7956df" emissiveIntensity={.8}/></mesh>
- <group ref={el=>{limbs.current[i]=el;}} position={[side*.22,1,0]}><Armor position={[0,-.23,0]} size={[.3,.44,.34]} color="#302649"/><Armor position={[0,-.46,.035]} size={[.31,.16,.37]}/><Armor position={[0,-.67,0]} size={[.3,.32,.34]} color="#25253e"/><Armor position={[0,-.86,.09]} size={[.35,.2,.5]}/><Armor position={[0,-.64,.18]} size={[.17,.035,.015]} color="#b998ff" glow/></group>
- <group ref={el=>{limbs.current[i+2]=el;}} position={[side*.49,1.63,0]} rotation={[0,0,side*.1]}><Armor position={[0,-.12,0]} size={[.27,.3,.36]} color="#62508e"/><Armor position={[0,-.37,0]} size={[.25,.2,.3]} color="#25253e"/><Armor position={[0,-.55,.015]} size={[.29,.22,.34]}/><Armor position={[0,-.7,.02]} size={[.23,.16,.27]} color="#33304d"/><Armor position={[0,-.49,.19]} size={[.18,.035,.015]} color="#b998ff" glow/></group>
- <Armor position={[side*.25,1.43,.26]} size={[.065,.51,.07]}/>
+  <SuitPanel position={[side*.38,2.13,.02]} size={[.12,.23,.22]}/>
+  <mesh position={[side*.448,2.14,.06]} rotation={[0,0,Math.PI/2]}><cylinderGeometry args={[.032,.032,.014,16]}/><meshStandardMaterial color="#303731"/></mesh>
+  <SuitPanel position={[side*.3,1.45,.27]} size={[.045,.55,.04]} color="#cacbc3"/>
+  <mesh position={[side*.14,1.37,.39]} rotation={[Math.PI/2,0,0]}><cylinderGeometry args={[.045,.045,.04,20]}/><meshStandardMaterial color="#383f3b" metalness={.6}/></mesh>
+  <group ref={el=>{limbs.current[i]=el;}} position={[side*.19,1.02,0]}>
+   <FabricLimb length={.43} radius={.17}/><mesh position={[0,-.39,0]}><cylinderGeometry args={[.172,.177,.045,24]}/><meshStandardMaterial color="#b94132" roughness={.7}/></mesh>
+   <group position={[0,-.44,0]}><FabricLimb length={.39} radius={.155}/></group>
+   <SuitPanel position={[0,-.9,.08]} size={[.32,.21,.48]}/><SuitPanel position={[0,-.997,.08]} size={[.33,.025,.49]} color="#9d9e97"/>
+  </group>
+  <group ref={el=>{limbs.current[i+2]=el;}} position={[side*.43,1.65,0]} rotation={[0,0,side*.16]}>
+   <FabricLimb length={.37} radius={.145}/><mesh position={[0,-.1,0]}><cylinderGeometry args={[.148,.155,.055,24]}/><meshStandardMaterial color="#b94132" roughness={.7}/></mesh>
+   <group position={[0,-.37,0]} rotation={[-.12,0,0]}><FabricLimb length={.28} radius={.13}/>
+    <mesh position={[0,-.29,0]}><cylinderGeometry args={[.132,.12,.055,24]}/><meshStandardMaterial color="#999d98" metalness={.4}/></mesh>
+    <SuitPanel position={[0,-.37,.02]} size={[.2,.14,.18]}/>
+    {Array.from({length:4},(_,j)=><mesh key={j} position={[(j-1.5)*.045,-.46,.05]} rotation={[.25,0,0]}><capsuleGeometry args={[.022,.09,4,8]}/><meshStandardMaterial color={j===3?'#dddcd1':'#656c67'} roughness={.8}/></mesh>)}
+   </group>
+  </group>
  </group>)}
- <Armor position={[0,1.46,-.35]} size={[.68,.6,.24]} color="#29203d"/>
- <mesh position={[0,1.48,-.5]} rotation={[0,Math.PI,0]}><circleGeometry args={[.235,40]}/><meshStandardMaterial color="#34215c" emissive="#613b9f" emissiveIntensity={.5}/></mesh>
- <mesh position={[0,1.48,-.52]} rotation={[.2,.2,-.4]} scale={[1,.65,1]}><torusGeometry args={[.27,.018,8,48]}/><meshStandardMaterial color="#dfb875" metalness={.65} roughness={.3}/></mesh>
- {Array.from({length:18},(_,i)=><mesh key={i} position={[Math.sin(i*2.4)*(.035+i*.009),1.48+Math.cos(i*2.4)*(.035+i*.009),-.53]}><sphereGeometry args={[i%4===0?.018:.008,6,6]}/><meshBasicMaterial color={i%3?'#cebcff':'#8ce5ff'}/></mesh>)}
- <mesh position={[0,2.04,0]} castShadow><torusGeometry args={[.46,.05,12,48,Math.PI]}/><meshStandardMaterial color="#29233f" metalness={.35} roughness={.4}/></mesh>
- <mesh position={[0,2.04,-.035]}><torusGeometry args={[.46,.022,8,48,Math.PI]}/><meshStandardMaterial color="#b5a0de" metalness={.4} roughness={.35}/></mesh>
+ <SuitPanel position={[0,1.46,-.36]} size={[.65,.85,.31]}/><SuitPanel position={[0,1.05,-.38]} size={[.72,.25,.34]} color="#d0d2c9"/>
+ <SuitPanel position={[0,1.94,-.32]} size={[.52,.2,.29]}/><FlagPatch/><SuitHose/>
+ {[-1,1].map(side=><SuitPanel key={side} position={[side*.3,1.46,-.53]} size={[.045,.76,.035]} color="#aeb2aa"/>)}
+ {Array.from({length:10},(_,i)=><mesh key={i} position={[(i%5-2)*.12,1.02+Math.floor(i/5)*.1,-.556]}><circleGeometry args={[.012,8]}/><meshStandardMaterial color="#555e59" side={THREE.DoubleSide}/></mesh>)}
  </group>;
 }
-
 export default memo(Explorer);

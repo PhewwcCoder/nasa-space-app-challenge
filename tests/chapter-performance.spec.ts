@@ -2,7 +2,7 @@ import { test, expect, type Page } from '@playwright/test';
 
 async function visit(page: Page, name: string, world: string, keyboard = false) {
   await page.locator('.archive-index-trigger').click();
-  const button = page.getByRole('button', { name: new RegExp(name) });
+  const button = page.locator('#archive-index').getByRole('button', { name: new RegExp(name) });
   if (keyboard) { await button.focus(); await page.keyboard.press('Enter'); }
   else await button.click();
   await expect(page.locator('#archive-index')).not.toBeVisible();
@@ -20,7 +20,7 @@ test('recorded chapter order yields before scene work and reuses warmed GPU reso
   page.on('pageerror', e => errors.push(e.message));
   page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
   await page.goto('/');
-  await expect(page.locator('canvas')).toHaveAttribute('data-world', 'orbit', { timeout: 20000 });
+  await expect(page.locator('canvas')).toHaveAttribute('data-world', 'museum', { timeout: 20000 });
   await page.evaluate(async () => {
     const fiberUrl = performance.getEntriesByType('resource').find(e => e.name.includes('/@react-three_fiber.js'))!.name;
     const archiveUrl = performance.getEntriesByType('resource').find(e => e.name.includes('/src/stores/archive.ts'))!.name;
@@ -95,19 +95,19 @@ test('late cold preparation cannot replace a newer chapter request', async ({ pa
     await route.continue();
   });
   await page.goto('/');
-  await expect(page.locator('canvas')).toHaveAttribute('data-world', 'orbit', { timeout: 20000 });
+  await expect(page.locator('canvas')).toHaveAttribute('data-world', 'museum', { timeout: 20000 });
   await page.locator('.archive-index-trigger').click();
   await page.getByRole('button', { name: /SPIRIT/ }).click();
   await expect(page.locator('main')).toHaveClass(/stage-spirit/);
-  await visit(page, 'PROLOGUE', 'orbit');
+  await visit(page, 'MUSEUM', 'museum');
   await page.waitForTimeout(3000);
-  await expect(page.locator('canvas')).toHaveAttribute('data-world', 'orbit');
+  await expect(page.locator('canvas')).toHaveAttribute('data-world', 'museum');
   await expect(page.locator('main')).toHaveClass(/stage-entry/);
   await expect(page.locator('canvas')).toHaveCount(1);
 });
 
 test('shader preparation survives disposal of transient source materials',async({page})=>{
- const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/');await expect(page.locator('canvas')).toHaveAttribute('data-world','orbit',{timeout:30000});
+ const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/');await expect(page.locator('canvas')).toHaveAttribute('data-world','museum',{timeout:30000});
  const result=await page.evaluate(async()=>{
   const fiberUrl=performance.getEntriesByType('resource').find(e=>e.name.includes('/@react-three_fiber.js'))!.name;const fiber=await import(/* @vite-ignore */fiberUrl);const root=fiber._roots.get(document.querySelector('canvas')).store.getState();
   const {preparationSnapshot}=await import(/* @vite-ignore */'/src/three/preparationSnapshot.ts');const THREE=await import(/* @vite-ignore */'/node_modules/.vite/deps/three.js');

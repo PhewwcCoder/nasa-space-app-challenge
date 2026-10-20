@@ -5,7 +5,7 @@ async function visitSpirit(page:Page){
   await expect(page.locator('canvas')).toHaveCount(1);await page.getByRole('button',{name:'Approach the trace'}).click();
 }
 async function scan(page:Page,id:string){
-  await page.locator(`.spirit-dock [data-artifact="${id}"]`).click();await page.getByRole('button',{name:'Scan object',exact:true}).click();
+  await page.locator(`.spirit-dock [data-artifact="${id}"]`).click();await expect(page.getByRole('button',{name:'Scan object',exact:true})).toHaveCount(0);
   await expect(page.getByRole('button',{name:'Scan object',exact:true})).toHaveCount(0);
 }
 
@@ -25,7 +25,7 @@ test('Spirit hardware, evidence actions, completion and chapter revisits',async(
   for(const name of ['Rotate model left','Zoom in','Reset view'])await page.getByRole('button',{name,exact:true}).click();
   await page.getByRole('button',{name:'FIELD GUIDE',exact:true}).click();await expect(page.getByRole('dialog',{name:'Spirit: reading the history of water.'})).toBeVisible();
   await page.screenshot({path:'docs/qa/spirit-desktop-guide.png'});await page.keyboard.press('Escape');await expect(page.getByRole('button',{name:'FIELD GUIDE',exact:true})).toBeFocused();
-  await expect(page.getByRole('region',{name:'Artifact inspection'})).toBeVisible();await page.getByRole('button',{name:'Archive discovery',exact:true}).click();
+  await expect(page.getByRole('region',{name:'Artifact inspection'})).toBeVisible();await page.getByRole('button',{name:'Save discovery',exact:true}).click();
   await expect.poll(()=>page.evaluate(()=>document.activeElement?.getAttribute('data-artifact'))).toBe('spirit');
   for(const [id,actions] of [
     ['abrasion',['Brush away dust','Grind the weathered layer','Examine the exposed interior']],
@@ -38,7 +38,7 @@ test('Spirit hardware, evidence actions, completion and chapter revisits',async(
     await expect(page.locator('.mars-note .poster-source')).toHaveAttribute('href',/science.nasa.gov/);
     if(id==='silica'){await expect(page.getByRole('status')).toContainText('neither is proof of life');await page.screenshot({path:'docs/qa/spirit-desktop-silica.png'});}
     if(id==='spiritLog')await expect(page.getByRole('status')).toContainText('March 22, 2010');
-    await page.getByRole('button',{name:'Archive discovery',exact:true}).click();
+    await page.getByRole('button',{name:'Save discovery',exact:true}).click();
   }
   await expect(page.getByRole('heading',{name:'It had a twin.'})).toBeVisible();await expect(page.locator('.spirit-next-signal')).toContainText('Continue to Meridiani Planum');
   await page.waitForTimeout(2000);await page.screenshot({path:'docs/qa/spirit-desktop-complete.png'});
@@ -55,7 +55,7 @@ test('Sojourner boundary travels to Spirit with pause and skip',async({page})=>{
   await page.goto('/');await page.evaluate(async()=>{const url=performance.getEntriesByType('resource').find(r=>r.name.includes('/src/stores/archive.ts'))!.name;const {useArchive}=await import(/* @vite-ignore */url);useArchive.getState().visitChapter('sojourner');for(const id of ['sojourner','pathfinder','airbags','tracks'])useArchive.getState().discover(id);});
   await page.locator('canvas').evaluate(el=>el.setAttribute('data-persistent','boundary'));
   await page.getByRole('button',{name:'Continue to Gusev Crater'}).click();await page.getByRole('button',{name:'Pause journey'}).click();
-  const before=await page.locator('.travel-line i').getAttribute('style');await page.waitForTimeout(200);expect(await page.locator('.travel-line i').getAttribute('style')).toBe(before);
+  const before=await page.getByRole('progressbar',{name:'Journey progress'}).getAttribute('value');await page.waitForTimeout(200);expect(await page.getByRole('progressbar',{name:'Journey progress'}).getAttribute('value')).toBe(before);
   await page.getByRole('button',{name:'Resume journey'}).click();await page.getByRole('button',{name:'Skip travel'}).click();
   await expect(page.getByRole('button',{name:'Approach the trace'})).toBeVisible();await expect(page.locator('canvas')).toHaveAttribute('data-persistent','boundary');
 });
@@ -65,7 +65,7 @@ test('natural Mars traverse and reduced-motion arrival retain the canvas',async(
   await page.locator('.archive-index-trigger').click();await page.getByRole('button',{name:/SOJOURNER/}).click();
   await page.locator('canvas').evaluate(el=>el.setAttribute('data-persistent','travel'));
   const start=async()=>page.evaluate(async()=>{const url=performance.getEntriesByType('resource').find(r=>r.name.includes('/src/stores/archive.ts'))!.name;const {useArchive}=await import(/* @vite-ignore */url);useArchive.getState().startSpiritTravel();});
-  await start();await expect(page.getByRole('button',{name:'Approach the trace'})).toBeVisible({timeout:30000});
+  await start();await page.getByRole('button',{name:'Cruise assist off'}).click();await expect(page.getByRole('button',{name:'Approach the trace'})).toBeVisible({timeout:45000});
   await page.locator('.archive-index-trigger').click();await page.getByRole('button',{name:/SOJOURNER/}).click();
   await page.emulateMedia({reducedMotion:'reduce'});await start();await expect(page.getByRole('button',{name:'Approach the trace'})).toBeVisible();
   await expect(page.locator('canvas')).toHaveAttribute('data-persistent','travel');

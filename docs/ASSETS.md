@@ -1,3 +1,27 @@
+## Playable Chapter 2 arrival / 2026-10-19 - current precedence
+
+The Chapter 2 landing sequence reuses the authored SurveyCraft, existing lunar scene, NASA-linked Moon/Mars/star textures and authored Mars terrain. LandingDust now accepts a warm Mars tint; no new raster, video, 3D model or paid generation was introduced. The flight corridor and landing ring are illustrative, not surveyed landing-site coordinates.
+
+## Gallery refinement / 2026-10-19
+
+The grayscale gallery backdrop is a locally authored procedural CanvasTexture, with no downloaded image or generated media. Expanded exhibit prose retains its official NASA links in `src/data/expedition.ts`; those five source pages were checked for this revision. Hardware source geometry and textures are unchanged.
+
+## Museum presentation revision / 2026-10-18
+
+Gallery hardware now renders through the same ApolloModel, SojournerModel and SpiritModel components as exploration (the latter also renders Opportunity and Voyager). Apollo retains its authored foil material treatment. Source-space bounds fit the GLB-backed hardware into the display; no replacement miniature asset or new provenance is introduced. The enclosing cylinder is removed in favor of a simple plinth. No external assets were downloaded for this revision.
+
+## Museum, EVA suit and navigation / 2026-10-18 ? current precedence
+
+No new image/video generation, paid assets or external runtime media. The user's astronaut image is a visual reference only; no mesh file accompanied it. `Explorer.tsx` authors the white EVA-style suit in Three.js: fabric-fold geometry, dark visor, red bands, chest controls, hose, gloves, boots, backpack and schematic US flag patch. It does not claim exact photogrammetry, NASA flight certification, or an exact Apollo suit. The older NASA generic astronaut GLB remains untouched and unused.
+
+Museum exhibits reuse existing Apollo, Spirit, Opportunity and Voyager GLBs and the authored Sojourner reconstruction. Non-owning clones share cached geometry/materials. Their original provenance below remains applicable. Display cylinders and lighting are original procedural geometry. The shuttle uses the existing authored fictional SurveyCraft, with the existing NASA/JPL-Caltech Mars globe and NASA/Goddard star map. The coordinate map is original SVG geometry; it is not a NASA terrain map.
+
+Historical Moon coordinates: [NASA Apollo 11 Lunar Surface Journal](https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11ov.html), 0.67409? N / 23.47298? E. Mars markers consistently use [NASA GISS Mars24 landers](https://www.giss.nasa.gov/tools/mars24/help/landers.html): Pathfinder 19.47? N / 326.75? E; Spirit 14.57? S / 175.48? E; Opportunity 1.95? S / 354.47? E. Other NASA pages use different reference frames/precision, especially for Pathfinder; this feature does not blend those estimates. Checked 2026-10-18. Display precision is two decimal degrees, not a statement of survey accuracy. Voyager uses [NASA mission history](https://science.nasa.gov/mission/voyager/voyager-1/), with no invented live coordinates.
+
+Museum fact sources are stored beside the copy in `src/data/expedition.ts` and linked in the UI: NASA Apollo 11 overview, Pathfinder mission, Spirit mission, Opportunity mission and Golden Record overview. Fictional shuttle coordinates are calculated locally and labeled simulated; no location permission, tracking service, API key or telemetry feed is used.
+
+All presentation-video production files already reside in `pitch-video/`; that entire directory is now explicitly Git-ignored, together with local `output/` and `tmp/` workspaces. Existing videos, storyboards and the active shot-list path are preserved. Runtime historical Apollo audio under `public/audio/` remains part of the website and is not moved.
+
 ## Authored credit rename / 2026-10-07
 
 Authored credits now use Sol-3. The Opportunity Blender scene and GLB provenance string received an equal-length metadata-only edit; geometry, materials, textures and NASA attribution are unchanged. Blender library references to the existing local tool installation directory are retained so those paths remain valid.
@@ -133,3 +157,11 @@ The upper shell receives distinct charcoal insulation and silver panel colors, g
 This section supersedes conflicting earlier behavior.
 
 The explorer is original procedural Three.js geometry inspired by the supplied character reference, explicitly fictional. The previous NASA astronaut GLB is retained on disk but no longer rendered. No generated media or generation credits used. New unmodified local assets: public/learning/seismic-surface.jpg from https://assets.science.nasa.gov/content/dam/science/psd/lunar-science/2023/09/371255main_Seismic_full.jpg (NASA Apollo 11 photograph); public/learning/seismic-diagram.jpg from https://assets.science.nasa.gov/content/dam/science/psd/lunar-science/2023/09/a11PSEP_NASM.jpg (NASA-hosted diagram, measurements by Allan Needell, NASM, 13 July 2010). Educational copy and links verified against https://science.nasa.gov/resource/apollo-11-seismic-experiment/ . Trace is simulated, not recorded seismic data.
+
+### Landscape reference / October 2026 update
+
+- [NASA: Gusev and Columbia Hills, approximate true color](https://science.nasa.gov/photojournal/sweeping-view-of-the-columbia-hills-and-gusev-crater-approximate-true-color/): terrain character and dusty red-brown palette.
+- [NASA: Opportunity Lion King panorama, approximate true color](https://science.nasa.gov/photojournal/opportunity-captures-lion-king-panorama/): open Meridiani plains and pale outcrops.
+- [NASA: cobbles between Meridiani ripples](https://science.nasa.gov/photojournal/cobbles-in-troughs-between-meridiani-ripples-false-color/): morphology only; the false-color image is not used as a true-color palette.
+
+Runtime soil, rocks, bedding and shelves are original procedural geometry/shaders informed by these references. No NASA image is used as a sampled texture, no exact survey is claimed, and evidence stations continue to combine separate dates and locations.

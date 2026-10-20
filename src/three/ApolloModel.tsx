@@ -20,12 +20,12 @@ function ModelPart({part,object}:{part:string;object:THREE.Group}) {
  return <group name={`apollo-${part}`} ref={ref} visible={!isolated||!selected||selected===part} onClick={handle} onPointerOver={e=>{if(active){e.stopPropagation();document.body.style.cursor='pointer';}}} onPointerOut={()=>{document.body.style.cursor='auto';}}><primitive object={object}/>{active&&selected===part&&<PartEdges object={object}/>}</group>;
 }
 function PartEdges({object}:{object:THREE.Group}){
- const edges=useMemo(()=>{const group=new THREE.Group();object.traverse(o=>{if(o instanceof THREE.Mesh){const lines=new THREE.LineSegments(new THREE.EdgesGeometry(o.geometry,28),new THREE.LineBasicMaterial({color:'#63cfff',transparent:true,opacity:.8,depthWrite:false}));lines.applyMatrix4(o.matrix);group.add(lines);}});return group;},[object]);
+ const edges=useMemo(()=>{const group=new THREE.Group();object.traverse(o=>{if(o instanceof THREE.Mesh){const lines=new THREE.LineSegments(new THREE.EdgesGeometry(o.geometry,65),new THREE.LineBasicMaterial({color:'#a2c8d0',transparent:true,opacity:.28,depthWrite:false}));lines.applyMatrix4(o.matrix);group.add(lines);}});return group;},[object]);
  useEffect(()=>()=>{edges.traverse(o=>{if(o instanceof THREE.LineSegments){o.geometry.dispose();(o.material as THREE.Material).dispose();}});},[edges]);return <primitive object={edges}/>;
 }
-function ApolloModel(){
+function ApolloModel({preview=false}:{preview?:boolean}){
  const sceneActive=useSceneActive();
- const historical=useArchive(s=>s.historical);const full=useGLTF('/models/apollo-full.glb','/draco/');
+ const storedHistorical=useArchive(s=>s.historical);const historical=preview||storedHistorical;const full=useGLTF('/models/apollo-full.glb','/draco/');
  const gltf=useGLTF('/models/apollo-descent.glb','/draco/');
  const {inspector,exploded,inspect,stage,selected,select,isolated,scanProgress}=useArchive(useShallow(s=>({inspector:s.inspector,exploded:s.exploded,inspect:s.inspect,stage:s.stage,selected:s.selected,select:s.select,isolated:s.isolated,scanProgress:s.scanProgress})));
  const groups=useMemo(()=>{

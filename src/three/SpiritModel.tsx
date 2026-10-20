@@ -18,12 +18,12 @@ function Assembly({id,object,artifact}:{id:string;object:THREE.Group;artifact:st
   useEffect(()=>{
     if(id==='body')return;
     let cancelled=false;let prepared:THREE.Group|null=null;
-    const cancel=afterPaint(()=>{void prepareEdges(object,35).then(parts=>{
+    const cancel=afterPaint(()=>{void prepareEdges(object,65).then(parts=>{
       if(cancelled)return;
       prepared=new THREE.Group();
       for(const {mesh,positions} of parts){
         const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.BufferAttribute(positions,3));
-        const lines=new THREE.LineSegments(geometry,new THREE.LineBasicMaterial({color:'#74d9ff',transparent:true,opacity:.65,depthWrite:false}));
+        const lines=new THREE.LineSegments(geometry,new THREE.LineBasicMaterial({color:'#a2c8d0',transparent:true,opacity:.28,depthWrite:false}));
         lines.applyMatrix4(mesh.matrix);prepared.add(lines);
       }
       setEdges(prepared);

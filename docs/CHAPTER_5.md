@@ -1,3 +1,15 @@
+## Interface refinement / 2026-10-19
+
+The Voyager minimap/deep-space explanation card is removed from both encounter and inspection. The sourced reconstruction labels and field guide remain. This supersedes the map visibility note below.
+
+## Direct inspection update / 2026-10-18
+
+Selecting an unknown object now identifies it and opens the existing investigation immediately. The separate Scan object button and timer are removed; source audits, evidence steps, hardware-part requirements and completion gates below remain valid. The on-screen minimap stays visible during inspection and yields space to the lesson and completion panel.
+
+## Navigation update / 2026-10-18
+
+All five missions are available from the new exploration museum and Mission selector. Saved discoveries live in the notebook. Mars sites also connect through the pilotable shuttle in Flight map, independent of learning completion. The source audit below is preserved; older archive/availability language describes historical revisions. See [EXPLORATION_MUSEUM.md](EXPLORATION_MUSEUM.md) for the current story, navigation and coordinate contract.
+
 # Chapter 5 / Voyager 1
 
 Authorized October 7, 2026. The user explicitly requested Chapter 5, superseding earlier unavailable-Voyager scope. All six index entries, including the prologue, are now freely accessible. Mobile testing is excluded by request. Website deployment is separate from GitHub source publication.

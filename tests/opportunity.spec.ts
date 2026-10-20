@@ -10,7 +10,7 @@ async function visit(page:Page){
 }
 async function scan(page:Page,id:string){
   await page.locator(`.opportunity-dock [data-artifact="${id}"]`).click();
-  await page.getByRole('button',{name:'Scan object',exact:true}).click();
+  await expect(page.getByRole('button',{name:'Scan object',exact:true})).toHaveCount(0);
   await expect(page.locator('.mars-scan-panel')).toHaveCount(0,{timeout:15000});
 }
 
@@ -39,7 +39,7 @@ test('Opportunity full desktop investigation, source photos, guide and retained 
   await expect(page.getByRole('dialog',{name:'Opportunity: the journey that kept growing.'})).toBeVisible();
   await page.screenshot({path:'docs/qa/opportunity-desktop-guide.png'});
   await page.keyboard.press('Escape');await expect(page.getByRole('button',{name:'FIELD GUIDE',exact:true})).toBeFocused();
-  await page.getByRole('button',{name:'Archive discovery',exact:true}).click();
+  await page.getByRole('button',{name:'Save discovery',exact:true}).click();
   for(const [id,actions] of [
     ['opportunityLanding',['Unfold the landing cradle','Trace the discarded descent system','Follow the rover off the lander']],
     ['heatShieldRock',['Compare the two surfaces','Read the composition finding','Separate the two histories']],
@@ -61,7 +61,7 @@ test('Opportunity full desktop investigation, source photos, guide and retained 
     await page.getByRole('button',{name:'Replay investigation'}).click();
     await expect(page.getByRole('button',{name:'Investigation incomplete'})).toBeDisabled();
     for(const action of actions)await page.getByRole('button',{name:action,exact:true}).click();
-    await page.getByRole('button',{name:'Archive discovery',exact:true}).click();
+    await page.getByRole('button',{name:'Save discovery',exact:true}).click();
   }
   await expect(page.locator('.mars-site-note')).toContainText('6 / 06 RECORDS');
   await expect(page.locator('.spirit-next-signal')).toContainText('Follow the deep-space signal');
@@ -89,12 +89,12 @@ test('Spirit boundary supports pause, skip, natural and reduced-motion arrival',
   await prepare();await page.locator('canvas').evaluate(el=>el.setAttribute('data-persistent','boundary4'));
   await page.getByRole('button',{name:'Continue to Meridiani Planum'}).click();
   await page.getByRole('button',{name:'Pause journey'}).click();
-  const before=await page.locator('.travel-line i').getAttribute('style');await page.waitForTimeout(250);
-  expect(await page.locator('.travel-line i').getAttribute('style')).toBe(before);
+  const before=await page.getByRole('progressbar',{name:'Journey progress'}).getAttribute('value');await page.waitForTimeout(250);
+  expect(await page.getByRole('progressbar',{name:'Journey progress'}).getAttribute('value')).toBe(before);
   await page.getByRole('button',{name:'Resume journey'}).click();await page.getByRole('button',{name:'Skip travel'}).click();
   await expect(page.locator('canvas')).toHaveAttribute('data-world','opportunity',{timeout:30000});
   await prepare();await page.getByRole('button',{name:'Continue to Meridiani Planum'}).click();
-  await expect(page.getByRole('button',{name:'Approach the familiar trace'})).toBeVisible({timeout:30000});
+  await page.getByRole('button',{name:'Cruise assist off'}).click();await expect(page.getByRole('button',{name:'Approach the familiar trace'})).toBeVisible({timeout:45000});
   await page.emulateMedia({reducedMotion:'reduce'});await prepare();await page.getByRole('button',{name:'Continue to Meridiani Planum'}).click();
   await expect(page.getByRole('button',{name:'Approach the familiar trace'})).toBeVisible();
   await expect(page.locator('canvas')).toHaveAttribute('data-persistent','boundary4');

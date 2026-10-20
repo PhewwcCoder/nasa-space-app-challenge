@@ -6,15 +6,17 @@ import { afterPaint } from '../afterPaint';
 import { SceneActivity } from './SceneActivity';
 import { preparationSnapshot } from './preparationSnapshot';
 
-export type WorldId = 'orbit' | 'lunar' | 'mars' | 'spirit' | 'transit' | 'opportunity' | 'voyager';
+export type WorldId = 'museum' | 'shuttle' | 'orbit' | 'lunar' | 'mars' | 'spirit' | 'transit' | 'opportunity' | 'voyager';
 export function worldFor(stage: Stage, progress: number): WorldId {
+  if (stage === 'shuttle') return 'shuttle';
+  if (stage === 'entry') return 'museum';
   if (stage === 'voyager' || stage === 'voyager-travel' && progress >= .5) return 'voyager';
   if (stage === 'voyager-travel') return 'opportunity';
-  if (stage === 'entry' || stage === 'signal') return 'orbit';
+  if (stage === 'signal') return 'orbit';
   if (stage === 'opportunity' || stage === 'opportunity-travel' && progress >= .5) return 'opportunity';
   if (stage === 'opportunity-travel') return 'spirit';
   if (stage === 'spirit' || stage === 'mars-travel' && progress >= .5) return 'spirit';
-  if (stage === 'mars' || stage === 'mars-travel' || stage === 'travel' && progress >= .68) return 'mars';
+  if (stage === 'mars-landing' || stage === 'mars' || stage === 'mars-travel' || stage === 'travel' && progress >= .68) return 'mars';
   if (stage === 'travel' && progress >= .36) return 'transit';
   return 'lunar';
 }

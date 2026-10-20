@@ -1,3 +1,29 @@
+## Inspection map clearance / 2026-10-20
+
+Evidence-inspection maps use the bottom-left corner with no expandable travel menu. Hardware inspection (Sojourner, Pathfinder, Spirit, Opportunity) and MER mission-record views omit the map to reserve the model and control area. This supersedes earlier persistent inspection-map placement. Apollo and Voyager remain map-free.
+
+## Student exploration refinement / 2026-10-20 - current precedence
+
+MissionQuestion mounts by surface stage and reads data/missionQuestions.ts. Question selection excludes the previous displayed index; the committed effect stores that index (avoiding React StrictMode initializer side effects). Session storage is optional, with a memory fallback. Inspection dismisses the question. FlightMap omits Apollo entirely and FlightHUD shows its landing map only on Mars. Shuttle MapPlot renders destination-up progress/checkpoints/lateral offset independently of unchanged geographic routePosition values. The geographic surface map uses a regional extent. All Mars surfaces and the shuttle course share the Chapter 2 base soil color and matching light colors/intensities; site geometry and shaders retain their geological variants.
+
+## Playable Chapter 2 arrival / 2026-10-19 - current precedence
+
+`mars-landing` selects the retained Mars world. `beginMarsLanding()` clears input, resets flight, and sets manual controls; `startTravel()` now routes Sojourner museum entry and the Apollo continuation. `LandingFlight.tsx` extracts the original lunar flight renderer/controller and shares it with Mars, including the unchanged pure flight model. Mars uses a landing-zone offset of [10, 0, 4], warm dust, its existing terrain, a larger visible shuttle and reduced approach fog. `MarsCamera` yields during landing. ChapterTravel waits for world readiness and hands over above the surface; the Mars arrival craft ends at the shared flight entry position. No additional canvas, camera, renderer or world graph. MissionAudio is excluded on Mars, so Apollo radio is not triggered by a Mars touchdown.
+
+## Interface refinement / 2026-10-19 ? current precedence
+
+FlightMap subscribes to inspector state and omits all Voyager maps and Apollo inspection maps. MuseumScene owns and disposes a procedural grayscale background texture inside the existing canvas. Apollo and shared MER/Voyager selected-part edges use a 65-degree threshold and 0.28 opacity. The Mars discovery grid sizes desktop columns to its actual children.
+
+## Museum and shuttle architecture / 2026-10-18 ? current precedence
+
+`Museum.tsx` replaces `Arrival` at stage `entry`; no timed launch runs. Its native overflow container owns five GSAP ScrollTriggers. Each trigger selects an exhibit; all triggers and resize/scroll listeners are cleaned up on unmount. `museumScroll` and `exhibit` preserve return position in the Zustand session store. Keyboard chapter tabs and native scrolling are equivalent routes. Mobile uses the same content with a compact model display above the reading area.
+
+`MuseumScene.tsx` and `ShuttleScene.tsx` add two retained scene graphs inside the existing R3F Canvas, renderer and camera. Museum models reuse ApolloModel with a full-hardware preview override, SpiritModel for both MER rovers and Voyager, and SojournerModel. Source geometry bounds normalize their size; material treatment is identical to the exploration renderer. Draco decoding is local. Camera ownership follows `SceneActivity`; inactive worlds do not simulate. Floating display movement stops for pause/reduced motion. The existing seven potential scene graphs and preparation-snapshot contracts remain intact; the two new graphs increase bounded session memory.
+
+`data/expedition.ts` centralizes five exhibit narratives, official links, historical landing references, coordinate formatting, and seam-aware route interpolation. `FlightMap.tsx` renders a persistent nonmodal minimap with native details for destination buttons, including during inspection. `launchExhibit.ts` shares the model/CTA entry route and resets Apollo into approach. `inspect(id)` identifies the object immediately with scanProgress=1; chapter scan timers and scan buttons are removed. `shuttle` is a new stage with source/destination, progress, lateral offset and cruise state. `ShuttleScene` advances a bounded timestep, reads the shared input state, and visits the destination using the existing `visitChapter` contract; discoveries and original canvas identity survive. Reduced motion bypasses flight. The HUD exposes the same state to the map, progress, keyboard and held pointer controls. Pointer capture loss, blur, pause, navigation and unmount release input. The map is a schematic linear route in latitude/wrapped longitude, not spherical navigation or real mission telemetry.
+
+The shared inspector, camera zoom limits, NASA field guides and chapter learning gates remain. Internal `archive` identifiers are retained for compatibility while prominent labels use notebook/mission language. `Explorer.tsx` replaces cosmic armor with original EVA-style geometry and jointed walking; reference image pixels are not used as textures. `pitch-video/`, `output/`, and `tmp/` are local production directories excluded from Git; web runtime assets remain under `public/`.
+
 ## Chapter 5 Voyager 1 / 2026-10-07 - current extension
 
 Voyager adds a seventh retained scene graph in the original Canvas, renderer and camera. `VoyagerScene`, `VoyagerChapter` and `data/voyager` follow the Opportunity boundaries. Store stages `voyager`/`voyager-travel`, an approach action, model preloading and the covered travel midpoint extend the existing navigation contract. Opportunity's camera yields during departure. The shared `SpiritModel` assembly renderer accepts a Voyager asset/orientation; prior defaults are unchanged. `PartPoster`, `PhotoReveal`, the shared inspector and guide remain common. Apollo counts exclude Voyager records.
@@ -116,3 +142,7 @@ See [HARDWARE_JOURNEY.md](HARDWARE_JOURNEY.md) for the consolidated extension co
 This section supersedes conflicting earlier behavior.
 
 App mounts Inspector directly; inspect(id) initializes scanProgress to 1. ScanTransition.tsx remains unused historical code; camera interpolation and one persistent canvas remain. ClueIcon.tsx provides decorative SVGs without changing accessible names. SeismicExhibit.tsx owns the locally sourced photo/diagram and independent keyboard-focusable reading scroller. Explorer.tsx now uses rigid authored RoundedBox armor and opposing limb pivots instead of approximate skinning of the NASA mesh. Reduced motion and pause stop walking animation.
+
+### Low-altitude Mars search
+
+`game/surfaceFlight.ts` owns deterministic, substepped acceleration, steering, braking, collisions, checkpoint state and obstacle-aware cruise. `archive.shuttleRace` carries the current course state. `ShuttleScene` is still one retained world in the persistent canvas; it uses a moving chase camera, instanced shoulder rocks, visible obstacle geometry and source/destination hardware. Museum Spirit/Opportunity entry and chapter completion use `startSpiritTravel`/`startOpportunityTravel`; the mission selector retains direct revisits. Legacy cinematic stage components remain compatible but those entry actions no longer use them. `MarsTerrain` selects ares/gusev/meridiani variants, and `MarsGeology` supplies procedural weathering materials. Shader cache keys distinguish the variants.

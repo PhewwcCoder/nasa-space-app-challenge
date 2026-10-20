@@ -16,12 +16,14 @@ for(const [chapter,id,limit] of [['01.*APOLLO','eagle',17],['02.*SOJOURNER','soj
     page.on('pageerror',e=>errors.push(e.message));
     page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
     await page.goto('/');await page.locator('.archive-index-trigger').click();await page.getByRole('button',{name:new RegExp(chapter)}).click();
+    await expect(page.locator('canvas')).toHaveAttribute('data-world',id==='eagle'?'lunar':id==='sojourner'?'mars':id,{timeout:30000});
+    await expect(page.locator('canvas')).toHaveAttribute('aria-busy','false');
     if(id==='sojourner')await page.getByRole('button',{name:'Approach the signal'}).click();
     if(id==='opportunity')await page.getByRole('button',{name:'Approach the familiar trace'}).click();
     if(id==='voyager')await page.getByRole('button',{name:'Approach the distant traveler'}).click();
     if(id==='spirit')await page.getByRole('button',{name:'Approach the trace'}).click();
     await page.locator(`[data-artifact="${id}"]`).last().click();
-    if(id!=='eagle'){await page.getByRole('button',{name:'Scan object',exact:true}).click();await expect(page.getByRole('button',{name:'Scan object',exact:true})).toHaveCount(0);}
+    if(id!=='eagle'){await expect(page.getByRole('button',{name:'Scan object',exact:true})).toHaveCount(0);}
     await expect(page.getByRole('heading',{name:new RegExp(id==='voyager'?'^Voyager 1$':`^${id}$`,'i')})).toBeVisible({timeout:15000});
     await page.waitForTimeout(2300);
     const initial=await camera(page);expect(initial.minimum).toBe(limit);

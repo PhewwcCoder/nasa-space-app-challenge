@@ -1,3 +1,11 @@
+## Direct inspection update / 2026-10-18
+
+Selecting an unknown object now identifies it and opens the existing investigation immediately. The separate Scan object button and timer are removed; source audits, evidence steps, hardware-part requirements and completion gates below remain valid. The on-screen minimap stays visible during inspection and yields space to the lesson and completion panel.
+
+## Navigation update / 2026-10-18
+
+All five missions are available from the new exploration museum and Mission selector. Saved discoveries live in the notebook. Mars sites also connect through the pilotable shuttle in Flight map, independent of learning completion. The source audit below is preserved; older archive/availability language describes historical revisions. See [EXPLORATION_MUSEUM.md](EXPLORATION_MUSEUM.md) for the current story, navigation and coordinate contract.
+
 ## Model refinement / 2026-10-06
 
 Spirit now loads `spirit-refined.glb`, authored in Blender from the NASA base and the supplied visual references. Added cells, mechanical joints, optics and harnesses remain grouped into the same reversible teaching assemblies. `mer-rover.glb` remains the untouched source. The current Mars terrain/lighting and closest-view limits are documented in ARCHITECTURE and ASSETS; earlier unchanged-source descriptions below describe the initial implementation only.
@@ -51,3 +59,11 @@ Read-only inputs: `Downloads/Hardware Datasheet.xlsx`, Sheet1, rows 2–6 (Sojou
 - [Airbags and Sojourner](https://science.nasa.gov/resource/airbags-and-sojourner-rover/), [rear ramp](https://science.nasa.gov/resource/pathfinder-rear-ramp/), [backshell](https://science.nasa.gov/resource/backshell-located/): Chapter 2 landing and deployment evidence.
 
 Full download URLs are in `public/learning/spirit-resources.json`. No external media requests are required during play. See STATUS for actual validation results.
+
+### Landscape reference / October 2026 update
+
+- [NASA: Gusev and Columbia Hills, approximate true color](https://science.nasa.gov/photojournal/sweeping-view-of-the-columbia-hills-and-gusev-crater-approximate-true-color/): terrain character and dusty red-brown palette.
+- [NASA: Opportunity Lion King panorama, approximate true color](https://science.nasa.gov/photojournal/opportunity-captures-lion-king-panorama/): open Meridiani plains and pale outcrops.
+- [NASA: cobbles between Meridiani ripples](https://science.nasa.gov/photojournal/cobbles-in-troughs-between-meridiani-ripples-false-color/): morphology only; the false-color image is not used as a true-color palette.
+
+Runtime soil, rocks, bedding and shelves are original procedural geometry/shaders informed by these references. No NASA image is used as a sampled texture, no exact survey is claimed, and evidence stations continue to combine separate dates and locations.
