@@ -311,3 +311,22 @@
 .minimap .planet-map text{display:block}.minimap:not(.inspecting .minimap){width:260px}
 
 .mars-walk-prompt{bottom:80px;max-width:430px;padding:20px;background:linear-gradient(120deg,#0d1b20ed,#0d1b20b8);border-left:2px solid #b9e8e5}.mars-walk-prompt h1{font-size:36px}.mars-walk-prompt .action{border-color:#b9e8e5;touch-action:none;user-select:none}.mars-walk-actions{display:flex;gap:22px;margin:14px 0}.mars-walk-prompt progress{width:100%;height:3px;accent-color:#b9e8e5}.mars-walk-prompt .action:disabled{opacity:.45}@media(max-width:760px){.mars-walk-prompt{bottom:65px;left:20px;right:20px;max-width:none}.mars-walk-prompt h1{font-size:28px}}
+
+/* Student exploration: quiet surfaces, clear actions, personal reflection. */
+.surface-guide{position:absolute;right:var(--edge);top:300px;width:290px;z-index:5}
+.surface-guide button{width:100%;display:grid;grid-template-columns:1fr auto;gap:10px;padding:18px 20px;text-align:left;background:#091214cf;border:1px solid #a5c8c34d}
+.surface-guide button>span:first-child{font-size:10px;letter-spacing:.12em;color:#b4d8d4}
+.surface-guide strong{grid-row:2;font:400 21px/1.3 'Barlow Condensed',sans-serif}
+.surface-guide button>span:last-child{grid-column:2;grid-row:1 / 3;align-self:center}
+.eagle .cutaway-controls button{background:#0b1416d9;border-color:#82969480;box-shadow:none}
+.eagle .cutaway-controls .separate-primary,.eagle .cutaway-controls .separate-primary[aria-pressed=true]{background:#0b1416d9;border:1px solid #d0f4e8;box-shadow:0 0 12px #c5f5df26,inset 0 0 0 1px #d0f4e81a;color:#f1fff6}
+.eagle .cutaway-controls button:not(.separate-primary)[aria-pressed=true]{background:#0b1416d9;border-color:#8baca7}
+button:not(:disabled),summary{transition:translate 180ms ease,scale 180ms ease,box-shadow 180ms ease,border-color 180ms ease,background-color 180ms ease}
+@media(hover:hover){button:not(:disabled):hover,summary:hover{translate:0 -3px;box-shadow:0 6px 18px #0004;border-color:#d0f4e8}button:not(:disabled):active{translate:0 0;scale:.98}}
+button:focus-visible,summary:focus-visible{outline:2px solid #e0ffed;outline-offset:4px}
+.curiosity-notebook label{display:block;margin:28px 0 12px;font-size:13px}
+.curiosity-notebook textarea{display:block;width:100%;min-height:280px;resize:vertical;padding:18px;background:#f5f3eb;color:#243535;border:1px solid #96b3ad;font:17px/1.7 Arial,sans-serif;box-sizing:border-box}
+.curiosity-notebook textarea:focus{outline:2px solid #aed8ca;outline-offset:3px}
+.curiosity-notebook .notebook-status{font-size:12px;line-height:1.6;color:#b5cbc7}
+@media(max-width:760px){.surface-guide{display:none}}
+@media(prefers-reduced-motion:reduce){button:not(:disabled),summary{transition:none}button:not(:disabled):hover,summary:hover,button:not(:disabled):active{translate:none;scale:none}}

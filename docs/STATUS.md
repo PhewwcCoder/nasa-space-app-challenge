@@ -1,5 +1,14 @@
 # Status
 
+## Student UI simplification / 2026-10-21
+
+Implemented locally: replaced Apollo's expedition/log sidebar with a compact Field Guide entrance. Separate hardware is the first Eagle action, with a bright pale border and neutral dark fill; secondary mode controls remain quieter. Enabled button hover lift, press feedback and keyboard focus styling, with movement disabled for reduced motion. The old generated-discovery notebook and count are removed. A personal notebook now accepts editable student opinions/questions, autosaves in browser storage and falls back to session memory when storage writes fail; closing restores opener focus. Discovery completion remains separate session progress.
+
+Chapters 2-4 now show the optional Miso question after completing or skipping their walking approach; Voyager shows it after its Approach action. Opening a chapter does not show a question. Completed approaches stay complete on revisits without another opening interruption. Inspection and skip keep questions dismissed. The persistent canvas, direct artifact identification, existing sources and authorized chapter scope remain intact. Product, architecture, design and exploration contracts are updated.
+
+Validation: typecheck, production build, pure flight and 800-visit question-selection checks pass. Twelve distinct desktop cases passed across an eight-test run and a five-test run (the notebook/UI case overlaps): all five hardware zoom/reset/exit cases, normal/reduced question lifecycle, notebook persistence/guide/focus/hover, answer feedback and route checks, and both walking regressions. No full-suite claim. Earlier runs exposed an overly specific dock-focus assertion (the in-world artifact is the intended restoration target) and a scene-loading timeout; assertions/readiness waits were corrected before passing reruns. Desktop screenshots reviewed: compact-guide-desktop.png, curiosity-notebook-desktop.png, hardware-hover-desktop.png and revision-mars-question.png under docs/qa. The hardware capture uses existing zoom-out controls to frame separated assemblies. Mobile testing was explicitly skipped. Existing Three.js bundle-size advisory remains. No commit, push or deployment.
+
+
 ## October 21 release publication
 
 Prepared the walking, question-lifecycle and physical-scale changes for GitHub and Cloudflare publication. Replaced the chronological README with a project overview, controls, source guide and six reviewed desktop screenshots in docs/images. Release comparison: [October 21 notes](RELEASE_2026-10-21.md). Pure flight, coordinate navigation, surface-flight and 800-visit question checks passed again. Existing implementation build and desktop validation are recorded below. Published source commit `f76fceb` to `origin/main` and deployed Cloudflare Worker version `d3a1cbb1-2972-4143-818e-67869675f58c` at https://nasa-space-app-challenge.aryan-sharar.workers.dev/.

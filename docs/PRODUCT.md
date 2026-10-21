@@ -1,3 +1,11 @@
+## Student UI simplification / 2026-10-21 - current precedence
+
+Apollo's expedition/log sidebar is replaced with a compact optional Field Guide entrance. Separate hardware is the first Eagle control, emphasized by a light border over a neutral dark surface. Buttons lift on hover and show keyboard focus; reduced motion removes movement.
+
+The notebook now contains only student-authored opinions and curiosity questions, autosaved locally with an in-memory fallback when storage is unavailable. Discovery completion remains separate session progress; the old generated-log notebook and its counter are removed. Notebook exit restores focus to its opener.
+
+Chapters 2-4 offer their optional question after completing or skipping the walking approach; Voyager offers it after Approach the distant traveler. Chapter opening never shows the question. Completed approaches remain complete on revisits without another opening question. Inspection and skip dismiss it for the visit. Artifact identification still happens directly on inspection, without a new scan gate.
+
 ## Astronaut walking on Mars / 2026-10-20 - current precedence
 
 Sojourner, Spirit and Opportunity now have a fictional EVA walking approach. Their Approach action starts a six-second player-controlled walk: hold W/up or the held pointer/keyboard button, pause with Escape, or Skip walk. Sojourner touchdown and Skip landing start this walk directly. Reduced motion reaches the endpoint immediately. Finishing exposes the existing clues; prior discoveries and completed approaches survive chapter revisits. Leaving a chapter cancels an unfinished walk. The astronaut is the visitor?s fictional expedition character, not a claim that humans visited Mars.

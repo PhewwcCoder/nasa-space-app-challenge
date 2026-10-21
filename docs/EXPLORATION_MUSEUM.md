@@ -1,3 +1,11 @@
+## Student UI simplification / 2026-10-21 - current precedence
+
+Apollo's expedition/log sidebar is replaced with a compact optional Field Guide entrance. Separate hardware is the first Eagle control, emphasized by a light border over a neutral dark surface. Buttons lift on hover and show keyboard focus; reduced motion removes movement.
+
+The notebook now contains only student-authored opinions and curiosity questions, autosaved locally with an in-memory fallback when storage is unavailable. Discovery completion remains separate session progress; the old generated-log notebook and its counter are removed. Notebook exit restores focus to its opener.
+
+Chapters 2-4 offer their optional question after completing or skipping the walking approach; Voyager offers it after Approach the distant traveler. Chapter opening never shows the question. Completed approaches remain complete on revisits without another opening question. Inspection and skip dismiss it for the visit. Artifact identification still happens directly on inspection, without a new scan gate.
+
 ## Astronaut walking on Mars / 2026-10-20 - current precedence
 
 Each Mars Approach action now invites an astronaut walk before the existing clue dock. Sojourner?s playable landing also hands over to walking. Hold W/up or Hold to walk, pause/resume with Escape, or Skip walk. Navigation cancels an unfinished walk and releases input; discoveries persist. Reduced motion arrives directly. Miso?s optional introduction closes for the visit when skipped, when approaching hardware, or when inspecting. It never reopens on walking completion or inspection exit; a new chapter visit offers a fresh question. The fictional EVA visitor and footprints are distinct from NASA rover history and surveyed site coordinates.

@@ -1,3 +1,11 @@
+## Student UI simplification / 2026-10-21 - current precedence
+
+Apollo's expedition/log sidebar is replaced with a compact optional Field Guide entrance. Separate hardware is the first Eagle control, emphasized by a light border over a neutral dark surface. Buttons lift on hover and show keyboard focus; reduced motion removes movement.
+
+The notebook now contains only student-authored opinions and curiosity questions, autosaved locally with an in-memory fallback when storage is unavailable. Discovery completion remains separate session progress; the old generated-log notebook and its counter are removed. Notebook exit restores focus to its opener.
+
+Chapters 2-4 offer their optional question after completing or skipping the walking approach; Voyager offers it after Approach the distant traveler. Chapter opening never shows the question. Completed approaches remain complete on revisits without another opening question. Inspection and skip dismiss it for the visit. Artifact identification still happens directly on inspection, without a new scan gate.
+
 ## Astronaut walking on Mars / 2026-10-20 - current precedence
 
 MarsExplorer reuses AstronautSuit in each retained Mars world, with an optional motion predicate that leaves Apollo behavior intact. marsWalking/marsWalk and start/finish actions own the six-second approach. Existing chapter cameras yield while walking and resume their normal surface/inspection transition afterward; no canvas or camera is added. MarsWalkHUD shares input state, releases held controls on cancellation/unmount/pause and restores clue focus on completion. Opening inspection during a walk completes the approach before the inspector takes camera ownership. Landing completion and Skip landing enter the Sojourner walk. Global navigation/restart cancels it. Terrain instance placement clears the narrow authored footpath. Inactive retained worlds do not animate their suits.

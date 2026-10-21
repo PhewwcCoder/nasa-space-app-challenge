@@ -1,3 +1,11 @@
+## Student UI simplification / 2026-10-21 - current precedence
+
+Apollo's expedition/log sidebar is replaced with a compact optional Field Guide entrance. Separate hardware is the first Eagle control, emphasized by a light border over a neutral dark surface. Buttons lift on hover and show keyboard focus; reduced motion removes movement.
+
+The notebook now contains only student-authored opinions and curiosity questions, autosaved locally with an in-memory fallback when storage is unavailable. Discovery completion remains separate session progress; the old generated-log notebook and its counter are removed. Notebook exit restores focus to its opener.
+
+Chapters 2-4 offer their optional question after completing or skipping the walking approach; Voyager offers it after Approach the distant traveler. Chapter opening never shows the question. Completed approaches remain complete on revisits without another opening question. Inspection and skip dismiss it for the visit. Artifact identification still happens directly on inspection, without a new scan gate.
+
 ## Astronaut walking on Mars / 2026-10-20 - current precedence
 
 Mars walking uses the existing white EVA suit with animated legs/arms and a gentle third-person chase camera. A short footprint path leads toward the unknown rover; small procedural stones are omitted inside its narrow corridor. Walking controls occupy the lower-left, while minimaps, chapter captions and Miso questions yield space. The astronaut remains beside the site after arrival and disappears during inspection. Reduced motion bypasses walking and disables bob/stride motion. All walks and footprints are authored fiction.

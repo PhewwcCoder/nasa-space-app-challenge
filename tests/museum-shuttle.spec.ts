@@ -39,7 +39,6 @@ test('map supports reversible shuttle travel, pause, and saved evidence', async 
   await expect(page.locator('.minimap')).toHaveCount(0);
   await page.getByRole('button', { name: 'Save discovery', exact: true }).click();
   await select(page, 'SOJOURNER');
-  await page.getByRole('button', { name: 'Explore without answering' }).click();
   await expect(page.locator('canvas')).toHaveAttribute('data-world', 'mars', { timeout: 30000 });
   await expect(page.getByRole('complementary', { name: 'Expedition minimap' })).toBeVisible();
   await expect(page.getByTestId('coordinates')).toHaveText('19.47\u00b0 N / 326.75\u00b0 E');
@@ -88,7 +87,7 @@ test('map supports reversible shuttle travel, pause, and saved evidence', async 
   await expect(page.getByTestId('coordinates')).toHaveCount(0);
   await page.keyboard.press('Escape');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
-  await expect(page.getByRole('button', { name: 'NOTEBOOK 01' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'NOTEBOOK' })).toBeVisible();
   await expect(page.locator('canvas')).toHaveCount(1); expect(errors).toEqual([]);
 });
 
@@ -97,7 +96,6 @@ test('touch thrust releases cleanly and flight can return to departure', async (
   test.setTimeout(60000);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/'); await select(page, 'SOJOURNER');
-  await page.getByRole('button', { name: 'Explore without answering' }).click();
   if (await page.getByRole('button', { name: 'Explore without answering' }).isVisible()) await page.getByRole('button', { name: 'Explore without answering' }).click();
   await page.getByText('Fly to another site', { exact: true }).click();
   await page.getByRole('button', { name: /Fly to Gusev Crater/ }).click();
@@ -131,7 +129,6 @@ test('touch thrust releases cleanly and flight can return to departure', async (
 
 test('inspection opens directly and its minimap does not cover the lesson', async ({ page }) => {
   await page.goto('/'); await select(page, 'SOJOURNER');
-  await page.getByRole('button', { name: 'Explore without answering' }).click();
   await expect(page.locator('canvas')).toHaveAttribute('data-world', 'mars', { timeout: 30000 });
   await page.getByRole('button', { name: /Approach/ }).click();if(await page.getByRole('button',{name:'Skip walk',exact:true}).isVisible())await page.getByRole('button',{name:'Skip walk',exact:true}).click();
   await page.locator('.mars-dock [data-artifact="airbags"]').click();
