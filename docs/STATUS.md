@@ -1,5 +1,12 @@
 # Status
 
+## Student UI publication / 2026-10-21
+
+Published to origin/main in two focused commits: `d650ea2` (post-approach mission questions) and `54efbf9` (compact guide, hardware emphasis, hover feedback and personal notebook). Deployed the existing Cloudflare Worker at https://nasa-space-app-challenge.aryan-sharar.workers.dev/ with version `6263b6e7-e8bb-4ef2-aa23-90b463431ccf`.
+
+Live verification passed: all JavaScript/CSS assets match local production output by SHA-256; HTML matches after normalizing line endings and trailing whitespace. Desktop Chrome verified the Field Guide, notebook persistence across reload, all four post-approach question flows, inspection exits, one canvas and zero page errors. Reviewed capture: docs/qa/deployed-student-ui.png. Existing local validation is recorded below. Mobile testing remains excluded. QA captures and unrelated local assets remain outside Git. This documentation receipt does not change the deployed runtime, which corresponds to `54efbf9`.
+
+
 ## Student UI simplification / 2026-10-21
 
 Implemented locally: replaced Apollo's expedition/log sidebar with a compact Field Guide entrance. Separate hardware is the first Eagle action, with a bright pale border and neutral dark fill; secondary mode controls remain quieter. Enabled button hover lift, press feedback and keyboard focus styling, with movement disabled for reduced motion. The old generated-discovery notebook and count are removed. A personal notebook now accepts editable student opinions/questions, autosaves in browser storage and falls back to session memory when storage writes fail; closing restores opener focus. Discovery completion remains separate session progress.
