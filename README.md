@@ -6,7 +6,9 @@ Explore five missions, take spacecraft hardware apart, and learn from NASA sourc
 
 [Visit Sol-3](https://nasa-space-app-challenge.aryan-sharar.workers.dev/) | [Project status](docs/STATUS.md) | [Sources and credits](docs/ASSETS.md)
 
-![The Sol-3 museum](docs/images/museum.jpg)
+[![Pilot the fictional spacecraft toward the lunar landing zone](docs/images/landing.jpg)](https://nasa-space-app-challenge.aryan-sharar.workers.dev/)
+
+Pilot the descent, control your speed, and land on the Moon.
 
 ## Explore
 
@@ -23,6 +25,52 @@ Choose any mission from the museum. Approach the site, inspect its hardware, and
 Miso's questions are optional and appear after the approach. Completed discoveries remain available during the session; notebook writing stays on your device.
 
 Historical facts link to NASA sources. The alien expedition, Mars astronaut and shuttle journeys are fictional. Reconstructed scenes are teaching models, not exact site surveys.
+
+## Inside Sol-3
+
+### Take the hardware apart
+
+Separate Eagle's structure, engine and landing gear. Rotate the model and explore what each part does.
+
+[![Eagle with its structure, engine and landing gear separated](docs/images/eagle.jpg)](https://nasa-space-app-challenge.aryan-sharar.workers.dev/)
+
+### Learn through the objects
+
+Miso's lessons connect the hardware to real NASA photographs and simple engineering explanations.
+
+![Eagle engine inspection with a NASA photograph and learning panel](docs/images/learning.jpg)
+
+### Open the Field Guide
+
+Read the mission story, meet the crew, and explore the science and Apollo guidance code.
+
+![Apollo 11 Field Guide showing the mission and crew](docs/images/field-guide.jpg)
+
+### Explore Mars
+
+Walk toward Sojourner, Spirit and Opportunity, then investigate the machines and the evidence around them.
+
+| Sojourner | Spirit | Opportunity |
+| --- | --- | --- |
+| [![Sojourner at Ares Vallis](docs/images/sojourner.jpg)](docs/images/sojourner.jpg) | [![Spirit at Gusev Crater](docs/images/spirit.jpg)](docs/images/spirit.jpg) | [![Opportunity at Meridiani Planum](docs/images/opportunity.jpg)](docs/images/opportunity.jpg) |
+
+### Reach Voyager 1
+
+Inspect the spacecraft in deep space and explore the Golden Record's instructions for a distant reader.
+
+[![Voyager 1 and its long instrument boom in the hardware inspector](docs/images/voyager.jpg)](https://nasa-space-app-challenge.aryan-sharar.workers.dev/)
+
+![The Golden Record investigation with its cover and playback diagram](docs/images/golden-record.jpg)
+
+### Choose your next mission
+
+The museum keeps all five missions open. Start anywhere and return whenever you want.
+
+[![The Sol-3 museum with Apollo 11 selected](docs/images/museum.jpg)](https://nasa-space-app-challenge.aryan-sharar.workers.dev/)
+
+[Explore Sol-3 in your browser](https://nasa-space-app-challenge.aryan-sharar.workers.dev/)
+
+*Screenshots from the live desktop experience. NASA asset credits are listed in [Sources and credits](docs/ASSETS.md).*
 
 ## Controls
 

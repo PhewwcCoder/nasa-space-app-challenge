@@ -1,5 +1,9 @@
 # Status
 
+## README visual showcase / 2026-10-21
+
+Restored a screenshot-led README while retaining short captions and the simple technology overview. Ten fresh 1920x1080 JPEG captures from the deployed application show the lunar flight, separated Eagle assemblies, an engine lesson, Apollo Field Guide, all three Mars sites, Voyager hardware, Golden Record and museum. Main preview images link to the live site; Mars thumbnails open their full-size images. All ten captures were visually reviewed and all local links/image paths resolve. Capture sessions reported zero page errors. Documentation/images only; no runtime deployment or mobile test.
+
 ## README technology overview / 2026-10-21
 
 Added a concise stack table covering frontend, graphics, animation, state, browser storage, asset tooling, builds, tests, hosting and deployment. Checked against package.json, application code and wrangler.jsonc. Clarified that the deployed app has no separate backend API or database. Documentation only; no deployment or test run needed.
