@@ -33,6 +33,23 @@ Historical facts link to NASA sources. The alien expedition, Mars astronaut and 
 
 On-screen controls and reduced-motion support are available.
 
+## Tech stack
+
+| Area | Tools |
+| --- | --- |
+| Frontend | React, TypeScript and CSS |
+| 3D graphics | Three.js, React Three Fiber and Drei |
+| Animation and scrolling | GSAP and ScrollTrigger |
+| App state | Zustand |
+| Storage | Browser localStorage for notes, sessionStorage for question history |
+| Models and assets | Blender, Python scripts and NASA imagery/models |
+| Build tools | Vite, Node.js and npm |
+| Testing | Playwright, TypeScript checks and Node.js simulation tests |
+| Hosting | Cloudflare Workers Static Assets |
+| Deployment and source control | Wrangler CLI, Git and GitHub |
+
+The app runs in the browser. There is no separate backend API or database; Cloudflare serves the built site and its assets. Exploration progress stays in memory during the session.
+
 ## Run locally
 
 Use Node.js 22 or newer.
@@ -54,7 +71,7 @@ Desktop tests require the dev server and Chrome. Mobile testing is currently def
 
 ## Development
 
-Built with React, TypeScript, Vite, Three.js and React Three Fiber. All missions share one persistent 3D canvas. Zustand manages session progress.
+All missions share one persistent 3D canvas.
 
 Read [AGENTS.md](AGENTS.md) and [project status](docs/STATUS.md) before making changes.
 

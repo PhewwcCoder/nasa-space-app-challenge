@@ -1,5 +1,9 @@
 # Status
 
+## README technology overview / 2026-10-21
+
+Added a concise stack table covering frontend, graphics, animation, state, browser storage, asset tooling, builds, tests, hosting and deployment. Checked against package.json, application code and wrangler.jsonc. Clarified that the deployed app has no separate backend API or database. Documentation only; no deployment or test run needed.
+
 ## README cleanup / 2026-10-21
 
 Rewrote the README as a shorter project introduction with one museum image, the five missions, essential controls, local setup and deployment instructions. Removed corrupted question-mark separators and the release-history tour. Updated notebook and question-timing descriptions to match the deployed UI. Verified local links and image paths; documentation only, with no runtime changes or new test run.
