@@ -1,118 +1,76 @@
 # Sol-3: The Human Trace
 
-**A cinematic exploration museum by Team Petrova.** Discover the machines humans sent beyond Earth, ask questions with Miso, and build your own notebook of evidence.
+A 3D space exploration museum built by Team Petrova for students and space enthusiasts.
 
-[**Play Sol-3**](https://nasa-space-app-challenge.aryan-sharar.workers.dev/) ? [Project status](docs/STATUS.md) ? [Sources & credits](docs/ASSETS.md)
+Explore five missions, take spacecraft hardware apart, and learn from NASA sources with Miso, a fictional alien copilot.
 
-![Sol-3 opening museum with floating Apollo hardware and mission stories](docs/images/museum.jpg)
+[Visit Sol-3](https://nasa-space-app-challenge.aryan-sharar.workers.dev/) | [Project status](docs/STATUS.md) | [Sources and credits](docs/ASSETS.md)
 
-## Five missions. One curious explorer.
+![The Sol-3 museum](docs/images/museum.jpg)
 
-Start in the museum, browse the exhibits, and choose a mission. Land, walk toward unknown hardware, open an inspection, and follow the clues. Return to **MUSEUM** to resume browsing, or use **EXPLORE OTHER MISSIONS** to revisit any chapter. Discoveries stay in your notebook.
+## Explore
 
-| Chapter | Destination | Discover |
+Choose any mission from the museum. Approach the site, inspect its hardware, and follow the evidence at your own pace. Field guides provide more detail, and a personal notebook saves your thoughts and questions in your browser.
+
+| Mission | Location | Highlights |
 | --- | --- | --- |
-| 01 ? Apollo 11 | Tranquility Base, Moon | Eagle, its separable assemblies, experiments and human traces |
-| 02 ? Sojourner | Ares Vallis, Mars | The small rover, Pathfinder and landing evidence |
-| 03 ? Spirit | Gusev Crater, Mars | Rover engineering, rock abrasion and clues in silica-rich soil |
-| 04 ? Opportunity | Meridiani Planum, Mars | Mineral clues, a meteorite, dune traction and a long mission |
-| 05 ? Voyager 1 | Between the stars | Spacecraft hardware, distant signals and the Golden Record |
+| Apollo 11 | Moon | Eagle, landing hardware and surface experiments |
+| Sojourner | Ares Vallis, Mars | The rover, Pathfinder and landing systems |
+| Spirit | Gusev Crater, Mars | Rover engineering and evidence of past water |
+| Opportunity | Meridiani Planum, Mars | Minerals, meteorites and rover endurance |
+| Voyager 1 | Interstellar space | Communications and the Golden Record |
 
-Miso is a fictional alien copilot. NASA-linked field notes distinguish historical evidence from interpretation. The Mars astronaut, shuttle journeys, terrain placement and separated hardware are educational reconstructions, not an exact survey or a claim that humans visited Mars.
+Miso's questions are optional and appear after the approach. Completed discoveries remain available during the session; notebook writing stays on your device.
 
-## Inside the experience
-
-### Apollo 11 ? Take Eagle apart
-
-Inspect the complete lander, separate its assemblies, or reveal the descent stage left on the Moon. Rotate, zoom and reset the model while exploring its engineering.
-
-![Apollo 11 Eagle with its hardware assemblies separated for inspection](docs/images/eagle.jpg)
-
-### Mars ? Walk toward the evidence
-
-Chapters 2?4 share a walking astronaut, warm Martian soil and question-led investigations. Sojourner is small beside a person; Spirit and Opportunity stand much taller. Models use NASA-referenced dimensions with a consistent 1.85 m fictional suited visitor.
-
-| Sojourner ? Ares Vallis | Spirit ? Gusev Crater |
-| --- | --- |
-| ![Sojourner and Pathfinder at Ares Vallis](docs/images/sojourner.jpg) | ![Astronaut beside Spirit at Gusev Crater](docs/images/spirit.jpg) |
-
-![Opportunity exploration at Meridiani Planum](docs/images/opportunity.jpg)
-
-Optional Miso questions draw from five sourced questions per chapter without immediate repeats. Skipping, approaching hardware or opening an inspection dismisses the introduction for that visit; it does not follow you through exploration.
-
-### Voyager 1 ? A traveler between the stars
-
-Explore the spacecraft and the ideas it carries: communication across distance, the Golden Record and our view of Earth.
-
-![Voyager 1 spacecraft in the interactive hardware inspector](docs/images/voyager.jpg)
-
-Screenshots above were captured from the application on desktop for the October 21, 2026 release. NASA imagery and model provenance are documented in [ASSETS.md](docs/ASSETS.md).
+Historical facts link to NASA sources. The alien expedition, Mars astronaut and shuttle journeys are fictional. Reconstructed scenes are teaching models, not exact site surveys.
 
 ## Controls
 
-| Activity | Controls |
-| --- | --- |
-| Walk on Moon or Mars | Hold **W / ?** or the on-screen walking control; release to stop; skip is available |
-| Fly and land | **WASD / arrows** to steer, **Space** to brake; assist, pause and skip controls are available |
-| Travel between Mars sites | Open **Fly to another site**; **W / ?** thrust, **A / D** steer, **Space** brake |
-| Inspect hardware | Select a clue; orbit, zoom, select assemblies and use **Reset view** |
-| Leave inspection / pause | **Escape** or the visible return/pause control |
+- **Walk:** hold W or Up Arrow. Release to stop, or use Skip walk.
+- **Fly:** use WASD or arrow keys to steer and Space to brake.
+- **Inspect:** select an object, drag to rotate, and scroll to zoom. Select parts to examine them separately.
+- **Return or pause:** press Escape or use the on-screen control.
 
-Reduced motion bypasses walking and provides direct arrivals. Historical landing coordinates and simulated shuttle positions are labeled separately. Apollo and Voyager have no minimap; maps yield during walking and hardware inspection.
-
-## Latest changes ? October 21, 2026
-
-- Added Apollo-style astronaut walking to Sojourner, Spirit and Opportunity, with stride animation, footprints, pause, skip and reduced-motion arrival.
-- Fixed optional questions reappearing after walking or inspection exit, while preserving random questions on new visits.
-- Unified astronaut scale and calibrated Eagle and Mars rover heights against NASA references; corrected ground contact.
-- Added this screenshot tour. See [release notes](docs/RELEASE_2026-10-21.md) for the comparison with the previous deployment.
+On-screen controls and reduced-motion support are available.
 
 ## Run locally
 
-Use Node.js 22 or newer, then:
+Use Node.js 22 or newer.
 
 ```sh
 npm install
 npm run dev
 ```
 
-Open the URL printed by Vite, normally `http://127.0.0.1:5173/`.
+Open the local URL printed by Vite.
 
 ```sh
 npm run typecheck
 npm run build
-node tests/flight.cjs
-node tests/navigation.cjs
-node tests/surface-flight.cjs
-node tests/mission-questions.cjs
 npx playwright test --project=desktop
 ```
 
-Playwright requires the dev server and Chrome. `npm run test:e2e` includes both configured desktop and mobile projects; mobile testing is currently deferred at the project owner's request. See [Status](docs/STATUS.md) for checks actually run and known limitations.
+Desktop tests require the dev server and Chrome. Mobile testing is currently deferred. See [project status](docs/STATUS.md) for completed checks and known limitations.
 
-## Build and source guide
+## Development
 
-React 19, TypeScript and Vite power the interface. React Three Fiber and Three.js share one persistent canvas across the museum and mission scenes. Zustand manages expedition state; authored Blender models and NASA assets support the exhibits.
+Built with React, TypeScript, Vite, Three.js and React Three Fiber. All missions share one persistent 3D canvas. Zustand manages session progress.
 
-- [Product scope](docs/PRODUCT.md) ? [Architecture](docs/ARCHITECTURE.md) ? [Design system](docs/DESIGN_SYSTEM.md)
-- [Exploration and simulated-navigation contract](docs/EXPLORATION_MUSEUM.md)
-- [Spirit source audit](docs/CHAPTER_3.md) ? [Opportunity source audit](docs/CHAPTER_4.md) ? [Voyager source audit](docs/CHAPTER_5.md)
-- [Hardware journey contract](docs/HARDWARE_JOURNEY.md) ? [Asset provenance](docs/ASSETS.md)
+Read [AGENTS.md](AGENTS.md) and [project status](docs/STATUS.md) before making changes.
 
-Read `AGENTS.md` and `docs/STATUS.md` before development. Current scope ends at Voyager 1. Runtime assets live in `public/`; local pitch-video production, temporary output and generated QA captures are separate from the published application.
+- [Product scope](docs/PRODUCT.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Design system](docs/DESIGN_SYSTEM.md)
+- [Exploration and navigation](docs/EXPLORATION_MUSEUM.md)
+- [Assets and provenance](docs/ASSETS.md)
 
-The editable rover models live in `assets/blender/`. Rebuild with Blender 4.5:
+## Deployment
 
-```sh
-blender --background --factory-startup --python scripts/build-spirit.py
-blender --background --factory-startup --python scripts/build-opportunity.py
-```
-
-## Deploy
+With access to the existing Cloudflare account:
 
 ```sh
 npm run build
 npx wrangler deploy
 ```
 
-Sign into the existing Cloudflare account first. `wrangler.jsonc` deploys `dist` to the existing `nasa-space-app-challenge` Worker. A GitHub push alone does not deploy the website. Deployment receipts are recorded in [Status](docs/STATUS.md).
+The configuration publishes to the existing Sol-3 Worker. Pushing to GitHub does not deploy the site.

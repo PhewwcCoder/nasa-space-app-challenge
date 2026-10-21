@@ -1,5 +1,9 @@
 # Status
 
+## README cleanup / 2026-10-21
+
+Rewrote the README as a shorter project introduction with one museum image, the five missions, essential controls, local setup and deployment instructions. Removed corrupted question-mark separators and the release-history tour. Updated notebook and question-timing descriptions to match the deployed UI. Verified local links and image paths; documentation only, with no runtime changes or new test run.
+
 ## Student UI publication / 2026-10-21
 
 Published to origin/main in two focused commits: `d650ea2` (post-approach mission questions) and `54efbf9` (compact guide, hardware emphasis, hover feedback and personal notebook). Deployed the existing Cloudflare Worker at https://nasa-space-app-challenge.aryan-sharar.workers.dev/ with version `6263b6e7-e8bb-4ef2-aa23-90b463431ccf`.
