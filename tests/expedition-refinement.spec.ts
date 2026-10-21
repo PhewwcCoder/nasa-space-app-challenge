@@ -18,7 +18,9 @@ test('desktop mission questions, terrain views, Apollo map removal and forward r
     await select(name);
     await expect(page.locator('canvas')).toHaveAttribute('data-world', world, { timeout: 30000 });
     const q = page.getByTestId('miso-question');
-    const first = await q.innerText();
+    await expect(q).toHaveCount(0);
+    await page.locator('.mars-approach .action').click();
+    if (world !== 'voyager') await page.getByRole('button', { name: 'Skip walk', exact: true }).click();
     await expect(page.locator('.mission-question .quiz-options button')).toHaveCount(3);
     await page.locator('.mission-question .quiz-options button').first().click();
     await expect(page.locator('.mission-question [role=status] a')).toHaveAttribute('href', /nasa.gov/);
@@ -29,12 +31,11 @@ test('desktop mission questions, terrain views, Apollo map removal and forward r
     await page.screenshot({ path: `docs/qa/revision-${world}-surface.png` });
     await select('APOLLO');
     await select(name);
-    await expect(q).not.toHaveText(first);
+    await expect(q).toHaveCount(0);
     await page.keyboard.press('Escape');
     await expect(page.locator('.mission-question')).toHaveCount(0);
   }
   await select('SOJOURNER');
-  await page.getByRole('button', { name: 'Explore without answering' }).click();
   await page.getByText('Fly to another site', { exact: true }).click();
   await page.getByRole('button', { name: 'Fly to Gusev Crater' }).click();
   await expect(page.locator('canvas')).toHaveAttribute('data-world', 'shuttle', { timeout: 30000 });
@@ -45,7 +46,6 @@ test('desktop mission questions, terrain views, Apollo map removal and forward r
   await page.getByRole('button', { name: 'Pause journey', exact: true }).click();
   await page.screenshot({ path: 'docs/qa/revision-forward-route.png' });
   await page.getByRole('button', { name: 'Skip travel', exact: true }).click();
-  await page.getByRole('button', { name: 'Explore without answering' }).click();
   await page.getByText('Fly to another site', { exact: true }).click();
   await page.getByRole('button', { name: 'Fly to Ares Vallis' }).click();
   await expect(page.locator('.route-map')).toHaveAttribute('aria-label', /from Gusev Crater to Ares Vallis/);
@@ -63,6 +63,8 @@ test('desktop reduced motion keeps questions optional and regional labels readab
   for (const name of ['SOJOURNER', 'SPIRIT', 'OPPORTUNITY', 'VOYAGER']) {
     await page.locator('.archive-index-trigger').click();
     await page.locator('#archive-index').getByRole('button', { name: new RegExp(name) }).click();
+    await expect(page.getByTestId('miso-question')).toHaveCount(0);
+    await page.locator('.mars-approach .action').click();
     await expect(page.getByTestId('miso-question')).toBeVisible();
     await page.getByRole('button', { name: 'Explore without answering' }).click();
     await expect(page.locator('canvas')).toHaveAttribute('aria-busy', 'false', { timeout: 30000 });

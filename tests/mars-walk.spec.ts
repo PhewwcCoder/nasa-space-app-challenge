@@ -10,7 +10,6 @@ test('astronaut walks in all three Mars chapters, pauses, skips and preserves in
   for (const [chapter, id, world] of [['SOJOURNER', 'sojourner', 'mars'], ['SPIRIT', 'spirit', 'spirit'], ['OPPORTUNITY', 'opportunity', 'opportunity']]) {
     await page.locator('.archive-index-trigger').click();
     await page.locator('#archive-index').getByRole('button', { name: new RegExp(chapter) }).click();
-    await page.getByRole('button', { name: 'Explore without answering' }).click();
     await expect(page.locator('canvas')).toHaveAttribute('data-world', world, { timeout: 30000 });
     await page.locator('.mars-approach .action').click();
     const walk = page.getByRole('region', { name: 'Walk toward the Mars rover' });
@@ -56,7 +55,6 @@ test('Mars walking cancels on departure and reduced motion reaches the rover dir
   await page.goto('/');
   await page.locator('.archive-index-trigger').click();
   await page.locator('#archive-index').getByRole('button', { name: /SPIRIT/ }).click();
-  await page.getByRole('button', { name: 'Explore without answering' }).click();
   await page.locator('.mars-approach .action').click();
   await page.keyboard.down('KeyW');
   await page.getByRole('button', { name: 'MUSEUM', exact: true }).click();
@@ -65,7 +63,6 @@ test('Mars walking cancels on departure and reduced motion reaches the rover dir
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.locator('.archive-index-trigger').click();
   await page.locator('#archive-index').getByRole('button', { name: /OPPORTUNITY/ }).click();
-  await page.getByRole('button', { name: 'Explore without answering' }).click();
   await page.locator('.mars-approach .action').click();
   await expect(page.locator('.mars-walk-prompt')).toHaveCount(0);
   await expect(page.locator('.discovery-dock [data-artifact="opportunity"]')).toBeVisible();
