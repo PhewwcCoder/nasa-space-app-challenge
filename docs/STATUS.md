@@ -1,5 +1,9 @@
 # Status
 
+## October 23 publication
+
+Pushed runtime commit 744d0da to origin/main and deployed https://nasa-space-app-challenge.aryan-sharar.workers.dev/ as Cloudflare version 1a1c2128-fec1-4c21-8eea-53f5ab0ea738. Final production build and coordinate checks passed. Node HTTP verification confirms live HTML (normalized line endings) and all JS/CSS match the production build byte-for-byte; Python HTTP verification received 403, so Node fetch was used. Desktop flow checks are recorded below. Mobile testing excluded. Unrelated QA artifacts remain local.
+
 ## Voyager departs from the current Mars site / 2026-10-23
 
 Selector routes from Chapters 2/3/4 to Voyager now launch a visible shuttle from the current Mars world and continue through the existing deep-space transition. Current-site terrain remains under the departure, source cameras yield, and the travel clock waits for scene readiness. Pause, skip and reduced-motion behavior remain; museum entry stays direct. Desktop regression passed all three departure worlds, paused departure, skipped and natural arrivals, one canvas and zero page errors. Build passed with the existing bundle advisory. Reviewed docs/qa/voyager-mars-departure.png. Mobile testing excluded; no deployment.
