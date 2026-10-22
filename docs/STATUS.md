@@ -1,5 +1,30 @@
 # Status
 
+## Voyager departs from the current Mars site / 2026-10-23
+
+Selector routes from Chapters 2/3/4 to Voyager now launch a visible shuttle from the current Mars world and continue through the existing deep-space transition. Current-site terrain remains under the departure, source cameras yield, and the travel clock waits for scene readiness. Pause, skip and reduced-motion behavior remain; museum entry stays direct. Desktop regression passed all three departure worlds, paused departure, skipped and natural arrivals, one canvas and zero page errors. Build passed with the existing bundle advisory. Reviewed docs/qa/voyager-mars-departure.png. Mobile testing excluded; no deployment.
+
+## Direct museum and Voyager arrivals / 2026-10-23
+
+Museum and Chapter 5 entry to Chapters 2/3/4 now starts the playable Mars landing directly in Ares, Gusev or Meridiani respectively. Shared touchdown and Skip landing use the selected chapter walking approach. Apollo retains direct lunar landing; museum to Voyager opens exploration directly. Mars-to-Mars rocky courses are preserved. Desktop regression passed all six museum/Voyager-to-Mars combinations, skip destinations, normal Voyager opening, Apollo replay, one canvas and zero page errors. Production build passed with the existing bundle-size advisory. Mobile testing excluded; no deployment.
+
+## Shuttle control hint placement / 2026-10-23
+
+Moved the W/arrow, steering and Space instructions from the upper-left destination heading to directly above the right-hand shuttle controls, as marked by the user. Placement follows the control panel. No flight behavior changes; mobile testing remains excluded.
+
+## Mars-to-Mars routing correction / 2026-10-23
+
+Mission-selector travel between Chapters 2/3/4 now uses the existing rocky Mars shuttle course, including reverse routes and direct Chapter 2/4 travel. Re-selecting the current Mars chapter stays at that site. Moon landing maps remain flight-only. Verified Sojourner model dimensions against NASA/JPL (65 x 48 x 30 cm); the existing 1.85 m fictional suit is appropriately taller. Perspective exaggerates the near visitor versus the distant rover; physical dimensions were retained. Source: https://www-robotics.jpl.nasa.gov/what-we-do/flight-projects/pathfinder/. Production build passed with the existing size advisory. Desktop regression passed all six directed Mars chapter routes with keyboard thrust, skip and one persistent canvas. Initial cold scene preparation exceeded a click timeout; waiting for renderer readiness resolved it. Pure surface-flight checks and git diff --check also passed. No mobile testing or deployment.
+
+## Landing navigation, mission entry and visitor patch / 2026-10-23
+
+Implemented locally: Moon and Mars landing maps now report the rendered ship's ground distance, height and descent, including its sloped cinematic approach. A shared coordinate transform drives ship/dust placement and telemetry; the landing ring uses the actual six-metre capture radius, equal-axis projection, discrete zoom and a scale bar. Per the user's clarified scope, the Moon map appears ONLY during spaceship landing and disappears at touchdown. No new map remains in walking, exploration or inspection; the briefly added surface map and its styles/helpers were removed. Existing Mars surface maps are unchanged.
+
+Mission-selector Chapters 2-5 now start Moon takeoff and spaceflight before the selected destination; Sojourner keeps its playable landing. Every Apollo entry resets its existing manual Moon landing. Pause, skip, mid-flight destination replacement, reduced motion, discovery state, museum scroll and the original canvas are preserved. The selector stays available during this travel, and the takeoff camera follows the shuttle. The fictional shared EVA visitor wears an original NASA x Bangladesh patch; historical Eagle markings are unchanged.
+
+Desktop validation: six distinct cases passed across focused runs, covering actual rendered Moon/Mars position versus map instruments; selector takeoff for all four destinations, natural Spirit arrival, pause/skip and mid-flight replacement; Apollo replay from all four chapters; desktop reduced-motion routing/museum restoration; manual failure/retry; manual landing; and the corrected no-map-after-touchdown walking/inspection-exit case (Apollo replay is part of the selector case). Pure flight, coordinate navigation, surface-flight and 800-visit question checks passed. Typecheck, final production build and git diff --check passed; the existing Three.js bundle-size advisory remains. A first selector run exposed the old hidden-during-travel CSS rule, now fixed. The obsolete surface-map test failed when the map was removed following the user's correction; its replacement passed. No full-suite or mobile test claim. Desktop captures reviewed: navigation-moon-approach.png, navigation-mars-approach.png, navigation-selector-takeoff.png, navigation-moon-walk-patch.png and navigation-moon-surface.png under docs/qa. No commit, push or deployment.
+
+
 ## README visual showcase / 2026-10-21
 
 Restored a screenshot-led README while retaining short captions and the simple technology overview. Ten fresh 1920x1080 JPEG captures from the deployed application show the lunar flight, separated Eagle assemblies, an engine lesson, Apollo Field Guide, all three Mars sites, Voyager hardware, Golden Record and museum. Main preview images link to the live site; Mars thumbnails open their full-size images. All ten captures were visually reviewed and all local links/image paths resolve. Capture sessions reported zero page errors. Documentation/images only; no runtime deployment or mobile test.

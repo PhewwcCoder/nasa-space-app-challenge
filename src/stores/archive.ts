@@ -14,7 +14,7 @@ type State = {
   voyagerApproached:boolean; approachVoyager:()=>void; startVoyagerTravel:()=>void;
   opportunityApproached: boolean; approachOpportunity: ()=>void; startOpportunityTravel: ()=>void;
   spiritApproached: boolean; evidenceStep: number; setEvidenceStep: (n:number)=>void; approachSpirit: ()=>void; startSpiritTravel: ()=>void; lunarSignalSeen: boolean; chapter: Chapter; identified: ArtifactId[]; marsApproached: boolean; travelProgress: number;
-  visitChapter: (id: Chapter) => void; startTravel: () => void; beginMarsLanding: () => void; setTravelProgress: (n:number) => void; approachMars: () => void; identify: (id: ArtifactId) => void;
+  visitChapter: (id: Chapter) => void; travelDestination: Exclude<Chapter, 'prologue' | 'apollo11'>; finishTravel: () => void; startTravel: (destination?: Exclude<Chapter, 'prologue' | 'apollo11'>) => void; finishMarsLanding: () => void; beginMarsLanding: (destination?: MarsStop) => void; setTravelProgress: (n:number) => void; approachMars: () => void; identify: (id: ArtifactId) => void;
   scanProgress: number; setScanProgress: (n: number) => void; stage: Stage; progress: number; inspector: ArtifactId | null; discovered: ArtifactId[];
   selected: string; inspectedParts: string[]; exploded: boolean; isolated: boolean; viewKey: number;
   walk: number; cutaway: boolean; historical: boolean; setWalk: (n: number) => void; toggleCutaway: () => void; toggleHistorical: () => void;
@@ -33,16 +33,19 @@ export const useArchive = create<State>((set, get) => ({
   exhibit:0,museumScroll:0,setExhibit:exhibit=>set({exhibit}),
   shuttleRace:newSurfaceFlight(),retryShuttle:()=>{clearControls();set({shuttleRace:newSurfaceFlight(get().shuttleRace.checkpoint),paused:false});},shuttleFrom:'sojourner',shuttleTo:'spirit',shuttleOffset:0,shuttleCruise:false,
   startShuttle:to=>{const from=get().chapter;if(!['sojourner','spirit','opportunity'].includes(from)||from===to)return;clearControls();set({marsWalking:false,shuttleRace:newSurfaceFlight(),shuttleFrom:from as MarsStop,shuttleTo:to,shuttleOffset:0,shuttleCruise:false,travelProgress:0,stage:'shuttle',inspector:null,paused:false});},
-  voyagerApproached:false, approachVoyager:()=>set({voyagerApproached:true,missionQuestionReady:true}), startVoyagerTravel:()=>{clearControls();set({stage:'voyager-travel',inspector:null,travelProgress:0,paused:false});},
+  voyagerApproached:false, approachVoyager:()=>set({voyagerApproached:true,missionQuestionReady:true}), startVoyagerTravel:()=>{clearControls();set({stage:'voyager-travel',marsWalking:false,missionQuestionReady:false,missionQuestionDismissed:false,inspector:null,selected:'',travelProgress:0,paused:false});},
   opportunityApproached:false, approachOpportunity:()=>get().startMarsWalk(), startOpportunityTravel:()=>{get().visitChapter('spirit');get().startShuttle('opportunity');},
   spiritApproached:false, evidenceStep:0, approachSpirit:()=>get().startMarsWalk(), setEvidenceStep:evidenceStep=>set({evidenceStep}), startSpiritTravel:()=>{get().visitChapter('sojourner');get().startShuttle('spirit');},
   lunarSignalSeen:false, chapter:'prologue',  identified:[], marsApproached:false, travelProgress:0,
   identify:id=>set(s=>({identified:s.identified.includes(id)?s.identified:[...s.identified,id]})),
   approachMars:()=>get().startMarsWalk(),
   setTravelProgress:travelProgress=>set({travelProgress}),
-  startTravel:()=>{clearControls();set({marsWalking:false,chapter:'sojourner',stage:'travel',inspector:null,selected:'',exploded:false,isolated:false,travelProgress:0,paused:false});},
-  beginMarsLanding:()=>{clearControls();set(s=>({chapter:'sojourner',stage:'mars-landing',travelProgress:1,inspector:null,marsApproached:false,assist:false,paused:false,flightReset:s.flightReset+1}));},
-  visitChapter:chapter=>{if(!builtChapters.includes(chapter))return;clearControls();set({missionQuestionReady:false,missionQuestionDismissed:false,marsWalking:false,marsWalk:0,chapter,stage:chapter==='prologue'?'entry':chapter==='apollo11'?'explore':chapter==='spirit'?'spirit':chapter==='opportunity'?'opportunity':chapter==='voyager'?'voyager':'mars',inspector:null,selected:'',exploded:false,isolated:false,paused:false,walk:1,viewKey:get().viewKey+1});},
+  travelDestination:'sojourner',
+  finishTravel:()=>{const s=get();if(s.travelDestination==='sojourner')s.beginMarsLanding();else s.visitChapter(s.travelDestination);},
+  startTravel:(destination='sojourner')=>{clearControls();set({missionQuestionReady:false,missionQuestionDismissed:false,travelDestination:destination,viewKey:get().viewKey+1,marsWalking:false,chapter:destination,stage:'travel',inspector:null,selected:'',exploded:false,isolated:false,travelProgress:0,paused:false});},
+  finishMarsLanding:()=>{const chapter=get().chapter;get().visitChapter(chapter);get().startMarsWalk();},
+  beginMarsLanding:(destination='sojourner')=>{clearControls();set(s=>({chapter:destination,missionQuestionReady:false,missionQuestionDismissed:false,marsWalking:false,selected:'',exploded:false,isolated:false,stage:'mars-landing',travelProgress:1,inspector:null,marsApproached:false,assist:false,paused:false,flightReset:s.flightReset+1}));},
+  visitChapter:chapter=>{if(!builtChapters.includes(chapter))return;clearControls();set({missionQuestionReady:false,missionQuestionDismissed:false,marsWalking:false,marsWalk:0,chapter,stage:chapter==='prologue'?'entry':chapter==='apollo11'?'approach':chapter==='spirit'?'spirit':chapter==='opportunity'?'opportunity':chapter==='voyager'?'voyager':'mars',inspector:null,selected:'',exploded:false,isolated:false,paused:false,walk:chapter==='apollo11'?0:1,...(chapter==='apollo11'?{assist:false,flightReset:get().flightReset+1}:{}),viewKey:get().viewKey+1});},
   scanProgress:1,setScanProgress:scanProgress=>set({scanProgress}),walk:0,cutaway:false,historical:true,setWalk:walk=>set({walk}),toggleCutaway:()=>set(s=>({cutaway:!s.cutaway})),toggleHistorical:()=>set(s=>({historical:!s.historical})),
   stage:'entry', progress:0, inspector:null, discovered:[], selected:'', inspectedParts:[],
   exploded:false, isolated:false, viewKey:0, muted:true, assist:false, flightReset:0, paused:false,

@@ -32,7 +32,28 @@ function FabricLimb({length,radius}:{length:number;radius:number}) {
  return <mesh geometry={geometry} position={[0,-length/2,0]} castShadow><meshStandardMaterial color="#e6e3db" roughness={.94}/></mesh>;
 }
 function SuitHose(){const curve=useMemo(()=>new THREE.CatmullRomCurve3([new THREE.Vector3(.19,1.39,.32),new THREE.Vector3(.34,1.12,.4),new THREE.Vector3(.36,.82,.34),new THREE.Vector3(.2,.76,.3),new THREE.Vector3(.09,1.12,.28)]),[]);return <mesh><tubeGeometry args={[curve,48,.025,8,false]}/><meshStandardMaterial color="#dad8cc" roughness={.9}/></mesh>;}
-function FlagPatch(){return <group position={[0,1.58,-.525]} rotation={[0,Math.PI,0]}><mesh><planeGeometry args={[.3,.18]}/><meshStandardMaterial color="#f5f0e5"/></mesh>{Array.from({length:7},(_,i)=><mesh key={i} position={[0,.077-i*.026,.002]}><planeGeometry args={[.3,.012]}/><meshStandardMaterial color="#ab3c35"/></mesh>)}<mesh position={[-.082,.039,.004]}><planeGeometry args={[.135,.103]}/><meshStandardMaterial color="#233f65"/></mesh>{Array.from({length:12},(_,i)=><mesh key={i} position={[-.13+(i%4)*.03,.075-Math.floor(i/4)*.03,.006]}><circleGeometry args={[.006,5]}/><meshBasicMaterial color="#f4eee0"/></mesh>)}</group>;}
+function FlagPatch(){
+ const texture=useMemo(()=>{
+  const canvas=document.createElement('canvas');canvas.width=768;canvas.height=384;
+  const c=canvas.getContext('2d')!;
+  c.fillStyle='#e8e6db';c.fillRect(0,0,768,384);
+  c.strokeStyle='#8e9691';c.lineWidth=10;c.strokeRect(8,8,752,368);
+  // Original fictional expedition patch: NASA motif paired with Bangladesh.
+  c.fillStyle='#163d85';c.beginPath();c.arc(174,169,132,0,Math.PI*2);c.fill();
+  c.fillStyle='#ffffff';for(const [x,y] of [[94,103],[162,63],[239,110],[114,240],[236,224],[209,77],[74,186]]){c.beginPath();c.arc(x,y,3,0,Math.PI*2);c.fill();}
+  c.strokeStyle='#d9e6f6';c.lineWidth=3;c.beginPath();c.ellipse(174,170,115,43,-.52,0,Math.PI*2);c.stroke();
+  c.strokeStyle='#ef4145';c.lineWidth=9;c.beginPath();c.moveTo(78,234);c.quadraticCurveTo(200,150,295,67);c.stroke();
+  c.fillStyle='white';c.font='bold italic 66px Georgia';c.textAlign='center';c.fillText('NASA',172,191);
+  c.fillStyle='#263c3d';c.font='44px Arial';c.fillText('\u00d7',361,186);
+  c.fillStyle='#006a4e';c.fillRect(414,65,300,200);
+  c.fillStyle='#f42a41';c.beginPath();c.arc(549,165,66,0,Math.PI*2);c.fill();
+  c.fillStyle='#263c3d';c.font='bold 24px Arial';c.fillText('BANGLADESH',564,312);
+  c.font='20px Arial';c.fillText('EXPLORER',174,331);
+  const map=new THREE.CanvasTexture(canvas);map.colorSpace=THREE.SRGBColorSpace;map.anisotropy=4;return map;
+ },[]);
+ useEffect(()=>()=>texture.dispose(),[texture]);
+ return <group name="nasa-bangladesh-patch" position={[0,1.58,-.525]} rotation={[0,Math.PI,0]}><mesh><planeGeometry args={[.48,.24]}/><meshStandardMaterial map={texture} roughness={.85}/></mesh></group>;
+}
 export function AstronautSuit({isWalking}:{isWalking?:()=>boolean}){
  const limbs=useRef<(THREE.Group|null)[]>([]),phase=useRef(0),stride=useRef(0);
  useFrame((_,dt)=>{const s=useArchive.getState();if(s.paused)return;const moving=(isWalking?isWalking():s.stage==='surface'&&!s.inspector&&flightInput.z<0&&s.walk<1)&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches;stride.current=THREE.MathUtils.damp(stride.current,moving?1:0,8,dt);if(moving)phase.current+=Math.min(dt,.05)*5;limbs.current.forEach((limb,i)=>{if(limb)limb.rotation.x=Math.sin(phase.current+(i%2?Math.PI:0))*stride.current*(i<2?.32:-.25);});});

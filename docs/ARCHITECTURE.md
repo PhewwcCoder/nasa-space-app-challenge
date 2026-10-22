@@ -1,3 +1,21 @@
+## Mars departure for Voyager / 2026-10-23 - current precedence
+
+Chapter 2/3/4 to Voyager uses the existing deep-space transition, with an animated shuttle lifting from the current Mars scene. The departure retains the source chapter until arrival; source cameras yield to the travel camera. Scene readiness pauses the transit clock. Pause, skip and reduced-motion arrival remain. Museum-to-Voyager stays direct.
+
+## Direct arrivals / 2026-10-23 - current precedence
+
+Museum and Voyager departures to Chapters 2/3/4 start direct playable Mars landing in the selected destination world, without lunar takeoff or transit. Touchdown and Skip landing enter that chapter walking approach. Apollo retains direct lunar landing. Museum to Voyager opens normal exploration immediately. Mars-to-Mars selection retains the rocky surface shuttle. Shared landing state, controls and original canvas remain.
+
+## Mars selector routing / 2026-10-23 - current precedence
+
+Switching between Chapters 2, 3 and 4 from a Mars surface or surface shuttle uses startShuttle and the existing rocky Mars course in either direction. Selecting the current Mars chapter returns to that site without a Moon departure. Other entries retain the existing arrival flows.
+
+## Navigation consistency / 2026-10-23 - current precedence
+
+`game/navigation.ts` supplies landingPosition/landingNavigation to the craft, dust and HUD, including altitude-dependent forward displacement and vertical display scale. LandingMap projects those same local X/Z coordinates at equal scale on both axes, shows the actual six-metre landing radius and uses discrete automatic zoom without clamping the marker. FlightHUD owns LandingMap, so it unmounts at touchdown. FlightMap continues to omit Apollo entirely; no walking, exploration or inspection map is added.
+
+`visitChapter('apollo11')` resets manual landing and walk state for every entry. Mission-selector Chapters 2-5 call startTravel(destination); finishTravel sends Sojourner to its landing and other destinations to their surfaces. Non-Sojourner routes end under the transit veil before the Mars landing segment; Voyager omits the Mars globe. viewKey remounts the travel controller on a replacement/repeated destination so the clock resets. Existing museum surface-search entries and inter-site shuttle arrival actions stay separate. No new canvas, renderer or backend.
+
 ## Student UI simplification / 2026-10-21 - current precedence
 
 Apollo's expedition/log sidebar is replaced with a compact optional Field Guide entrance. Separate hardware is the first Eagle control, emphasized by a light border over a neutral dark surface. Buttons lift on hover and show keyboard focus; reduced motion removes movement.

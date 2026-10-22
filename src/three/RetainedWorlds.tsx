@@ -1,22 +1,23 @@
 import { Fragment, Suspense, startTransition, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { createPortal, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
-import { useArchive, type Stage } from '../stores/archive';
+import { useArchive, type Stage, type Chapter } from '../stores/archive';
 import { afterPaint } from '../afterPaint';
 import { SceneActivity } from './SceneActivity';
 import { preparationSnapshot } from './preparationSnapshot';
 
 export type WorldId = 'museum' | 'shuttle' | 'orbit' | 'lunar' | 'mars' | 'spirit' | 'transit' | 'opportunity' | 'voyager';
-export function worldFor(stage: Stage, progress: number): WorldId {
+export function worldFor(stage: Stage, progress: number, chapter?: Chapter): WorldId {
+  if(stage==='mars-landing')return chapter==='spirit'?'spirit':chapter==='opportunity'?'opportunity':'mars';
   if (stage === 'shuttle') return 'shuttle';
   if (stage === 'entry') return 'museum';
   if (stage === 'voyager' || stage === 'voyager-travel' && progress >= .5) return 'voyager';
-  if (stage === 'voyager-travel') return 'opportunity';
+  if (stage === 'voyager-travel') return chapter==='sojourner'?'mars':chapter==='spirit'?'spirit':'opportunity';
   if (stage === 'signal') return 'orbit';
   if (stage === 'opportunity' || stage === 'opportunity-travel' && progress >= .5) return 'opportunity';
   if (stage === 'opportunity-travel') return 'spirit';
   if (stage === 'spirit' || stage === 'mars-travel' && progress >= .5) return 'spirit';
-  if (stage === 'mars-landing' || stage === 'mars' || stage === 'mars-travel' || stage === 'travel' && progress >= .68) return 'mars';
+  if (stage === 'mars' || stage === 'mars-travel' || stage === 'travel' && progress >= .68) return 'mars';
   if (stage === 'travel' && progress >= .36) return 'transit';
   return 'lunar';
 }
@@ -57,7 +58,7 @@ function Prepared({ id, ready }: { id: WorldId; ready: (id: WorldId) => void }) 
  * Only the displayed scene is rendered/raycast/animated. Visited resources stay resident.
  */
 export default function RetainedWorlds({ renderWorld }: { renderWorld: (id: WorldId, active: boolean) => ReactNode }) {
-  const requested = useArchive(s => worldFor(s.stage, s.travelProgress));
+  const requested = useArchive(s => worldFor(s.stage, s.travelProgress, s.chapter));
   const root = useThree();
   const [mounted, setMounted] = useState<WorldId[]>([requested]);
   const [prepared, setPrepared] = useState<WorldId[]>([]);

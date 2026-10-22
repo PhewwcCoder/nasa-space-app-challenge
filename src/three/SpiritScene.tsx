@@ -1,3 +1,5 @@
+import { MarsDepartureCraft } from './ChapterTravel';
+import LandingFlight from './LandingFlight';
 import MarsExplorer from './MarsExplorer';
 import { memo } from 'react';
 import { useShallow } from 'zustand/react/shallow';
@@ -20,7 +22,7 @@ function SpiritCamera(){
   useEffect(()=>{start.current.copy(camera.position);elapsed.current=0;arrived.current=false;},[camera,inspector,spiritApproached,viewKey,stage]);
   useEffect(()=>{const handle=(event:Event)=>{if(!inspector)return;const mode=(event as CustomEvent<string>).detail,d=camera.position.clone().sub(focus);if(mode==='left'||mode==='right')d.applyAxisAngle(new THREE.Vector3(0,1,0),mode==='left'?.25:-.25);else d.multiplyScalar(mode==='in'?.85:1.15);d.setLength(THREE.MathUtils.clamp(d.length(),inspectionMinDistance(inspector),18));camera.position.copy(focus.clone().add(d));camera.lookAt(focus);};window.addEventListener('model-control',handle);return()=>window.removeEventListener('model-control',handle);},[camera,focus,inspector]);
   useFrame((_,dt)=>{
-    if(stage==='mars-travel'||stage==='opportunity-travel')return;
+    if(stage==='voyager-travel'||stage==='mars-travel'||stage==='opportunity-travel')return;
     if(camera instanceof THREE.PerspectiveCamera){if(inspector)camera.setViewOffset(size.width,size.height,size.width>760?size.width*.18:0,size.width<=760?size.height*.1:0,size.width,size.height);else camera.clearViewOffset();}
     if(useArchive.getState().paused||useArchive.getState().marsWalking)return;
     elapsed.current+=dt;if(inspector&&arrived.current&&scanProgress===1)return;
@@ -78,9 +80,9 @@ function SpiritScene({active=true}:{active?:boolean}){
   return <>
     <hemisphereLight args={['#e9d5bd','#51453e',1.45]}/><directionalLight position={[-12,18,8]} intensity={3} color="#fff0cf" castShadow shadow-mapSize={[2048,2048]} shadow-camera-left={-16} shadow-camera-right={16} shadow-camera-top={16} shadow-camera-bottom={-16} shadow-bias={-.0003}/>
     <Terrain variant="gusev"/><Dust/><SpiritModel/><EvidenceGround/>
-    <group position={[11,0,-6]} rotation={[0,-.6,0]} scale={.65}><SurveyCraft thrust={0}/></group>
+    {stage==='voyager-travel'?<MarsDepartureCraft/>:<group position={[11,0,-6]} rotation={[0,-.6,0]} scale={.65}><SurveyCraft thrust={0}/></group>}
     {active&&stage==='spirit'&&!inspector&&spiritApproached&&<Html position={[1.4,1.7,0]} center zIndexRange={[4,3]}><button className="world-target" data-artifact="spirit" onClick={()=>inspect('spirit')}><span>01</span><small>{identified.includes('spirit')?'SPIRIT':'UNKNOWN HARDWARE'}<br/>INSPECT TRACE</small></button></Html>}
-    {active&&<SpiritCamera/>}<MarsExplorer chapter="spirit"/>
+    {stage==='mars-landing'?<LandingFlight mars/>:active&&<SpiritCamera/>}<MarsExplorer chapter="spirit"/>
   </>;
 }
 

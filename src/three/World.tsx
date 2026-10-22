@@ -85,7 +85,7 @@ function renderWorld(id:WorldId,active:boolean){
  if(id==='transit')return <TransitPlanets/>;
  return <MemoLunarScene active={active} orbit={id==='orbit'}/>;
 }
-function Scene(){const stage=useArchive(s=>s.stage);return <><RetainedWorlds renderWorld={renderWorld}/>{stage==='travel'&&<ChapterTravel/>}{stage==='mars-travel'&&<MarsTraverse/>}{stage==='opportunity-travel'&&<OpportunityTraverse/>}{stage==='voyager-travel'&&<VoyagerTraverse/>}</>;}
+function Scene(){const stage=useArchive(s=>s.stage),viewKey=useArchive(s=>s.viewKey);return <><RetainedWorlds renderWorld={renderWorld}/>{stage==='travel'&&<ChapterTravel key={viewKey}/>}{stage==='mars-travel'&&<MarsTraverse/>}{stage==='opportunity-travel'&&<OpportunityTraverse/>}{stage==='voyager-travel'&&<VoyagerTraverse/>}</>;}
 function World(){return <div className="world" aria-label="Three dimensional archive exploration"><Canvas shadows dpr={[1,2]} camera={{position:[0,4.5,23],fov:49,near:.1,far:700}} gl={{antialias:true,powerPreference:'high-performance',localClippingEnabled:true}}><Input/><Suspense fallback={null}><Scene/></Suspense></Canvas></div>;}
 
 

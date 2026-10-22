@@ -1,3 +1,9 @@
+## Local navigation maps / 2026-10-23 - current precedence
+
+Restore the Moon landing map at lower left. Its craft, ring and ground-range readout use the rendered position, equal-axis scale, a scale bar and discrete auto zoom. The ring radius is six local metres, matching flight capture. Remove decorative invented contour lines from this instrument. X/right and -Z/forward describe the authored scene; do not imply surveyed north or GPS.
+
+The Moon map is visible only during spaceship landing and disappears at touchdown. Do not add maps during walking, exploration or inspection. Use the existing dark translucent flight palette. The original fictional suit patch pairs a NASA-inspired blue insignia with Bangladesh's green/red flag.
+
 ## Student UI simplification / 2026-10-21 - current precedence
 
 Apollo's expedition/log sidebar is replaced with a compact optional Field Guide entrance. Separate hardware is the first Eagle control, emphasized by a light border over a neutral dark surface. Buttons lift on hover and show keyboard focus; reduced motion removes movement.

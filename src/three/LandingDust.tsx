@@ -1,6 +1,7 @@
 import { useSceneFrame as useFrame } from './SceneActivity';
 import { useMemo, useRef, useEffect, type RefObject } from 'react';
 import * as THREE from 'three';
+import { landingPosition } from '../game/navigation';
 import type { FlightState } from '../game/flight';
 import { useArchive } from '../stores/archive';
 
@@ -26,7 +27,8 @@ export default function LandingDust({flight,mars=false}:{flight:RefObject<Flight
     if(!group.current.visible||useArchive.getState().paused)return;
     if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)material.uniforms.time.value+=dt;
     material.uniforms.strength.value=1-Math.min(1,s.altitude/18);
-    group.current.position.set(s.x,.08,s.z+s.altitude*1.7);
+    const position=landingPosition(s);
+    group.current.position.set(position.x,.08,position.z);
   });
   return <group ref={group}>{[0,1,2,3].map(i=><mesh key={i} position={[0,i*.13,0]} rotation={[-Math.PI/2,0,i*.73]} material={material}><planeGeometry args={[21+i*2,21+i*2]}/></mesh>)}</group>;
 }

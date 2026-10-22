@@ -1,3 +1,21 @@
+## Mars departure for Voyager / 2026-10-23 - current precedence
+
+Chapter 2/3/4 to Voyager uses the existing deep-space transition, with an animated shuttle lifting from the current Mars scene. The departure retains the source chapter until arrival; source cameras yield to the travel camera. Scene readiness pauses the transit clock. Pause, skip and reduced-motion arrival remain. Museum-to-Voyager stays direct.
+
+## Direct arrivals / 2026-10-23 - current precedence
+
+Museum and Voyager departures to Chapters 2/3/4 start direct playable Mars landing in the selected destination world, without lunar takeoff or transit. Touchdown and Skip landing enter that chapter walking approach. Apollo retains direct lunar landing. Museum to Voyager opens normal exploration immediately. Mars-to-Mars selection retains the rocky surface shuttle. Shared landing state, controls and original canvas remain.
+
+## Mars selector routing / 2026-10-23 - current precedence
+
+Switching between Chapters 2, 3 and 4 from a Mars surface or surface shuttle uses startShuttle and the existing rocky Mars course in either direction. Selecting the current Mars chapter returns to that site without a Moon departure. Other entries retain the existing arrival flows.
+
+## Navigation and visitor patch / 2026-10-23 - current precedence
+
+Apollo opens with the existing piloted lunar landing from every chapter entry, including the Mission selector and Voyager return. Selector choices for Chapters 2-5 replay the Moon takeoff and spaceflight before reaching the selected chapter; Sojourner retains its playable Mars landing. Pause, skip, museum return and reduced-motion bypass remain available. Museum Spirit/Opportunity entries and Mars-to-Mars map flights retain their existing surface-search routes. Discoveries are preserved.
+
+The lunar approach map is restored only while the spaceship is landing. Apollo walking, exploration and inspection have no map. Flight instruments show actual rendered height, ground distance and descent, including the sloped approach corridor. Local scene metres and historical NASA landing-site references are distinct. The shared fictional EVA visitor wears an original NASA x Bangladesh patch; historical spacecraft markings remain unchanged.
+
 ## Student UI simplification / 2026-10-21 - current precedence
 
 Apollo's expedition/log sidebar is replaced with a compact optional Field Guide entrance. Separate hardware is the first Eagle control, emphasized by a light border over a neutral dark surface. Buttons lift on hover and show keyboard focus; reduced motion removes movement.

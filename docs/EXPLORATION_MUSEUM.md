@@ -1,3 +1,21 @@
+## Mars departure for Voyager / 2026-10-23 - current precedence
+
+Chapter 2/3/4 to Voyager uses the existing deep-space transition, with an animated shuttle lifting from the current Mars scene. The departure retains the source chapter until arrival; source cameras yield to the travel camera. Scene readiness pauses the transit clock. Pause, skip and reduced-motion arrival remain. Museum-to-Voyager stays direct.
+
+## Direct arrivals / 2026-10-23 - current precedence
+
+Museum and Voyager departures to Chapters 2/3/4 start direct playable Mars landing in the selected destination world, without lunar takeoff or transit. Touchdown and Skip landing enter that chapter walking approach. Apollo retains direct lunar landing. Museum to Voyager opens normal exploration immediately. Mars-to-Mars selection retains the rocky surface shuttle. Shared landing state, controls and original canvas remain.
+
+## Mars selector routing / 2026-10-23 - current precedence
+
+Switching between Chapters 2, 3 and 4 from a Mars surface or surface shuttle uses startShuttle and the existing rocky Mars course in either direction. Selecting the current Mars chapter returns to that site without a Moon departure. Other entries retain the existing arrival flows.
+
+## Unified selector departures and local navigation / 2026-10-23 - current precedence
+
+Mission-selector choices for Chapters 2-5 start the existing fictional Moon departure and spaceflight, then open the selected destination (Sojourner continues into manual Mars landing). Every Apollo chapter entry starts its lunar landing. Skip, pause, reduced motion, museum scroll restoration and session discoveries remain. Museum Spirit/Opportunity surface-search routes and Mars map flights are retained.
+
+The Moon map returns only during spaceship landing; walking, exploration and inspection remain map-free. Landing instruments include the rendered approach corridor's forward displacement, so a distant craft cannot be reported inside the ring. Landing maps use local scene metres with explicit X/Z axes, not planetary latitude/longitude or surveyed positions. Existing source links and non-survey limitations remain.
+
 ## Student UI simplification / 2026-10-21 - current precedence
 
 Apollo's expedition/log sidebar is replaced with a compact optional Field Guide entrance. Separate hardware is the first Eagle control, emphasized by a light border over a neutral dark surface. Buttons lift on hover and show keyboard focus; reduced motion removes movement.

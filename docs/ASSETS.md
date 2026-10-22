@@ -1,3 +1,7 @@
+## Fictional NASA x Bangladesh visitor patch / 2026-10-23
+
+Explorer.tsx draws a local CanvasTexture for the shared fictional EVA visitor: a blue NASA-inspired insignia, multiplication mark and Bangladesh flag. Original authored graphic/geometry, not a downloaded historical suit photograph or an assertion of a joint mission or NASA endorsement. The astronaut backpack replaces its previous US flag patch; Eagle and other historical hardware markings remain unchanged. Texture ownership/disposal stays with the suit component. No paid generation or external runtime asset is added.
+
 ## Astronaut walking on Mars / 2026-10-20 - current precedence
 
 ## Human and hardware scale / 2026-10-21

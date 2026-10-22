@@ -38,9 +38,9 @@ function VoyagerScene({active=true}:{active?:boolean}){
  return <><ambientLight intensity={.65}/><directionalLight position={[7,12,10]} intensity={3.2} color="#fff0d7"/><directionalLight position={[-10,4,-8]} intensity={2} color="#98bddc"/><SpiritModel artifact="voyager" url="/models/voyager-refined.glb" rotation={-.4}/>{active&&<VoyagerCamera/>}</>;
 }
 export function VoyagerTraverse(){
- const {camera}=useThree();const time=useRef(0),start=useRef(new THREE.Vector3());
+ const {camera,gl}=useThree();const time=useRef(0),start=useRef(new THREE.Vector3());
  useEffect(()=>{start.current.copy(camera.position);if(camera instanceof THREE.PerspectiveCamera)camera.clearViewOffset();},[camera]);
- useFrame((_,dt)=>{const state=useArchive.getState();if(state.paused)return;if(matchMedia('(prefers-reduced-motion: reduce)').matches){state.setStage('voyager');return;}time.current+=Math.min(dt,.1);const p=Math.min(1,time.current/10);if(p-state.travelProgress>.004||p===1)state.setTravelProgress(p);const t=p<.5?p*2:(p-.5)*2,e=t*t*(3-2*t);if(p<.5)camera.position.lerpVectors(start.current,new THREE.Vector3(25,65,50),e);else camera.position.lerpVectors(new THREE.Vector3(28,17,52),new THREE.Vector3(17,16,34),e);camera.lookAt(-2.5,3,2);if(p===1)state.setStage('voyager');});
+ useFrame((_,dt)=>{const state=useArchive.getState();if(state.paused||gl.domElement.getAttribute('aria-busy')==='true')return;if(matchMedia('(prefers-reduced-motion: reduce)').matches){state.setStage('voyager');return;}time.current+=Math.min(dt,.1);const p=Math.min(1,time.current/10);if(p-state.travelProgress>.004||p===1)state.setTravelProgress(p);const t=p<.5?p*2:(p-.5)*2,e=t*t*(3-2*t);if(p<.5){const z=state.chapter==='sojourner'?4:-6;camera.position.set(20+20*e,8+90*e,z+24+45*e);camera.lookAt(10+20*e,1+80*e,z+40*e);}else{camera.position.lerpVectors(new THREE.Vector3(28,17,52),new THREE.Vector3(17,16,34),e);camera.lookAt(-2.5,3,2);}if(p===1)state.setStage('voyager');});
  return null;
 }
 export default memo(VoyagerScene);

@@ -1,3 +1,5 @@
+import { MarsDepartureCraft } from './ChapterTravel';
+import LandingFlight from './LandingFlight';
 import MarsExplorer from './MarsExplorer';
 import { memo } from 'react';
 import { useShallow } from 'zustand/react/shallow';
@@ -48,9 +50,9 @@ function OpportunityScene({active=true}:{active?:boolean}){
   return <>
     <hemisphereLight args={['#e9d5bd','#51453e',1.45]}/><directionalLight position={[-12,18,8]} intensity={3} color="#fff0cf" castShadow shadow-mapSize={[2048,2048]} shadow-camera-left={-16} shadow-camera-right={16} shadow-camera-top={16} shadow-camera-bottom={-16} shadow-bias={-.0003}/>
     <Terrain variant="meridiani"/><Dust/><SpiritModel artifact="opportunity" url="/models/opportunity-refined.glb"/><OpportunityEvidence/>
-    <group position={[11,0,-6]} rotation={[0,-.6,0]} scale={.65}><SurveyCraft thrust={0}/></group>
+    {stage==='voyager-travel'?<MarsDepartureCraft/>:<group position={[11,0,-6]} rotation={[0,-.6,0]} scale={.65}><SurveyCraft thrust={0}/></group>}
     {active&&stage==='opportunity'&&!inspector&&opportunityApproached&&<Html position={[1.4,1.7,0]} center zIndexRange={[4,3]}><button className="world-target" data-artifact="opportunity" onClick={()=>inspect('opportunity')}><span>01</span><small>{identified.includes('opportunity')?'OPPORTUNITY':'UNKNOWN TRACE'}<br/>INSPECT TRACE</small></button></Html>}
-    {active&&<OpportunityCamera/>}<MarsExplorer chapter="opportunity"/>
+    {stage==='mars-landing'?<LandingFlight mars/>:active&&<OpportunityCamera/>}<MarsExplorer chapter="opportunity"/>
   </>;
 }
 
