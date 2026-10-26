@@ -1,5 +1,11 @@
 # Status
 
+## October 27 publication
+
+Published runtime commit `f30ca17` to `origin/main` and deployed the existing Cloudflare Worker at https://nasa-space-app-challenge.aryan-sharar.workers.dev/ as version `66d38c83-ba37-4526-ab72-5edcd15487fd`. This includes the museum-first Miso welcome and twelve FAQs, timed Apollo hint, removal of later automatic tips, cached rendering improvements, relocated hardware actions and corrected journey navigation.
+
+Release build passed with the existing Three.js bundle advisory. Live verification confirms HTML matches the local production build after line-ending normalization and all six JavaScript/CSS assets match byte-for-byte by SHA-256. Four desktop Playwright cases passed against the public URL: Chapter 3/4 selection during travel; map skip/keyboard input/pause/return; hardware separation and component controls in Chapters 2-5; and Miso's welcome, twelve FAQs, museum scroll and keyboard focus. Local regression results remain recorded below. Mobile testing excluded. Local QA captures, video workspaces and the pre-existing .gitignore edit remain outside these release commits. This receipt changes documentation only; deployed runtime corresponds to `f30ca17`.
+
 ## Hardware action placement and shuttle navigation / 2026-10-27
 
 Moved Separate/Assemble hardware beneath the Sojourner, Spirit, Opportunity and Voyager names with 16px text and a 48px minimum button height. Supporting reset/isolation/orbit controls stay near the component buttons. Replaced the two extra journey-map footer lines with a prominent full-width Skip journey button; simulated-position and schematic labels remain. Enlarged the W/arrow/steering/brake instructions from 11px to 16px.
