@@ -11,25 +11,25 @@ type V3 = [number,number,number];
 function Box({at,size,color='#b7a48b',metal=.6}:{at:V3;size:V3;color?:string;metal?:number}) {
   return <mesh position={at} castShadow receiveShadow><boxGeometry args={size}/><meshStandardMaterial color={color} metalness={metal} roughness={.48}/></mesh>;
 }
-function Part({id,offset,children}:{id:string;offset:V3;children:React.ReactNode}) {
+function Part({id,offset,children,preview=false}:{id:string;offset:V3;children:React.ReactNode;preview?:boolean}) {
   const sceneActive=useSceneActive();
   const ref=useRef<THREE.Group>(null);const {inspector,selected,exploded,isolated,select,scanProgress,paused}=useArchive(useShallow(s=>({inspector:s.inspector,selected:s.selected,exploded:s.exploded,isolated:s.isolated,select:s.select,scanProgress:s.scanProgress,paused:s.paused})));
-  const active=inspector==='sojourner'&&scanProgress===1;
+  const active=!preview&&inspector==='sojourner'&&scanProgress===1;
   useEffect(()=>{if(!sceneActive)ref.current?.position.set(0,0,0);},[sceneActive]);
-  useFrame((_,dt)=>{if(!ref.current||paused)return;const t=active&&(exploded||selected===id)?1:0;const k=matchMedia('(prefers-reduced-motion: reduce)').matches?1:1-Math.exp(-dt*5);ref.current.position.lerp(new THREE.Vector3(...offset).multiplyScalar(t),k);});
+  useFrame((_,dt)=>{if(!ref.current||paused||preview)return;const t=active&&(exploded||selected===id)?1:0;const k=matchMedia('(prefers-reduced-motion: reduce)').matches?1:1-Math.exp(-dt*5);ref.current.position.lerp(new THREE.Vector3(...offset).multiplyScalar(t),k);});
   return <group name={`sojourner-${id}`} ref={ref} visible={!active||!isolated||!selected||selected===id} onClick={e=>{if(active){e.stopPropagation();select(id);}}}>{children}{active&&selected===id&&<mesh position={[0,.27,0]}><boxGeometry args={[.76,.47,.57]}/><meshBasicMaterial transparent opacity={0} depthWrite={false}/><Edges color="#a0e0e5"/></mesh>}</group>;
 }
 // NASA/JPL: 0.30 m body height; the flexible antenna extends above this envelope.
-function SojournerModel(){const foil=useHardwareMaterial('#bb914f',.65);return <group name="sojourner-hardware" position={[0,.005*.30/.354,0]} scale={[.65/.66,.30/.354,.48/.546]}>
+function SojournerModel({preview=false}:{preview?:boolean}){const foil=useHardwareMaterial('#bb914f',.65);return <group name="sojourner-hardware" position={[0,.005*.30/.354,0]} scale={[.65/.66,.30/.354,.48/.546]}>
   <mesh position={[0,.21,0]} castShadow material={foil}><boxGeometry args={[.48,.16,.32]}/></mesh>
   {[-1,1].map(s=><group key={`body-${s}`}><Strut from={[-.23,.15,s*.17]} to={[.23,.15,s*.17]} radius={.009}/>{[-.19,-.1,0,.1,.19].map(x=><mesh key={x} position={[x,.275,s*.178]} rotation={[Math.PI/2,0,0]}><cylinderGeometry args={[.006,.006,.008,8]}/><meshStandardMaterial color="#dad5c6" metalness={.8} roughness={.4}/></mesh>)}</group>)}
   {[-1,1].map(s=><group key={s}><Box at={[0,.25,s*.166]} size={[.43,.095,.013]} color="#c8bfa7"/>{Array.from({length:9},(_,i)=><Box key={i} at={[-.19+i*.048,.26,s*.175]} size={[.012,.08,.008]} color="#7e7263"/>)}</group>)}
-  <Part id="solar" offset={[0,.35,0]}>
+  <Part id="solar" offset={[0,.35,0]} preview={preview}>
     <Box at={[0,.325,0]} size={[.66,.022,.44]} color="#c2b9a6"/>
     {Array.from({length:84},(_,i)=><Box key={i} at={[(i%12-5.5)*.052,.339,(Math.floor(i/12)-3)*.058]} size={[.049,.003,.054]} color={i%3===0?'#252b48':'#333b55'} metal={.55}/>)}
     {[-1,1].map(s=><Box key={s} at={[s*.322,.344,0]} size={[.009,.01,.44]} color="#dbd6c1"/>)}
   </Part>
-  <Part id="wheels" offset={[0,-.01,.32]}>
+  <Part id="wheels" offset={[0,-.01,.32]} preview={preview}>
     {[-1,1].map(s=><group key={s}>
       <Strut from={[-.25,.065,s*.23]} to={[-.1,.22,s*.2]} radius={.013}/><Strut from={[-.1,.22,s*.2]} to={[.02,.065,s*.23]} radius={.013}/><Strut from={[0,.065,s*.23]} to={[.13,.23,s*.2]} radius={.013}/><Strut from={[.13,.23,s*.2]} to={[.25,.065,s*.23]} radius={.013}/><Strut from={[-.1,.22,s*.2]} to={[.13,.23,s*.2]} radius={.014}/>
       {[-.25,0,.25].map((x,i)=><group key={i} position={[x,.065,s*.24]} rotation={[Math.PI/2,0,0]}>
@@ -39,7 +39,7 @@ function SojournerModel(){const foil=useHardwareMaterial('#bb914f',.65);return <
       </group>)}
     </group>)}
   </Part>
-  <Part id="apxs" offset={[-.3,.05,0]}>
+  <Part id="apxs" offset={[-.3,.05,0]} preview={preview}>
     <Strut from={[-.23,.19,0]} to={[-.38,.25,0]} radius={.012}/><Strut from={[-.38,.25,0]} to={[-.44,.13,0]} radius={.012}/>
     <mesh position={[-.44,.12,0]} rotation={[0,0,Math.PI/2]} castShadow><cylinderGeometry args={[.05,.045,.07,20]}/><meshStandardMaterial color="#b2aaa0" metalness={.7} roughness={.4}/></mesh>
     {[-.1,.1].map(z=><group key={z} position={[.25,.24,z]}><Box at={[0,0,0]} size={[.06,.065,.07]} color="#b6b6a5"/><mesh position={[.035,0,0]} rotation={[0,0,Math.PI/2]}><cylinderGeometry args={[.018,.018,.015,16]}/><meshStandardMaterial color="#111c24" metalness={.7} roughness={.15}/></mesh></group>)}

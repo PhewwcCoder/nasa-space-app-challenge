@@ -335,4 +335,60 @@ button:focus-visible,summary:focus-visible{outline:2px solid #e0ffed;outline-off
 .map-local-readout{font-size:9px;line-height:1.7;color:#bdd3d4;margin:9px 0 0}
 @media(min-width:761px){.map-screen>svg{height:160px}}
 
-.shuttle-controls .shuttle-keyboard-hint{position:absolute;bottom:calc(100% + 20px);left:0;right:0;margin:0;font-size:11px;line-height:1.7;color:#f1e5d0;text-shadow:0 2px 8px #18140f}
+.shuttle-controls .shuttle-keyboard-hint{position:absolute;bottom:calc(100% + 20px);left:0;right:0;margin:0;font-size:16px;line-height:1.7;color:#f1e5d0;text-shadow:0 2px 8px #18140f}
+/* Miso: one optional companion, shared by all five missions. */
+.miso-welcome-backdrop{position:fixed;inset:0;z-index:18;background:#0b172b17;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);pointer-events:none}
+.header-actions .miso-trigger{display:flex;align-items:center;gap:9px;padding:0;min-height:44px;text-transform:none;font-size:12px}
+.miso-trigger img{width:50px;height:50px;object-fit:cover;border-radius:50%;border:1px solid #b4d9cf;background:#142b32}
+.miso-tip{position:fixed;z-index:19;top:112px;left:50%;transform:translateX(-50%);width:min(345px,29vw);display:flex;gap:12px;padding:16px;background:#f5f7f0f5;color:#253d39;border:1px solid #c8d9d0;box-shadow:0 10px 35px #0002;text-align:left;pointer-events:auto;letter-spacing:normal}
+.miso-tip>img{width:44px;height:44px;object-fit:cover;border-radius:50%;flex:none}
+.miso-tip .eyebrow{color:#4f7169;font-size:9px;margin:0 0 7px}
+.miso-tip h2{font:400 30px/1.1 'Barlow Condensed',sans-serif;margin:0 0 8px}
+.miso-tip p:not(.eyebrow){font:15px/1.5 Arial,sans-serif;margin:0 0 12px}
+.miso-tip-actions{display:flex;gap:12px;flex-wrap:wrap}
+.header-actions .miso-tip-actions button{color:#2c5d51;background:none;border:0;border-bottom:1px solid #9bb9ac;min-height:36px;padding:6px 0;font-size:11px;letter-spacing:0}
+.header-actions .miso-tip-actions button:first-child:not(:last-child){background:#284f42;color:#fff;border:1px solid #284f42;padding:9px 13px}
+.miso-tip.miso-welcome{top:50%;bottom:auto;left:50%;transform:translate(-50%,-50%);width:min(760px,calc(100vw - 64px));padding:38px;gap:30px;align-items:center}
+.miso-tip.miso-welcome h2{font-size:42px;margin-bottom:16px}
+.miso-tip.miso-welcome p:not(.eyebrow){font-size:18px;line-height:1.65;margin-bottom:22px}
+.header-actions .miso-welcome .miso-tip-actions button{background:#284f42;color:#fff;border:1px solid #284f42;min-height:46px;padding:12px 18px;font-size:12px}
+.miso-tip.miso-museum-invite{top:auto;bottom:72px;left:var(--edge);transform:none;width:min(560px,47vw);padding:22px;gap:18px}
+.miso-tip.miso-museum-invite>img{width:84px;height:100px;object-fit:contain;border-radius:0}
+.experience:has(.miso-museum-invite) .museum-model-label{visibility:hidden}
+.miso-welcome>img{width:200px;height:240px;object-fit:contain;border-radius:0}
+.miso-tip.miso-eagle-tip{left:auto;right:var(--edge);top:170px;transform:none;width:320px}
+@media(min-width:761px){.experience:has(.miso-tip:not(.miso-welcome)) .site-caption{max-width:33vw}}
+.experience:has(.miso-welcome) .museum-model-label{visibility:hidden}
+.miso-dialog{padding:26px;width:min(540px,calc(100vw - 32px));max-height:calc(100svh - 48px);overflow:auto;overscroll-behavior:contain;background:#f7f9f3;color:#253d39;border:1px solid #c3d3ca;box-shadow:0 16px 70px #0005;text-align:left;letter-spacing:normal}
+.miso-dialog::backdrop{background:#020b1599;backdrop-filter:blur(4px)}
+.miso-dialog header{display:flex;align-items:center;gap:14px;position:sticky;top:0;background:#f7f9f3;z-index:2;padding:8px 0}
+.miso-dialog header img{width:60px;height:60px;object-fit:cover;border-radius:50%;background:#12242c}
+.miso-dialog header .eyebrow{color:#59776b;font-size:9px;margin:0 0 5px}
+.miso-dialog h2{font:400 36px/1 'Barlow Condensed',sans-serif;margin:0}
+.header-actions .miso-dialog header button{margin-left:auto;background:none;border:1px solid #aac1b5;color:#294f40;min-width:44px;min-height:44px;font-size:25px;padding:0}
+.miso-dialog .miso-intro{font:16px/1.5 Arial,sans-serif;margin:22px 0 16px}
+.miso-answer{padding:18px;background:#e6eee5;border-left:2px solid #52806c;margin-bottom:18px}
+.miso-answer h3{font:600 16px/1.4 Arial,sans-serif;margin:0 0 10px}
+.miso-answer p{font:16px/1.65 Arial,sans-serif;margin:0}
+.miso-dialog nav{display:grid;gap:0}
+.header-actions .miso-dialog nav button{display:flex;align-items:center;gap:13px;color:#334e43;text-align:left;font:14px/1.4 Arial,sans-serif;padding:12px 10px;min-height:44px;border:0;border-bottom:1px solid #c8d6cb;background:transparent;letter-spacing:0}
+.header-actions .miso-dialog nav button[aria-pressed=true]{background:#dce9dd;color:#173d2c}
+.miso-dialog nav button span{font:10px 'IBM Plex Mono',monospace;color:#627d6e}
+.miso-disclosure{font:11px/1.6 Arial,sans-serif;color:#62766b;margin:20px 0 0}
+.miso-dialog button:focus-visible,.miso-tip button:focus-visible{outline:2px solid #366c57;outline-offset:2px}
+@media(min-width:761px) and (max-height:800px){.miso-tip.miso-welcome{padding:30px}.miso-welcome>img{width:180px;height:220px}.miso-tip:not(.miso-welcome){padding:12px;top:100px}.miso-tip:not(.miso-welcome)>img{width:32px;height:32px}}
+@media(max-width:1100px){.header-actions{gap:15px}.header-actions .miso-trigger span{display:none}}
+@media(max-width:760px){.miso-tip,.miso-tip.miso-welcome,.miso-tip.miso-eagle-tip,.miso-tip.miso-museum-invite{left:16px;right:16px;top:auto;bottom:55px;transform:none;width:auto;max-height:45svh;overflow:auto}.miso-trigger img{width:32px;height:32px}.miso-dialog{padding:18px}.miso-tip.miso-welcome{top:50%;bottom:auto;left:16px;right:16px;transform:translateY(-50%);max-height:80svh;gap:15px;padding:22px;flex-direction:column}.miso-welcome>img{width:120px;height:130px}.miso-tip.miso-welcome h2{font-size:32px}.miso-tip.miso-welcome p:not(.eyebrow){font-size:16px}}
+.experience:has(.miso-welcome) .archive-index-trigger{filter:blur(3px)}
+.miso-eagle-hint{position:fixed;z-index:19;transform:translateY(-50%);display:flex;align-items:center;gap:10px;padding:10px 14px;background:#f5f7f0;color:#253d39;border:1px solid #c8d9d0;box-shadow:0 8px 25px #0002;pointer-events:none;text-align:left;letter-spacing:normal}
+.miso-eagle-hint::before{content:'';position:absolute;left:-7px;top:calc(50% - 6px);width:12px;height:12px;background:#f5f7f0;border-left:1px solid #c8d9d0;border-bottom:1px solid #c8d9d0;transform:rotate(45deg)}
+.miso-eagle-hint img{width:34px;height:38px;object-fit:contain}
+.miso-eagle-hint p{font:15px/1.4 Arial,sans-serif;white-space:nowrap;margin:0}
+.experience:has(.miso-eagle-hint) .archive-index-trigger{filter:blur(3px)}
+@media(max-width:760px){.miso-eagle-hint{transform:none;max-width:calc(100vw - 40px);padding:9px;gap:7px}.miso-eagle-hint p{font-size:12px;white-space:normal}.miso-eagle-hint::before{display:none}}
+
+/* Primary hardware action stays with the artifact name. */
+.mars-investigation .investigation-title:has(.hardware-separate-primary) h2{margin-bottom:16px}
+.hardware-separate-primary{display:block;pointer-events:auto;padding:13px 18px;min-height:48px;font-size:16px;line-height:1.4;background:#0b1416d9;border:1px solid #d0f4e8;color:#f1fff6}
+.shuttle-map .shuttle-skip{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;margin-top:14px;padding:13px 15px;min-height:48px;font-size:16px;background:#d8e9dd;color:#17382e;border:1px solid #e4f8eb;pointer-events:auto}
+.shuttle-actions>button:last-child:nth-child(odd){grid-column:1/-1}

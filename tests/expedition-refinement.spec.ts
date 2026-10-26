@@ -45,7 +45,7 @@ test('desktop mission questions, terrain views, Apollo map removal and forward r
   await expect.poll(() => page.getByTestId('route-marker').getAttribute('transform')).not.toBe(before);
   await page.getByRole('button', { name: 'Pause journey', exact: true }).click();
   await page.screenshot({ path: 'docs/qa/revision-forward-route.png' });
-  await page.getByRole('button', { name: 'Skip travel', exact: true }).click();
+  await page.getByRole('button', { name: 'Skip journey', exact: true }).click();
   await page.getByText('Fly to another site', { exact: true }).click();
   await page.getByRole('button', { name: 'Fly to Ares Vallis' }).click();
   await expect(page.locator('.route-map')).toHaveAttribute('aria-label', /from Gusev Crater to Ares Vallis/);

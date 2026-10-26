@@ -7,6 +7,8 @@ export type Stage = 'mars-landing' | 'shuttle' | 'entry' | 'signal' | 'approach'
 export const builtChapters = ['prologue', 'apollo11', 'sojourner', 'spirit', 'opportunity', 'voyager'] as const;
 export type Chapter = typeof builtChapters[number];
 type State = {
+  museumBrowsed: boolean;
+  misoTipsDismissed: string[]; dismissMisoTip: (id: string) => void;
   missionQuestionReady: boolean; missionQuestionDismissed: boolean; dismissMissionQuestion: () => void;
   marsWalking: boolean; marsWalk: number; startMarsWalk: () => void; finishMarsWalk: () => void;
   exhibit: number; museumScroll: number; setExhibit: (n:number)=>void;
@@ -26,6 +28,8 @@ type State = {
   retryFlight: () => void; setPaused: (n: boolean) => void; restart: () => void;
 };
 export const useArchive = create<State>((set, get) => ({
+  museumBrowsed: false,
+  misoTipsDismissed: [], dismissMisoTip: id => set(s => s.misoTipsDismissed.includes(id) ? s : { misoTipsDismissed: [...s.misoTipsDismissed, id] }),
   missionQuestionReady:false,missionQuestionDismissed:false, dismissMissionQuestion:()=>set({missionQuestionDismissed:true}),
   marsWalking:false, marsWalk:0,
   startMarsWalk:()=>{const s=get();if(!['mars','spirit','opportunity'].includes(s.stage))return;clearControls();set({missionQuestionReady:false,marsWalking:true,marsWalk:0,paused:false,inspector:null,...(s.chapter==='sojourner'?{marsApproached:false}:s.chapter==='spirit'?{spiritApproached:false}:{opportunityApproached:false})});if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)get().finishMarsWalk();},
@@ -57,5 +61,5 @@ export const useArchive = create<State>((set, get) => ({
   resetView:()=>set(s=>({viewKey:s.viewKey+1})), toggleMute:()=>set(s=>({muted:!s.muted})),
   toggleAssist:()=>set(s=>({assist:!s.assist})), retryFlight:()=>set(s=>({flightReset:s.flightReset+1,assist:false})),
   setPaused:paused=>{clearControls();set({paused});},
-  restart:()=>{clearControls();set(s=>({missionQuestionReady:false,missionQuestionDismissed:false,marsWalking:false,marsWalk:0,exhibit:0,museumScroll:0,shuttleOffset:0,shuttleCruise:false,voyagerApproached:false,opportunityApproached:false,spiritApproached:false,evidenceStep:0,lunarSignalSeen:false,chapter:'prologue',identified:[],marsApproached:false,travelProgress:0,selected:'',stage:'entry',walk:0,historical:true,cutaway:false,progress:0,inspector:null,discovered:[],inspectedParts:[],exploded:false,isolated:false,assist:false,paused:false,flightReset:s.flightReset+1}));}
+  restart:()=>{clearControls();set(s=>({museumBrowsed:false,misoTipsDismissed:[],missionQuestionReady:false,missionQuestionDismissed:false,marsWalking:false,marsWalk:0,exhibit:0,museumScroll:0,shuttleOffset:0,shuttleCruise:false,voyagerApproached:false,opportunityApproached:false,spiritApproached:false,evidenceStep:0,lunarSignalSeen:false,chapter:'prologue',identified:[],marsApproached:false,travelProgress:0,selected:'',stage:'entry',walk:0,historical:true,cutaway:false,progress:0,inspector:null,discovered:[],inspectedParts:[],exploded:false,isolated:false,assist:false,paused:false,flightReset:s.flightReset+1}));}
 }));

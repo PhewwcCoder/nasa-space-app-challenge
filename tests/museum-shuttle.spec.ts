@@ -62,7 +62,7 @@ test('map supports reversible shuttle travel, pause, and saved evidence', async 
     await page.screenshot({ path: 'docs/qa/shuttle-desktop.png' });
     await page.keyboard.press('Escape');
     await expect(page.getByRole('button', { name: 'Pause journey' })).toBeVisible();
-    await page.getByRole('button', { name: 'Skip travel', exact: true }).click();
+    await page.getByRole('button', { name: 'Skip journey', exact: true }).click();
     await expect(page.locator('canvas')).toHaveAttribute('data-world', 'spirit', { timeout: 30000 });
   }
   if (await page.getByRole('button', { name: 'Explore without answering' }).isVisible()) await page.getByRole('button', { name: 'Explore without answering' }).click();
@@ -70,7 +70,7 @@ test('map supports reversible shuttle travel, pause, and saved evidence', async 
   await expect(page.getByTestId('coordinates')).toHaveText('14.57° S / 175.48° E');
   await page.screenshot({ path: `docs/qa/flight-map-${info.project.name}.png` });
   await page.getByRole('button', { name: /Fly to Ares Vallis/ }).click();
-  if (info.project.name !== 'mobile-reduced') await page.getByRole('button', { name: 'Skip travel', exact: true }).click();
+  if (info.project.name !== 'mobile-reduced') await page.getByRole('button', { name: 'Skip journey', exact: true }).click();
   await expect(page.locator('canvas')).toHaveAttribute('data-world', 'mars', { timeout: 30000 });
   if (await page.getByRole('button', { name: 'Explore without answering' }).isVisible()) await page.getByRole('button', { name: 'Explore without answering' }).click();
   await page.getByText('Fly to another site', { exact: true }).click();

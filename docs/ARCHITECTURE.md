@@ -1,3 +1,21 @@
+## Hardware actions and journey navigation / 2026-10-27 - current precedence
+
+The four later-chapter inspectors render their existing toggleExploded action inside investigation-title; supporting model controls remain in mars-model-tools. ShuttleHUD moves the same visitChapter(shuttleTo) skip action into the map footer as Skip journey. ArchiveIndex handles an active shuttle plus a Mars destination before surface routing, calling visitChapter rather than restarting startShuttle. This clears held inputs, inspection and pause through the existing store action. Cancel still restores prior pause. Surface-to-surface travel, landing routes and retained canvas ownership are unchanged. Regression: tests/journey-controls.spec.ts and tests/mars-selector.spec.ts.
+
+## Miso companion / 2026-10-26 - current precedence
+
+`MisoGuide.tsx` mounts once in the shared header. It owns the native modal FAQ dialog, prior-pause restoration, input clearing through setPaused, local answer selection, keyboard containment and opener focus. `data/misoGuide.ts` owns twelve prepared question entries and chapter suggestions; the first answer is resolved from current stage/inspection. No network request, chatbot service, extra canvas or renderer is introduced.
+
+`misoTipsDismissed` and `dismissMisoTip` belong to the session store; restart clears them. The welcome is consumed on explicit browsing or departure. `museumBrowsed` records intentional story scrolling past 55% of the viewport or a non-Apollo tab choice; restoration and resizing alone do not trigger it. Museum handles the `miso-show-apollo` event by scrolling to the first exhibit without launching. The post-browse invitation uses the existing dismissed-tip list, and restart clears both browsing and dismissal state. `EagleHint` measures `.separate-primary` and follows resize using ResizeObserver. Its input-transparent hint/backdrop expire after 3000ms in the first Eagle inspection, or sooner on separation/selection; exit cleans up the timer. Later chapter suggestion cards are removed; their authored text remains in the on-demand FAQ. The introductory blur is an input-transparent CSS backdrop removed with the welcome. Native museum scroll and retained-world ownership remain unchanged.
+
+Desktop coverage: `tests/miso-guide.spec.ts`. Existing flight, navigation and inspector contracts still apply.
+
+## Museum and Apollo interaction efficiency / 2026-10-26
+
+MuseumScene retains only visited exhibit groups (at most five), toggles visibility and uses nested SceneActivity to stop hidden preview updates. Apollo, Sojourner and shared MER/Voyager previews ignore inspector transforms; museum previews skip unused selection-outline preparation. Geometry, materials, lighting and renderer quality are unchanged.
+
+Apollo `useModelEdges` prepares the original 65-degree outlines through the existing worker/cache after paint, then retains the line geometry/materials across selection changes. Source buffers are copied, never detached. Cancellation guards stale work and disposes owned line resources on cleanup. Part interpolation reuses its scratch vector. `tests/render-efficiency.spec.ts` verifies exact outline arrays/transforms, repeated resource identity, assembled hidden previews, original renderer/canvas and inspector controls. See [PERFORMANCE.md](PERFORMANCE.md) for local measurements and cold-load limitations.
+
 ## Mars departure for Voyager / 2026-10-23 - current precedence
 
 Chapter 2/3/4 to Voyager uses the existing deep-space transition, with an animated shuttle lifting from the current Mars scene. The departure retains the source chapter until arrival; source cameras yield to the travel camera. Scene readiness pauses the transit clock. Pause, skip and reduced-motion arrival remain. Museum-to-Voyager stays direct.

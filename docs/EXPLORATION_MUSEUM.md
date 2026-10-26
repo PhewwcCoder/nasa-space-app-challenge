@@ -1,3 +1,15 @@
+## Hardware actions and journey navigation / 2026-10-27 - current precedence
+
+While already flying a Mars surface shuttle, an explicit Mars chapter choice in Mission selector ends that journey and opens the chosen chapter. Surface-to-surface selection continues to offer the playable route. Skip journey is prominent below the journey map and arrives at its displayed destination, including while paused. Simulated-position and schematic labels remain after removing the two extra footer explanations. Hardware separation in Chapters 2-5 now sits beneath the artifact name; inspection, evidence gates and optional questions are unchanged.
+
+## Miso welcomes and guides / 2026-10-26 - current precedence
+
+The entrance introduces Miso in a centered welcome with a much larger portrait. She invites museum browsing first and explains scrolling, model-click and Explore interactions. The welcome action only focuses the story scroller and clears the soft background blur. After intentional browsing, a smaller suggestion offers Apollo 11: first show its gallery exhibit, then explicitly enter the mission. Keep browsing dismisses the suggestion. Every mission remains freely selectable.
+
+Ask Miso provides twelve prepared FAQ responses and a next-step answer tailored to the current activity; it is not an open-ended chatbot. The dialog pauses activity and restores the prior pause state on exit. Apollo's first hardware inspection shows "Click Separate hardware to see the parts." beside that control, with a soft background blur; both expire after three seconds. Chapters 2-5 have no automatic suggestion cards. Their observation-led guidance is available only through Ask Miso, without premature artifact identification. Existing optional quizzes and their timing remain unchanged.
+
+Personal notes remain local browser drafts; discovery progress and tip dismissals remain session state. No new historical claims, external assets, future chapter or archaeological accuracy claim is introduced.
+
 ## Mars departure for Voyager / 2026-10-23 - current precedence
 
 Chapter 2/3/4 to Voyager uses the existing deep-space transition, with an animated shuttle lifting from the current Mars scene. The departure retains the source chapter until arrival; source cameras yield to the travel camera. Scene readiness pauses the transit clock. Pause, skip and reduced-motion arrival remain. Museum-to-Voyager stays direct.

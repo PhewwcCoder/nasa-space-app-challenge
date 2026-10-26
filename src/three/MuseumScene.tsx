@@ -1,8 +1,8 @@
-import { Suspense, useMemo, useEffect, useRef } from 'react';
+import { Suspense, startTransition, useMemo, useEffect, useRef, useState } from 'react';
 import { useThree } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
-import { useSceneFrame } from './SceneActivity';
+import { SceneActivity, useSceneFrame } from './SceneActivity';
 import { useArchive } from '../stores/archive';
 import { exhibits } from '../data/expedition';
 import SojournerModel from './SojournerModel';
@@ -21,10 +21,14 @@ function SharedHardware({ index }: { index: number }) {
   </group></group>;
 }
 function ExhibitModel({ index }: { index: number }) {
-  return index === 1 ? <group scale={3.8} position={[0, -.85, 0]}><SojournerModel/></group> : <SharedHardware index={index}/>;
+  return index === 1 ? <group scale={3.8} position={[0, -.85, 0]}><SojournerModel preview/></group> : <SharedHardware index={index}/>;
 }
 export default function MuseumScene({ active }: { active: boolean }) {
-  const exhibit = useArchive(s => s.exhibit), { camera, size } = useThree();
+  const exhibit = useArchive(s => s.exhibit), root = useThree(), { camera, size } = root;
+  const [visited, setVisited] = useState([exhibit]);
+  useEffect(() => {
+    if (!visited.includes(exhibit)) startTransition(() => setVisited(ids => ids.includes(exhibit) ? ids : [...ids, exhibit]));
+  }, [exhibit, visited]);
   const turntable = useRef<THREE.Group>(null), time = useRef(0);
   useEffect(() => {
     if (!active) return;
@@ -53,6 +57,8 @@ export default function MuseumScene({ active }: { active: boolean }) {
   return <><primitive attach="background" object={background}/><ambientLight intensity={1.4}/><directionalLight position={[3, 7, 5]} intensity={3.2} color="#fff2d8"/><directionalLight position={[-5, 3, -2]} intensity={2} color="#c5e1ef"/>
     <group position={mobile ? [0, 2.3, 0] : [-2.75, 0, 0]} scale={mobile ? .39 : 1}>
       <mesh position={[0, -1.05, 0]}><cylinderGeometry args={[2.65, 2.85, .12, 80]}/><meshStandardMaterial color="#c4cdca" metalness={.2} roughness={.6}/></mesh>
-      <group ref={turntable} position={[0, 1.1, 0]} rotation={[.08, -.5, 0]}><Suspense fallback={null}><ExhibitModel key={exhibit} index={exhibit}/></Suspense></group>
+      <group ref={turntable} position={[0, 1.1, 0]} rotation={[.08, -.5, 0]}>{visited.map(index => <group key={index} name={`museum-exhibit-${index}`} visible={index === exhibit}>
+        <SceneActivity active={active && index === exhibit} root={root}><Suspense fallback={null}><ExhibitModel index={index}/></Suspense></SceneActivity>
+      </group>)}</group>
     </group></>;
 }

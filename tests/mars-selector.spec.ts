@@ -6,7 +6,7 @@ test('all six Mars selector directions stay on the rocky surface course',async({
  for(const name of ['OPPORTUNITY','SPIRIT','SOJOURNER','SPIRIT','OPPORTUNITY','SOJOURNER']){
  await select(name);await expect(page.getByRole('region',{name:'Mars shuttle flight'})).toBeVisible();await expect(page.locator('canvas')).toHaveAttribute('data-world','shuttle',{timeout:30000});await expect(page.locator('.travel-hud')).toHaveCount(0);
  await page.keyboard.down('KeyW');await expect.poll(async()=>Number(await page.getByRole('progressbar').getAttribute('value'))).toBeGreaterThan(0);await page.keyboard.up('KeyW');
- await page.getByRole('button',{name:'Skip travel',exact:true}).click();await expect(page.locator('.experience')).toHaveClass(new RegExp('stage-'+(name==='SOJOURNER'?'mars':name.toLowerCase())));
+ await page.getByRole('button',{name:'Skip journey',exact:true}).click();await expect(page.locator('.experience')).toHaveClass(new RegExp('stage-'+(name==='SOJOURNER'?'mars':name.toLowerCase())));
  }
  await expect(page.locator('canvas')).toHaveCount(1);
 });

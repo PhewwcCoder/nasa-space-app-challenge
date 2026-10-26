@@ -7,21 +7,20 @@ import { Html, Line, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import { useArchive } from '../stores/archive';
 import { components } from '../data/archive';
+import { useModelEdges } from './useModelEdges';
 const positions: Record<string,[number,number,number]> = {structure:[-1.8,2.6,0],engine:[4,1.4,2.1],gear:[0,.2,-.7]};
 const tags: Record<string,[number,number,number]> = {structure:[-4.2,5.9,0],engine:[5.3,1.1,2.1],gear:[-4.5,1.4,0]};
 function componentFor(name:string) { if(name.startsWith('group13_pC'))return 'engine';if(name.startsWith('group31')||name.startsWith('polySurfa')||name==='pCylinder3')return 'gear';return 'structure'; }
-function ModelPart({part,object}:{part:string;object:THREE.Group}) {
+function ModelPart({part,object,preview}:{part:string;object:THREE.Group;preview:boolean}) {
  const sceneActive=useSceneActive();
- const ref=useRef<THREE.Group>(null);const {inspector,exploded,selected,select,isolated,cutaway}=useArchive(useShallow(s=>({inspector:s.inspector,exploded:s.exploded,selected:s.selected,select:s.select,isolated:s.isolated,cutaway:s.cutaway})));const active=inspector==='eagle'&&useArchive.getState().scanProgress===1;
+ const ref=useRef<THREE.Group>(null);const {inspector,exploded,selected,select,isolated,cutaway}=useArchive(useShallow(s=>({inspector:preview?null:s.inspector,exploded:preview?false:s.exploded,selected:preview?'':s.selected,select:s.select,isolated:preview?false:s.isolated,cutaway:preview?false:s.cutaway})));const active=inspector==='eagle'&&useArchive.getState().scanProgress===1;
+ const edges=useModelEdges(object,!preview);
+ const target=useMemo(()=>new THREE.Vector3(),[]);
  useEffect(()=>{object.traverse(o=>{if(o instanceof THREE.Mesh){const materials=Array.isArray(o.material)?o.material:[o.material];materials.forEach(m=>{if(m instanceof THREE.MeshStandardMaterial){m.clippingPlanes=active&&cutaway&&part==='structure'?[new THREE.Plane(new THREE.Vector3(0,0,-1),-22)]:[];m.clipShadows=true;m.needsUpdate=true;}});}});},[object,active,part,cutaway]);
  useEffect(()=>{if(!sceneActive)ref.current?.position.set(0,0,0);},[sceneActive]);
- useFrame((_,dt)=>{if(!ref.current)return;const p=active&&(exploded||selected===part)?positions[part]:[0,0,0];const alpha=window.matchMedia('(prefers-reduced-motion: reduce)').matches?1:1-Math.exp(-dt*4);ref.current.position.lerp(new THREE.Vector3(...p),alpha);});
+ useFrame((_,dt)=>{if(!ref.current||preview)return;const p=active&&(exploded||selected===part)?positions[part]:[0,0,0];const alpha=window.matchMedia('(prefers-reduced-motion: reduce)').matches?1:1-Math.exp(-dt*4);ref.current.position.lerp(target.set(p[0],p[1],p[2]),alpha);});
  const handle=(e:ThreeEvent<MouseEvent>)=>{if(active){e.stopPropagation();select(part);}};
- return <group name={`apollo-${part}`} ref={ref} visible={!isolated||!selected||selected===part} onClick={handle} onPointerOver={e=>{if(active){e.stopPropagation();document.body.style.cursor='pointer';}}} onPointerOut={()=>{document.body.style.cursor='auto';}}><primitive object={object}/>{active&&selected===part&&<PartEdges object={object}/>}</group>;
-}
-function PartEdges({object}:{object:THREE.Group}){
- const edges=useMemo(()=>{const group=new THREE.Group();object.traverse(o=>{if(o instanceof THREE.Mesh){const lines=new THREE.LineSegments(new THREE.EdgesGeometry(o.geometry,65),new THREE.LineBasicMaterial({color:'#a2c8d0',transparent:true,opacity:.28,depthWrite:false}));lines.applyMatrix4(o.matrix);group.add(lines);}});return group;},[object]);
- useEffect(()=>()=>{edges.traverse(o=>{if(o instanceof THREE.LineSegments){o.geometry.dispose();(o.material as THREE.Material).dispose();}});},[edges]);return <primitive object={edges}/>;
+ return <group name={`apollo-${part}`} ref={ref} visible={!isolated||!selected||selected===part} onClick={handle} onPointerOver={e=>{if(active){e.stopPropagation();document.body.style.cursor='pointer';}}} onPointerOut={()=>{document.body.style.cursor='auto';}}><primitive object={object}/>{active&&selected===part&&edges&&<primitive object={edges}/>}</group>;
 }
 function ApolloModel({preview=false}:{preview?:boolean}){
  const sceneActive=useSceneActive();
@@ -59,8 +58,8 @@ function ApolloModel({preview=false}:{preview?:boolean}){
  // NASA ALSJ: 7.04 m from footpads to rendezvous radar. Keep both stages at the same scale.
  const physicalScale=7.04/5.012792199850082;
  return <group name="eagle-hardware" scale={preview?1.28:physicalScale} position={[0,preview?-.13:-.10263100266456604*physicalScale,0]} onClick={()=>{if(!inspector){if(stage==='surface'&&useArchive.getState().walk>=1)useArchive.getState().setStage('identified');else if(stage==='explore'||stage==='identified')inspect('eagle');}}}>
- {Object.entries(groups).map(([id,object])=><ModelPart key={id} part={id} object={object}/>)}
- {sceneActive&&inspector==='eagle'&&scanProgress===1&&components.map(c=>(!isolated||!selected||c.id===selected)&&<group key={c.id} position={exploded?[0,0,0]:c.id==='engine'?[-2.8,.2,-2]:c.id==='structure'?[4,-2,0]:[0,0,0]}>
+ {Object.entries(groups).map(([id,object])=><ModelPart key={id} part={id} object={object} preview={preview}/>)}
+ {!preview&&sceneActive&&inspector==='eagle'&&scanProgress===1&&components.map(c=>(!isolated||!selected||c.id===selected)&&<group key={c.id} position={exploded?[0,0,0]:c.id==='engine'?[-2.8,.2,-2]:c.id==='structure'?[4,-2,0]:[0,0,0]}>
  <Line points={[[positions[c.id][0],positions[c.id][1]+(c.id==='structure'?1.8:.6),positions[c.id][2]],tags[c.id]]} color={selected===c.id?'#b8f2f5':'#76999a'} lineWidth={.7} transparent opacity={.65}/>
  <Html position={tags[c.id]} center zIndexRange={[6,5]}><button className={`spatial-part ${selected===c.id?'selected':''}`} onClick={()=>select(c.id)} data-part={c.id} aria-label={c.name} aria-pressed={selected===c.id}><strong>{c.id==='structure'?'Structure':c.id==='engine'?'Engine':'Landing gear'}</strong><small>{selected===c.id?'COMPONENT SELECTED':'INSPECT COMPONENT'} <i>+</i></small></button></Html>
  </group>)}

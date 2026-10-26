@@ -29,13 +29,13 @@ export function VoyagerInspector({id}:{id:VoyagerArtifactId}){
   const ready=known&&(id==='voyager'?voyagerParts.every(p=>inspectedParts.includes(p.id)):evidenceStep>=(story?.actions.length??1));
   useEffect(()=>{close.current?.focus();},[]);
   return <section className="investigation mars-investigation spirit-investigation voyager-investigation" role="region" aria-label="Artifact inspection">
-    <div className="investigation-title"><p className="eyebrow">{a.code} / {known?'SPATIAL ANALYSIS':'UNIDENTIFIED TRACE'}</p><h2>{known?a.name:a.unknownName}</h2></div>
+    <div className="investigation-title"><p className="eyebrow">{a.code} / {known?'SPATIAL ANALYSIS':'UNIDENTIFIED TRACE'}</p><h2>{known?a.name:a.unknownName}</h2>{id==='voyager'&&<button className="hardware-separate-primary" aria-pressed={exploded} onClick={toggleExploded}>{exploded?'Assemble':'Separate'} hardware</button>}</div>
     <button ref={close} className="exit-inspection" onClick={()=>inspect(null)}>ESC / Return to encounter <span>×</span></button>
     {<>
       {id==='voyager'?<>
         <nav className="component-switch" aria-label="Hardware components">{voyagerParts.map((p,i)=><button key={p.id} aria-pressed={selected===p.id} onClick={()=>select(p.id)}><span>0{i+1}</span>{p.name}<small>{selected===p.id?'✓':'+'}</small></button>)}</nav>
         {selected&&<PartPoster part={`voyager-${selected}`} conclusion={ready?a.interpretation:undefined}/>}
-        <div className="mars-model-tools"><button className="quiet-button" aria-pressed={exploded} onClick={toggleExploded}>{exploded?'Assemble':'Separate'} hardware</button><button className="quiet-button" disabled={!selected} aria-pressed={isolated} onClick={toggleIsolated}>{isolated?'Show all parts':'Isolate selection'}</button><button className="quiet-button" onClick={resetView}>Reset view</button>{['left','right','in','out'].map((v,i)=><button key={v} className="quiet-button" aria-label={['Rotate model left','Rotate model right','Zoom in','Zoom out'][i]} onClick={()=>window.dispatchEvent(new CustomEvent('model-control',{detail:v}))}>{['↶','↷','+','−'][i]}</button>)}</div>
+        <div className="mars-model-tools"><button className="quiet-button" disabled={!selected} aria-pressed={isolated} onClick={toggleIsolated}>{isolated?'Show all parts':'Isolate selection'}</button><button className="quiet-button" onClick={resetView}>Reset view</button>{['left','right','in','out'].map((v,i)=><button key={v} className="quiet-button" aria-label={['Rotate model left','Rotate model right','Zoom in','Zoom out'][i]} onClick={()=>window.dispatchEvent(new CustomEvent('model-control',{detail:v}))}>{['↶','↷','+','−'][i]}</button>)}</div>
         <p className="mars-orbit-hint">Drag to orbit / Scroll to zoom / NASA-based spacecraft reconstruction</p>
       </>:story&&<aside ref={note} className="part-poster floating-lesson mars-note" tabIndex={0} aria-label={`${a.name} field note`}>
         <header className="poster-presenter"><img src="/textures/alien-cat.png" alt="Miso the alien cat"/><div><span>MISO’S DISCOVERY</span><p>{story.prompt}</p></div></header>

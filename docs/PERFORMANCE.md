@@ -1,3 +1,19 @@
+## Museum revisits and Apollo part selection / 2026-10-26
+
+Apollo previously rebuilt synchronous Three.js EdgesGeometry whenever a selected assembly mounted. This caused repeated long main-thread stalls. Outlines now use the existing worker and geometry cache, retain the exact 65-degree edge result, and reuse line resources across selections. Museum previews retain visited model groups (bounded at five), stop hidden scene updates, ignore inspector transforms, and skip unused selection outlines. No mesh detail, material, lighting or DPR reduction was made.
+
+`scripts/profile-interactions.mjs` measures the public museum and assisted Apollo inspection flow in installed desktop Chrome against the production preview, at 1440x900 with reduced motion and no throttling. Each run uses a fresh context, Event Timing (16ms reporting threshold), long-task observation, RAF intervals and CPU profiles. Outputs: `docs/qa/performance/baseline-oct26` and `optimized-oct26`. Values below are maximum observed event duration per click, not field INP percentiles.
+
+| Interaction | Before (ms) | After (ms) |
+| --- | ---: | ---: |
+| Warm museum Apollo / Spirit / Apollo | 168 / 264 / 168 | 32 / 24 / 24 |
+| First Structure / Engine / Landing gear selection | 936 / 112 / 960 | 88 / 56 / 40 |
+| Repeat Structure / Engine / Landing gear selection | 904 / 96 / 1200 | 24 / 32 / 32 |
+
+The six optimized part-selection windows and three warm museum windows had zero long tasks. Baseline repeated Structure and Landing gear had long tasks of 785ms and 1034ms. The final selected-hardware screenshots are pixel-identical (RGB mean absolute difference 0; no differing pixel bounds). Regression tests also compare every outline position array and transform against the original Three.js algorithm, verify stable resource identity across selections/revisits, and exercise separation, isolation, orbit controls, cross-section, remains and saving.
+
+These are local samples on one machine, not a guarantee that all lag is eliminated. Cold asset, shader and GPU preparation still cost time: the optimized first Spirit museum visit included a 291ms task. Driver caches were not purged, so cold before/after timings are not treated as a controlled improvement claim. Retaining up to five previews and Apollo line resources trades bounded session memory for faster revisits. Mobile and low-end hardware testing were excluded by request.
+
 ## Voyager and shader lifetime / 2026-10-07
 
 Chapter 5 extends the same retained-world/preload/readiness path to Voyager. Its 2.29 MiB Draco model has seven material batches. A rapid Apollo-to-Mars test exposed a Three.js async shader readiness race when a transient source material was disposed before polling finished. Preparation now uses owned material wrappers with the same shader hooks in a temporary scene snapshot. Geometry and textures remain shared; the snapshot graph is released after compilation, while shader references remain with the retained world. Cancellation does not dispose compiling wrappers. A dedicated renderer test covers source disposal during compilation; Voyager revisits separately verify scene, geometry, material, renderer and camera identity and one preparation.

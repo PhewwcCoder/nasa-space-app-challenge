@@ -1,3 +1,13 @@
+## Hardware actions and journey navigation / 2026-10-27 - current precedence
+
+The primary Separate/Assemble hardware control sits 16px below the artifact name in Chapters 2-5, using 16px text, a 48px minimum height, dark fill and pale border. Supporting model tools remain at the bottom. The shuttle map footer has a full-width, pale Skip journey action with 16px text. Flight instructions above the right controls use 16px text and can wrap; no scene or model quality changes.
+
+## Miso companion / 2026-10-26 - current precedence
+
+Reuse Miso's existing fictional cat portrait for the header avatar, entrance welcome and Apollo hardware hint. The welcome is centered in the viewport on a warm-paper surface, with a 200px-wide Miso portrait (180px in short desktop windows), larger readable copy and one museum-browsing action. The header avatar is enlarged to 50px. After browsing, a smaller optional Apollo suggestion sits below the museum model without blurring the gallery. A subtle 3px backdrop blur and light tint separate her introduction from the gallery; browsing or departure clears both. The welcome has no auto-dismiss timer, pulsing or narration.
+
+Mars and Voyager have no automatic suggestion cards. Eagle's one-line hint sits 14px to the right of Separate hardware, vertically centered with that button, with a small portrait and pointer. The scene has a 3px blur for three seconds; hint and blur then disappear together. It does not take focus or intercept input. The FAQ uses a bounded, scrolling warm-paper dialog with selected-question feedback, live answer text and an explicit close control. All chapter guidance remains available from Ask Miso. Reduced motion requires no animation to understand the new UI. Mobile testing is deferred by request.
+
 ## Local navigation maps / 2026-10-23 - current precedence
 
 Restore the Moon landing map at lower left. Its craft, ring and ground-range readout use the rendered position, equal-axis scale, a scale bar and discrete auto zoom. The ring radius is six local metres, matching flight capture. Remove decorative invented contour lines from this instrument. X/right and -Z/forward describe the authored scene; do not imply surveyed north or GPS.

@@ -1,3 +1,15 @@
+## Hardware actions and journey navigation / 2026-10-27 - current precedence
+
+Separate hardware sits directly below the inspected Sojourner, Spirit, Opportunity or Voyager name with larger text. Reset, isolation and orbit controls remain beside the component controls. The Mars shuttle map replaces its two small footer lines with a prominent Skip journey button; simulated-position and schematic labels remain. Keyboard flight instructions are larger. During an active Mars shuttle journey, choosing a Mars chapter in Mission selector opens that chapter directly and clears pause/input; choosing between Mars surface scenes still starts the playable shuttle route.
+
+## Miso companion / 2026-10-26 - current precedence
+
+Miso introduces herself in a centered welcome with a large portrait over a soft background blur. Its only action, Let’s browse the museum, clears the welcome and focuses the native story scroller; it never starts Apollo. After an intentional scroll of at least 55% of the story viewport, or selecting a different mission tab, a smaller optional suggestion recommends Apollo 11. Show me Apollo 11 returns to its museum exhibit; Explore with Miso is a separate explicit launch action. Keep browsing dismisses the suggestion for the expedition. All exhibits remain freely available.
+
+Ask Miso is an avatar button available throughout the expedition. It opens 12 prepared FAQ answers, including a context-sensitive next step. This is authored guidance, not live AI chat. Opening pauses the expedition; closing or Escape restores its prior pause state and avatar focus. The guide explains controls, inspection, separation, evidence gates, mission choice, optional questions, notebook persistence and fictional versus sourced content.
+
+Apollo's first Eagle inspection shows one line beside Separate hardware: "Click Separate hardware to see the parts." A soft background blur and the hint disappear together after three seconds; selecting or separating hardware can clear them sooner. Later chapters have no automatic suggestion cards. Their guidance remains available on demand through Ask Miso, and existing optional mission questions remain unchanged. Restart/refresh resets the Apollo hint. Existing learning gates and the five-chapter limit remain.
+
 ## Mars departure for Voyager / 2026-10-23 - current precedence
 
 Chapter 2/3/4 to Voyager uses the existing deep-space transition, with an animated shuttle lifting from the current Mars scene. The departure retains the source chapter until arrival; source cameras yield to the travel camera. Scene readiness pauses the transit clock. Pause, skip and reduced-motion arrival remain. Museum-to-Voyager stays direct.
